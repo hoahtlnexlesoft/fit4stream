@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103124108"</script>
+<script>window.__BUILD__="20261103124521"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2829,7 +2829,7 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
   }
   function Welcome(p) {
     var vr = useRef(null), gr = useRef(null), cvr = useRef(null), boxr = useRef(null), dn = useRef(false), ph = useState(0), phase = ph[0], setPhase = ph[1], gs = useState(null), geo = gs[0], setGeo = gs[1];
-    var RATE = 1.5;
+    var RATE = 2;
     function enter() { if (dn.current) return; dn.current = true; setPhase(2); setTimeout(function () { p.nav.root('home'); }, 520); }
     useEffect(function () {
       var el = boxr.current; if (!el) return;
@@ -2842,7 +2842,9 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
       }
       measure();
       var ro = window.ResizeObserver ? new ResizeObserver(measure) : null; ro && ro.observe(el);
-      [vr.current, gr.current].forEach(function (v) { if (!v) return; v.muted = true; v.playsInline = true; v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
+      var seen = false; try { seen = localStorage.getItem('f4s_seen') === '1'; localStorage.setItem('f4s_seen', '1'); } catch (_) {}
+      var guard = setTimeout(enter, seen ? 3200 : 6500);
+      [vr.current, gr.current].forEach(function (v) { if (!v) return; if (seen) { try { v.currentTime = 5.6; } catch (_) {} } v.muted = true; v.playsInline = true; v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
       function cl(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
       function eo(v) { return 1 - Math.pow(1 - v, 3); }
       function star(px, py, r, a, col) {
@@ -2892,8 +2894,8 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
       return function () { cancelAnimationFrame(raf); clearTimeout(to); ro && ro.disconnect(); };
     }, []);
     function tu(e) { var ct = e.currentTarget.currentTime, g = gr.current; if (g && Math.abs(g.currentTime - ct) > 0.15) { try { g.currentTime = ct; } catch (z) {} }
-      if (phase < 0.5 && ct > 5.3) setPhase(0.5); if (phase < 1 && ct > 7.3) setPhase(1); if (ct > 9.6) enter(); }
-    return h('div', { ref: boxr, className: cx('screen noscroll welcome wl3 launch', phase >= 0.5 && 'is-ring', phase >= 1 && 'is-crisp', phase >= 2 && 'is-out') },
+      if (phase < 0.5 && ct > 5.3) setPhase(0.5); if (phase < 1 && ct > 7.3) setPhase(1); if (ct > 9.3) enter(); }
+    return h('div', { ref: boxr, onClick: function () { enter(); }, className: cx('screen noscroll welcome wl3 launch', phase >= 0.5 && 'is-ring', phase >= 1 && 'is-crisp', phase >= 2 && 'is-out') },
       h('video', { ref: gr, className: 'sp-glow', src: 'splash.mp4', autoPlay: true, playsInline: true, preload: 'auto', 'aria-hidden': true }),
       h('video', { ref: vr, className: 'sp-video', src: 'splash.mp4', autoPlay: true, playsInline: true, preload: 'auto', onTimeUpdate: tu, onEnded: enter, 'aria-label': 'Fit4Stream is loading' }),
       geo ? h('div', { className: 'sp-logo', 'aria-hidden': true, style: { left: geo.x - geo.s / 2, top: geo.y - geo.s / 2, width: geo.s, height: geo.s } }, h(F.Logo, { size: geo.s, markOnly: true })) : null,
@@ -4018,7 +4020,8 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
   if (dev) document.body.classList.add('devmode');
   if (dev && (navigator.standalone || matchMedia('(display-mode: standalone)').matches)) {
     document.body.classList.add('pwa');
-    var fixH = function(){ var sw = document.querySelector('.stagewrap'); if (sw) sw.style.setProperty('height', Math.max(screen.height, window.innerHeight) + 'px', 'important'); };
+    // iOS draws a system strip the page cannot paint into; size to the real visible height (innerHeight), never screen.height.
+    var fixH = function(){ var sw = document.querySelector('.stagewrap'); if (sw) sw.style.setProperty('height', window.innerHeight + 'px', 'important'); };
     fixH(); window.addEventListener('resize', fixH); window.addEventListener('orientationchange', function(){ setTimeout(fixH, 300); });
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
