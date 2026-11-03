@@ -1,8 +1,8 @@
-<script>window.__BUILD__="20261103124653"</script>
+<script>window.__BUILD__="20261103124912"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#13121a">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -2048,6 +2048,9 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
 
 #upd-bar{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 10px);transform:translateX(-50%);z-index:99999;border:0;border-radius:999px;padding:10px 16px;background:#f4a425;color:#1b1306;font:600 13px/1 -apple-system,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.45);animation:updin .4s cubic-bezier(.2,.9,.3,1.1)}
 @keyframes updin{from{opacity:0;transform:translate(-50%,-12px)}}
+
+/* Home-screen app: opaque status bar (avoids iOS 26 short-viewport gap) -> no top inset to reserve */
+body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
