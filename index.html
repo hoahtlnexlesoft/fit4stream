@@ -2002,6 +2002,15 @@ input:focus,textarea:focus{outline:none}
 /* soft dark fade behind the bar so content dims as it scrolls under */
 .tabbar::before{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;pointer-events:none;background:linear-gradient(180deg,rgba(14,13,20,0),rgba(14,13,20,.75) 55%,rgba(14,13,20,.92));z-index:-1}
 .tabbar{position:absolute}
+
+/* ===== real-device mode: respect notch / home indicator, fill the whole screen ===== */
+html:has(body.devmode),body.devmode{height:100%;margin:0;overflow:hidden;background:#13121a}
+body.devmode{--st:max(env(safe-area-inset-top),20px)!important;--sb:max(env(safe-area-inset-bottom),10px)!important}
+body.devmode .stagewrap{position:fixed!important;inset:0!important;height:100dvh!important;padding:0!important}
+body.devmode .scaler,body.devmode .device,body.devmode .screenhost{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border-radius:0!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;background:#13121a!important;transform:none!important}
+body.devmode .device::before,body.devmode .device::after,body.devmode .island,body.devmode .btn-side,body.devmode .statusbar,body.devmode .homebar{display:none!important}
+body.devmode .app{border-radius:0!important}
+body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
