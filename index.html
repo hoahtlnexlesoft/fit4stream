@@ -1,3 +1,4 @@
+<script>window.__BUILD__="20261103124108"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2044,6 +2045,9 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
 .live-since{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.75);font-size:13px;font-weight:500}
 .live-since i{width:7px;height:7px;border-radius:50%;background:#ff5d4f;box-shadow:0 0 0 3px rgba(255,93,79,.22)}
 .dots span{cursor:pointer}
+
+#upd-bar{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 10px);transform:translateX(-50%);z-index:99999;border:0;border-radius:999px;padding:10px 16px;background:#f4a425;color:#1b1306;font:600 13px/1 -apple-system,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.45);animation:updin .4s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes updin{from{opacity:0;transform:translate(-50%,-12px)}}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4035,5 +4039,28 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
   list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); }; jump.appendChild(b); });
   function mark(){ var k=(location.hash||'#welcome').slice(1); Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
   setInterval(mark, 400); mark();
+})();
+</script>
+<script>
+/* Auto-update: on return to foreground (or every 60s while open) check /version.json; newer build -> reload. */
+(function(){
+  if (!/^https?:/.test(location.protocol)) return;
+  var cur = window.__BUILD__; if (!cur) return;
+  var busy = false;
+  function check(silent){
+    if (busy) return; busy = true;
+    fetch('/version.json?t=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; }).then(function(v){
+      busy = false; if (!v || !v.build || v.build === cur) return;
+      if (silent) { location.reload(); return; }
+      if (document.getElementById('upd-bar')) return;
+      var b = document.createElement('button'); b.id = 'upd-bar'; b.type = 'button';
+      b.textContent = 'New version available \u00b7 Tap to update';
+      b.onclick = function(){ location.reload(); };
+      document.body.appendChild(b);
+    }).catch(function(){ busy = false; });
+  }
+  document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'visible') check(true); });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) check(true); });
+  setInterval(function(){ if (document.visibilityState === 'visible') check(false); }, 60000);
 })();
 </script>
