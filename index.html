@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103134440"</script>
+<script>window.__BUILD__="20261103134551"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3241,8 +3241,8 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   var CHANNELS = ['Thao', 'Hieu LK', 'Thao NGUYEN2', 'An Tran', 'Nhan Doan', 'Business Demo', 'Kee Desmond', 'Marc John', 'Sandra Smith'];
   function ini(n) { var w = n.trim().split(/\s+/); return ((w[0] || '')[0] + ((w[1] || w[0] || '')[w[1] ? 0 : 1] || '')).toUpperCase(); }
   var EV = {
-    xmas: { id: 'xmas', title: 'DANANG CHRISTMAS MARKET 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
-      about: 'DANANG CHRISTMAS MARKET 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
+    xmas: { id: 'xmas', title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
+      about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
     seo: { id: 'seo', title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: '[Sample upcoming event]' },
     gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
@@ -3326,8 +3326,8 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   /* ---------- notifications ---------- */
   function Notifications(p) {
     var items = [
-      ['radio', '#e74645', 'DANANG CHRISTMAS MARKET 2026 is live', 'thao15 nguyen15 just went live. Join now.', '2m', 'detail:xmas'],
-      ['ticket', '#facd60', 'Registration confirmed', 'You’re registered for DANANG CHRISTMAS MARKET 2026.', '15m', 'myevents'],
+      ['radio', '#e74645', 'Danang Christmas Market 2026 is live', 'thao15 nguyen15 just went live. Join now.', '2m', 'detail:xmas'],
+      ['ticket', '#facd60', 'Registration confirmed', 'You’re registered for Danang Christmas Market 2026.', '15m', 'myevents'],
       ['clock', '#39cae0', 'Starting in 1 hour', 'Welcome to our topic about SEO marketing starts at 20:00.', '1h', 'detail:seo'],
       ['star', '#a57ad8', 'Rate your last event', 'How was “For payout batch 5.Nov-1”?', 'Yesterday', 'reviews']];
     return h(SubPage, { nav: p.nav, title: 'Notifications', actions: h(Tap, { className: 'f4-link', onClick: function () { p.nav.toast('All marked as read'); } }, 'Mark all') },
@@ -3358,7 +3358,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h(F.TextField, { label: 'Social link', icon: 'globe', placeholder: 'https://instagram.com/your-channel' }));
   }
   function Payments(p) {
-    var rows = [['DANANG CHRISTMAS MARKET 2026', 'Nov 03, 2026 · Visa •••• 4242', '$3.99', 'Paid'], ['Payout 3 - pay on 31.Oct - USD', 'Oct 30, 2026 · Visa •••• 4242', '$9.99', 'Paid']];
+    var rows = [['Danang Christmas Market 2026', 'Nov 03, 2026 · Visa •••• 4242', '$3.99', 'Paid'], ['Payout 3 - pay on 31.Oct - USD', 'Oct 30, 2026 · Visa •••• 4242', '$9.99', 'Paid']];
     return h(SubPage, { nav: p.nav, title: 'Payment History' },
       h('div', { className: 'pay-sum' }, h('span', null, 'Spent this month'), h('b', null, '$13.98'), h('i', null, '2 transactions')),
       h('div', { className: 'mgroup', style: { margin: 0 } }, rows.map(function (r, i) {
@@ -3394,7 +3394,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
       h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Share' },
         h('span', { className: 'grab' }),
-        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + (p.img || IMG) + ')' } }), h('div', { style: { minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, p.title || 'DANANG CHRISTMAS MARKET 2026'), h('span', { className: 'subtle', style: { fontSize: 12.5 } }, 'fit4stream.com/e/' + (p.slug || 'danang-christmas-market-2026')))),
+        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + (p.img || IMG) + ')' } }), h('div', { style: { minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, p.title || 'Danang Christmas Market 2026'), h('span', { className: 'subtle', style: { fontSize: 12.5 } }, 'fit4stream.com/e/' + (p.slug || 'danang-christmas-market-2026')))),
         h('div', { className: 'share-grid' }, opts.map(function (o) { return h(Tap, { key: o[0], className: 'share-it', go: function () { p.close(); p.toast(o[0] === 'Copy link' ? 'Link copied' : 'Shared to ' + o[0]); } }, h('span', null, h(F.Icon, { name: o[1], size: 22 })), o[0]); })),
         h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-lg f4-btn-block', go: p.close }, 'Cancel')));
   }
@@ -3951,7 +3951,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('section', { className: 'sheet sheet-up', role: 'dialog', 'aria-label': 'Complete registration' },
         h('span', { className: 'grab' }),
         h('div', { className: 'row-between' }, h('h2', { className: 'h-md' }, 'Complete registration'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.nav.back }, h(F.Icon, { name: 'x', size: 18 }))),
-        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + IMG + ')' } }), h('b', { style: { flex: 1, fontSize: 14, lineHeight: '18px' } }, 'DANANG CHRISTMAS MARKET 2026'), h('b', { style: { color: 'var(--primary)', fontSize: 16 } }, '$3.99')),
+        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + IMG + ')' } }), h('b', { style: { flex: 1, fontSize: 14, lineHeight: '18px' } }, 'Danang Christmas Market 2026'), h('b', { style: { color: 'var(--primary)', fontSize: 16 } }, '$3.99')),
         h('div', { className: 'info-card', style: { background: 'var(--bg)' } },
           h(F.InfoRow, { icon: 'calendar', label: 'Date', value: '11/03/2026' }),
           h(F.InfoRow, { icon: 'clock', label: 'Time', value: '9:43 AM · 137 min' }),
@@ -3976,7 +3976,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('h1', { className: 'display center', style: { margin: '36px 24px 0' } }, 'Registration successful!'),
       h('p', { className: 'muted center', style: { margin: '12px 32px 0' } }, 'A confirmation email with your event access details has been sent to your inbox. If you don\'t receive it shortly, please check your spam or junk folder.'),
       h('div', { className: 'mini-ticket' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + IMG + ')' } }),
-        h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 14 } }, 'DANANG CHRISTMAS MARKET 2026'), h('span', { className: 'subtle', style: { fontSize: 12 } }, 'Live now · 11/03/2026 · 9:43 AM')), h(F.Badge, { tone: 'purchased' }, 'Purchased')),
+        h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 14 } }, 'Danang Christmas Market 2026'), h('span', { className: 'subtle', style: { fontSize: 12 } }, 'Live now · 11/03/2026 · 9:43 AM')), h(F.Badge, { tone: 'purchased' }, 'Purchased')),
       h('div', { style: { flex: 1 } }),
       h('div', { className: 'pad col gap12 bottom-safe', style: { alignSelf: 'stretch' } },
         h(Tap, { className: 'f4-btn f4-btn-live f4-btn-lg f4-btn-block', go: function () { p.nav.replace('player'); } }, 'Join live now'),
@@ -4029,7 +4029,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
   function StarRow(p) { return h('span', { className: 'rv-stars', 'aria-label': p.n + ' out of 5' }, [1, 2, 3, 4, 5].map(function (i) { return h(F.Icon, { key: i, name: 'star', size: p.size || 14, filled: i <= p.n, className: i <= p.n ? 'on' : '' }); })); }
   var REVIEWS = [
-    { n: 'Linh Tran', av: 'r1', r: 5, d: '2 days ago', ev: 'DANANG CHRISTMAS MARKET 2026', t: 'Great stream quality and the host kept the chat lively the whole time. Felt like being there in person.', h: 12 },
+    { n: 'Linh Tran', av: 'r1', r: 5, d: '2 days ago', ev: 'Danang Christmas Market 2026', t: 'Great stream quality and the host kept the chat lively the whole time. Felt like being there in person.', h: 12 },
     { n: 'Minh Pham', av: 'r2', r: 4, d: '1 week ago', ev: 'Acoustic night: Live from the studio', t: 'Loved the setlist. Audio dropped once for a few seconds, otherwise smooth.', h: 5 },
     { n: 'Hana Nguyen', av: 'r3', r: 5, d: '2 weeks ago', ev: 'Welcome to our topic about SEO marketing', t: 'Clear, practical and the Q&A at the end answered exactly what I needed.', h: 9 },
     { n: 'David Le', av: 'r1', r: 3, d: '3 weeks ago', ev: 'For payout batch 5.Nov-1', t: 'Good content but it started 10 minutes late.', h: 1 }];
@@ -4096,7 +4096,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
           h(Tap, { className: 'pv-ic', label: 'Full screen', go: function () { p.nav.push('full'); } }, h(FsIc, null)))),
       h('section', { className: 'pl-info' },
         h('div', { className: 'pl-tags' }, h('span', { className: 'pl-cat' }, 'Concerts and Performances'), h('span', { className: 'pl-dot' }), h('span', null, '137 min · English')),
-        h('h1', { className: 'pl-title' }, 'DANANG CHRISTMAS MARKET 2026'),
+        h('h1', { className: 'pl-title' }, 'Danang Christmas Market 2026'),
         h('div', { className: 'pl-host' },
           h(Tap, { className: 'row gap10', style: { flex: 1, minWidth: 0 }, go: function () { p.nav.push('organizer'); } },
             h(F.Avatar, { src: AV.thao, initials: 'TH', size: 40, seed: 0 }),
@@ -4129,7 +4129,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     return h('div', { className: 'screen noscroll full' },
       h('p', { className: 'video-ph', style: { top: '42%' } }, '[Live video — organizer screen share]'),
       h('div', { className: 'full-top' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
-        h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'DANANG CHRISTMAS MARKET 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
+        h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h(F.Badge, { tone: 'live' }, 'Live'), h('span', { className: 'pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'), h('span', { className: 'pill' }, h(F.Icon, { name: 'clock', size: 12 }), '02:14:47 left')),
       h('div', { className: 'full-chat' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })),
       h('div', { className: 'cam big' }, h('span', null, 'TN')),
@@ -4213,7 +4213,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
         h('span', { className: 'f4-badge f4-badge-live', style: { position: 'absolute', left: 8, top: 8 } }, h('span', { className: 'f4-live-dot' }), 'Live'),
         h('button', { type: 'button', className: 'pip-x', 'aria-label': 'Close mini player', onClick: function (e) { e.stopPropagation(); setPip(false); } }, '×'),
-        h('span', { className: 'pip-t' }, 'DANANG CHRISTMAS MARKET 2026')) : null,
+        h('span', { className: 'pip-t' }, 'Danang Christmas Market 2026')) : null,
       launch ? h(Launch, { key: 'launch' + launch, nav: nav, onDone: function () { setLaunch(false); } }) : null,
       loadKey && top !== 'welcome' && !/^(home|guide|onair|upcoming|detail|checkout|full|player)$/.test(tname) ? h('div', { key: loadKey, className: 'ldr-wrap' }, (window.__TICKS_UNTIL__ || 0) > loadKey ? h(TickLoader, null) : h(LogoLoader)) : null,
       gate ? h(AuthSheet, { why: gate, close: function () { setGate(null); }, nav: nav }) : null,
