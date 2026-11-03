@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103134124"</script>
+<script>window.__BUILD__="20261103134440"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2162,6 +2162,21 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .acc .mgroup-l{margin:30px 28px 10px!important}
 .acc .mgroup > *{padding-left:18px!important;padding-right:18px!important}
 .acc .pad,.ga .pad{padding-left:24px!important;padding-right:24px!important}
+
+/* Member card: stand out — rich logo-tone gradient, glowing gradient edge, colourful watermark, soft lift */
+.acc .mcard{background:radial-gradient(110% 80% at 100% 0%,rgba(165,122,216,.55),transparent 55%),radial-gradient(80% 70% at 0% 100%,rgba(57,202,224,.22),transparent 60%),radial-gradient(70% 55% at 100% 100%,rgba(244,164,37,.20),transparent 60%),linear-gradient(150deg,#3b1f58 0%,#2a1a44 42%,#1a1628 100%)!important;box-shadow:0 22px 50px -12px rgba(120,47,141,.55),0 8px 24px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.14)!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;overflow:hidden}
+.acc .mcard::before{padding:1.4px!important;background:linear-gradient(135deg,#39cae0,#5b6be0 25%,#a57ad8 50%,#e74645 75%,#facd60)!important;opacity:.9}
+.acc .mcard::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.10) 45%,transparent 60%);z-index:0}
+.acc .mcard-glow{width:300px!important;height:300px!important;right:-90px!important;top:-120px!important;background:radial-gradient(circle,rgba(231,70,69,.35),rgba(165,122,216,.25) 40%,transparent 68%)!important}
+.acc .mcard-mark{opacity:.16!important;filter:none!important;right:-34px!important;bottom:-46px!important}
+.acc .mcard-brand{color:rgba(255,255,255,.88)!important}
+.acc .mcard-id span{color:rgba(255,255,255,.7)!important}
+.acc .mcard-stats{background:rgba(10,8,20,.28)!important;border:1px solid rgba(255,255,255,.1)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.acc .mcard-stats span{color:rgba(255,255,255,.68)!important}
+.acc .mcard-edit{background:rgba(255,255,255,.14)!important}
+.acc .mcard-plan{box-shadow:0 4px 14px rgba(244,164,37,.45)}
+.acc .mcard > *{position:relative;z-index:1}
+.acc .mcard > .mcard-glow,.acc .mcard > .mcard-mark{position:absolute!important;z-index:0!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
