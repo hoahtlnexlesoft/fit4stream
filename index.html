@@ -2027,6 +2027,23 @@ body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
 html,body{background:#13121a}
 body.devmode .stagewrap{bottom:0!important}
 body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px),8px)!important}
+
+.cf2{position:relative;height:446px;margin-top:10px;touch-action:pan-y;user-select:none;-webkit-user-select:none;overflow:hidden;contain:layout paint}
+.cf2 .cf2-card{position:absolute!important;left:50%;top:10px;margin-left:-160px;width:320px!important;height:410px!important;transform-origin:center center!important;transition:none!important;will-change:transform,opacity;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 18px 36px rgba(0,0,0,.4)!important;opacity:1}
+.cf2 .cat-tag{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(20,16,30,.55)!important}
+.cf2 img,.cf2 .cf-card{-webkit-user-drag:none}
+.cf-livebar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.live-pill{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px 0 9px;border-radius:8px;background:linear-gradient(180deg,#ff5d4f,#e1342f);color:#fff;font-size:12px;font-weight:800;line-height:1;letter-spacing:.09em;box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 6px 18px rgba(231,70,69,.55);animation:livepill 2s ease-in-out infinite}
+.live-pill .eq{display:inline-flex;align-items:flex-end;gap:2px;height:11px}
+.live-pill .eq i{width:2.5px;border-radius:2px;background:#fff;animation:eqb .9s ease-in-out infinite}
+.live-pill .eq i:nth-child(1){height:5px;animation-delay:-.3s}.live-pill .eq i:nth-child(2){height:11px;animation-delay:-.6s}.live-pill .eq i:nth-child(3){height:7px}
+@keyframes eqb{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.live-pill .eq i{transform-origin:bottom}
+@keyframes livepill{0%,100%{box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 6px 16px rgba(231,70,69,.45)}50%{box-shadow:0 0 0 1px rgba(255,255,255,.18) inset,0 6px 26px rgba(231,70,69,.85)}}
+.live-view{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px;border-radius:8px;background:rgba(10,8,16,.55);color:rgba(255,255,255,.92);font-size:12px;font-weight:600}
+.live-since{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.75);font-size:13px;font-weight:500}
+.live-since i{width:7px;height:7px;border-radius:50%;background:#ff5d4f;box-shadow:0 0 0 3px rgba(255,93,79,.22)}
+.dots span{cursor:pointer}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3241,6 +3258,84 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
   }
 
   /* ---------- Home (as the app: hero, Top Channels, Trending, Browse by Category, per-category) ---------- */
+
+  // Pointer-driven coverflow: one transform per card per frame, no native scroll / no teleport.
+  function CoverFlow(p) {
+    var heroes = p.heroes, N = heroes.length, COPIES = 2, T = N * COPIES, SP = 312;
+    var st = useState(1), slide = st[0], setSlide = st[1];
+    var box = useRef(null), cards = useRef([]), S = useRef({ pos: 1, target: 1, raf: 0, drag: null, moved: false, last: 1 });
+    function wrap(d) { d = ((d % T) + T) % T; return d >= T / 2 ? d - T : d; }
+    function paint() {
+      var s = S.current, list = cards.current;
+      for (var v = 0; v < list.length; v++) {
+        var c = list[v]; if (!c) continue;
+        var d = wrap(v - s.pos), ad = Math.min(1, Math.abs(d)), far = Math.abs(d) > 2.2;
+        var sc = 1 - 0.16 * ad, x = d * SP;
+        c.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0) scale(' + sc.toFixed(4) + ')';
+        c.style.opacity = far ? 0 : (1 - 0.4 * ad).toFixed(3);
+        c.style.zIndex = String(100 - Math.round(Math.abs(d) * 10));
+        c.style.visibility = far ? 'hidden' : 'visible';
+      }
+      var idx = ((Math.round(s.pos) % N) + N) % N;
+      if (idx !== s.last) { s.last = idx; setSlide(idx); }
+    }
+    function animate() {
+      var s = S.current; cancelAnimationFrame(s.raf);
+      var t0 = performance.now();
+      (function step(now) {
+        var dt = Math.min(48, now - t0); t0 = now;
+        var diff = s.target - s.pos;
+        s.pos += diff * (1 - Math.exp(-dt / 85));
+        if (Math.abs(diff) < 0.0008) { s.pos = s.target; s.pos = ((s.pos % T) + T) % T; s.target = s.pos; paint(); return; }
+        paint(); s.raf = requestAnimationFrame(step);
+      })(t0);
+    }
+    useEffect(function () { paint(); return function () { cancelAnimationFrame(S.current.raf); }; }, []);
+    function down(e) {
+      var s = S.current; cancelAnimationFrame(s.raf);
+      s.drag = { x: e.clientX, y: e.clientY, pos: s.pos, t: performance.now(), vx: 0, lx: e.clientX, lt: performance.now(), lock: 0, id: e.pointerId };
+      s.moved = false;
+    }
+    function move(e) {
+      var s = S.current, g = s.drag; if (!g) return;
+      var dx = e.clientX - g.x, dy = e.clientY - g.y;
+      if (!g.lock) { if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return; g.lock = Math.abs(dx) > Math.abs(dy) ? 1 : 2; if (g.lock === 1) { try { box.current.setPointerCapture(g.id); } catch (_) {} } }
+      if (g.lock !== 1) return;
+      s.moved = true;
+      var now = performance.now(), ddt = Math.max(1, now - g.lt);
+      g.vx = 0.8 * ((e.clientX - g.lx) / ddt) + 0.2 * g.vx; g.lx = e.clientX; g.lt = now;
+      s.pos = g.pos - dx / SP; s.target = s.pos; paint();
+    }
+    function up() {
+      var s = S.current, g = s.drag; s.drag = null; if (!g) return;
+      if (g.lock !== 1) { animate(); return; }
+      var fling = -g.vx * 0.32; // px/ms -> index offset
+      var base = Math.round(g.pos), t = Math.round(s.pos + Math.max(-0.6, Math.min(0.6, fling)));
+      t = Math.max(base - 1, Math.min(base + 1, t));
+      s.target = t; animate();
+    }
+    function go(i) { var s = S.current; var d = wrap(i - s.pos); s.target = s.pos + Math.round(d); animate(); }
+    var list = [];
+    for (var v = 0; v < T; v++) list.push(v);
+    return h(React.Fragment, null,
+      h('div', { className: 'cf2', ref: box, onPointerDown: down, onPointerMove: move, onPointerUp: up, onPointerCancel: up,
+        onClickCapture: function (e) { if (S.current.moved) { e.stopPropagation(); e.preventDefault(); S.current.moved = false; } } },
+        list.map(function (v) {
+          var e = heroes[v % N], live = e.status === 'live', reg = p.reg;
+          return h('div', { key: v, className: 'cf-card cf2-card', ref: function (el) { cards.current[v] = el; }, style: { backgroundImage: 'url(' + e.img + ')' } },
+            h(Tap, { className: 'cf-hit', label: e.title, go: function () { p.nav.push('detail:' + e.id); } }),
+            h('div', { className: 'cf-top' }, h('span', { className: 'cat-tag' }, e.cat)),
+            h('div', { className: 'cf-cap' },
+              live ? h('div', { className: 'cf-livebar' },
+                h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'),
+                h('span', { className: 'live-view' }, h('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z' }), h('circle', { cx: 12, cy: 12, r: 3 })), (e.viewers || '2.4K') + ' watching')) : null,
+              h('b', null, e.title), h('span', { className: 'org' }, 'by ' + e.org),
+              h('div', { className: 'cf-foot' },
+                live ? h('span', { className: 'live-since' }, h('i'), 'Started 12 min ago') : h('span', { className: 'soon' }, h(F.Icon, { name: 'clock', size: 14 }), e.date.replace(', 2026', '')),
+                h(Tap, { className: live && reg ? 'mini-cta live' : 'mini-cta', go: function () { if (live && !p.nav.authed) return p.nav.requireAuth('Sign in to register for this event'); p.nav.push(live && reg ? 'player' : (live ? 'checkout' : 'detail:' + e.id)); } }, live && reg ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Join Live Event') : 'Register'))));
+        })),
+      h('div', { className: 'dots' }, heroes.map(function (x, i) { return h('span', { key: i, className: i === slide ? 'on' : '', onClick: function () { go(i); } }); })));
+  }
   function Home(p) {
     var st = useState(true), loading = st[0], setLoading = st[1];
     var pr = useState(0), pull = pr[0], setPull = pr[1];
@@ -3284,18 +3379,7 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
       h('div', { className: 'screen under-head', ref: ref, onTouchStart: ts, onTouchMove: tm, onTouchEnd: te, onScroll: function (e) { var v = e.currentTarget.scrollTop > 8; if (v !== solid) setSolid(v); } },
         h('div', { className: 'ptr', style: { height: pull, opacity: pull / 70 } }, h('span', { className: pull > 64 ? 'spin' : '', style: { transform: 'rotate(' + pull * 4 + 'deg)' } }, h(F.Logo, { size: 28, markOnly: true }))),
         loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : h('div', { className: 'fade-in' },
-          h('div', { className: 'coverflow', ref: function (el) { if (el && !el.__init) { el.__init = 1; requestAnimationFrame(function () { el.scrollLeft = 340 * 4; cfPaint(el); }); } }, onScroll: onRail }, heroes.concat(heroes, heroes).map(function (e, k) { var i = k % heroes.length;
-            var live = e.status === 'live';
-            return h('div', { key: e.id + k, className: 'cf-card', style: { backgroundImage: 'url(' + e.img + ')' } },
-              h(Tap, { className: 'cf-hit', label: e.title, go: function () { p.nav.push('detail:' + e.id); } }),
-              h('div', { className: 'cf-top' }, h('span', { className: 'cat-tag' }, e.cat)),
-              h('div', { className: 'cf-cap' },
-                h('b', null, e.title), h('span', { className: 'org' }, 'by ' + e.org),
-                h('div', { className: 'cf-foot' },
-                  live ? h('span', { className: 'livetxt' }, h('i', null), 'Live now') : h('span', { className: 'soon' }, h(F.Icon, { name: 'clock', size: 14 }), e.date.replace(', 2026', '')),
-                  h(Tap, { className: live && reg ? 'mini-cta live' : 'mini-cta', go: function () { if (live && !p.nav.authed) return p.nav.requireAuth('Sign in to register for this event'); p.nav.push(live && reg ? 'player' : (live ? 'checkout' : 'detail:' + e.id)); } }, live && reg ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Join Live Event') : 'Register'))));
-          })),
-          h('div', { className: 'dots' }, heroes.map(function (x, i) { return h('span', { key: i, className: i === slide ? 'on' : '' }); })),
+          h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
             h('div', { className: 'stories' }, CHANNELS.map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), live: i === 0, go: function () { p.nav.push('organizer'); } }); }))),
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, [EV.xmas, EV.gig, EV.seo].map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
