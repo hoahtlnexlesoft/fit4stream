@@ -3,11 +3,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#13121a">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-title" content="Fit4Stream">
-<title>Fit4Stream</title>
+<title>Fit4Stream iPhone Prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
@@ -1991,6 +1991,17 @@ input:focus,textarea:focus{outline:none}
 .f4-tab::before{border:0!important}
 .f4-tabbar{height:auto!important;align-items:stretch!important}
 .f4-tab{margin:0!important;height:64px!important}
+
+/* tab bar v-final: dark frosted material so it never washes out over photos */
+.f4-tabbar{background:linear-gradient(180deg,rgba(34,30,44,.78),rgba(20,18,28,.86))!important;backdrop-filter:blur(30px) saturate(180%)!important;-webkit-backdrop-filter:blur(30px) saturate(180%)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:0 18px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.16)!important}
+.f4-tabbar::after{background:radial-gradient(120% 70% at 20% -10%,rgba(255,255,255,.08),transparent 55%)!important}
+.f4-tab:not(.is-on):not(.is-center){color:rgba(255,255,255,.72)!important}
+.f4-tab,.f4-tab-l{text-shadow:none!important}
+.f4-tab.is-on:not(.is-center)::before{background:rgba(140,70,180,.38)!important}
+.f4-tab-orb{box-shadow:0 0 0 4px rgba(20,18,28,.9),0 10px 24px rgba(0,0,0,.45)!important}
+/* soft dark fade behind the bar so content dims as it scrolls under */
+.tabbar::before{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;pointer-events:none;background:linear-gradient(180deg,rgba(14,13,20,0),rgba(14,13,20,.75) 55%,rgba(14,13,20,.92));z-index:-1}
+.tabbar{position:absolute}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
