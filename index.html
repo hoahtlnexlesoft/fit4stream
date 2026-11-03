@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103124521"</script>
+<script>window.__BUILD__="20261103124653"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2843,8 +2843,8 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
       measure();
       var ro = window.ResizeObserver ? new ResizeObserver(measure) : null; ro && ro.observe(el);
       var seen = false; try { seen = localStorage.getItem('f4s_seen') === '1'; localStorage.setItem('f4s_seen', '1'); } catch (_) {}
-      var guard = setTimeout(enter, seen ? 3200 : 6500);
-      [vr.current, gr.current].forEach(function (v) { if (!v) return; if (seen) { try { v.currentTime = 5.6; } catch (_) {} } v.muted = true; v.playsInline = true; v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
+      var guard = setTimeout(enter, seen ? 2800 : 5500);
+      [vr.current, gr.current].forEach(function (v) { if (!v) return; var st0 = seen ? 6.0 : 1.0; var seek = function () { try { if (v.currentTime < st0) v.currentTime = st0; } catch (_) {} }; if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, { once: true }); v.muted = true; v.playsInline = true; v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
       function cl(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
       function eo(v) { return 1 - Math.pow(1 - v, 3); }
       function star(px, py, r, a, col) {
