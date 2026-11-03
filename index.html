@@ -2023,6 +2023,10 @@ body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
 .ld-multi .lr3 .lr-arc{animation:lr-spin 3.2s linear infinite reverse;filter:drop-shadow(0 0 4px rgba(57,202,224,.5))}
 @keyframes lr-pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
 @keyframes lr-spin{to{transform:rotate(360deg)}}
+
+html,body{background:#13121a}
+body.devmode .stagewrap{bottom:0!important}
+body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px),8px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3924,6 +3928,11 @@ body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
   var coarse = window.matchMedia && matchMedia('(pointer:coarse)').matches; var dev = (coarse || ('ontouchstart' in window)) && Math.min(screen.width, screen.height) < 600;
   window.__FRAME__ = !dev;
   if (dev) document.body.classList.add('devmode');
+  if (dev && (navigator.standalone || matchMedia('(display-mode: standalone)').matches)) {
+    document.body.classList.add('pwa');
+    var fixH = function(){ var sw = document.querySelector('.stagewrap'); if (sw) sw.style.setProperty('height', Math.max(screen.height, window.innerHeight) + 'px', 'important'); };
+    fixH(); window.addEventListener('resize', fixH); window.addEventListener('orientationchange', function(){ setTimeout(fixH, 300); });
+  }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
   function fit(){
     if (dev) return;
