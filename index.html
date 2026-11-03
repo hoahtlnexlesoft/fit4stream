@@ -1,9 +1,9 @@
-<script>window.__BUILD__="20261103125447"</script>
+<script>window.__BUILD__="20261103130230"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#13121a">
+<meta name="theme-color" content="#0d0e12">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -2085,6 +2085,35 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
 .f4-ea2{opacity:1!important;overflow:visible}
 .f4-ea2 .ea2-spin{transform-origin:120px 80px;animation:ea2s 9s linear infinite}
 @keyframes ea2s{to{transform:rotate(360deg)}}
+
+/* Launch v2 */
+html body .stage .l2.screen,.l2{position:absolute;inset:0;display:grid;place-items:center;z-index:5;background:radial-gradient(120% 80% at 50% 45%,#1d1428 0%,#100d16 60%,#0b0a10 100%)!important;transition:opacity .45s ease,transform .45s ease;cursor:pointer}
+.l2.l2-out{opacity:0;transform:scale(1.04)}
+.l2-amb{position:absolute;left:50%;top:46%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(closest-side,rgba(120,47,141,.32),rgba(57,33,99,.12) 60%,transparent);pointer-events:none}
+.l2-stage{position:relative;width:300px;height:360px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:60px;box-sizing:border-box;margin-top:-40px}
+.l2-rings{position:absolute;left:50%;top:60px;width:290px;height:290px;margin:-70px 0 0 -145px}
+.l2-rings svg{overflow:visible}
+.l2-logo{position:relative;width:150px;height:150px;overflow:visible;z-index:2}
+.l2-logo path{transform-box:fill-box;transform-origin:center}
+.l2-bloom{position:absolute;left:50%;top:60px;width:220px;height:220px;margin:-35px 0 0 -110px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,240,215,.55),rgba(250,205,96,.18) 45%,transparent);pointer-events:none;z-index:1}
+.l2-word{position:relative;z-index:2;margin-top:58px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.l2-word b{font-size:26px;font-weight:800;color:#fff;letter-spacing:.02em}
+.l2-word span{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.04em}
+@keyframes l2-in{from{opacity:0}to{opacity:1}}
+@keyframes l2-draw{from{stroke-dashoffset:100;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes l2-trail{0%{stroke-dashoffset:100;opacity:.0}8%{opacity:.75}60%{stroke-dashoffset:0;opacity:.75}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes l2-comet{0%{stroke-dashoffset:105;opacity:0}10%{opacity:1}85%{opacity:1}100%{stroke-dashoffset:5;opacity:0}}
+@keyframes l2-fill{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@keyframes l2-bloom{0%{opacity:0;transform:scale(.4)}35%{opacity:1}100%{opacity:0;transform:scale(1.8)}}
+@keyframes l2-sheen{from{transform:translateX(0) skewX(-18deg)}to{transform:translateX(820px) skewX(-18deg)}}
+@keyframes l2-word{from{opacity:0;transform:translateY(8px);letter-spacing:.24em}to{opacity:1;transform:none;letter-spacing:.02em}}
+
+/* Darker, calmer base (less purple) */
+.stage,.stage.anim-none{background:radial-gradient(110% 50% at 88% -8%,rgba(120,47,141,.13),transparent 62%),radial-gradient(80% 40% at 0% 0%,rgba(57,202,224,.035),transparent 60%),linear-gradient(180deg,#121319 0%,#0e0f13 50%,#0b0c0f 100%)!important}
+html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .screenhost{background-color:#0d0e12!important}
+.home-amb{background:radial-gradient(70% 38% at 90% 0%,rgba(120,47,141,.12),transparent 70%),linear-gradient(180deg,#13141a,rgba(14,15,19,0))!important}
+.stage>.screen.l2,.stage .screen.l2{background:radial-gradient(90% 60% at 50% 42%,#17131d 0%,#0e0f13 55%,#0a0b0e 100%)!important}
+.l2-amb{background:radial-gradient(closest-side,rgba(120,47,141,.18),rgba(57,33,99,.06) 60%,transparent)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2901,6 +2930,63 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
       return function () { cancelAnimationFrame(raf); };
     }, []);
     return h('canvas', { ref: cv, className: 'lt-canvas', role: 'img', 'aria-label': 'Fit4Stream logo animation' });
+  }
+
+  /* ---------- Launch v2: light traces each facet of the real logo, then the logo resolves ---------- */
+  var LP = {
+    base: 'M245.823 30.0916L30.7393 244.929C-4.1252 279.753 -4.12519 336.215 30.7393 371.04L245.823 585.877C280.687 620.702 337.214 620.702 372.078 585.877L587.162 371.04C622.026 336.215 622.026 279.753 587.162 244.929L372.078 30.0916C337.214 -4.73292 280.687 -4.73292 245.823 30.0916Z',
+    a: 'M454.54 106.519L584.292 236.122C623.878 275.663 623.878 340.275 584.292 379.816L380.514 583.361C356.177 607.669 322.373 616.999 290.666 611.414C339.148 594.024 381.912 553.848 413.365 506.373C451.998 448.235 473.793 378.991 468.455 327.644C464.198 286.707 448.44 275.917 413.047 251.736L410.759 250.212L307.187 172.971C295.304 164.847 281.007 156.215 266.266 151.899C257.243 149.233 248.156 148.218 239.324 149.804C279.8 120.355 374.414 94.7768 454.476 106.519H454.54Z',
+    b: 'M28.8104 240.501L236.655 32.6402C276.242 -6.90091 340.927 -6.90091 380.514 32.6402L454.476 106.582C438.527 103.662 422.133 101.948 405.74 101.377C335.907 98.8383 265.44 116.356 224.392 147.709C220.579 150.629 217.148 153.485 214.161 156.278C213.717 156.595 213.335 156.849 212.891 157.166L213.018 157.357C191.35 178.111 190.333 197.406 188.427 234.535C188.427 234.535 185.885 397.904 189.698 412.692C192.303 422.784 196.624 432.05 203.55 439.095C201.517 438.397 199.483 437.636 197.323 436.747C136.958 409.074 48.7625 320.028 28.6833 240.564L28.8104 240.501Z',
+    c: 'M454.794 332.72C454.476 329.674 453.142 321.486 452.951 320.28C451.236 330.182 446.025 338.94 439.036 346.557C427.916 358.616 421.562 363.312 407.9 370.421L284.057 434.715C246.059 454.454 229.094 463.339 190.905 447.726C143.058 428.178 51.2407 334.561 29.573 240.246C-5.8197 280.041 -4.48533 341.479 33.6397 379.624L235.829 581.582L237.418 583.169C243.454 589.198 250.126 594.276 257.116 598.465C264.931 603.098 281.325 609.508 291.365 611.222C341.944 595.99 377.082 552.577 409.806 503.325C447.804 446.076 460.004 382.861 454.794 332.657V332.72Z'
+  };
+  function Launch(p) {
+    var dn = useRef(false), ph = useState(0), out = ph[0], setOut = ph[1];
+    var seen = useRef(null);
+    if (seen.current === null) { var sv = false; try { sv = localStorage.getItem('f4s_seen2') === '1'; localStorage.setItem('f4s_seen2', '1'); } catch (_) {} seen.current = sv; }
+    var SKIP = seen.current ? 1.55 : 0, END = 3.55 - SKIP;
+    function enter() { if (dn.current) return; console.log('L2ENTER '+performance.now()+' '+new Error().stack.split('\n').slice(1,4).join(' | ')); dn.current = true; setOut(1); setTimeout(function () { p.nav.root('home'); }, 480); }
+    useEffect(function () { var t = setTimeout(enter, END * 1000); return function () { clearTimeout(t); }; }, []);
+    function A(name, dur, delay, ease) { return { animation: name + ' ' + dur + 's ' + (ease || 'cubic-bezier(.45,0,.2,1)') + ' ' + (delay - SKIP).toFixed(2) + 's both' }; }
+    var facets = [['b', '#7fe6f5', '#39cae0', 0.2], ['a', '#d6b8ff', '#a57ad8', 0.55], ['c', '#ffe3a0', '#f7924a', 0.9]];
+    return h('div', { className: cx('screen noscroll l2', out && 'l2-out'), onClick: enter, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
+      h('div', { className: 'l2-amb', style: A('l2-in', 1.2, 0, 'ease-out') }),
+      h('div', { className: 'l2-stage' },
+        h('div', { className: 'l2-rings ld-multi', style: A('l2-in', .6, 2.05, 'ease-out') },
+          h('svg', { viewBox: '0 0 200 200', width: '100%', height: '100%' },
+            h('defs', null,
+              h('linearGradient', { id: 'l2r1', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#facd60' }), h('stop', { offset: .45, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#a57ad8' })),
+              h('linearGradient', { id: 'l2r2', x1: 1, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: 1, stopColor: '#5b8cf0' }))),
+            h('g', { className: 'lr lr4' }, h('circle', { cx: 100, cy: 100, r: 97, className: 'lr-track', style: { opacity: .5 } })),
+            h('g', { className: 'lr lr3' }, h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-arc', stroke: 'url(#l2r2)', strokeWidth: 2, pathLength: 100, strokeDasharray: '22 78' })),
+            h('g', { className: 'lr lr2' }, h('circle', { cx: 100, cy: 100, r: 70, className: 'lr-track', style: { opacity: .7 } })),
+            h('g', { className: 'lr lr1' }, h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-arc', stroke: 'url(#l2r1)', strokeWidth: 2.4, pathLength: 100, strokeDasharray: '46 54' })))),
+        h('div', { className: 'l2-bloom', style: A('l2-bloom', 1.1, 1.85, 'ease-out') }),
+        h('svg', { className: 'l2-logo', viewBox: '-20 -20 658 658', 'aria-hidden': true },
+          h('defs', null,
+            h('filter', { id: 'l2glow', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feGaussianBlur', { stdDeviation: 9 })),
+            h('linearGradient', { id: 'l2ga', x1: 422.388, y1: 72.6262, x2: 431.77, y2: 415.549, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0, stopColor: '#782F8D' }), h('stop', { offset: 1, stopColor: '#392163' })),
+            h('linearGradient', { id: 'l2gb', x1: 459.242, y1: 14.4246, x2: 73.952, y2: 371.941, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0, stopColor: '#33438D' }), h('stop', { offset: 1, stopColor: '#39CAE0' })),
+            h('linearGradient', { id: 'l2gc', x1: 49.9063, y1: 148.978, x2: 392.559, y2: 506.129, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0.2, stopColor: '#E74645' }), h('stop', { offset: 1, stopColor: '#FACD60' })),
+            h('linearGradient', { id: 'l2sh', x1: 0, y1: 0, x2: 1, y2: 0 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: 0 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: .75 }), h('stop', { offset: 1, stopColor: '#fff', stopOpacity: 0 })),
+            h('clipPath', { id: 'l2clip' }, h('path', { d: LP.base }))),
+          // ghost outline
+          h('path', { d: LP.base, fill: 'none', stroke: '#fff', strokeOpacity: .14, strokeWidth: 3, pathLength: 100, strokeDasharray: 100, style: A('l2-draw', 1.1, 0, 'ease-in-out') }),
+          // fills
+          h('path', { d: LP.base, fill: '#fff', style: A('l2-fill', .6, 2.0) }),
+          h('path', { d: LP.a, fill: 'url(#l2ga)', fillRule: 'evenodd', style: A('l2-fill', .55, 1.8) }),
+          h('path', { d: LP.b, fill: 'url(#l2gb)', fillRule: 'evenodd', style: A('l2-fill', .55, 1.68) }),
+          h('path', { d: LP.c, fill: 'url(#l2gc)', style: A('l2-fill', .55, 1.92) }),
+          // traces: glowing trail + bright comet head, one facet after another
+          facets.map(function (f) {
+            var d = LP[f[0]], t = f[3];
+            return h('g', { key: f[0] },
+              h('path', { d: d, fill: 'none', stroke: f[2], strokeWidth: 7, strokeLinecap: 'round', strokeLinejoin: 'round', pathLength: 100, strokeDasharray: 100, style: Object.assign(A('l2-trail', 1.95 - t + .35, t), {}) }),
+              h('path', { d: d, fill: 'none', stroke: f[2], strokeWidth: 26, strokeLinecap: 'round', pathLength: 100, strokeDasharray: '9 91', filter: 'url(#l2glow)', style: A('l2-comet', .95, t, 'cubic-bezier(.5,0,.3,1)') }),
+              h('path', { d: d, fill: 'none', stroke: f[1], strokeWidth: 8, strokeLinecap: 'round', pathLength: 100, strokeDasharray: '5 95', style: A('l2-comet', .95, t, 'cubic-bezier(.5,0,.3,1)') }));
+          }),
+          // sheen sweep
+          h('g', { clipPath: 'url(#l2clip)' }, h('rect', { x: -160, y: -100, width: 150, height: 820, fill: 'url(#l2sh)', style: A('l2-sheen', .85, 2.3, 'cubic-bezier(.4,0,.2,1)') }))),
+        h('div', { className: 'l2-word', style: A('l2-word', .7, 2.35, 'cubic-bezier(.2,.8,.2,1)') }, h('b', null, 'Fit4Stream'), h('span', null, 'Live events, anywhere'))));
   }
   function Welcome(p) {
     var vr = useRef(null), gr = useRef(null), cvr = useRef(null), boxr = useRef(null), dn = useRef(false), ph = useState(0), phase = ph[0], setPhase = ph[1], gs = useState(null), geo = gs[0], setGeo = gs[1];
@@ -4011,7 +4097,7 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
         h(Tap, { className: 'ctl coral', label: 'Send a heart', onClick: function () { tap(15); p.nav.toast('\u2764\ufe0f sent'); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
   }
 
-  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Welcome, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Welcome, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
+  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
 
   function stackFor(n) {
     var map = { categories: ['home', 'categories'], login: ['home', 'login'], signup: ['home', 'signup'], forgot: ['home', 'login', 'forgot'], notifications: ['home', 'notifications'], payments: ['account', 'payments'], security: ['account', 'security'], channel: ['account', 'channel'], profile: ['account', 'profile'], payout: ['home', 'detail:payout'], search: ['home', 'search'], myevents: ['account', 'myevents'], detail: ['home', 'detail:seo'], live: ['home', 'live'], checkout: ['home', 'live', 'checkout'], success: ['home', 'live', 'success'], organizer: ['home', 'detail', 'organizer'], reviews: ['home', 'detail', 'organizer', 'reviews'], player: ['home', 'live', 'player'], full: ['home', 'live', 'player', 'full'] };
