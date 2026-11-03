@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103132615"</script>
+<script>window.__BUILD__="20261103132907"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2147,6 +2147,9 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .l2.l2-overlay.l2-out{opacity:0;transform:scale(1.05);filter:blur(3px);pointer-events:none}
 
 .l2,.l2.l2-overlay{display:grid!important;place-items:center!important;padding:0!important;overflow:hidden!important;background:radial-gradient(90% 60% at 50% 42%,#17131d 0%,#0e0f13 55%,#0a0b0e 100%)!important}
+
+.l3 .l3-vbox{margin-top:-30px}
+.l3-sound{position:absolute;left:50%;bottom:calc(var(--sb,20px) + 40px);transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px;border-radius:18px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);font-size:13px;font-weight:500;animation:l2-in .5s ease .6s both}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2973,44 +2976,33 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     c: 'M454.794 332.72C454.476 329.674 453.142 321.486 452.951 320.28C451.236 330.182 446.025 338.94 439.036 346.557C427.916 358.616 421.562 363.312 407.9 370.421L284.057 434.715C246.059 454.454 229.094 463.339 190.905 447.726C143.058 428.178 51.2407 334.561 29.573 240.246C-5.8197 280.041 -4.48533 341.479 33.6397 379.624L235.829 581.582L237.418 583.169C243.454 589.198 250.126 594.276 257.116 598.465C264.931 603.098 281.325 609.508 291.365 611.222C341.944 595.99 377.082 552.577 409.806 503.325C447.804 446.076 460.004 382.861 454.794 332.657V332.72Z'
   };
   function Launch(p) {
-    // Client video (light traces the logo, then it resolves), shown small like the vector logo, edges feathered into the bg.
-    var dn = useRef(false), ph = useState(0), out = ph[0], setOut = ph[1], vr = useRef(null);
-    var seen = useRef(null);
-    if (seen.current === null) { var sv = false; try { sv = localStorage.getItem('f4s_seen3') === '1'; localStorage.setItem('f4s_seen3', '1'); } catch (_) {} seen.current = sv; }
-    var RATE = 1.6, START = seen.current ? 3.8 : 0.6, STOP = 7.6;
-    function at(vt) { return Math.max(0, (vt - START) / RATE); }
-    var END = at(STOP);
-    var rootEl = useRef(null);
+    // Plays the client clip exactly as delivered (full length, normal speed, with sound) — only the logo is shown smaller.
+    var dn = useRef(false), ph = useState(0), out = ph[0], setOut = ph[1], vr = useRef(null), rootEl = useRef(null);
+    var ms = useState(false), muted = ms[0], setMuted = ms[1];
     function enter() {
       if (dn.current) return; dn.current = true;
-      try { vr.current && vr.current.pause(); } catch (_) {}
       if (p.onDone) { setOut(1); setTimeout(p.onDone, 760); }
       else { window.__fromLaunch = true; p.nav.root('home'); }
     }
     useEffect(function () {
-      var v = vr.current, guard = setTimeout(enter, (END + 1.6) * 1000);
+      var v = vr.current, guard = setTimeout(enter, 13000);
       if (v) {
-        v.muted = true; v.playsInline = true;
-        var seek = function () { try { v.currentTime = START; } catch (_) {} v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); };
-        if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, { once: true });
-        v.addEventListener('timeupdate', function () { if (v.currentTime >= STOP) enter(); });
+        v.playsInline = true; v.muted = false; v.volume = 1;
+        var pr = v.play();
+        if (pr && pr.catch) pr.catch(function () {
+          // Browser blocked autoplay with sound: keep the animation running muted and offer a tap to turn sound on.
+          v.muted = true; setMuted(true); var p2 = v.play(); if (p2 && p2.catch) p2.catch(function () {});
+        });
       }
       return function () { clearTimeout(guard); };
     }, []);
-    function A(name, dur, delay, ease) { return { animation: name + ' ' + dur + 's ' + (ease || 'cubic-bezier(.45,0,.2,1)') + ' ' + delay.toFixed(2) + 's both' }; }
-    return h('div', { ref: rootEl, className: cx('screen noscroll l2 l3', p.onDone && 'l2-overlay', out && 'l2-out'), onClick: enter, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
-      h('div', { className: 'l2-stage' },
-        h('div', { className: 'l2-rings ld-multi', style: A('l2-in', .6, at(5.3), 'ease-out') },
-          h('svg', { viewBox: '0 0 200 200', width: '100%', height: '100%' },
-            h('defs', null,
-              h('linearGradient', { id: 'l2r1', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#facd60' }), h('stop', { offset: .45, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#a57ad8' })),
-              h('linearGradient', { id: 'l2r2', x1: 1, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: 1, stopColor: '#5b8cf0' }))),
-            h('g', { className: 'lr lr4' }, h('circle', { cx: 100, cy: 100, r: 97, className: 'lr-track', style: { opacity: .5 } })),
-            h('g', { className: 'lr lr3' }, h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-arc', stroke: 'url(#l2r2)', strokeWidth: 2, pathLength: 100, strokeDasharray: '22 78' })),
-            h('g', { className: 'lr lr2' }, h('circle', { cx: 100, cy: 100, r: 70, className: 'lr-track', style: { opacity: .7 } })),
-            h('g', { className: 'lr lr1' }, h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-arc', stroke: 'url(#l2r1)', strokeWidth: 2.4, pathLength: 100, strokeDasharray: '46 54' })))),
-        h('div', { className: 'l3-vbox' }, h('video', { ref: vr, className: 'l3-video', src: 'launch.mp4', muted: true, playsInline: true, autoPlay: true, preload: 'auto', 'aria-hidden': true })),
-        h('div', { className: 'l2-word', style: A('l2-word', .7, at(5.6), 'cubic-bezier(.2,.8,.2,1)') }, h('b', null, 'Fit4Stream'), h('span', null, 'Live events, anywhere'))));
+    function tapScreen() {
+      var v = vr.current;
+      if (v && v.muted) { v.muted = false; v.volume = 1; setMuted(false); var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); return; }
+    }
+    return h('div', { ref: rootEl, className: cx('screen noscroll l2 l3', p.onDone && 'l2-overlay', out && 'l2-out'), onClick: tapScreen, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
+      h('div', { className: 'l3-vbox' }, h('video', { ref: vr, className: 'l3-video', src: 'launch2.mp4', playsInline: true, autoPlay: true, preload: 'auto', onEnded: enter, 'aria-hidden': true })),
+      muted ? h('span', { className: 'l3-sound' }, h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M11 5L6 9H3v6h3l5 4z' }), h('path', { d: 'M22 9l-6 6M16 9l6 6' })), 'Tap for sound') : null);
   }
   function Welcome(p) {
     var vr = useRef(null), gr = useRef(null), cvr = useRef(null), boxr = useRef(null), dn = useRef(false), ph = useState(0), phase = ph[0], setPhase = ph[1], gs = useState(null), geo = gs[0], setGeo = gs[1];
