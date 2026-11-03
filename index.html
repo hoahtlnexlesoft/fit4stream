@@ -1,8 +1,8 @@
-<script>window.__BUILD__="20261103124912"</script>
+<script>window.__BUILD__="20261103125447"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#13121a">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -2007,7 +2007,7 @@ input:focus,textarea:focus{outline:none}
 /* ===== real-device mode: respect notch / home indicator, fill the whole screen ===== */
 html:has(body.devmode),body.devmode{height:100%;margin:0;overflow:hidden;background:#13121a}
 body.devmode{--st:max(env(safe-area-inset-top),20px)!important;--sb:max(env(safe-area-inset-bottom),10px)!important}
-body.devmode .stagewrap{position:fixed!important;inset:0!important;height:100dvh!important;padding:0!important}
+body.devmode .stagewrap{position:fixed!important;inset:0!important;height:auto!important;min-height:0!important;padding:0!important}
 body.devmode .scaler,body.devmode .device,body.devmode .screenhost{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border-radius:0!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;background:#13121a!important;transform:none!important}
 body.devmode .device::before,body.devmode .device::after,body.devmode .island,body.devmode .btn-side,body.devmode .statusbar,body.devmode .homebar{display:none!important}
 body.devmode .app{border-radius:0!important}
@@ -2050,7 +2050,41 @@ body.devmode .tabbar{padding-bottom:max(calc(env(safe-area-inset-bottom) - 16px)
 @keyframes updin{from{opacity:0;transform:translate(-50%,-12px)}}
 
 /* Home-screen app: opaque status bar (avoids iOS 26 short-viewport gap) -> no top inset to reserve */
-body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
+
+
+.as2{overflow:hidden;gap:0!important;padding:10px 22px calc(var(--sb) + 18px)!important;border-radius:30px 30px 0 0!important;background:linear-gradient(180deg,#221c30 0%,#17141f 46%,#131119 100%)!important;box-shadow:0 -1px 0 rgba(255,255,255,.09) inset,0 -24px 60px rgba(0,0,0,.5)!important;border:0!important}
+.as2::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent)}
+.as2-glow{position:absolute;left:50%;top:-120px;width:420px;height:260px;margin-left:-210px;border-radius:50%;background:radial-gradient(closest-side,rgba(165,122,216,.38),rgba(120,47,141,.16) 55%,transparent);filter:blur(6px);pointer-events:none}
+.as2-glow::after{content:"";position:absolute;left:46%;top:58%;width:160px;height:90px;border-radius:50%;background:radial-gradient(closest-side,rgba(244,164,37,.22),transparent)}
+.as2 > :not(.as2-glow):not(.as2-x){position:relative}
+.as2 .grab{margin-bottom:12px}
+.as2-x{position:absolute!important;top:14px;right:14px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7)}
+.as2-icon{position:relative;margin-top:4px;padding:8px;border-radius:24px;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%)}
+.as2-icon::before{content:"";position:absolute;inset:-6px;border-radius:28px;border:1px solid rgba(255,255,255,.07)}
+.as2-badge{position:absolute;right:-2px;bottom:-2px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f4a425;color:#1b1306;box-shadow:0 0 0 3px #1f1a2b}
+.as2 h2{margin:16px 0 0!important;font-size:21px!important;line-height:27px!important;font-weight:700;letter-spacing:-.01em;max-width:300px}
+.as2 p{margin:6px 0 18px!important;font-size:14px!important;color:rgba(248,250,252,.55)!important}
+.as2-perks{list-style:none;margin:0 0 20px;padding:6px 14px;width:100%;box-sizing:border-box;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);text-align:left}
+.as2-perks li{display:flex;align-items:center;gap:13px;padding:11px 0}
+.as2-perks li+li{border-top:1px solid rgba(255,255,255,.05)}
+.as2-ic{flex:none;width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:#f4a425;background:linear-gradient(160deg,rgba(244,164,37,.18),rgba(120,47,141,.22));box-shadow:0 0 0 1px rgba(244,164,37,.14) inset}
+.as2-perks b{display:block;font-size:14.5px;font-weight:600;color:#f8fafc}
+.as2-perks div span{display:block;font-size:12.5px;color:rgba(248,250,252,.5);margin-top:2px}
+.as2-cta{box-shadow:0 10px 26px rgba(244,164,37,.28)!important}
+.as2-alt{margin-top:14px;font-size:14px;color:rgba(248,250,252,.55)}
+.as2-link{color:#f4a425;font-weight:600;padding:4px 0}
+
+/* real device: fill the whole screen (iOS standalone 100% height bug) — same approach as SaoVoxy */
+@media (max-width:600px){
+  html,body.devmode{height:100%!important;min-height:100lvh!important}
+  html:has(body.devmode){height:100%!important;min-height:100lvh!important}
+  body.devmode .stagewrap{position:fixed!important;inset:0!important;height:auto!important;min-height:0!important}
+  body.devmode .tabbar{padding-bottom:max(8px,calc(env(safe-area-inset-bottom,0px) - 12px))!important}
+}
+
+.f4-ea2{opacity:1!important;overflow:visible}
+.f4-ea2 .ea2-spin{transform-origin:120px 80px;animation:ea2s 9s linear infinite}
+@keyframes ea2s{to{transform:rotate(360deg)}}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2490,7 +2524,7 @@ body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
         h('rect', { key: 'l', x: 98, y: 90, width: 44, height: 4, rx: 2, fill: 'rgba(199,181,230,.3)' })];
     }
   };
-  function EmptyArt(p) {
+  function EmptyArtOld(p) {
     var f = ART[p.name] || ART.inbox;
     return h('svg', { className: 'f4-empty-art', viewBox: '0 0 240 160', width: p.width || 220, role: 'img', 'aria-label': p.label || 'Illustration' }, h('defs', null,
         h('linearGradient', { id: 'f4e-neon', x1: 40, y1: 24, x2: 204, y2: 140, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0, stopColor: '#fbe2b4', stopOpacity: .5 }), h('stop', { offset: .55, stopColor: '#f7bd5c', stopOpacity: .5 }), h('stop', { offset: 1, stopColor: '#f4a425', stopOpacity: .5 })),
@@ -2498,6 +2532,44 @@ body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
         h('radialGradient', { id: 'f4e-flare' }, h('stop', { offset: 0, stopColor: '#fff' }), h('stop', { offset: .3, stopColor: '#ffd89a', stopOpacity: .8 }), h('stop', { offset: 1, stopColor: '#ff9a50', stopOpacity: 0 }))),
       h('g', { filter: 'url(#f4e-glow)' }, p.name === 'success' ? null : deco(), f()),
       h('g', { 'aria-hidden': true }, h('circle', { cx: 196, cy: 40, r: 6, fill: 'url(#f4e-flare)', opacity: .7 }), h('path', { d: 'M186 40h20M196 33v14', stroke: '#fff7e6', strokeWidth: 0.62, strokeLinecap: 'round', opacity: .7 })));
+  }
+  var GLYPH = {
+    calendar: { d: ['M6 4.5h12a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3z', 'M8 2.5v4M16 2.5v4M3 9.5h18', 'M10 13.5l4 4M14 13.5l-4 4'], badge: 'clock' },
+    search: { d: ['M10.5 4a6.5 6.5 0 1 1 0 13a6.5 6.5 0 0 1 0-13z', 'M15.5 15.5l5 5', 'M8.5 10.5h4'], badge: 'x' },
+    ticket: { d: ['M5 5.5h14a2 2 0 0 1 2 2v2.5a2.5 2.5 0 0 0 0 5v2.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V15a2.5 2.5 0 0 0 0-5V7.5a2 2 0 0 1 2-2z', 'M15 6v1.6M15 10.2v1.6M15 14.4v1.6M15 18.6v.4', 'M7 10h4M7 13.5h3'], badge: 'plus' },
+    live: { d: ['M5.5 7.5h13a2.5 2.5 0 0 1 2.5 2.5v8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18v-8a2.5 2.5 0 0 1 2.5-2.5z', 'M8.5 3.5l3.5 4 3.5-4', 'M10.5 11.5v5l4.2-2.5z'], badge: 'off' },
+    reviews: { d: ['M6 4.5h12a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6l-4.5 3.5v-3.5H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z', 'M12 7.6l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z'], badge: 'plus' },
+    inbox: { d: ['M3 13.5l2.6-7.2A2 2 0 0 1 7.5 5h9a2 2 0 0 1 1.9 1.3l2.6 7.2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 13.5h5l1.5 2.5h5l1.5-2.5h5'], badge: null }
+  };
+  function EmptyArt(p) {
+    if (p.name === 'success') return EmptyArtOld(p);
+    var g = GLYPH[p.name] || GLYPH.inbox, W = p.width || 220;
+    var badge = g.badge === 'clock' ? [h('circle', { key: 'c', cx: 0, cy: 0, r: 5, fill: 'none', stroke: '#f4a425', strokeWidth: 1.5 }), h('path', { key: 'h', d: 'M0-2.6V0l1.8 1.3', fill: 'none', stroke: '#f4a425', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' })]
+      : g.badge === 'x' ? [h('path', { key: 'x', d: 'M-3-3l6 6M3-3l-6 6', stroke: '#c9b4ec', strokeWidth: 1.6, strokeLinecap: 'round' })]
+      : g.badge === 'plus' ? [h('path', { key: 'p', d: 'M0-4v8M-4 0h8', stroke: '#f4a425', strokeWidth: 1.7, strokeLinecap: 'round' })]
+      : g.badge === 'off' ? [h('circle', { key: 'o', cx: 0, cy: 0, r: 3.4, fill: '#6b6478' })] : null;
+    return h('svg', { className: 'f4-empty-art f4-ea2', viewBox: '0 0 240 160', width: W, role: 'img', 'aria-label': p.label || 'Illustration' },
+      h('defs', null,
+        h('radialGradient', { id: 'ea2-glow', cx: '50%', cy: '50%', r: '50%' }, h('stop', { offset: 0, stopColor: '#8a4fb0', stopOpacity: .42 }), h('stop', { offset: .55, stopColor: '#5b2c78', stopOpacity: .14 }), h('stop', { offset: 1, stopColor: '#2a1838', stopOpacity: 0 })),
+        h('linearGradient', { id: 'ea2-tile', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#2f2640' }), h('stop', { offset: 1, stopColor: '#1b1724' })),
+        h('linearGradient', { id: 'ea2-edge', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .22 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: .05 }), h('stop', { offset: 1, stopColor: '#fff', stopOpacity: .02 })),
+        h('linearGradient', { id: 'ea2-ink', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#ffe0a3' }), h('stop', { offset: 1, stopColor: '#f4a425' })),
+        h('linearGradient', { id: 'ea2-arc', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#facd60', stopOpacity: .9 }), h('stop', { offset: .5, stopColor: '#e74645', stopOpacity: .7 }), h('stop', { offset: 1, stopColor: '#a57ad8', stopOpacity: .6 })),
+        h('filter', { id: 'ea2-sh', x: '-40%', y: '-40%', width: '180%', height: '180%' }, h('feDropShadow', { dx: 0, dy: 8, stdDeviation: 8, floodColor: '#000', floodOpacity: .45 }))),
+      h('ellipse', { cx: 120, cy: 80, rx: 92, ry: 74, fill: 'url(#ea2-glow)' }),
+      h('circle', { cx: 120, cy: 80, r: 70, fill: 'none', stroke: '#fff', strokeOpacity: .035 }),
+      h('circle', { cx: 120, cy: 80, r: 55, fill: 'none', stroke: '#fff', strokeOpacity: .06 }),
+      h('circle', { cx: 120, cy: 80, r: 55, fill: 'none', stroke: 'url(#ea2-arc)', strokeWidth: 1.6, strokeLinecap: 'round', pathLength: 100, strokeDasharray: '18 82', strokeDashoffset: 62, className: 'ea2-spin' }),
+      h('circle', { cx: 120, cy: 80, r: 41, fill: 'none', stroke: '#fff', strokeOpacity: .07 }),
+      h('circle', { cx: 175, cy: 80, r: 2.4, fill: '#39cae0', opacity: .8 }),
+      h('circle', { cx: 70.5, cy: 111, r: 2, fill: '#a57ad8', opacity: .9 }),
+      h('circle', { cx: 158, cy: 31, r: 1.4, fill: '#facd60', opacity: .8 }),
+      h('g', { filter: 'url(#ea2-sh)' },
+        h('rect', { x: 89, y: 49, width: 62, height: 62, rx: 20, fill: 'url(#ea2-tile)' }),
+        h('rect', { x: 89.5, y: 49.5, width: 61, height: 61, rx: 19.5, fill: 'none', stroke: 'url(#ea2-edge)' })),
+      h('g', { transform: 'translate(105 65) scale(1.25)', fill: 'none', stroke: 'url(#ea2-ink)', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }, g.d.map(function (d, i) { return h('path', { key: i, d: d }); })),
+      badge ? h('g', { transform: 'translate(150 50)' },
+        h('circle', { r: 12.5, fill: '#231d2e', stroke: '#fff', strokeOpacity: .1 }), badge) : null);
   }
   var ICON_TO_ART = { calendarX: 'calendar', calendar: 'calendar', search: 'search', ticket: 'ticket', radio: 'live', inbox: 'inbox', star: 'reviews' };
   function EmptyState(p) {
@@ -3539,15 +3611,20 @@ body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
 
   /* ---------- Account: My Account ---------- */
   function AuthSheet(p) {
+    var perks = [['ticket', 'Register & join live events', 'Get your seat and watch in one tap'], ['bell', 'Never miss a start', 'Save events and get reminders'], ['heart', 'Follow organizers', 'See new events from people you love']];
     return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
-      h('div', { className: 'sheet auth-sheet', role: 'dialog', 'aria-label': 'Sign in required' },
+      h('div', { className: 'sheet auth-sheet as2', role: 'dialog', 'aria-label': 'Sign in required' },
+        h('span', { className: 'as2-glow', 'aria-hidden': true }),
         h('span', { className: 'grab' }),
-        h(F.AppIcon, { size: 56 }),
+        h(Tap, { className: 'as2-x', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 })),
+        h('div', { className: 'as2-icon' }, h(F.AppIcon, { size: 60 }), h('span', { className: 'as2-badge' }, h(F.Icon, { name: 'lock', size: 13 }))),
         h('h2', null, p.why),
-        h('p', null, 'Create a free account or sign in to register, save events and follow your favourite organizers.'),
-        h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { p.close(); p.nav.push('login'); } }, 'Sign in'),
-        h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-lg f4-btn-block', go: function () { p.close(); p.nav.push('signup'); } }, 'Create account'),
-        h(Tap, { className: 'auth-later', go: p.close }, 'Not now')));
+        h('p', null, 'It only takes a minute — and it\u2019s free.'),
+        h('ul', { className: 'as2-perks' }, perks.map(function (k) {
+          return h('li', { key: k[0] }, h('span', { className: 'as2-ic' }, h(F.Icon, { name: k[0], size: 18 })), h('div', null, h('b', null, k[1]), h('span', null, k[2])));
+        })),
+        h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block as2-cta', go: function () { p.close(); p.nav.push('login'); } }, 'Sign in'),
+        h('div', { className: 'as2-alt' }, 'New to Fit4Stream? ', h(Tap, { className: 'as2-link', go: function () { p.close(); p.nav.push('signup'); } }, 'Create a free account'))));
   }
   function GuestAccount(p) {
     var bs = useState(false), busy = bs[0], setBusy = bs[1], sh = useState(false), show = sh[0], setShow = sh[1], rm = useState(true), rem = rm[0], setRem = rm[1];
@@ -4023,9 +4100,7 @@ body.devmode.pwa{--st:max(env(safe-area-inset-top),6px)!important}
   if (dev) document.body.classList.add('devmode');
   if (dev && (navigator.standalone || matchMedia('(display-mode: standalone)').matches)) {
     document.body.classList.add('pwa');
-    // iOS draws a system strip the page cannot paint into; size to the real visible height (innerHeight), never screen.height.
-    var fixH = function(){ var sw = document.querySelector('.stagewrap'); if (sw) sw.style.setProperty('height', window.innerHeight + 'px', 'important'); };
-    fixH(); window.addEventListener('resize', fixH); window.addEventListener('orientationchange', function(){ setTimeout(fixH, 300); });
+
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
   function fit(){
