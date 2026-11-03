@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261103130419"</script>
+<script>window.__BUILD__="20261103130649"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2120,6 +2120,11 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .mbtn.ring svg,.dt-glass svg,.dt-arw svg,.f4-iconbtn svg,.og-back svg,.og-share svg,.rbtn svg,.pv-glass:not(.pv-sm) svg,.lg-back svg,.as2-x svg,.round-s svg{width:17px!important;height:17px!important}
 .mbtn.ring.bell .bdot{top:9px!important;right:10px!important}
 .mbtn.signin-pill{height:44px!important;padding:0 18px!important;border-radius:22px!important}
+
+/* Launch v3: client video, logo kept small (~150px) */
+.l3-vbox{position:relative;z-index:2;width:150px;height:150px;flex:none}
+.l3-video{position:absolute;left:50%;top:50%;width:226px;height:402px;margin:-201px 0 0 -112px;object-fit:cover;pointer-events:none;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent 100%);mask-image:radial-gradient(closest-side,#000 72%,transparent 100%)}
+.l3 .l2-rings{z-index:1}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2946,18 +2951,28 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     c: 'M454.794 332.72C454.476 329.674 453.142 321.486 452.951 320.28C451.236 330.182 446.025 338.94 439.036 346.557C427.916 358.616 421.562 363.312 407.9 370.421L284.057 434.715C246.059 454.454 229.094 463.339 190.905 447.726C143.058 428.178 51.2407 334.561 29.573 240.246C-5.8197 280.041 -4.48533 341.479 33.6397 379.624L235.829 581.582L237.418 583.169C243.454 589.198 250.126 594.276 257.116 598.465C264.931 603.098 281.325 609.508 291.365 611.222C341.944 595.99 377.082 552.577 409.806 503.325C447.804 446.076 460.004 382.861 454.794 332.657V332.72Z'
   };
   function Launch(p) {
-    var dn = useRef(false), ph = useState(0), out = ph[0], setOut = ph[1];
+    // Client video (light traces the logo, then it resolves), shown small like the vector logo, edges feathered into the bg.
+    var dn = useRef(false), ph = useState(0), out = ph[0], setOut = ph[1], vr = useRef(null);
     var seen = useRef(null);
-    if (seen.current === null) { var sv = false; try { sv = localStorage.getItem('f4s_seen2') === '1'; localStorage.setItem('f4s_seen2', '1'); } catch (_) {} seen.current = sv; }
-    var SKIP = seen.current ? 1.55 : 0, END = 3.55 - SKIP;
-    function enter() { if (dn.current) return; console.log('L2ENTER '+performance.now()+' '+new Error().stack.split('\n').slice(1,4).join(' | ')); dn.current = true; setOut(1); setTimeout(function () { p.nav.root('home'); }, 480); }
-    useEffect(function () { var t = setTimeout(enter, END * 1000); return function () { clearTimeout(t); }; }, []);
-    function A(name, dur, delay, ease) { return { animation: name + ' ' + dur + 's ' + (ease || 'cubic-bezier(.45,0,.2,1)') + ' ' + (delay - SKIP).toFixed(2) + 's both' }; }
-    var facets = [['b', '#7fe6f5', '#39cae0', 0.2], ['a', '#d6b8ff', '#a57ad8', 0.55], ['c', '#ffe3a0', '#f7924a', 0.9]];
-    return h('div', { className: cx('screen noscroll l2', out && 'l2-out'), onClick: enter, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
-      h('div', { className: 'l2-amb', style: A('l2-in', 1.2, 0, 'ease-out') }),
+    if (seen.current === null) { var sv = false; try { sv = localStorage.getItem('f4s_seen3') === '1'; localStorage.setItem('f4s_seen3', '1'); } catch (_) {} seen.current = sv; }
+    var RATE = 1.6, START = seen.current ? 3.8 : 0.6, STOP = 7.6;
+    function at(vt) { return Math.max(0, (vt - START) / RATE); }
+    var END = at(STOP);
+    function enter() { if (dn.current) return; dn.current = true; setOut(1); setTimeout(function () { p.nav.root('home'); }, 480); }
+    useEffect(function () {
+      var v = vr.current, guard = setTimeout(enter, (END + 1.6) * 1000);
+      if (v) {
+        v.muted = true; v.playsInline = true;
+        var seek = function () { try { v.currentTime = START; } catch (_) {} v.playbackRate = RATE; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); };
+        if (v.readyState >= 1) seek(); else v.addEventListener('loadedmetadata', seek, { once: true });
+        v.addEventListener('timeupdate', function () { if (v.currentTime >= STOP) enter(); });
+      }
+      return function () { clearTimeout(guard); };
+    }, []);
+    function A(name, dur, delay, ease) { return { animation: name + ' ' + dur + 's ' + (ease || 'cubic-bezier(.45,0,.2,1)') + ' ' + delay.toFixed(2) + 's both' }; }
+    return h('div', { className: cx('screen noscroll l2 l3', out && 'l2-out'), onClick: enter, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
       h('div', { className: 'l2-stage' },
-        h('div', { className: 'l2-rings ld-multi', style: A('l2-in', .6, 2.05, 'ease-out') },
+        h('div', { className: 'l2-rings ld-multi', style: A('l2-in', .6, at(5.3), 'ease-out') },
           h('svg', { viewBox: '0 0 200 200', width: '100%', height: '100%' },
             h('defs', null,
               h('linearGradient', { id: 'l2r1', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#facd60' }), h('stop', { offset: .45, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#a57ad8' })),
@@ -2966,33 +2981,8 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
             h('g', { className: 'lr lr3' }, h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-arc', stroke: 'url(#l2r2)', strokeWidth: 2, pathLength: 100, strokeDasharray: '22 78' })),
             h('g', { className: 'lr lr2' }, h('circle', { cx: 100, cy: 100, r: 70, className: 'lr-track', style: { opacity: .7 } })),
             h('g', { className: 'lr lr1' }, h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-track' }), h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-arc', stroke: 'url(#l2r1)', strokeWidth: 2.4, pathLength: 100, strokeDasharray: '46 54' })))),
-        h('div', { className: 'l2-bloom', style: A('l2-bloom', 1.1, 1.85, 'ease-out') }),
-        h('svg', { className: 'l2-logo', viewBox: '-20 -20 658 658', 'aria-hidden': true },
-          h('defs', null,
-            h('filter', { id: 'l2glow', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feGaussianBlur', { stdDeviation: 9 })),
-            h('linearGradient', { id: 'l2ga', x1: 422.388, y1: 72.6262, x2: 431.77, y2: 415.549, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0, stopColor: '#782F8D' }), h('stop', { offset: 1, stopColor: '#392163' })),
-            h('linearGradient', { id: 'l2gb', x1: 459.242, y1: 14.4246, x2: 73.952, y2: 371.941, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0, stopColor: '#33438D' }), h('stop', { offset: 1, stopColor: '#39CAE0' })),
-            h('linearGradient', { id: 'l2gc', x1: 49.9063, y1: 148.978, x2: 392.559, y2: 506.129, gradientUnits: 'userSpaceOnUse' }, h('stop', { offset: 0.2, stopColor: '#E74645' }), h('stop', { offset: 1, stopColor: '#FACD60' })),
-            h('linearGradient', { id: 'l2sh', x1: 0, y1: 0, x2: 1, y2: 0 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: 0 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: .75 }), h('stop', { offset: 1, stopColor: '#fff', stopOpacity: 0 })),
-            h('clipPath', { id: 'l2clip' }, h('path', { d: LP.base }))),
-          // ghost outline
-          h('path', { d: LP.base, fill: 'none', stroke: '#fff', strokeOpacity: .14, strokeWidth: 3, pathLength: 100, strokeDasharray: 100, style: A('l2-draw', 1.1, 0, 'ease-in-out') }),
-          // fills
-          h('path', { d: LP.base, fill: '#fff', style: A('l2-fill', .6, 2.0) }),
-          h('path', { d: LP.a, fill: 'url(#l2ga)', fillRule: 'evenodd', style: A('l2-fill', .55, 1.8) }),
-          h('path', { d: LP.b, fill: 'url(#l2gb)', fillRule: 'evenodd', style: A('l2-fill', .55, 1.68) }),
-          h('path', { d: LP.c, fill: 'url(#l2gc)', style: A('l2-fill', .55, 1.92) }),
-          // traces: glowing trail + bright comet head, one facet after another
-          facets.map(function (f) {
-            var d = LP[f[0]], t = f[3];
-            return h('g', { key: f[0] },
-              h('path', { d: d, fill: 'none', stroke: f[2], strokeWidth: 7, strokeLinecap: 'round', strokeLinejoin: 'round', pathLength: 100, strokeDasharray: 100, style: Object.assign(A('l2-trail', 1.95 - t + .35, t), {}) }),
-              h('path', { d: d, fill: 'none', stroke: f[2], strokeWidth: 26, strokeLinecap: 'round', pathLength: 100, strokeDasharray: '9 91', filter: 'url(#l2glow)', style: A('l2-comet', .95, t, 'cubic-bezier(.5,0,.3,1)') }),
-              h('path', { d: d, fill: 'none', stroke: f[1], strokeWidth: 8, strokeLinecap: 'round', pathLength: 100, strokeDasharray: '5 95', style: A('l2-comet', .95, t, 'cubic-bezier(.5,0,.3,1)') }));
-          }),
-          // sheen sweep
-          h('g', { clipPath: 'url(#l2clip)' }, h('rect', { x: -160, y: -100, width: 150, height: 820, fill: 'url(#l2sh)', style: A('l2-sheen', .85, 2.3, 'cubic-bezier(.4,0,.2,1)') }))),
-        h('div', { className: 'l2-word', style: A('l2-word', .7, 2.35, 'cubic-bezier(.2,.8,.2,1)') }, h('b', null, 'Fit4Stream'), h('span', null, 'Live events, anywhere'))));
+        h('div', { className: 'l3-vbox' }, h('video', { ref: vr, className: 'l3-video', src: 'launch.mp4', muted: true, playsInline: true, autoPlay: true, preload: 'auto', 'aria-hidden': true })),
+        h('div', { className: 'l2-word', style: A('l2-word', .7, at(5.6), 'cubic-bezier(.2,.8,.2,1)') }, h('b', null, 'Fit4Stream'), h('span', null, 'Live events, anywhere'))));
   }
   function Welcome(p) {
     var vr = useRef(null), gr = useRef(null), cvr = useRef(null), boxr = useRef(null), dn = useRef(false), ph = useState(0), phase = ph[0], setPhase = ph[1], gs = useState(null), geo = gs[0], setGeo = gs[1];
