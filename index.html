@@ -2012,6 +2012,17 @@ body.devmode .device::before,body.devmode .device::after,body.devmode .island,bo
 body.devmode .app{border-radius:0!important}
 body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
 .launch .sp-video{transform:scale(.42)!important}
+
+.ld-multi::before{display:none}
+.ld-multi svg{overflow:visible;display:block}
+.ld-multi .lr{transform-origin:100px 100px;transform-box:view-box;opacity:0;animation:lr-pop 1s cubic-bezier(.2,.9,.25,1.15) forwards}
+.ld-multi .lr1{animation-delay:.05s}.ld-multi .lr2{animation-delay:.15s}.ld-multi .lr3{animation-delay:.25s}.ld-multi .lr4{animation-delay:.35s}
+.ld-multi .lr-track{fill:none;stroke:rgba(255,255,255,.10);stroke-width:1}
+.ld-multi .lr-arc{fill:none;stroke-linecap:round;transform-origin:100px 100px;transform-box:view-box}
+.ld-multi .lr1 .lr-arc{animation:lr-spin 1.8s linear infinite;filter:drop-shadow(0 0 4px rgba(231,70,69,.55))}
+.ld-multi .lr3 .lr-arc{animation:lr-spin 3.2s linear infinite reverse;filter:drop-shadow(0 0 4px rgba(57,202,224,.5))}
+@keyframes lr-pop{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes lr-spin{to{transform:rotate(360deg)}}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2862,7 +2873,16 @@ body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
       h('video', { ref: vr, className: 'sp-video', src: 'splash.mp4', autoPlay: true, playsInline: true, preload: 'auto', onTimeUpdate: tu, onEnded: enter, 'aria-label': 'Fit4Stream is loading' }),
       geo ? h('div', { className: 'sp-logo', 'aria-hidden': true, style: { left: geo.x - geo.s / 2, top: geo.y - geo.s / 2, width: geo.s, height: geo.s } }, h(F.Logo, { size: geo.s, markOnly: true })) : null,
       h('canvas', { ref: cvr, className: 'lt-canvas lt-fx', 'aria-hidden': true }),
-      geo ? h('div', { className: 'ld-ring', role: 'progressbar', 'aria-label': 'Loading', style: { left: geo.x - geo.s * 0.7, top: geo.y - geo.s * 0.7, width: geo.s * 1.4, height: geo.s * 1.4 } }, h('i', null)) : null);
+      geo ? h('div', { className: 'ld-ring ld-multi', role: 'progressbar', 'aria-label': 'Loading', style: { left: geo.x - geo.s * 1.1, top: geo.y - geo.s * 1.1, width: geo.s * 2.2, height: geo.s * 2.2 } }, h('svg', { viewBox: '0 0 200 200', width: '100%', height: '100%' },
+        h('defs', null,
+          h('linearGradient', { id: 'ldg1', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#facd60' }), h('stop', { offset: .45, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#a57ad8' })),
+          h('linearGradient', { id: 'ldg2', x1: 1, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: 1, stopColor: '#5b8cf0' }))),
+        h('g', { className: 'lr lr4' }, h('circle', { cx: 100, cy: 100, r: 97, className: 'lr-track', style: { opacity: .5 } })),
+        h('g', { className: 'lr lr3' }, h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-track' }),
+          h('circle', { cx: 100, cy: 100, r: 84, className: 'lr-arc', stroke: 'url(#ldg2)', strokeWidth: 2.2, pathLength: 100, strokeDasharray: '22 78' })),
+        h('g', { className: 'lr lr2' }, h('circle', { cx: 100, cy: 100, r: 70, className: 'lr-track', style: { opacity: .7 } })),
+        h('g', { className: 'lr lr1' }, h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-track' }),
+          h('circle', { cx: 100, cy: 100, r: 62, className: 'lr-arc', stroke: 'url(#ldg1)', strokeWidth: 2.6, pathLength: 100, strokeDasharray: '46 54' })))) : null);
   }
 
   function GoogleG() { return h('svg', { width: 18, height: 18, viewBox: '0 0 48 48', 'aria-hidden': true }, h('path', { fill: '#FFC107', d: 'M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.4-.4-3.5z' }), h('path', { fill: '#FF3D00', d: 'M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z' }), h('path', { fill: '#4CAF50', d: 'M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z' }), h('path', { fill: '#1976D2', d: 'M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z' })); }
