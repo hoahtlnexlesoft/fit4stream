@@ -2011,6 +2011,7 @@ body.devmode .scaler,body.devmode .device,body.devmode .screenhost{position:abso
 body.devmode .device::before,body.devmode .device::after,body.devmode .island,body.devmode .btn-side,body.devmode .statusbar,body.devmode .homebar{display:none!important}
 body.devmode .app{border-radius:0!important}
 body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
+.launch .sp-video{transform:scale(.42)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2799,7 +2800,7 @@ body.devmode .tabbar{padding-bottom:calc(var(--sb) + 2px)!important}
       var W, H, G, Kp, c = cvr.current, x = c.getContext('2d'), LP = new Path2D(LOGO_P[0]);
       function measure() {
         W = el.clientWidth; H = el.clientHeight; if (!W || !H) return;
-        var k = Math.max(W / 720, H / 1280), Z = 0.6, gx = (W - 720 * k) / 2 + 360 * k, gy = (H - 1280 * k) / 2 + 637 * k;
+        var k = Math.max(W / 720, H / 1280), Z = 0.42, gx = (W - 720 * k) / 2 + 360 * k, gy = (H - 1280 * k) / 2 + 637 * k;
         G = { x: W / 2 + (gx - W / 2) * Z, y: H / 2 + (gy - H / 2) * Z, s: 452 * k * Z }; Kp = G.s / 610; setGeo(G);
         var dpr = Math.min(3, window.devicePixelRatio || 1); c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); c.style.width = W + 'px'; c.style.height = H + 'px'; x.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
