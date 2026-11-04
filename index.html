@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104040859"</script>
+<script>window.__BUILD__="20261104041013"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2462,6 +2462,25 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .tl-t2 b{font-size:14px!important;font-weight:700;line-height:18px;color:#fff;font-variant-numeric:tabular-nums}
 .tl-t2 b.tl-end{color:rgba(255,255,255,.55)!important}
 .tl-arr{color:rgba(244,164,37,.8);display:block}
+
+/* Categories page — 2-col tinted cards */
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.cg-it{position:relative;display:flex!important;flex-direction:column;align-items:flex-start;min-height:132px;padding:16px;border-radius:22px;text-align:left;overflow:hidden;background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--t) 24%,transparent),transparent 60%),rgba(255,255,255,.04)}
+.cg-it::after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--t) 18%,transparent),transparent);pointer-events:none}
+.cg-it:active{transform:scale(.97)}
+.cg-top{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:auto}
+.cg-ic{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:var(--t);background:color-mix(in srgb,var(--t) 18%,transparent)}
+.cg-go{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
+.cg-live{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:7px;background:#e74645;color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em}
+.cg-live i{width:5px;height:5px;border-radius:50%;background:#fff;animation:f4-pulse 1.4s infinite}
+.cg-it b{margin-top:18px;font-size:15.5px;line-height:20px;font-weight:600;color:#fff}
+.cg-sub{margin-top:3px;font-size:12.5px;color:rgba(255,255,255,.5)}
+.cg-it.is-live .cg-sub{color:color-mix(in srgb,var(--t) 70%,#fff)}
+.cg-it:last-child:nth-child(odd){grid-column:1/-1;min-height:0;flex-direction:row!important;align-items:center;gap:14px}
+.cg-it:last-child:nth-child(odd) .cg-top{width:auto;margin:0;order:0}
+.cg-it:last-child:nth-child(odd) .cg-go{display:none}
+.cg-it:last-child:nth-child(odd) b{margin:0;flex:1}
+.cg-it:last-child:nth-child(odd) .cg-sub{margin:0}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3789,10 +3808,23 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('span', { className: 'ct-sub' }, n ? n + (n === 1 ? ' event' : ' events') : 'Coming soon'));
     }));
   }
+
+  var CAT_TINT = { 'Concerts and Performances': '#e74645', 'Broadcast Events': '#5b8cf0', 'Talk Shows': '#f4a425', 'Social and Community': '#f472b6', 'Product Launches and Demonstrations': '#39cae0', 'Virtual Conferencing': '#a57ad8', 'Others': '#94a3b8', 'Virtual Workshops and Training': '#34d399', 'Virtual Networking': '#60a5fa' };
+  function CatGrid(p) {
+    var idx = CATS.map(function (c, i) { return i; }).sort(function (a, b) { var oa = CATS[a][0] === 'Others', ob = CATS[b][0] === 'Others'; if (oa !== ob) return oa ? 1 : -1; return CATS[b][1] - CATS[a][1]; });
+    return h('div', { className: 'cg' }, idx.map(function (i) {
+      var c = CATS[i], n = c[1], live = n > 0, tint = CAT_TINT[c[0]] || '#a57ad8';
+      return h(Tap, { key: c[0], className: cx('cg-it', live && 'is-live'), style: { '--t': tint }, onClick: function () { p.onPick(i); } },
+        h('div', { className: 'cg-top' },
+          h('span', { className: 'cg-ic' }, h(F.Icon, { name: c[2], size: 20 })),
+          live ? h('span', { className: 'cg-live' }, h('i', null), 'LIVE') : h('span', { className: 'cg-go' }, h(F.Icon, { name: 'chevronRight', size: 14 }))),
+        h('b', null, SHORT[c[0]] || c[0]),
+        h('span', { className: 'cg-sub' }, n ? n + (n === 1 ? ' event' : ' events') : 'Coming soon'));
+    }));
+  }
   function Categories(p) {
     return h(SubPage, { nav: p.nav, title: 'Browse by Category' },
-      h('p', { className: 'muted', style: { margin: '0 4px', fontSize: 14 } }, CATS.length + ' categories · tap one to see its events'),
-      h(CatTiles, { grid: true, onPick: function (i) { tap(6); p.nav.push('list:' + CATS[i][0]); } }));
+      h(CatGrid, { onPick: function (i) { tap(6); p.nav.push('list:' + CATS[i][0]); } }));
   }
   function CatBento(p) {
     return h('div', { className: 'bento' },
