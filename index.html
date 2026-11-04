@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104040053"</script>
+<script>window.__BUILD__="20261104040152"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2430,6 +2430,19 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 /* liked state: brand amber instead of red */
 .fa.on{color:#f4a425!important}
 .sheet.sh2{background:linear-gradient(180deg,#1f1d27,#17161d)!important}
+
+/* Logged-in Home extras */
+.hi-row{display:flex;align-items:flex-end;justify-content:space-between;margin:2px 0 4px}
+.hi-row span{display:block;font-size:13px;color:rgba(255,255,255,.55)}
+.hi-row b{display:block;font-size:22px;line-height:28px;font-weight:700;color:#fff}
+.yt-card{display:flex!important;align-items:center;gap:12px;width:100%;padding:10px;border-radius:20px;text-align:left;background:linear-gradient(120deg,rgba(231,70,69,.14),rgba(255,255,255,.04) 45%)}
+.yt-th{position:relative;flex:none;width:64px;height:64px;border-radius:14px;background-size:cover;background-position:center}
+.yt-live{position:absolute;left:4px;bottom:4px;display:inline-flex;align-items:center;gap:3px;height:16px;padding:0 5px;border-radius:5px;background:#e74645;color:#fff;font-style:normal;font-size:9px;font-weight:800;letter-spacing:.05em}
+.yt-live em{width:4px;height:4px;border-radius:50%;background:#fff}
+.yt-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.yt-body b{font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yt-body span{font-size:12.5px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.yt-go{flex:none;display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 14px;border-radius:18px;background:#f4a425;color:#1b1306;font-size:13.5px;font-weight:700}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3890,7 +3903,13 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { className: 'screen under-head', ref: ref, onTouchStart: ts, onTouchMove: tm, onTouchEnd: te, onScroll: function (e) { var v = e.currentTarget.scrollTop > 8; if (v !== solid) setSolid(v); } },
         h('div', { className: 'ptr', style: { height: pull, opacity: pull / 70 } }, h('span', { className: pull > 64 ? 'spin' : '', style: { transform: 'rotate(' + pull * 4 + 'deg)' } }, h(F.Logo, { size: 28, markOnly: true }))),
         loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : h('div', { className: 'fade-in' },
+          p.nav.authed ? h('div', { className: 'hi-row pad' }, h('div', null, h('span', null, 'Good evening,'), h('b', null, 'Thao \ud83d\udc4b'))) : null,
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
+          p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
+            h('div', { className: 'pad' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
+              h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('i', { className: 'yt-live' }, h('em', null), 'LIVE')),
+              h('div', { className: 'yt-body' }, h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Started 12 min ago \u00b7 by thao15 nguyen15')),
+              h('span', { className: 'yt-go' }, h(F.Icon, { name: 'play', size: 14 }), 'Join')))) : null,
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
             h('div', { className: 'stories' }, CHANNELS.map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), live: i === 0, go: function () { p.nav.push('organizer'); } }); }))),
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, [EV.xmas, EV.gig, EV.seo].map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
@@ -4574,7 +4593,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
-    window.__jump = function (n) { if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n)) setAuthed(true); if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
     // swipe back from the left edge
