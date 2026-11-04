@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104083840"</script>
+<script>window.__BUILD__="20261104084129"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3306,6 +3306,26 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .f4-field-box:focus-within,.lg-box:focus-within,.f4-search:focus-within,.compose-in:focus-within,.lv-in:focus-within,.co-cp:focus-within,.ch2-in:focus-within,.sc-in:focus-within,.fl2-input:focus-within,.ac-f input:focus,.tarea:focus,.ch2-ta:focus,.player textarea:focus{box-shadow:inset 0 0 0 1.5px #F4A425,0 0 0 4px rgba(244,164,37,.14)!important;border-color:transparent!important;outline:none!important}
 .co-cp.err:focus-within{box-shadow:inset 0 0 0 1.5px #E74645,0 0 0 4px rgba(231,70,69,.14)!important}
 input,textarea{caret-color:#F4A425}
+.ac2{height:auto!important;aspect-ratio:1.586;padding:18px 20px!important;justify-content:space-between!important;gap:0!important;border-radius:22px!important;background:linear-gradient(135deg,#3A1F63 0%,#5B2A86 38%,#8A3A7E 68%,#D2554F 100%)!important;box-shadow:0 22px 48px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.08);transition:background .5s}
+.ac2::after{display:none!important}
+.ac2.b-visa{background:linear-gradient(135deg,#0E1446 0%,#1F2E9E 45%,#2C5BD6 75%,#6FA0FF 100%)!important}
+.ac2.b-mc{background:linear-gradient(135deg,#16151B 0%,#2A2229 45%,#4A2A1F 75%,#B5521F 100%)!important}
+.ac2>*{position:relative;z-index:1}
+.ac2-mesh{position:absolute!important;inset:0;z-index:0!important;border-radius:inherit;background:radial-gradient(60% 70% at 85% 10%,rgba(250,205,96,.35),transparent 60%),radial-gradient(55% 60% at 10% 100%,rgba(57,202,224,.25),transparent 60%)}
+.ac2-guil{position:absolute!important;inset:0;z-index:0!important;border-radius:inherit;opacity:.18;background:repeating-radial-gradient(circle at 110% 120%,transparent 0 9px,rgba(255,255,255,.5) 9px 10px);-webkit-mask:linear-gradient(120deg,transparent 30%,#000 75%);mask:linear-gradient(120deg,transparent 30%,#000 75%)}
+.ac2-sheen{position:absolute!important;inset:0;z-index:0!important;border-radius:inherit;overflow:hidden;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 48%,transparent 60%);background-size:250% 100%;animation:ac2-sh 4.5s ease-in-out infinite}
+@keyframes ac2-sh{0%{background-position:150% 0}60%,100%{background-position:-60% 0}}
+.ac2-row{display:flex;align-items:center;justify-content:space-between}
+.ac2-issuer{display:inline-flex;align-items:center;gap:8px}.ac2-issuer b{font-size:14px;font-weight:800;letter-spacing:-.2px;color:#fff}
+.ac2-issuer svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
+.ac2-type{font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.65)}
+.ac2-visa{font-size:24px;font-weight:900;font-style:italic;letter-spacing:.5px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.ac2-mc{display:inline-flex}.ac2-mc i{width:28px;height:28px;border-radius:50%;background:#EB001B}.ac2-mc i+i{background:#F79E1B;margin-left:-11px;mix-blend-mode:screen;opacity:.95}
+.ac2-mid{margin-top:4px}
+.ac2-chip{filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.ac2-num{display:flex;justify-content:space-between;font-family:ui-monospace,"SF Mono",Menlo,monospace!important;font-size:21px!important;font-weight:600!important;letter-spacing:.06em!important;color:#fff;text-shadow:0 1px 0 rgba(255,255,255,.25),0 -1px 0 rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.3)}
+.ac2 .ac-meta i{color:rgba(255,255,255,.6)!important}
+.ac2 .ac-meta span{font-size:13.5px;letter-spacing:.04em}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5359,10 +5379,19 @@ input,textarea{caret-color:#F4A425}
       h('div', { className: 'sheet ac', role: 'dialog', 'aria-label': 'Add card' },
         h('span', { className: 'grab' }),
         h('div', { className: 'ac-head' }, h('h2', null, 'Add card'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 }))),
-        h('div', { className: cx('ac-card', brand && 'b-' + brand) },
-          h('div', { className: 'ac-chip' }), h('span', { className: 'ac-brand' }, brand === 'mc' ? h(CardLogo, { k: 'mc' }) : brand === 'visa' ? 'VISA' : ''),
-          h('b', { className: 'ac-num' }, shown),
-          h('div', { className: 'ac-meta' }, h('span', null, h('i', null, 'Card holder'), (st.name || 'YOUR NAME').toUpperCase()), h('span', null, h('i', null, 'Expires'), st.e || 'MM/YY'))),
+        h('div', { className: cx('ac-card ac2', brand && 'b-' + brand) },
+          h('span', { className: 'ac2-mesh', 'aria-hidden': true }), h('span', { className: 'ac2-guil', 'aria-hidden': true }), h('span', { className: 'ac2-sheen', 'aria-hidden': true }),
+          h('div', { className: 'ac2-row' },
+            h('span', { className: 'ac2-issuer' }, h(F.Logo, { size: 22, markOnly: true }), h('b', null, 'Fit4Stream')),
+            h('span', { className: 'ac2-brand' }, brand === 'mc' ? h('span', { className: 'ac2-mc' }, h('i'), h('i')) : brand === 'visa' ? h('b', { className: 'ac2-visa' }, 'VISA') : h('span', { className: 'ac2-type' }, 'DEBIT \u00b7 CREDIT'))),
+          h('div', { className: 'ac2-row ac2-mid' },
+            h('svg', { className: 'ac2-chip', width: 46, height: 34, viewBox: '0 0 46 34', 'aria-hidden': true },
+              h('defs', null, h('linearGradient', { id: 'chipg', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#F3DC9B' }), h('stop', { offset: .5, stopColor: '#C9A24C' }), h('stop', { offset: 1, stopColor: '#F0D58A' }))),
+              h('rect', { x: .5, y: .5, width: 45, height: 33, rx: 7, fill: 'url(#chipg)', stroke: 'rgba(0,0,0,.25)' }),
+              h('path', { d: 'M0 12h14M0 22h14M32 12h14M32 22h14M14 0v34M32 0v34M14 17h18', stroke: 'rgba(90,60,10,.45)', strokeWidth: 1.2, fill: 'none' })),
+            h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'none', stroke: 'rgba(255,255,255,.75)', strokeWidth: 1.8, strokeLinecap: 'round', 'aria-hidden': true }, h('path', { d: 'M8.5 7.5a6.5 6.5 0 0 1 0 9M12 5a10 10 0 0 1 0 14M15.5 2.5a13.5 13.5 0 0 1 0 19M5 10a3 3 0 0 1 0 4' }))),
+          h('b', { className: 'ac-num ac2-num' }, shown.split(' ').map(function (g, i) { return h('span', { key: i }, g); })),
+          h('div', { className: 'ac-meta' }, h('span', null, h('i', null, 'Card holder'), (st.name || 'YOUR NAME').toUpperCase()), h('span', null, h('i', null, 'Valid thru'), st.e || 'MM/YY'))),
         h('label', { className: 'ac-f' }, h('span', null, 'Card number'), h('input', { inputMode: 'numeric', autoComplete: 'cc-number', placeholder: '1234 5678 9012 3456', value: fmtN(st.n), onChange: function (e) { set({ n: e.target.value }); } })),
         h('div', { className: 'ac-row' },
           h('label', { className: 'ac-f' }, h('span', null, 'Expiry'), h('input', { inputMode: 'numeric', autoComplete: 'cc-exp', placeholder: 'MM/YY', value: st.e, onChange: function (e) { set({ e: fmtE(e.target.value) }); } })),
