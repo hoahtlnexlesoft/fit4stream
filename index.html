@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104093150"</script>
+<script>window.__BUILD__="20261104095825"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3445,6 +3445,28 @@ input,textarea{caret-color:#F4A425}
 .cp-st.done .cp-dot{background:#39C87C;box-shadow:none;color:#0c1a12}
 .cp-st.now .cp-dot{box-shadow:none;border:2px solid rgba(244,164,37,.25);border-top-color:#F4A425;animation:f4spin .8s linear infinite}
 .co-proc p.cp-note{margin:20px 0 0;display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.45)}
+
+.rt-sheet{background:#1b1921!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;gap:0!important;padding-top:10px!important;align-items:stretch}
+.rt-ev{display:flex;align-items:center;gap:12px;margin-top:8px;padding:10px;border-radius:16px;background:rgba(255,255,255,.05)}
+.rt-th{position:relative;flex:none;width:52px;height:52px;border-radius:12px;background-size:cover;background-position:center}
+.rt-th i{position:absolute;left:4px;bottom:4px;font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:.06em;padding:2px 5px;border-radius:5px;background:#E5484D;color:#fff}
+.rt-ev b{display:block;font-size:14.5px;color:#fff}
+.rt-ev span{font-size:12.5px;color:rgba(255,255,255,.55)}
+.rt-q{text-align:center;margin-top:22px}
+.rt-q h2{margin:0;font-size:21px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.rt-lbl{margin:6px 0 0;font-size:14px;font-weight:600;color:rgba(255,255,255,.5);min-height:20px}
+.rt-lbl.on{color:#F6C26B}
+.rt-stars{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.rt-stars button{width:52px;height:52px;border:0;padding:0;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.06);color:rgba(255,255,255,.28);cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.rt-stars button.on{color:#F4A425;background:rgba(244,164,37,.14)}
+.rt-stars button.pop{animation:rtpop .35s}
+@keyframes rtpop{40%{transform:scale(1.18)}100%{transform:scale(1)}}
+.rt-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+.rt-tag{border:0;font:inherit;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);cursor:pointer}
+.rt-tag.on{background:rgba(244,164,37,.16);color:#F6C26B;box-shadow:inset 0 0 0 1px rgba(244,164,37,.5)}
+.rt-act{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:24px}
+.rt-dis{opacity:.4;pointer-events:none;box-shadow:none!important}
+.rt-later{border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:rgba(255,255,255,.6);padding:10px 16px;cursor:pointer}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5985,7 +6007,24 @@ input,textarea{caret-color:#F4A425}
         h('div', { className: 'inv-pre' }, h('span', { className: 'os-b' }, h('span', { style: { transform: 'scale(1.4)', display: 'grid' } }, micOn)), h('div', null, h('b', null, 'Microphone on'), h('span', null, 'Camera off · you can change this anytime'))),
         h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: joinStage }, 'Join stage'),
         h(Tap, { className: 'ok-later', go: function () { set({ invite: false, hand: false }); p.nav.toast('Invitation declined'); } }, 'Not now')))) : null,
-      st.rateOpen ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ rateOpen: false }); } }, h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Rate this event' }, h('span', { className: 'grab' }), h('h2', { className: 'h-md' }, 'Rate this event'), h('div', { className: 'rate-stars' }, [1, 2, 3, 4, 5].map(function (n) { return h('button', { key: n, type: 'button', 'aria-label': n + ' stars', className: n <= st.rate ? 'on' : '', onClick: function () { tap(8); set({ rate: n }); } }, h(F.Icon, { name: 'star', size: 34, filled: true })); })), h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { set({ rateOpen: false }); } }, st.rate ? 'Submit rating' : 'Not now')))) : null);
+      st.rateOpen ? toApp(h(RateSheet, { value: st.rate, onClose: function () { set({ rateOpen: false }); }, onSubmit: function (n) { set({ rate: n, rateOpen: false }); p.nav.toast && p.nav.toast('Thanks for rating!'); } })) : null);
+  }
+  function RateSheet(p) {
+    var a = useState(p.value || 0), n = a[0], setN = a[1];
+    var b = useState([]), tags = b[0], setTags = b[1];
+    var LBL = ['Tap a star to rate', 'Not great', 'Could be better', 'It was okay', 'Really good', 'Loved it!'];
+    var TAGS = n && n <= 2 ? ['Video quality', 'Audio issues', 'Too short', 'Off topic'] : ['Great host', 'Sound & video', 'Fun chat', 'Learned a lot'];
+    function tg(t) { tap(6); setTags(tags.indexOf(t) > -1 ? tags.filter(function (x) { return x !== t; }) : tags.concat([t])); }
+    return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.onClose(); } },
+      h('div', { className: 'sheet rt-sheet', role: 'dialog', 'aria-label': 'Rate this event' }, h('span', { className: 'grab' }),
+        h('div', { className: 'rt-ev' }, h('span', { className: 'rt-th', style: { backgroundImage: 'url(' + IMG + ')' } }, h('i', null, 'LIVE')),
+          h('div', null, h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Hosted by thao15 nguyen15'))),
+        h('div', { className: 'rt-q' }, h('h2', null, 'How was the event?'), h('p', { className: cx('rt-lbl', n && 'on') }, LBL[n])),
+        h('div', { className: 'rt-stars' }, [1, 2, 3, 4, 5].map(function (k) { return h('button', { key: k, type: 'button', 'aria-label': k + ' stars', className: cx(k <= n && 'on', k === n && 'pop'), onClick: function () { tap(8); setN(k); setTags([]); } }, h(F.Icon, { name: 'star', size: 38, filled: true })); })),
+        n ? h('div', { className: 'rt-tags' }, TAGS.map(function (t) { return h('button', { key: t, type: 'button', className: cx('rt-tag', tags.indexOf(t) > -1 && 'on'), onClick: function () { tg(t); } }, t); })) : null,
+        h('div', { className: 'rt-act' },
+          h(Tap, { className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block', !n && 'rt-dis'), go: function () { if (n) p.onSubmit(n); } }, 'Submit rating'),
+          h(Tap, { className: 'rt-later', go: p.onClose }, 'Not now'))));
   }
   function Full(p) {
     var ftk = useTick();
