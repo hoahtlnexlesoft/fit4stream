@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104040358"</script>
+<script>window.__BUILD__="20261104040859"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2456,6 +2456,12 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .fl2-cam{transition:right .3s ease,bottom .3s ease,opacity .3s ease}
 .fl2:has(.fl2-tray) .fl2-cam{bottom:124px}
 .ok-later{margin-top:-8px!important;height:40px!important;line-height:40px}
+
+/* Guide time column: start ↓ end, same size */
+.tl-t2{display:flex!important;flex-direction:column;align-items:center;gap:2px}
+.tl-t2 b{font-size:14px!important;font-weight:700;line-height:18px;color:#fff;font-variant-numeric:tabular-nums}
+.tl-t2 b.tl-end{color:rgba(255,255,255,.55)!important}
+.tl-arr{color:rgba(244,164,37,.8);display:block}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4028,7 +4034,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
           h('div', { className: 'tl' }, r.ev.map(function (e) {
             var st = e.status;
             return h('div', { key: e.id, className: cx('tl-it', st), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push('detail:' + e.id); } },
-              h('div', { className: 'tl-time' }, h('b', null, e.range.split('–')[0].trim()), h('span', null, e.range.split('–')[1].trim())),
+              h('div', { className: 'tl-time tl-t2', 'aria-label': 'From ' + e.range.split('–')[0].trim() + ' to ' + e.range.split('–')[1].trim() }, h('b', null, e.range.split('–')[0].trim()), h('svg', { className: 'tl-arr', width: 10, height: 16, viewBox: '0 0 10 16', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M5 1.5v12M1.8 10.5L5 13.7l3.2-3.2' })), h('b', { className: 'tl-end' }, e.range.split('–')[1].trim())),
               h('span', { className: 'tl-dot' }),
               h('div', { className: 'tl-body' },
                 h('b', null, e.title),
