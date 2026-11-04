@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104095825"</script>
+<script>window.__BUILD__="20261104100251"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3467,6 +3467,13 @@ input,textarea{caret-color:#F4A425}
 .rt-act{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:24px}
 .rt-dis{opacity:.4;pointer-events:none;box-shadow:none!important}
 .rt-later{border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:rgba(255,255,255,.6);padding:10px 16px;cursor:pointer}
+
+.f4-emblem{display:block;overflow:visible}
+.f4-ea3{display:flex;justify-content:center}
+.em3{display:flex!important;justify-content:center;width:auto!important;height:auto!important;margin:-10px auto 4px!important}
+.as2-emb{display:flex;justify-content:center;margin:-4px 0 4px}
+.ed-emb{display:flex;justify-content:center;margin:0 auto 6px}
+.sc-emb{flex:none;margin:-10px -6px -10px -10px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3959,7 +3966,92 @@ input,textarea{caret-color:#F4A425}
     reviews: { d: ['M6 4.5h12a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6l-4.5 3.5v-3.5H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z', 'M12 7.6l1.2 2.4 2.6.4-1.9 1.8.5 2.6-2.4-1.3-2.4 1.3.5-2.6-1.9-1.8 2.6-.4z'], badge: 'plus' },
     inbox: { d: ['M3 13.5l2.6-7.2A2 2 0 0 1 7.5 5h9a2 2 0 0 1 1.9 1.3l2.6 7.2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 13.5h5l1.5 2.5h5l1.5-2.5h5'], badge: null }
   };
+
+  /* ---- Emblem: illustrated icon in the success-ticket style (plum card, brand-gradient edge, corner badge, confetti) ---- */
+  var EMB_BADGE = { amber: ['#ffe29a', '#f4a425', '#2a1803', '#f4a425'], red: ['#ff9a93', '#e5484d', '#fff', '#e5484d'], green: ['#9be8bd', '#39c87c', '#0c1a12', '#39c87c'], purple: ['#e2d0fb', '#a57ad8', '#1b1030', '#a57ad8'] };
+  var EMB_GLYPH = {
+    check: 'M-7.5 0.5l5 5 10-11', plus: 'M0-7v14M-7 0h14', x: 'M-5.5-5.5l11 11M5.5-5.5l-11 11',
+    clock: 'M0-7.5a7.5 7.5 0 1 1 0 15a7.5 7.5 0 1 1 0-15M0-4v4l2.8 2',
+    out: 'M-6 0h11M1-4.5L5.5 0 1 4.5', trash: 'M-6-4.5h12M-2.5-4.5v-2h5v2M-4.5-4.5l.8 10h7.4l.8-10',
+    lock: 'M-5-1h10v7h-10zM-3-1v-3a3 3 0 0 1 6 0v3', flag: 'M-5 7v-14M-5-6.5h9l-2 3.5 2 3.5h-9',
+    pause: 'M-3-5v10M3-5v10', mic: 'M0-7a2.6 2.6 0 0 1 2.6 2.6v3.6a2.6 2.6 0 0 1-5.2 0v-3.6A2.6 2.6 0 0 1 0-7zM-5.5-1a5.5 5.5 0 0 0 11 0M0 4.5v3', search: 'M-1.5-6a4.5 4.5 0 1 1 0 9a4.5 4.5 0 1 1 0-9M2 2l4.5 4.5', refund: 'M-6-1a6 6 0 1 1 1.8 4.3M-6-6v5h5'
+  };
+  var EMB = {
+    calendar: { badge: ['amber', 'clock'] }, search: { badge: ['purple', 'x'] }, ticket: { badge: ['amber', 'plus'] }, live: { badge: ['purple', 'pause'] },
+    reviews: { badge: ['amber', 'plus'] }, inbox: { badge: ['purple', 'check'] }, users: { badge: ['amber', 'plus'] }, bell: { badge: ['green', 'check'] },
+    logout: { badge: ['amber', 'out'] }, del: { badge: ['red', 'trash'] }, card: { badge: ['red', 'x'] }, lock: { badge: ['amber', 'lock'] },
+    ended: { badge: ['amber', 'flag'] }, shield: { badge: ['green', 'check'] }, stage: { badge: ['amber', 'mic'] }, refund: { badge: ['amber', 'refund'] }, success: { badge: ['amber', 'check'] }
+  };
+  function embLogo(x, y, sc) { return h('g', { key: 'logo', transform: 'translate(' + x + ' ' + y + ') scale(' + sc + ')' },
+          h('path', { d: 'M245.823 30.0916L30.7393 244.929C-4.1252 279.753 -4.12519 336.215 30.7393 371.04L245.823 585.877C280.687 620.702 337.214 620.702 372.078 585.877L587.162 371.04C622.026 336.215 622.026 279.753 587.162 244.929L372.078 30.0916C337.214 -4.73292 280.687 -4.73292 245.823 30.0916Z', fill: '#fff' }),
+          h('path', { d: 'M28.8 240.5L236.7 32.6c39.6-39.5 104.3-39.5 143.8 0l74 74C380 92 260 100 213 157c-21.7 20.8-22.7 40.2-24.6 77.3 0 0-2.5 163.4 1.3 178.2 2.6 10.1 6.9 19.4 13.9 26.4C136.9 409 48.8 320 28.7 240.6z', fill: '#39cae0' }),
+          h('path', { d: 'M454.5 106.5l129.8 129.6c39.6 39.5 39.6 104.2 0 143.7L380.5 583.4c-24.3 24.3-58.1 33.6-89.8 28 48.5-17.4 91.2-57.6 122.7-105 38.6-58.2 60.4-127.4 55-178.8-4.2-40.9-20-51.7-55.4-75.9L307.2 173c-11.9-8.1-26.2-16.8-40.9-21.1-9-2.7-18.1-3.7-27-2.1 40.5-29.4 135.1-55 215.2-43.3z', fill: '#782f8d' }),
+          h('path', { d: 'M454.8 332.7c-.3-3-1.7-11.2-1.9-12.4-1.7 9.9-6.9 18.7-13.9 26.3-11.1 12-17.5 16.8-31.1 23.9L284 434.7c-38 19.7-55 28.6-93.1 13C143 428.2 51.2 334.6 29.6 240.2c-35.4 39.8-34.1 101.2 4 139.4l203.8 203.6c18 18 34.5 25.7 53.9 28 50.6-15.2 85.7-58.6 118.4-107.9 38-57.2 50.2-120.4 45-170.6z', fill: '#f7924a' }));
+  }
+  function embBody(k, id) {
+    var E = 'url(#' + id + 'e)', F = 'url(#' + id + 't)', SH = 'url(#' + id + 's)';
+    var W = 'rgba(255,255,255,', card = function (x, y, w, hh, r) { return [h('rect', { key: 'c', x: x, y: y, width: w, height: hh, rx: r, fill: F, stroke: E, strokeWidth: 1.8 }), h('rect', { key: 'sh', x: x + 1, y: y + 1, width: w - 2, height: hh / 2, rx: r - 1, fill: SH })]; };
+    var bar = function (key, x, y, w, o, hh) { return h('rect', { key: key, x: x, y: y, width: w, height: hh || 5, rx: (hh || 5) / 2, fill: W + o + ')' }); };
+    if (k === 'ticket' || k === 'success') return [
+      h('path', { key: 'c', d: 'M44 26h72a10 10 0 0 1 10 10v11a10 10 0 0 0 0 20v11a10 10 0 0 1-10 10H44a10 10 0 0 1-10-10V67a10 10 0 0 0 0-20V36a10 10 0 0 1 10-10z', fill: F, stroke: E, strokeWidth: 1.8 }),
+      h('path', { key: 'd', d: 'M104 32v50', stroke: W + '.22)', strokeWidth: 1.3, strokeDasharray: '3 4', strokeLinecap: 'round' }),
+      embLogo(44, 36, .034), bar('a', 70, 41, 24, .7), bar('b', 70, 51, 16, .3, 4), bar('e', 44, 70, 46, .14, 4)];
+    if (k === 'calendar') return card(36, 26, 88, 64, 12).concat([
+      h('rect', { key: 'top', x: 37, y: 27, width: 86, height: 15, rx: 11, fill: E, opacity: .9 }), h('rect', { key: 'top2', x: 37, y: 36, width: 86, height: 6, fill: '#2a2140' }),
+      h('rect', { key: 'r1', x: 54, y: 20, width: 4, height: 12, rx: 2, fill: '#e7e2f0' }), h('rect', { key: 'r2', x: 102, y: 20, width: 4, height: 12, rx: 2, fill: '#e7e2f0' })]
+      .concat([0, 1, 2, 3, 4, 5, 6, 7].map(function (i) { return h('rect', { key: 'g' + i, x: 48 + (i % 4) * 17, y: 50 + Math.floor(i / 4) * 15, width: 11, height: 9, rx: 3, fill: i === 5 ? '#f4a425' : W + '.14)' }); })));
+    if (k === 'search') return card(34, 24, 80, 64, 12).concat([bar('a', 46, 38, 40, .55), bar('b', 46, 50, 54, .2, 4), bar('c', 46, 60, 30, .2, 4), bar('d', 46, 72, 44, .14, 4),
+      h('circle', { key: 'lz', cx: 104, cy: 54, r: 15, fill: 'rgba(30,24,44,.85)', stroke: E, strokeWidth: 3 }), h('path', { key: 'lh', d: 'M115 65l9 9', stroke: E, strokeWidth: 5, strokeLinecap: 'round' })]);
+    if (k === 'live' || k === 'ended') return card(32, 28, 96, 60, 12).concat([
+      h('path', { key: 'an', d: 'M66 18l14 10 14-10', fill: 'none', stroke: W + '.4)', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' }),
+      h('rect', { key: 'scr', x: 40, y: 36, width: 80, height: 44, rx: 8, fill: W + '.05)' }),
+      h('path', { key: 'pl', d: 'M74 48v20l17-10z', fill: E, stroke: E, strokeWidth: 2, strokeLinejoin: 'round' }),
+      k === 'live' ? h('g', { key: 'lv' }, h('rect', { x: 46, y: 42, width: 20, height: 8, rx: 4, fill: W + '.18)' })) : h('g', { key: 'lv' }, bar('p', 46, 72, 68, .5, 3))]);
+    if (k === 'reviews') return [
+      h('path', { key: 'c', d: 'M46 24h68a12 12 0 0 1 12 12v32a12 12 0 0 1-12 12H72l-16 12V80H46a12 12 0 0 1-12-12V36a12 12 0 0 1 12-12z', fill: F, stroke: E, strokeWidth: 1.8 }),
+      h('path', { key: 's', d: 'M80 36l5.6 11.2 12.4 1.8-9 8.7 2.1 12.3L80 64.2 68.9 70l2.1-12.3-9-8.7 12.4-1.8z', fill: E })];
+    if (k === 'inbox') return card(32, 30, 96, 58, 12).concat([
+      h('path', { key: 't', d: 'M40 62h20l5 9h30l5-9h20', fill: 'none', stroke: E, strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }), bar('a', 56, 42, 48, .5), bar('b', 64, 52, 32, .22, 4)]);
+    if (k === 'users') return card(30, 26, 100, 62, 12).concat([
+      h('circle', { key: 'a', cx: 62, cy: 50, r: 11, fill: E }), h('circle', { key: 'a2', cx: 62, cy: 47, r: 4.4, fill: '#2a2140' }), h('path', { key: 'a3', d: 'M54 58a8.5 8.5 0 0 1 16 0', fill: '#2a2140' }),
+      h('circle', { key: 'b', cx: 92, cy: 50, r: 11, fill: W + '.16)' }), h('circle', { key: 'b2', cx: 92, cy: 47, r: 4.4, fill: '#2a2140' }), h('path', { key: 'b3', d: 'M84 58a8.5 8.5 0 0 1 16 0', fill: '#2a2140' }),
+      bar('l', 52, 72, 52, .18, 4)]);
+    if (k === 'bell') return card(36, 24, 88, 66, 14).concat([
+      h('path', { key: 'b', d: 'M80 34a15 15 0 0 1 15 15v9l5 8H60l5-8v-9a15 15 0 0 1 15-15z', fill: E }), h('path', { key: 'cl', d: 'M74 70a6 6 0 0 0 12 0', fill: E }),
+      h('circle', { key: 'dot', cx: 94, cy: 38, r: 5, fill: '#e5484d', stroke: '#2a2140', strokeWidth: 2 })]);
+    if (k === 'logout') return card(52, 18, 56, 74, 12).concat([h('rect', { key: 'd', x: 61, y: 28, width: 38, height: 52, rx: 8, fill: W + '.06)' }), embLogo(68, 38, .038), h('circle', { key: 'k', cx: 93, cy: 60, r: 2.6, fill: '#f4a425' }), bar('r', 66, 70, 20, .25, 4)]);
+    if (k === 'del') return card(32, 24, 96, 62, 12).concat([h('circle', { key: 'a', cx: 56, cy: 49, r: 12, fill: E }), h('circle', { key: 'a2', cx: 56, cy: 45.5, r: 4.8, fill: '#2a2140' }), h('path', { key: 'a3', d: 'M47.5 58a9 9 0 0 1 17 0', fill: '#2a2140' }), bar('l1', 76, 41, 34, .55, 6), bar('l2', 76, 53, 22, .25), bar('l3', 44, 71, 60, .14)]);
+    if (k === 'card') return card(30, 26, 100, 62, 11).concat([h('rect', { key: 's', x: 31, y: 38, width: 98, height: 10, fill: W + '.14)' }), h('rect', { key: 'ch', x: 42, y: 58, width: 17, height: 13, rx: 3, fill: '#e9c46a' }), bar('n', 66, 62, 40, .3)]);
+    if (k === 'lock') return card(36, 22, 88, 68, 14).concat([embLogo(62, 30, .058), bar('a', 56, 72, 48, .3, 4)]);
+    if (k === 'shield') return card(36, 22, 88, 68, 14).concat([h('path', { key: 's', d: 'M80 32l18 6v13c0 11.5-7.6 19.5-18 23-10.4-3.5-18-11.5-18-23V38z', fill: E }), h('path', { key: 's2', d: 'M80 40l11 3.6v7.6c0 7-4.6 12-11 14.4z', fill: W + '.25)' })]);
+    if (k === 'stage') return card(30, 26, 100, 62, 12).concat([
+      h('rect', { key: 't1', x: 38, y: 34, width: 40, height: 46, rx: 8, fill: W + '.07)' }), h('rect', { key: 't2', x: 82, y: 34, width: 40, height: 46, rx: 8, fill: W + '.07)', stroke: E, strokeWidth: 1.6, strokeDasharray: '4 3' }),
+      h('circle', { key: 'a', cx: 58, cy: 52, r: 9, fill: E }), h('path', { key: 'p', d: 'M102 50v10M97 55h10', stroke: W + '.6)', strokeWidth: 2.4, strokeLinecap: 'round' })]);
+    if (k === 'refund') return card(32, 26, 96, 62, 12).concat([h('circle', { key: 'co', cx: 64, cy: 57, r: 16, fill: E }), h('text', { key: 't', x: 64, y: 63, textAnchor: 'middle', fontSize: 17, fontWeight: 800, fill: '#2a1803', fontFamily: 'Plus Jakarta Sans, sans-serif' }, '$'), bar('l1', 88, 46, 28, .5), bar('l2', 88, 58, 20, .22, 4), bar('l3', 88, 68, 24, .14, 4)]);
+    return embBody('inbox', id);
+  }
+  var embSeq = 0;
+  function Emblem(p) {
+    var k = EMB[p.name] ? p.name : 'inbox', cfg = EMB[k], id = 'emb' + k + (p.uid || ''), bc = EMB_BADGE[cfg.badge[0]], W = p.width || 160;
+    return h('svg', { className: cx('f4-emblem', p.className), viewBox: '0 0 160 120', width: W, height: W * .75, role: p.label ? 'img' : undefined, 'aria-label': p.label, 'aria-hidden': p.label ? undefined : true },
+      h('defs', null,
+        h('radialGradient', { id: id + 'g', cx: '50%', cy: '50%', r: '50%' }, h('stop', { offset: 0, stopColor: '#a57ad8', stopOpacity: .38 }), h('stop', { offset: .6, stopColor: '#782f8d', stopOpacity: .1 }), h('stop', { offset: 1, stopColor: '#782f8d', stopOpacity: 0 })),
+        h('linearGradient', { id: id + 't', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#3a2a55' }), h('stop', { offset: .55, stopColor: '#2a2140' }), h('stop', { offset: 1, stopColor: '#1d1a28' })),
+        h('linearGradient', { id: id + 'e', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: .35, stopColor: '#a57ad8' }), h('stop', { offset: .7, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#facd60' })),
+        h('linearGradient', { id: id + 's', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .1 }), h('stop', { offset: 1, stopColor: '#fff', stopOpacity: 0 })),
+        h('linearGradient', { id: id + 'b', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: bc[0] }), h('stop', { offset: 1, stopColor: bc[1] })),
+        h('filter', { id: id + 'd', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feDropShadow', { dx: 0, dy: 8, stdDeviation: 8, floodColor: '#000', floodOpacity: .45 })),
+        h('filter', { id: id + 'l', x: '-60%', y: '-60%', width: '220%', height: '220%' }, h('feDropShadow', { dx: 0, dy: 0, stdDeviation: 6, floodColor: bc[3], floodOpacity: .5 }))),
+      h('ellipse', { cx: 80, cy: 60, rx: 74, ry: 56, fill: 'url(#' + id + 'g)' }),
+      h('circle', { cx: 22, cy: 22, r: 2.4, fill: '#facd60', opacity: .8 }), h('circle', { cx: 140, cy: 20, r: 1.8, fill: '#39cae0', opacity: .8 }), h('circle', { cx: 18, cy: 96, r: 1.6, fill: '#a57ad8', opacity: .8 }), h('circle', { cx: 146, cy: 62, r: 1.4, fill: '#e74645', opacity: .7 }),
+      h('g', { transform: 'rotate(-7 80 57)', filter: 'url(#' + id + 'd)' }, embBody(k, id)),
+      h('g', { transform: 'translate(124 92)', filter: 'url(#' + id + 'l)' },
+        h('circle', { r: 16, fill: 'url(#' + id + 'b)' }), h('circle', { r: 16, fill: 'none', stroke: 'rgba(255,255,255,.5)', strokeWidth: 1 }),
+        h('path', { d: EMB_GLYPH[cfg.badge[1]], fill: 'none', stroke: bc[2], strokeWidth: 2.6, strokeLinecap: 'round', strokeLinejoin: 'round' })));
+  }
   function EmptyArt(p) {
+    if (p.name !== 'success') return h('span', { className: 'f4-ea3' }, h(Emblem, { name: p.name, width: (p.width || 220) * .82, label: p.label || 'Illustration' }));
+  
     if (p.name === 'success') return SuccessArt(p);
     var g = GLYPH[p.name] || GLYPH.inbox, W = p.width || 220;
     var badge = g.badge === 'clock' ? [h('circle', { key: 'c', cx: 0, cy: 0, r: 5, fill: 'none', stroke: '#f4a425', strokeWidth: 1.5 }), h('path', { key: 'h', d: 'M0-2.6V0l1.8 1.3', fill: 'none', stroke: '#f4a425', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' })]
@@ -4034,7 +4126,7 @@ input,textarea{caret-color:#F4A425}
       }));
   }
 
-  window.F4S = { Icon: Icon, Logo: Logo, AppIcon: AppIcon, APPICON_URL: APPICON_URL, Button: Button, IconButton: IconButton, Badge: Badge, Art: Art, EventCard: EventCard, SectionHeader: SectionHeader, CategoryTile: CategoryTile, SpeakerAvatar: SpeakerAvatar, PersonRow: PersonRow, Avatar: Avatar, Stars: Stars, SegmentedTabs: SegmentedTabs, DateStrip: DateStrip, SearchField: SearchField, TextField: TextField, InfoRow: InfoRow, Countdown: Countdown, PriceBar: PriceBar, AppHeader: AppHeader, BottomNav: BottomNav, NavGlyph: NavGlyph, EmptyState: EmptyState, EmptyArt: EmptyArt, ReviewCard: ReviewCard, RatingSummary: RatingSummary, ChatMessage: ChatMessage, Skeleton: Skeleton, MenuSheet: MenuSheet, ICONS: Object.keys(P) };
+  window.F4S = { Icon: Icon, Logo: Logo, AppIcon: AppIcon, APPICON_URL: APPICON_URL, Button: Button, IconButton: IconButton, Badge: Badge, Art: Art, EventCard: EventCard, SectionHeader: SectionHeader, CategoryTile: CategoryTile, SpeakerAvatar: SpeakerAvatar, PersonRow: PersonRow, Avatar: Avatar, Stars: Stars, SegmentedTabs: SegmentedTabs, DateStrip: DateStrip, SearchField: SearchField, TextField: TextField, InfoRow: InfoRow, Countdown: Countdown, PriceBar: PriceBar, AppHeader: AppHeader, BottomNav: BottomNav, NavGlyph: NavGlyph, EmptyState: EmptyState, EmptyArt: EmptyArt, ReviewCard: ReviewCard, Emblem: Emblem, RatingSummary: RatingSummary, ChatMessage: ChatMessage, Skeleton: Skeleton, MenuSheet: MenuSheet, ICONS: Object.keys(P) };
 })();
 
 </script>
@@ -4773,7 +4865,7 @@ input,textarea{caret-color:#F4A425}
       h(Top, { back: p.nav.back, title: 'Security' }),
       h('div', { className: 'pad sc2-body' },
         h('div', { className: 'sc-hero' },
-          h('span', { className: 'sc-shield' }, h('svg', { width: 30, height: 30, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z' }), h('path', { d: 'M9 12l2 2 4-4' }))),
+          h('span', { className: 'sc-emb' }, h(F.Emblem, { name: 'shield', width: 84 })),
           h('div', null, h('b', null, twofa ? 'Your account is well protected' : 'Good \u2014 one step to go'), h('span', null, twofa ? 'Password + 2-step verification are on' : 'Turn on 2-step verification for extra safety')),
           h('div', { className: 'sc-meter' }, h('i', { style: { width: twofa ? '100%' : '70%' } }))),
         h('section', { className: 'sc-card' },
@@ -5203,7 +5295,7 @@ input,textarea{caret-color:#F4A425}
         h('span', { className: 'as2-glow', 'aria-hidden': true }),
         h('span', { className: 'grab' }),
         h(Tap, { className: 'as2-x', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 })),
-        h('div', { className: 'as2-icon' }, h(F.AppIcon, { size: 60 }), h('span', { className: 'as2-badge' }, h(F.Icon, { name: 'lock', size: 13 }))),
+        h('div', { className: 'as2-emb' }, h(F.Emblem, { name: 'lock', width: 150 })),
         h('h2', null, p.why),
         h('p', null, 'It only takes a minute — and it\u2019s free.'),
         h('ul', { className: 'as2-perks' }, perks.map(function (k) {
@@ -5324,38 +5416,7 @@ input,textarea{caret-color:#F4A425}
 
   /* Centered confirm dialog, portalled above the whole app (covers the tab bar) */
   /* illustrated emblems in the success-ticket style: plum card + brand-gradient outline + corner badge */
-  function DlgEmblem(p) {
-    var k = p.k, id = 'em' + k;
-    var badge = k === 'logout' ? ['#FFD27A', '#F4A425', '#1b1306', 'M9 12h7M13 8.5l3.5 3.5-3.5 3.5'] : k === 'del' ? ['#FF9A93', '#E5484D', '#fff', 'M8 9h8M10.5 9V7.8h3V9M9.2 9l.6 7.2h4.4l.6-7.2'] : ['#FF9A93', '#E5484D', '#fff', 'M9 9l6 6M15 9l-6 6'];
-    var body;
-    if (k === 'logout') body = [
-      h('rect', { key: 'b', x: 30, y: 16, width: 54, height: 66, rx: 12, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
-      h('rect', { key: 'd', x: 40, y: 26, width: 34, height: 46, rx: 7, fill: 'rgba(255,255,255,.06)' }),
-      h('circle', { key: 'k', cx: 70, cy: 54, r: 2.4, fill: '#F4A425' }),
-      h('rect', { key: 'r1', x: 44, y: 62, width: 20, height: 4, rx: 2, fill: 'rgba(255,255,255,.25)' }),
-      h('g', { key: 'l', transform: 'translate(44 32) scale(.034)' }, LOGO_P.map(function (d, i) { return h('path', { key: i, d: d, fill: ['#fff', '#782F8D', '#33438D', '#E74645'][i] }); }))];
-    else if (k === 'del') body = [
-      h('rect', { key: 'b', x: 18, y: 22, width: 80, height: 56, rx: 12, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
-      h('circle', { key: 'a', cx: 40, cy: 44, r: 10, fill: 'url(#' + id + 'g)' }),
-      h('circle', { key: 'a2', cx: 40, cy: 41, r: 4, fill: '#2A2340' }), h('path', { key: 'a3', d: 'M33 51a7.5 7.5 0 0 1 14 0', fill: '#2A2340' }),
-      h('rect', { key: 'l1', x: 56, y: 37, width: 28, height: 6, rx: 3, fill: 'rgba(255,255,255,.55)' }),
-      h('rect', { key: 'l2', x: 56, y: 48, width: 18, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.25)' }),
-      h('rect', { key: 'l3', x: 28, y: 63, width: 50, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.14)' })];
-    else body = [
-      h('rect', { key: 'b', x: 16, y: 22, width: 84, height: 56, rx: 11, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
-      h('rect', { key: 's', x: 17, y: 34, width: 82, height: 9, fill: 'rgba(255,255,255,.14)' }),
-      h('rect', { key: 'c', x: 27, y: 52, width: 15, height: 11, rx: 2.5, fill: '#E9C46A' }),
-      h('rect', { key: 'n', x: 48, y: 55, width: 34, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.3)' })];
-    return h('span', { className: 'em3' },
-      h('svg', { viewBox: '0 0 120 100', width: 132, height: 110, 'aria-hidden': true },
-        h('defs', null,
-          h('linearGradient', { id: id + 'g', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39CAE0' }), h('stop', { offset: .35, stopColor: '#A57AD8' }), h('stop', { offset: .7, stopColor: '#E74645' }), h('stop', { offset: 1, stopColor: '#FACD60' })),
-          h('linearGradient', { id: id + 'b', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: badge[0] }), h('stop', { offset: 1, stopColor: badge[1] }))),
-        h('circle', { cx: 12, cy: 18, r: 2.4, fill: '#FACD60', opacity: .8 }), h('circle', { cx: 108, cy: 26, r: 2, fill: '#39CAE0', opacity: .8 }), h('circle', { cx: 10, cy: 84, r: 1.6, fill: '#A57AD8', opacity: .8 }),
-        h('g', { transform: 'rotate(-8 60 50)' }, body),
-        h('circle', { cx: 92, cy: 76, r: 15, fill: 'url(#' + id + 'b)', stroke: '#1e1b26', strokeWidth: 3 }),
-        h('g', { transform: 'translate(80 64)' }, h('path', { d: badge[3], fill: 'none', stroke: badge[2], strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }))));
-  }
+  function DlgEmblem(p) { return h('span', { className: 'em3' }, h(F.Emblem, { name: p.k, width: 150 })); }
   function ConfirmDialog(p) {
     var del = p.kind === 'delete';
     var host = document.querySelector('.app');
@@ -5961,7 +6022,7 @@ input,textarea{caret-color:#F4A425}
             h(Tap, { className: 'wr-b pri', onClick: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Invite friends')));
       })() : null,
       mode === 'ended' ? h('div', { className: 'ed' },
-        h('div', { className: 'ed-badge' }, h('span', { className: 'ed-glow' }), h('span', { className: 'ed-ic' }, h('svg', { width: 34, height: 34, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M4 22V4M4 4h12l-2 4 2 4H4' })))),
+        h('div', { className: 'ed-emb' }, h(F.Emblem, { name: 'ended', width: 168 })),
         h('span', { className: 'ed-k' }, 'Live ended \u00b7 Nov 03, 11:59 AM'),
         h('h2', { className: 'ed-h' }, 'Thanks for watching!'),
         h('p', { className: 'ed-p' }, 'Danang Christmas Market 2026'),
