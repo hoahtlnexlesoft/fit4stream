@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104130627"</script>
+<script>window.__BUILD__="20261104131002"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6526,14 +6526,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
     // interactive swipe-back (iOS style): drag right from anywhere (or the left edge) to reveal the previous screen
     var sw = useRef(null), dx = useState(0), drag = dx[0], setDrag = dx[1], sa = useState(0), swAnim = sa[0], setSwAnim = sa[1], appEl = useRef(null), swClick = useRef(false);
-    function canSwipe() { var t = stack[stack.length - 1].split(':')[0]; return stack.length > 1 && !MODALS.test(t) && !/^(player|full)$/.test(t) && !swAnim; }
+    function canSwipe() { var t = stack[stack.length - 1].split(':')[0]; return stack.length > 1 && !MODALS.test(t) && t !== 'full' && !swAnim && !(appEl.current && appEl.current.querySelector('.sheet-wrap,.cd-wrap')); }
     function hScrollable(el) { while (el && el !== appEl.current) { if (el.classList && (el.classList.contains('cf2') || el.hasAttribute('data-noswipe'))) return true; var cs = getComputedStyle(el); if ((cs.overflowX === 'auto' || cs.overflowX === 'scroll') && el.scrollWidth > el.clientWidth + 2) return true; el = el.parentElement; } return false; }
     function pd(e) { if (!canSwipe() || (e.pointerType === 'mouse' && e.button !== 0)) return; var r = appEl.current.getBoundingClientRect(), x = e.clientX - r.left; var edge = x < 36; if (!edge && hScrollable(e.target)) return; sw.current = { x0: e.clientX, y0: e.clientY, id: e.pointerId, on: false, edge: edge, w: r.width, t: Date.now(), lx: e.clientX, lt: Date.now(), v: 0 }; }
     function pm(e) { var g = sw.current; if (!g || e.pointerId !== g.id) return; var ddx = e.clientX - g.x0, ddy = e.clientY - g.y0;
       if (!g.on) { if (Math.abs(ddy) > 10 && Math.abs(ddy) > Math.abs(ddx)) { sw.current = null; return; } if (ddx > (g.edge ? 6 : 14) && ddx > Math.abs(ddy) * 1.6) { g.on = true; g.x0 = e.clientX - 1; if (g.id !== 't') try { appEl.current.setPointerCapture(e.pointerId); } catch (er) {} } else return; }
       var now = Date.now(); g.v = (e.clientX - g.lx) / Math.max(1, now - g.lt); g.lx = e.clientX; g.lt = now; setDrag(Math.max(0, e.clientX - g.x0)); }
     function pu(e) { var g = sw.current; if (!g) return; sw.current = null; if (!g.on) return; swClick.current = true; setTimeout(function () { swClick.current = false; }, 60);
-      var cur = Math.max(0, e.clientX - g.x0), go = cur > g.w * 0.35 || (g.v > 0.45 && cur > 40);
+      var cur = Math.max(0, e.clientX - g.x0), go = cur > g.w * 0.3 || (g.v > 0.35 && cur > 36);
       if (go) { setSwAnim(1); setDrag(g.w); setTimeout(function () { tap(6); setDir('none'); setStack(function (st) { return st.length > 1 ? st.slice(0, -1) : st; }); setDrag(0); setSwAnim(0); }, 230); }
       else { setSwAnim(2); setDrag(0); setTimeout(function () { setSwAnim(0); }, 230); } }
     function clickCap(e) { if (swClick.current) { e.preventDefault(); e.stopPropagation(); } }
