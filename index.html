@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104075628"</script>
+<script>window.__BUILD__="20261104075939"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3089,6 +3089,28 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .ed-rp-b{flex:none;width:38px;height:38px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.1);color:#fff}
 .ed-rp-b.on{background:rgba(57,200,124,.18);color:#7fe0a8}
 .ed-acts{margin-top:18px;display:flex;gap:10px;width:100%}
+.fs-grid{height:min(430px,48vh)!important}
+.fs-grid .stg{display:grid!important;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px!important}
+.fs-grid .stg .stg-t{grid-column:auto!important;grid-row:auto!important}
+.fs-grid .stg.n1 .stg-t{grid-column:1/-1!important;grid-row:1/-1!important}
+.fs-grid .stg.n2 .stg-t{grid-row:1/-1!important}
+.fs-grid .stg.n3 .stg-t:first-child{grid-row:1/-1!important;grid-column:1!important}
+.fs-grid .stg-t{border-radius:20px!important;background:#1c1a22!important;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.fs-grid .stg-img{background-position:center 22%!important;filter:saturate(.92) brightness(.96)}
+.fs-grid .stg-t::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(8,7,12,.78) 100%);pointer-events:none}
+.fs-grid .stg-t.speaking{box-shadow:0 0 0 2px #F4A425,0 0 26px rgba(244,164,37,.45)!important}
+.fs-grid .stg-tag{left:10px!important;right:10px!important;bottom:10px!important;z-index:1;flex-direction:column;align-items:flex-start!important;gap:3px!important}
+.fs-grid .stg-tag b{font-size:13px!important;font-weight:700!important;max-width:100%;text-shadow:none!important}
+.fs-grid .stg-tag i{order:2;height:15px!important;padding:0 6px!important;border-radius:5px!important;font-size:9px!important}
+.fs-grid .stg-mic{position:absolute;left:0;top:-200px;display:none!important}
+.fs-grid .stg-mic.off{display:grid!important;position:fixed;position:absolute;left:auto;top:auto}
+.fs-grid .stg-t .stg-mic.off{display:none!important}
+.fs-grid .stg-noc{background:radial-gradient(120% 90% at 50% 30%,#2b2537,#17151d)!important}
+.fs-grid .stg-noc .f4-avatar{width:64px!important;height:64px!important;box-shadow:0 0 0 3px rgba(255,255,255,.08)!important}
+.fs-grid .stg-eq{right:10px!important;top:10px!important;left:auto!important;background:rgba(10,9,14,.5)!important;border-radius:9px!important}
+.fs-grid .stg-t .fs-muted{position:absolute;left:10px;top:10px;z-index:1;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(229,72,77,.92);color:#fff}
+.player.fs.is-grid .fs-rail{gap:8px}.player.fs.is-grid .fs-rb-t{display:none}
+.player.fs.is-grid .fs-chat{padding-right:70px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5282,6 +5304,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
         return h('div', { key: x.n, className: cx('stg-t', x.speaking && 'speaking', x.me && 'me') },
           x.img ? h('div', { className: 'stg-img', style: { backgroundImage: 'url(' + x.img + ')' } }) : h('div', { className: 'stg-noc' }, h(F.Avatar, { src: AV.me, name: 'You', initials: 'TN', size: 52 }), h('span', null, 'Camera off')),
           h('div', { className: 'stg-tag' }, h('span', { className: cx('stg-mic', !x.mic && 'off') }, x.mic ? micOn : micOff), h('b', null, x.n), h('i', { className: 'r-' + x.role.toLowerCase() }, x.role)),
+          !x.mic ? h('span', { className: 'fs-muted', 'aria-label': 'Muted' }, micOff) : null,
           x.speaking ? h('span', { className: 'stg-eq', 'aria-label': 'Speaking' }, h('i'), h('i'), h('i')) : null);
       }));
     }
