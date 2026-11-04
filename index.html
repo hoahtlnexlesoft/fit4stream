@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104090706"</script>
+<script>window.__BUILD__="20261104090839"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4661,11 +4661,15 @@ input,textarea{caret-color:#F4A425}
   }
 
   /* ---------- account sub pages ---------- */
+  function pickPhoto(cb) { var i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = function () { var f = i.files && i.files[0]; if (!f) return; var r = new FileReader(); r.onload = function () { cb(r.result); }; r.readAsDataURL(f); }; i.click(); }
+  function setMyPhoto(url) { AV.me = url; window.__chAv = url; window.dispatchEvent(new Event('f4-avatar')); }
+  function useMyPhoto() { var s = useState(AV.me), v = s[0], set = s[1]; useEffect(function () { function f() { set(AV.me); } window.addEventListener('f4-avatar', f); return function () { window.removeEventListener('f4-avatar', f); }; }, []); return v; }
   function EditProfile(p) {
+    var me = useMyPhoto();
     return h(SubPage, { nav: p.nav, title: 'My Profile', bottom: h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Profile saved'); p.nav.back(); } }, 'Save changes') },
       h('div', { className: 'col', style: { alignItems: 'center', gap: 10, padding: '8px 0' } },
-        h('span', { className: 'mcard-av' }, h(F.Avatar, { src: AV.me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 96 })),
-        h(Tap, { className: 'f4-link', onClick: function () { p.nav.toast('Choose a photo from your library'); } }, 'Change photo')),
+        h(Tap, { className: 'mcard-av ep-av', label: 'Change photo', onClick: function () { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); } }, h(F.Avatar, { src: me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 96 })),
+        h(Tap, { className: 'f4-link', onClick: function () { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); } }, 'Change photo')),
       h(F.TextField, { label: 'Full name', icon: 'user', value: 'Thao 13 NGUYEN13' }),
       h(F.TextField, { label: 'Email', icon: 'mail', value: 'thaonguyentest123+13@gmail.com', hint: 'Email can’t be changed here.' }),
       h(F.TextField, { label: 'Language', icon: 'globe', value: 'English' }));
@@ -4676,7 +4680,7 @@ input,textarea{caret-color:#F4A425}
     var camIc = h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z' }), h('circle', { cx: 12, cy: 13, r: 3.5 }));
     var am = useState(window.__chAv || AV.me), avSrc = am[0], setAv = am[1];
     var cm = useState(window.__chCover || PH.concert), cover = cm[0], setCover = cm[1];
-    function pick(kind) { var i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = function () { var f = i.files && i.files[0]; if (!f) return; var r = new FileReader(); r.onload = function () { if (kind === 'av') { window.__chAv = r.result; setAv(r.result); p.nav.toast('Profile photo updated'); } else { window.__chCover = r.result; setCover(r.result); p.nav.toast('Cover updated'); } }; r.readAsDataURL(f); }; i.click(); }
+    function pick(kind) { var i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = function () { var f = i.files && i.files[0]; if (!f) return; var r = new FileReader(); r.onload = function () { if (kind === 'av') { setMyPhoto(r.result); setAv(r.result); p.nav.toast('Profile photo updated'); } else { window.__chCover = r.result; setCover(r.result); p.nav.toast('Cover updated'); } }; r.readAsDataURL(f); }; i.click(); }
     var SOC = [['in', 'LinkedIn', ''], ['yt', 'YouTube', 'youtube.com/@thao13'], ['ig', 'Instagram', ''], ['fb', 'Facebook', '']];
     return h('div', { className: 'screen tabscreen ch2' },
       h('div', { className: 'ch2-cover', style: { backgroundImage: 'url(' + cover + ')' } },
@@ -4939,6 +4943,7 @@ input,textarea{caret-color:#F4A425}
       h('div', { className: 'dots' }, heroes.map(function (x, i) { return h('span', { key: i, className: i === slide ? 'on' : '', onClick: function () { go(i); } }); })));
   }
   function Home(p) {
+    useMyPhoto();
     var st = useState(function () { if (window.__fromLaunch) { window.__fromLaunch = false; p.nav.firstHome = false; return false; } return true; }), loading = st[0], setLoading = st[1];
     var pr = useState(0), pull = pr[0], setPull = pr[1];
     var ref = useRef(null), startY = useRef(null);
@@ -5182,6 +5187,7 @@ input,textarea{caret-color:#F4A425}
       h('div', { style: { height: 140 } }));
   }
   function Account(p) {
+    useMyPhoto();
     if (!p.nav.authed) return h(GuestAccount, p);
     var c = useState(null), confirm = c[0], setConfirm = c[1];
     function row(icon, tint, title, sub, go) {
