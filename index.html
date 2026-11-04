@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104131002"</script>
+<script>window.__BUILD__="20261104131325"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3490,7 +3490,7 @@ input,textarea{caret-color:#F4A425}
 
 /* keep back / close buttons pinned while content scrolls (stage has will-change:transform, so fixed = pinned to the screen) */
 .stage .top,.stage .og-back,.stage .ch2-back,.stage .dt-close{position:fixed!important;z-index:40!important}
-.stage .top{left:0!important;right:0!important;width:auto!important}
+.stage .top{left:0!important;right:0!important;width:auto!important;top:var(--st)!important}
 
 .stage .top{transition:background .2s,box-shadow .2s}
 .stage .top::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--st);background:inherit;-webkit-backdrop-filter:inherit;backdrop-filter:inherit;pointer-events:none}
@@ -3498,6 +3498,9 @@ input,textarea{caret-color:#F4A425}
 
 .l3-skip{position:absolute;z-index:10;top:calc(var(--st,47px) + 10px);right:16px;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 14px;border:0;border-radius:999px;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);cursor:pointer;animation:fade .4s .6s both}
 .l3-skip:active{transform:scale(.96);background:rgba(255,255,255,.16)}
+
+.top-sp{display:none}
+.tabscreen>.top-sp{display:block;flex:none;height:56px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4474,11 +4477,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function Tap(p) {
     return h('button', { type: 'button', className: cx('tap', p.className), style: p.style, 'aria-label': p.label, onClick: function (e) { tap(); p.go && p.go(); p.onClick && p.onClick(e); } }, p.children);
   }
-  function Top(p) { // pushed-screen header
-    return h('header', { className: cx('top', p.glass && 'glass'), style: p.style },
+  function Top(p) { // pushed-screen header (fixed; .top-sp keeps its space in flow layouts)
+    return h(React.Fragment, null, h('div', { className: 'top-sp', 'aria-hidden': true }), h('header', { className: cx('top', p.glass && 'glass'), style: p.style },
       h(Tap, { className: 'f4-iconbtn' + (p.glass ? ' f4-iconbtn-glass' : ''), label: 'Back', go: p.back }, h(F.Icon, { name: 'chevronLeft' })),
       p.title ? h('h1', { className: 'top-title' }, p.title) : h('span', { style: { flex: 1 } }),
-      h('div', { className: 'top-act' }, p.actions || h('span', { style: { width: 44 } })));
+      h('div', { className: 'top-act' }, p.actions || h('span', { style: { width: 44 } }))));
   }
   function Large(p) {
     return h('div', { className: 'large' }, h('h1', null, p.title, p.badge || null), p.action || null);
