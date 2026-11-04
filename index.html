@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104074335"</script>
+<script>window.__BUILD__="20261104075047"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3060,6 +3060,35 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .wr-b{flex:1;height:50px;border-radius:25px;display:flex!important;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-size:14.5px;font-weight:700}
 .wr-b.on{background:rgba(57,200,124,.16);color:#7fe0a8}
 .wr-b.pri{background:#F4A425;color:#1b1306}
+.yt-soon{background:linear-gradient(120deg,rgba(244,164,37,.14),rgba(255,255,255,.04) 60%)!important}
+.yt-sn{background:#F4A425!important;color:#1b1306!important}
+.yt-go2{background:rgba(255,255,255,.12)!important;color:#fff!important}
+.ed{position:absolute;left:0;right:0;top:calc(var(--st) + 60px);bottom:calc(var(--sb) + 16px);z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 20px;text-align:center}
+.ed-badge{position:relative;width:86px;height:86px;display:grid;place-items:center;margin-bottom:16px}
+.ed-glow{position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(closest-side,rgba(244,164,37,.45),transparent);animation:ed-g 3s ease-in-out infinite alternate}
+@keyframes ed-g{from{transform:scale(.9);opacity:.7}to{transform:scale(1.1);opacity:1}}
+.ed-ic{position:relative;width:86px;height:86px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(135deg,#F4A425,#E5484D);box-shadow:0 16px 40px rgba(229,72,77,.4),inset 0 1px 0 rgba(255,255,255,.35);transform:rotate(-6deg)}
+.ed-ic svg{transform:rotate(6deg)}
+.ed-k{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.ed-h{margin:6px 0 0;font-size:28px;line-height:34px;font-weight:800;letter-spacing:-.5px;color:#fff}
+.ed-p{margin:4px 0 0;font-size:14px;color:rgba(255,255,255,.6)}
+.ed-stats{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%}
+.ed-st{display:flex;flex-direction:column;align-items:center;gap:3px;padding:12px 4px 10px;border-radius:18px;background:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.ed-st-ic{width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background:rgba(244,164,37,.16);color:#F6C26B;margin-bottom:3px}
+.ed-st b{font-size:16px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.ed-st>span:last-child{font-size:11px;color:rgba(255,255,255,.5)}
+.ed-rate{margin-top:12px;width:100%;box-sizing:border-box;padding:14px;border-radius:20px;background:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.ed-rate>b{font-size:14.5px;color:#fff}
+.ed-stars{margin-top:8px;display:flex;justify-content:center;gap:6px}
+.ed-star{width:44px;height:44px;display:grid!important;place-items:center;color:rgba(255,255,255,.18);transition:transform .2s}
+.ed-star.on{color:#F4A425;transform:scale(1.08)}
+.ed-replay{margin-top:12px;width:100%;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px;border-radius:20px;background:rgba(255,255,255,.07);text-align:left}
+.ed-rp-ic{flex:none;width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:rgba(165,122,216,.22);color:#D6BCFB}
+.ed-replay>div{flex:1;min-width:0}
+.ed-replay b{display:block;font-size:14px;color:#fff}.ed-replay span:not(.ed-rp-ic){font-size:12px;color:rgba(255,255,255,.55)}
+.ed-rp-b{flex:none;width:38px;height:38px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+.ed-rp-b.on{background:rgba(57,200,124,.18);color:#7fe0a8}
+.ed-acts{margin-top:18px;display:flex;gap:10px;width:100%}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4525,10 +4554,14 @@ i.r-you{background:#fff!important;color:#14121a!important}
           p.nav.authed ? h('div', { className: 'hi-row pad' }, h('div', null, h('span', null, 'Good evening,'), h('b', null, 'Thao \ud83d\udc4b'))) : null,
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
-            h('div', { className: 'pad' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
+            h('div', { className: 'pad col gap10' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
               h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('i', { className: 'yt-live' }, h('em', null), 'LIVE')),
               h('div', { className: 'yt-body' }, h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Started 12 min ago \u00b7 by thao15 nguyen15')),
-              h('span', { className: 'yt-go' }, h(F.Icon, { name: 'play', size: 14 }), 'Join')))) : null,
+              h('span', { className: 'yt-go' }, h(F.Icon, { name: 'play', size: 14 }), 'Join')),
+              h(Tap, { className: 'yt-card yt-soon', go: function () { p.nav.push('player:waiting'); } },
+                h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.seo.img + ')' } }, h('i', { className: 'yt-live yt-sn' }, '5 MIN')),
+                h('div', { className: 'yt-body' }, h('b', null, EV.seo.title), h('span', null, 'Starts in 5 min \u00b7 doors open now')),
+                h('span', { className: 'yt-go yt-go2' }, h(F.Icon, { name: 'clock', size: 14 }), 'Enter')))) : null,
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
             h('div', { className: 'stories' }, CHANNELS.map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), live: i === 0, go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }); }))),
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, [EV.xmas, EV.gig, EV.seo].map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
@@ -5339,8 +5372,17 @@ i.r-you{background:#fff!important;color:#14121a!important}
             h(Tap, { className: cx('wr-b', st.remind && 'on'), onClick: function () { tap(10); set({ remind: !st.remind }); p.nav.toast(st.remind ? 'Reminder off' : 'We\u2019ll ping you when it starts'); } }, h(F.Icon, { name: st.remind ? 'check' : 'bell', size: 17 }), st.remind ? 'Reminder on' : 'Remind me'),
             h(Tap, { className: 'wr-b pri', onClick: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Invite friends')));
       })() : null,
-      mode === 'ended' ? h('div', { className: 'fs-state' }, h('span', { className: 'pvs-badge' }, 'Live ended'), h('b', { className: 'pvs-h' }, 'Thanks for watching!'), h('span', { className: 'pvs-s' }, '2h 17m · 2.4K watched · Replay soon'),
-        h('div', { className: 'pvs-acts' }, h(Tap, { className: 'pvs-btn pri', go: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 15, filled: true }), 'Rate event'), h(Tap, { className: 'pvs-btn', go: function () { p.nav.root('home'); } }, 'Home'))) : null,
+      mode === 'ended' ? h('div', { className: 'ed' },
+        h('div', { className: 'ed-badge' }, h('span', { className: 'ed-glow' }), h('span', { className: 'ed-ic' }, h('svg', { width: 34, height: 34, viewBox: '0 0 24 24', fill: 'none', stroke: '#fff', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M4 22V4M4 4h12l-2 4 2 4H4' })))),
+        h('span', { className: 'ed-k' }, 'Live ended \u00b7 Nov 03, 11:59 AM'),
+        h('h2', { className: 'ed-h' }, 'Thanks for watching!'),
+        h('p', { className: 'ed-p' }, 'Danang Christmas Market 2026'),
+        h('div', { className: 'ed-stats' },
+          [['clock', '2h 17m', 'Duration'], ['eye', '2.4K', 'Watched'], ['heart', '1.2K', 'Likes'], ['message', '386', 'Messages']].map(function (x) { return h('div', { key: x[2], className: 'ed-st' }, h('span', { className: 'ed-st-ic' }, h(F.Icon, { name: x[0], size: 17, filled: x[0] === 'heart' })), h('b', null, x[1]), h('span', null, x[2])); })),
+        h('div', { className: 'ed-rate' }, h('b', null, 'How was the event?'),
+          h('div', { className: 'ed-stars' }, [1, 2, 3, 4, 5].map(function (n) { return h(Tap, { key: n, className: cx('ed-star', n <= (st.rate || 0) && 'on'), label: n + ' stars', onClick: function () { tap(8); set({ rate: n }); if (n >= 1) p.nav.toast('Thanks for rating ' + n + '\u2605'); } }, h(F.Icon, { name: 'star', size: 30, filled: true })); }))),
+        h('div', { className: 'ed-replay' }, h('span', { className: 'ed-rp-ic' }, h(F.Icon, { name: 'play', size: 16 })), h('div', null, h('b', null, 'Replay coming soon'), h('span', null, 'We\u2019ll notify you when it\u2019s ready')), h(Tap, { className: cx('ed-rp-b', st.remind && 'on'), onClick: function () { tap(8); set({ remind: !st.remind }); } }, st.remind ? h(F.Icon, { name: 'check', size: 15 }) : h(F.Icon, { name: 'bell', size: 15 }))),
+        h('div', { className: 'ed-acts' }, h(Tap, { className: 'wr-b', go: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Share'), h(Tap, { className: 'wr-b pri', go: function () { p.nav.root('home'); } }, h(F.Icon, { name: 'home', size: 17 }), 'Back to Home'))) : null,
       live ? h('div', { className: 'fs-rail' },
         railBtn('like', 'thumbsUp', '1.2K', st.liked, function () { tap(10); if (!st.liked) heart(); set({ liked: !st.liked }); }, st.liked),
         railBtn('rate', 'star', st.rate ? st.rate.toFixed(1) : 'Rate', !!st.rate, function () { set({ rateOpen: true }); }, !!st.rate),
