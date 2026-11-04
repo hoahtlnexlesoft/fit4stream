@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104071129"</script>
+<script>window.__BUILD__="20261104071750"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2987,6 +2987,20 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .player.fs.on-stage .fs-rail{display:none}
 .player.fs.on-stage .fs-chat,.player.fs.on-stage .fs-meta{padding-right:14px}
 .fs-screen{top:calc(var(--st) + 150px)!important}
+.fs-hostpill{display:flex;align-items:center;gap:4px;max-width:calc(100% - 150px);padding:4px 4px 4px 4px;border-radius:26px;background:rgba(10,9,14,.45);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.fs-hp-main{min-width:0;display:flex!important;align-items:center;gap:8px;text-align:left;padding-right:4px}
+.fs-hp-main>div{min-width:0}
+.fs-hp-main b{display:block;font-size:13.5px;line-height:17px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-hp-main span:not(.fs-hp-av){display:block;font-size:11.5px;line-height:15px;color:rgba(255,255,255,.62);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-hp-av{flex:none;position:relative;border-radius:50%;display:grid}
+.fs-hp-av.speaking{box-shadow:0 0 0 2px #f4a425}
+.fs-hp-av .f4-avatar{box-shadow:none!important}
+.fs-hp-follow{flex:none;width:32px;height:32px;border-radius:50%;display:grid!important;place-items:center;background:#f4a425;color:#1b1306}
+.fs-hp-follow.on{background:rgba(255,255,255,.14);color:#fff}
+.fs-screen .lv-who{position:absolute}
+.fs-screen{top:calc(var(--st) + 96px)!important}
+.fs-rail{gap:12px}
+.fs-rb-ic{width:42px;height:42px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5218,7 +5232,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
     var bigIsScreen = !!st.swap;
     var media = mode === 'waiting' || mode === 'ended' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
       : st.layout === 'grid' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
-      : bigIsScreen ? h('div', { className: 'fs-wrap', onClick: function () { set({ ui: !st.ui }); } }, h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } }), h('div', { className: 'fs-screen', style: { backgroundImage: 'url(' + SCREEN + ')' } }))
+      : bigIsScreen ? h('div', { className: 'fs-wrap', onClick: function () { set({ ui: !st.ui }); } }, h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } }), h('div', { className: 'fs-screen', style: { backgroundImage: 'url(' + SCREEN + ')' } }, h('span', { className: 'lv-who' }, h(F.Icon, { name: 'monitor', size: 12 }), 'Nhan Doan', h('em', { className: 'r-organizer' }, 'Screen share'))))
       : h('div', { className: 'fs-media', style: { backgroundImage: 'url(' + HOSTCAM + ')' }, onClick: function () { set({ ui: !st.ui }); } });
     var railBtn = function (k, ic, label, on, go, filled) { return h(Tap, { key: k, className: cx('fs-rb', on && 'on'), label: label, onClick: go }, h('span', { className: 'fs-rb-ic' }, h(F.Icon, { name: ic, size: 21, filled: filled })), h('span', { className: 'fs-rb-t' }, label)); };
     return h('div', { className: cx('screen noscroll player fs', st.layout === 'grid' && live && 'is-grid', st.onstage && live && 'on-stage', !st.ui && 'ui-off', !live && 'is-state') },
@@ -5235,7 +5249,11 @@ i.r-you{background:#fff!important;color:#14121a!important}
         live ? h(Tap, { className: 'fs-tb', label: st.layout === 'grid' ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); set({ layout: st.layout === 'grid' ? 'focus' : 'grid' }); } }, gridIc) : null,
         live && !st.onstage ? h(Tap, { className: cx('fs-tb', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 19 })) : null),
       live && st.layout !== 'grid' ? h('div', { className: 'fs-sub' },
-        h('span', { className: 'fs-spk' }, bigIsScreen ? h(F.Icon, { name: 'monitor', size: 13 }) : h('span', { className: 'stg-eq fs-eq' }, h('i'), h('i'), h('i')), h('b', null, bigIsScreen ? 'Nhan Doan' : 'thao15 nguyen15'), h('i', { className: bigIsScreen ? 'r-organizer' : 'r-host' }, bigIsScreen ? 'Screen share' : 'Host')),
+        h('div', { className: 'fs-hostpill' },
+          h(Tap, { className: 'fs-hp-main', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
+            h('span', { className: cx('fs-hp-av', !bigIsScreen && 'speaking') }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 34 })),
+            h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
+          h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 15 }) : h(F.Icon, { name: 'plus', size: 15 }))),
         h('button', { type: 'button', className: 'fs-pip', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show screen share large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
           h('span', { className: 'fs-pip-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
           h('span', { className: 'fs-pip-tag' }, bigIsScreen ? 'Host' : 'Screen'),
@@ -5254,10 +5272,6 @@ i.r-you{background:#fff!important;color:#14121a!important}
         live ? h('div', { className: 'fs-chat', onClick: function () { set({ sheet: true, tab: 'chat' }); } },
           h('div', { className: 'fs-pin' }, h('span', null, pinIc), h('p', null, 'Market tour starts at the fountain at 10:00 🎄')),
           MSGS.slice(-4).map(Line)) : null,
-        h('div', { className: 'fs-meta' },
-          h(Tap, { className: 'fs-host', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 36 }),
-            h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
-          h(Tap, { className: cx('lv-follow', st.follow && 'on'), onClick: function () { tap(10); set({ follow: !st.follow }); } }, st.follow ? h(F.Icon, { name: 'check', size: 15 }) : null, st.follow ? 'Following' : 'Follow')),
         st.onstage && live ? h('div', { className: 'onstage fs-os' },
           h('span', { className: 'os-live' }, h('i'), "You're on stage"),
           h('span', { style: { flex: 1 } }),
