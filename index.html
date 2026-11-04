@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104090112"</script>
+<script>window.__BUILD__="20261104090227"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3381,6 +3381,28 @@ input,textarea{caret-color:#F4A425}
 .et3 .et3-foot .et3-join,.et3 .et3-join{color:#1b1306!important;text-shadow:none!important}
 .et3 .et3-time.on{color:#fff!important}
 .cf2{height:476px!important}.cf2 .cf2-card{margin-left:-172px!important;width:344px!important;height:440px!important}
+.ps2{position:relative;overflow:hidden;padding:18px 18px 16px;border-radius:24px;background:linear-gradient(135deg,#2A1A45 0%,#1C1830 55%,#15131c 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 16px 40px rgba(0,0,0,.35)}
+.ps2-glow{position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(244,164,37,.28),transparent);pointer-events:none}
+.ps2>*{position:relative}
+.ps2-top{display:flex;align-items:center;justify-content:space-between}
+.ps2-k{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+.ps2-ic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(244,164,37,.18);color:#F6C26B;font-style:normal}
+.ps2-mo{height:24px;padding:0 10px;border-radius:12px;display:inline-grid;place-items:center;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08)}
+.ps2-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:12px}
+.ps2-amt{display:flex;align-items:flex-start;font-size:44px;line-height:48px;font-weight:800;letter-spacing:-1.5px;color:#fff}
+.ps2-amt sup{font-size:20px;line-height:28px;margin-right:2px;color:rgba(255,255,255,.6);letter-spacing:0}
+.ps2-amt small{font-size:22px;line-height:32px;align-self:flex-end;color:rgba(255,255,255,.5);letter-spacing:-.5px}
+.ps2-bars{display:flex;align-items:flex-end;gap:6px;height:58px}
+.ps2-bars span{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%}
+.ps2-bars i{display:block;width:10px;border-radius:4px;background:rgba(255,255,255,.14)}
+.ps2-bars span.on i{background:linear-gradient(180deg,#FFD27A,#F4A425);box-shadow:0 0 12px rgba(244,164,37,.5)}
+.ps2-bars em{font-style:normal;font-size:9px;color:rgba(255,255,255,.35)}
+.ps2-bars span.on em{color:#F6C26B;font-weight:700}
+.ps2-stats{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:rgba(255,255,255,.55)}
+.ps2-stats b{color:#fff}
+.ps2-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+.ps2-rf{display:inline-flex;align-items:center;gap:4px;color:#7AD9EA}.ps2-rf b{color:#7AD9EA}
+.ps2-dn{margin-left:auto;display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:11px;background:rgba(57,200,124,.14);color:#7fe0a8;font-weight:700;font-size:11.5px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5562,7 +5584,17 @@ input,textarea{caret-color:#F4A425}
   function Payments(p) {
     var ids = Object.keys(ORDERS);
     return h(SubPage, { nav: p.nav, title: 'Payment History' },
-      h('div', { className: 'pay-sum' }, h('span', null, 'Spent this month'), h('b', null, '$6.87'), h('i', null, '3 transactions · 1 refunded')),
+      h('div', { className: 'ps2' },
+        h('span', { className: 'ps2-glow', 'aria-hidden': true }),
+        h('div', { className: 'ps2-top' }, h('span', { className: 'ps2-k' }, h('i', { className: 'ps2-ic' }, h(F.Icon, { name: 'ticket', size: 15 })), 'Spent this month'), h('span', { className: 'ps2-mo' }, 'November')),
+        h('div', { className: 'ps2-row' },
+          h('b', { className: 'ps2-amt' }, h('sup', null, '$'), '6', h('small', null, '.87')),
+          h('div', { className: 'ps2-bars', 'aria-hidden': true }, [['Jun', 4.5], ['Jul', 9.9], ['Aug', 3.99], ['Sep', 14.2], ['Oct', 10.48], ['Nov', 6.87]].map(function (m, i, a) { return h('span', { key: m[0], className: i === a.length - 1 ? 'on' : '' }, h('i', { style: { height: Math.max(12, m[1] / 14.2 * 100) + '%' } }), h('em', null, m[0])); }))),
+        h('div', { className: 'ps2-stats' },
+          h('span', null, h('b', null, '3'), ' transactions'),
+          h('span', { className: 'ps2-dot' }),
+          h('span', { className: 'ps2-rf' }, h(F.Icon, { name: 'rotateCcw', size: 13 }), h('b', null, '1'), ' refunded'),
+          h('span', { className: 'ps2-dn' }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 3, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M12 5v14M5 12l7 7 7-7' })), '34% vs Oct'))),
       h('div', { className: 'mgroup', style: { margin: 0 } }, ids.map(function (id) {
         var o = ORDERS[id], stt = STAT[o.st];
         return h(Tap, { key: id, className: 'mrow', go: function () { p.nav.push('receipt:' + id); } },
