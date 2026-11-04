@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104072411"</script>
+<script>window.__BUILD__="20261104073313"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3020,6 +3020,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .fs-hp-main span:not(.fs-hp-av){max-width:170px}
 .fs-media.fs-feed{background-position:center 40%;image-rendering:auto}
 .fs-pip-tag{display:inline-flex!important;align-items:center;gap:4px}.fs-pip-tag i{width:5px;height:5px;border-radius:50%;background:#e5484d}
+.fl2-ui .lv-live,.fl2-ui .lv-view,.full .lv-live,.full .lv-view{background:rgba(10,9,14,.42);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5320,6 +5321,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
       st.rateOpen ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ rateOpen: false }); } }, h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Rate this event' }, h('span', { className: 'grab' }), h('h2', { className: 'h-md' }, 'Rate this event'), h('div', { className: 'rate-stars' }, [1, 2, 3, 4, 5].map(function (n) { return h('button', { key: n, type: 'button', 'aria-label': n + ' stars', className: n <= st.rate ? 'on' : '', onClick: function () { tap(8); set({ rate: n }); } }, h(F.Icon, { name: 'star', size: 34, filled: true })); })), h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { set({ rateOpen: false }); } }, st.rate ? 'Submit rating' : 'Not now')))) : null);
   }
   function Full(p) {
+    var ftk = useTick();
     var s = useState(0), q = s[0], setQ = s[1];
     var ms = useState(false), muted = ms[0], setMuted = ms[1];
     var cs = useState(true), chat = cs[0], setChat = cs[1];
@@ -5347,7 +5349,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'fl2-shade', 'aria-hidden': true }),
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
-        h(F.Badge, { tone: 'live' }, 'Live'), h('span', { className: 'pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'), h('span', { className: 'pill' }, h(F.Icon, { name: 'clock', size: 12 }), '02:14:47 left')),
+        h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, fmtT(Math.max(0, 8220 - (EV.xmas.left - ftk))))), h('span', { className: 'lv-view' }, h(F.Icon, { name: 'eye', size: 14 }), '2.4K')),
       chat && !panel ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
       h('button', { type: 'button', className: 'fl2-cam fl2-ui', 'aria-label': swap ? 'Show screen share large' : 'Show host camera large', onClick: function () { tap(8); setSwap(!swap); } },
         h('div', { key: swap ? 'e' : 'h', className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
