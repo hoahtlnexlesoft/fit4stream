@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104033319"</script>
+<script>window.__BUILD__="20261104033618"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2285,6 +2285,16 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .me2-chev{flex:none;color:rgba(255,255,255,.35)}
 .top .f4-iconbtn,.top .tap.f4-iconbtn{border:0!important;outline:0!important;box-shadow:none!important;background:rgba(255,255,255,.08)!important}
 .top .f4-iconbtn::before,.top .f4-iconbtn::after{display:none!important}
+
+/* My Events segments: content-sized widths, no focus ring */
+.me2-seg{display:flex!important}
+.me2-segi{flex:1 1 auto!important;padding:0 10px!important}
+.me2-segi:focus,.me2-segi:focus-visible{outline:none!important;box-shadow:none!important}
+/* Premium icon badges (menu rows, detail facts, category tiles) — glass squircle, soft inner light, glowing glyph */
+.mrow-ic,.dt-ic,.ct-ic,.fact-ic,.cr-ic{border-radius:14px!important;color:#f3e9ff!important;background:radial-gradient(110% 100% at 28% 8%,rgba(186,135,255,.42),rgba(186,135,255,0) 58%),radial-gradient(90% 80% at 85% 100%,rgba(244,164,37,.16),rgba(244,164,37,0) 60%),linear-gradient(160deg,#2e2540 0%,#1b1724 100%)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(255,255,255,.06),0 8px 18px -6px rgba(0,0,0,.55)!important;border:0!important}
+.mrow-ic svg,.dt-ic svg,.ct-ic svg,.fact-ic svg,.cr-ic svg{filter:drop-shadow(0 0 6px rgba(200,160,255,.45));stroke-width:1.6}
+.ct-ic{border-radius:16px!important}
+.dt-ic{border-radius:16px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2825,11 +2835,11 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   var React = window.React, h = React.createElement, F = window.F4S;
   var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
   var PH = window.__PHOTOS__ || {};
-  var IMG = PH.festival;
+  var IMG = PH.xmas;
   var AV = window.__AVATARS__ || {};
   var AVN = { 'Linh Tran': 'r1', 'Minh Pham': 'r2', 'Hana Nguyen': 'r3', 'Thao': 'thao', 'Thao NGUYEN2': 'thao2', 'Nhan Doan': 'nhan', 'Marc John': 'marc', 'Sandra Smith': 'sandra', 'Elon Mush': 'elon', 'Thao 13': 'me', 'You': 'me', 'thao15 nguyen15': 'thao', 'Tom Bradley': 'tom', 'Sally': 'sally' };
   function av(name) { return AV[AVN[name]]; }
-  var PICK = [[/christmas|danang/i, 'festival'], [/seo/i, 'conference'], [/python/i, 'movie'], [/artificial|\bai\b/i, 'comedy'], [/software/i, 'theater'], [/aws/i, 'hero'], [/advanced technology/i, 'sports'], [/c#/i, 'concert'], [/urban/i, 'conference'], [/reinvention/i, 'theater'], [/payout/i, 'concert']];
+  var PICK = [[/christmas|danang/i, 'xmas'], [/seo/i, 'conference'], [/python/i, 'movie'], [/artificial|\bai\b/i, 'comedy'], [/software/i, 'theater'], [/aws/i, 'hero'], [/advanced technology/i, 'sports'], [/c#/i, 'concert'], [/urban/i, 'conference'], [/reinvention/i, 'theater'], [/payout/i, 'concert']];
   function photoFor(t) { for (var i = 0; i < PICK.length; i++) if (PICK[i][0].test(t || '')) return PH[PICK[i][1]]; return PH.concert; }
   function EC(p) { var q = Object.assign({}, p); if (!q.image) q.image = photoFor(q.title); delete q.caption; return h(F.EventCard, q); }
   function tap(ms) { try { navigator.vibrate && navigator.vibrate(ms || 8); } catch (e) {} }
