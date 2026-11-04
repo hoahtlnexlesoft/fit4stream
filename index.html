@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104090437"</script>
+<script>window.__BUILD__="20261104090706"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3408,6 +3408,14 @@ input,textarea{caret-color:#F4A425}
 @keyframes chat-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
 .fs-chat,.fl3-chat{transition:none}
 .rc-cut span{background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 7px,transparent 7px 13px)!important}
+.fs-hearts{right:14px!important;bottom:calc(var(--sb) + 58px)!important;width:46px!important;height:420px!important;z-index:8!important}
+.fs-hearts .hrt{left:50%!important;margin-left:-13px;bottom:0;color:#F4A425;animation:hrt2 2.4s cubic-bezier(.2,.7,.3,1) forwards!important;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.fs-hearts .hrt:nth-child(3n){--dx:-34px;--r:-14deg}.fs-hearts .hrt:nth-child(3n+1){--dx:-12px;--r:10deg}.fs-hearts .hrt:nth-child(3n+2){--dx:-52px;--r:-4deg}
+.fs-hearts .hrt:nth-child(2n) svg{color:#E5484D}
+@keyframes hrt2{0%{opacity:0;transform:translate(0,0) scale(.3)}12%{opacity:1;transform:translate(0,-30px) scale(1.15)}45%{transform:translate(calc(var(--dx) * .5),-170px) scale(1) rotate(var(--r))}100%{opacity:0;transform:translate(var(--dx),-400px) scale(.8) rotate(calc(var(--r) * -1))}}
+.fs-hearts .hrt:nth-child(3n){--dx:-18px}.fs-hearts .hrt:nth-child(3n+1){--dx:8px}.fs-hearts .hrt:nth-child(3n+2){--dx:-30px}
+.fs-hearts .hrt svg,.fs-hearts .hrt>span{width:30px!important;height:30px!important}
+.player.fs .fs-hearts{z-index:20!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
