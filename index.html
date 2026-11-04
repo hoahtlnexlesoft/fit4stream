@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104061701"</script>
+<script>window.__BUILD__="20261104063957"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2838,6 +2838,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .co2 .co-note{padding:0 4px;margin-top:-8px}
 .co2 .co-bar{padding-top:14px!important;border-top:1px solid rgba(255,255,255,.06)}
 .co2 .co-note{margin-bottom:16px}
+.im-host{display:none!important}.im-rail{bottom:170px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4244,7 +4245,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
         list.map(function (v) {
           var e = heroes[v % N], live = e.status === 'live', reg = p.reg;
           return h('div', { key: v, className: 'cf-card cf2-card', ref: function (el) { cards.current[v] = el; }, style: { backgroundImage: 'url(' + e.img + ')' } },
-            h(Tap, { className: 'cf-hit', label: e.title, go: function () { p.nav.push('detail:' + e.id); } }),
+            h(Tap, { className: 'cf-hit', label: e.title, go: function () { if (live && reg && p.nav.authed) { window.__focusChat = false; p.nav.push('player'); } else p.nav.push('detail:' + e.id); } }),
             h('div', { className: 'cf-top' }, h('span', { className: 'cat-tag' }, e.cat)),
             h('div', { className: 'cf-cap' },
               live ? h('div', { className: 'cf-livebar' },
