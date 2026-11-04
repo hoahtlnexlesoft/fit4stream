@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104035111"</script>
+<script>window.__BUILD__="20261104035758"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2392,6 +2392,21 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .fl2-cam-tag i{flex:none;width:6px;height:6px;border-radius:50%;background:#e74645}
 .fl2-cam-mic{position:absolute;right:6px;bottom:6px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#22c55e;color:#fff}
 .fl2:has(.fl2-panel) .fl2-cam{right:324px}
+
+/* Host cam tile: tap to swap into the big view */
+.fl2-cam{border:0;padding:0;cursor:pointer}
+.fl2-cam:active,.pv-cam:active{transform:scale(.96)}
+.fl2-cam-swap{position:absolute;right:6px;top:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff}
+.fl2-cam-mic{bottom:6px!important}
+.fl2-video,.video.pv{transition:background-image .01s}
+.fl2-video{animation:swIn .35s ease both}
+@keyframes swIn{from{opacity:.4;transform:scale(1.03)}to{opacity:1;transform:none}}
+.fl2-video.is-cam,.video.pv.is-cam{background-position:center 25%!important}
+.pv-cam{position:absolute;right:14px;bottom:54px;z-index:4;width:96px;height:128px;padding:0;border:0;border-radius:14px;overflow:hidden;background:#111;box-shadow:0 10px 22px rgba(0,0,0,.45);cursor:pointer;transition:transform .2s ease}
+.pv-cam::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2);pointer-events:none}
+.pv-cam .fl2-cam-tag{max-width:80px;font-size:10px}
+.rv-bottom{position:sticky!important;bottom:0!important;left:auto!important;right:auto!important;margin-top:8px}
+.ok-h{font-size:26px!important;line-height:32px!important;font-weight:600!important;letter-spacing:-.3px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2844,28 +2859,28 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('linearGradient', { id: 'ok2-seal', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#ffe29a' }), h('stop', { offset: 1, stopColor: '#f4a425' })),
         h('filter', { id: 'ok2-sh', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feDropShadow', { dx: 0, dy: 14, stdDeviation: 14, floodColor: '#000', floodOpacity: .5 })),
         h('filter', { id: 'ok2-sg', x: '-60%', y: '-60%', width: '220%', height: '220%' }, h('feDropShadow', { dx: 0, dy: 0, stdDeviation: 8, floodColor: '#f4a425', floodOpacity: .55 }))),
-      h('ellipse', { cx: 150, cy: 100, rx: 140, ry: 95, fill: 'url(#ok2-glow)' }),
-      h('g', { transform: 'rotate(-8 150 100)', filter: 'url(#ok2-sh)' },
-        h('path', { d: 'M62 58h176a12 12 0 0 1 12 12v14a16 16 0 0 0 0 32v14a12 12 0 0 1-12 12H62a12 12 0 0 1-12-12v-14a16 16 0 0 0 0-32V70a12 12 0 0 1 12-12z', fill: 'url(#ok2-tk)', stroke: 'url(#ok2-edge)', strokeWidth: 1.6 }),
-        h('path', { d: 'M62 58h176a12 12 0 0 1 12 12v14a16 16 0 0 0 0 32H50a16 16 0 0 0 0-32V70a12 12 0 0 1 12-12z', fill: 'url(#ok2-sheen)' }),
-        h('path', { d: 'M196 64v72', stroke: 'rgba(255,255,255,.22)', strokeWidth: 1.4, strokeDasharray: '3 5', strokeLinecap: 'round' }),
-        h('g', { transform: 'translate(70 78) scale(.06)' },
+      h('ellipse', { cx: 150, cy: 100, rx: 110, ry: 90, fill: 'url(#ok2-glow)' }),
+      h('g', { transform: 'rotate(-7 150 98)', filter: 'url(#ok2-sh)' },
+        h('path', { d: 'M90 52h120a12 12 0 0 1 12 12v19a14 14 0 0 0 0 28v19a12 12 0 0 1-12 12H90a12 12 0 0 1-12-12v-19a14 14 0 0 0 0-28V64a12 12 0 0 1 12-12z', fill: 'url(#ok2-tk)', stroke: 'url(#ok2-edge)', strokeWidth: 1.6 }),
+        h('path', { d: 'M90 52h120a12 12 0 0 1 12 12v19a14 14 0 0 0 0 28H78a14 14 0 0 0 0-28V64a12 12 0 0 1 12-12z', fill: 'url(#ok2-sheen)' }),
+        h('path', { d: 'M178 58v82', stroke: 'rgba(255,255,255,.22)', strokeWidth: 1.4, strokeDasharray: '3 5', strokeLinecap: 'round' }),
+        h('g', { transform: 'translate(94 66) scale(.062)' },
           h('path', { d: 'M245.823 30.0916L30.7393 244.929C-4.1252 279.753 -4.12519 336.215 30.7393 371.04L245.823 585.877C280.687 620.702 337.214 620.702 372.078 585.877L587.162 371.04C622.026 336.215 622.026 279.753 587.162 244.929L372.078 30.0916C337.214 -4.73292 280.687 -4.73292 245.823 30.0916Z', fill: '#fff' }),
           h('path', { d: 'M28.8 240.5L236.7 32.6c39.6-39.5 104.3-39.5 143.8 0l74 74C380 92 260 100 213 157c-21.7 20.8-22.7 40.2-24.6 77.3 0 0-2.5 163.4 1.3 178.2 2.6 10.1 6.9 19.4 13.9 26.4C136.9 409 48.8 320 28.7 240.6z', fill: '#39cae0' }),
           h('path', { d: 'M454.5 106.5l129.8 129.6c39.6 39.5 39.6 104.2 0 143.7L380.5 583.4c-24.3 24.3-58.1 33.6-89.8 28 48.5-17.4 91.2-57.6 122.7-105 38.6-58.2 60.4-127.4 55-178.8-4.2-40.9-20-51.7-55.4-75.9L307.2 173c-11.9-8.1-26.2-16.8-40.9-21.1-9-2.7-18.1-3.7-27-2.1 40.5-29.4 135.1-55 215.2-43.3z', fill: '#782f8d' }),
           h('path', { d: 'M454.8 332.7c-.3-3-1.7-11.2-1.9-12.4-1.7 9.9-6.9 18.7-13.9 26.3-11.1 12-17.5 16.8-31.1 23.9L284 434.7c-38 19.7-55 28.6-93.1 13C143 428.2 51.2 334.6 29.6 240.2c-35.4 39.8-34.1 101.2 4 139.4l203.8 203.6c18 18 34.5 25.7 53.9 28 50.6-15.2 85.7-58.6 118.4-107.9 38-57.2 50.2-120.4 45-170.6z', fill: '#f7924a' })),
-        h('rect', { x: 112, y: 80, width: 66, height: 7, rx: 3.5, fill: 'rgba(255,255,255,.75)' }),
-        h('rect', { x: 112, y: 95, width: 48, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.32)' }),
-        h('rect', { x: 70, y: 118, width: 108, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.16)' }),
-        h('rect', { x: 205, y: 82, width: 26, height: 26, rx: 4, fill: 'none', stroke: 'rgba(255,255,255,.35)', strokeWidth: 1.4 }),
-        h('path', { d: 'M210 87h6v6h-6zM220 87h6v6h-6zM210 97h6v6h-6zM221 98h4v4h-4z', fill: 'rgba(255,255,255,.5)' })),
-      h('g', { transform: 'translate(222 142)', filter: 'url(#ok2-sg)' },
-        h('circle', { r: 22, fill: 'url(#ok2-seal)' }),
-        h('circle', { r: 22, fill: 'none', stroke: 'rgba(255,255,255,.5)', strokeWidth: 1 }),
-        h('path', { d: 'M-9 0.5l6 6 12-13', fill: 'none', stroke: '#2a1803', strokeWidth: 3.2, strokeLinecap: 'round', strokeLinejoin: 'round' })),
-      h('circle', { cx: 58, cy: 40, r: 2, fill: '#facd60', opacity: .8 }),
-      h('circle', { cx: 252, cy: 50, r: 1.6, fill: '#39cae0', opacity: .8 }),
-      h('circle', { cx: 40, cy: 150, r: 1.4, fill: '#a57ad8', opacity: .8 }));
+        h('rect', { x: 138, y: 72, width: 36, height: 6, rx: 3, fill: 'rgba(255,255,255,.75)' }),
+        h('rect', { x: 138, y: 85, width: 24, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.32)' }),
+        h('rect', { x: 94, y: 118, width: 72, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.16)' }),
+        h('rect', { x: 184, y: 88, width: 18, height: 18, rx: 3.5, fill: 'none', stroke: 'rgba(255,255,255,.35)', strokeWidth: 1.3 }),
+        h('path', { d: 'M187.5 91.5h4v4h-4zM194.5 91.5h4v4h-4zM187.5 98.5h4v4h-4zM195 99h3v3h-3z', fill: 'rgba(255,255,255,.5)' })),
+      h('g', { transform: 'translate(214 140)', filter: 'url(#ok2-sg)' },
+        h('circle', { r: 19, fill: 'url(#ok2-seal)' }),
+        h('circle', { r: 19, fill: 'none', stroke: 'rgba(255,255,255,.5)', strokeWidth: 1 }),
+        h('path', { d: 'M-7.5 0.5l5 5 10-11', fill: 'none', stroke: '#2a1803', strokeWidth: 2.8, strokeLinecap: 'round', strokeLinejoin: 'round' })),
+      h('circle', { cx: 74, cy: 38, r: 2, fill: '#facd60', opacity: .8 }),
+      h('circle', { cx: 236, cy: 46, r: 1.6, fill: '#39cae0', opacity: .8 }),
+      h('circle', { cx: 62, cy: 150, r: 1.4, fill: '#a57ad8', opacity: .8 }));
   }
   function EmptyArtOld(p) {
     var f = ART[p.name] || ART.inbox;
@@ -4269,7 +4284,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     return h('div', { className: 'screen noscroll success' },
       h('div', { className: 'confetti-box', 'aria-hidden': true }, bits),
       h('div', { className: 'ok-art' }, h(F.EmptyArt, { name: 'success', width: 300, label: 'Registration confirmed' })),
-      h('h1', { className: 'display center', style: { margin: '36px 24px 0' } }, 'Registration successful!'),
+      h('h1', { className: 'display center ok-h', style: { margin: '36px 24px 0' } }, 'Registration successful!'),
       h('p', { className: 'muted center', style: { margin: '12px 32px 0' } }, 'A confirmation email with your event access details has been sent to your inbox. If you don\'t receive it shortly, please check your spam or junk folder.'),
       h('div', { className: 'mini-ticket' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + IMG + ')' } }),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 14 } }, 'Danang Christmas Market 2026'), h('span', { className: 'subtle', style: { fontSize: 12 } }, 'Live now · 11/03/2026 · 9:43 AM')), h(F.Badge, { tone: 'purchased' }, 'Purchased')),
@@ -4370,7 +4385,11 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     function heart(ch) { tap(15); var id = Date.now() + Math.random(); set({ hearts: st.hearts.concat([{ id: id, ch: typeof ch === 'string' ? ch : null }]).slice(-12), tray: false }); }
     function send(e) { e.preventDefault(); if (!st.draft.trim()) return; tap(8); set({ mine: st.mine.concat([st.draft]).slice(-4), draft: '', tab: 'chat' }); }
     return h('div', { className: 'screen noscroll player' },
-      h('section', { className: cx('video pv', st.paused && 'is-paused'), 'aria-label': 'Video player', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } },
+      h('section', { className: cx('video pv', st.paused && 'is-paused', st.swap && 'is-cam'), 'aria-label': 'Video player', style: { backgroundImage: 'url(' + (st.swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' } },
+        h('button', { type: 'button', className: 'pv-cam', 'aria-label': st.swap ? 'Show screen share large' : 'Show host camera large', onClick: function (e) { e.stopPropagation(); tap(8); set({ swap: !st.swap }); } },
+          h('div', { className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (st.swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
+          h('span', { className: 'fl2-cam-tag' }, h('i', null), st.swap ? 'Screen' : 'Host'),
+          h('span', { className: 'fl2-cam-swap', 'aria-hidden': true }, h('svg', { width: 11, height: 11, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' })))),
         h('div', { className: 'pv-shade' }),
         h(Tap, { className: 'pv-glass pv-back', label: 'Minimize', go: p.nav.back }, h(Arr, { dir: 'l' })),
         h('div', { className: 'pv-tr' },
@@ -4429,6 +4448,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     var mg = useState(msgs0), msgs = mg[0], setMsgs = mg[1], dr = useState(''), draft = dr[0], setDraft = dr[1];
     function send(e) { e && e.preventDefault && e.preventDefault(); var t = draft.trim(); if (!t) return; tap(6); setMsgs(msgs.concat([['Thao 13', t]])); setDraft(''); }
     var us = useState(true), ui = us[0], setUi = us[1];
+    var sw = useState(false), swap = sw[0], setSwap = sw[1];
     var ls = useState(false), liked = ls[0], setLiked = ls[1];
     var hs = useState([]), hearts = hs[0], setHearts = hs[1];
     var fs = useState(null), flash = fs[0], setFlash = fs[1];
@@ -4442,15 +4462,16 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     }
     var vol = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M11 5L6 9H3v6h3l5 4z' }), muted ? h('path', { d: 'M22 9l-6 6M16 9l6 6' }) : h('path', { d: 'M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13' }));
     return h('div', { className: cx('screen noscroll full fl2', !ui && 'ui-off') },
-      h('div', { className: 'fl2-video', style: { backgroundImage: 'url(' + EV.xmas.img + ')' }, onClick: function () { setUi(!ui); } }),
+      h('div', { key: swap ? 'h' : 'e', className: cx('fl2-video', swap && 'is-cam'), style: { backgroundImage: 'url(' + (swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' }, onClick: function () { setUi(!ui); } }),
       h('div', { className: 'fl2-shade', 'aria-hidden': true }),
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h(F.Badge, { tone: 'live' }, 'Live'), h('span', { className: 'pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'), h('span', { className: 'pill' }, h(F.Icon, { name: 'clock', size: 12 }), '02:14:47 left')),
       chat && !panel ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
-      h('div', { className: 'fl2-cam fl2-ui', 'aria-label': 'Host camera' },
-        h('div', { className: 'fl2-cam-img', style: { backgroundImage: 'url(' + av('thao15 nguyen15') + ')' } }),
-        h('span', { className: 'fl2-cam-tag' }, h('i', null), 'thao15 nguyen15'),
+      h('button', { type: 'button', className: 'fl2-cam fl2-ui', 'aria-label': swap ? 'Show screen share large' : 'Show host camera large', onClick: function () { tap(8); setSwap(!swap); } },
+        h('div', { key: swap ? 'e' : 'h', className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
+        h('span', { className: 'fl2-cam-tag' }, h('i', null), swap ? 'Screen share' : 'thao15 nguyen15'),
+        h('span', { className: 'fl2-cam-swap', 'aria-hidden': true }, h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))),
         h('span', { className: 'fl2-cam-mic' }, h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('rect', { x: 9, y: 3, width: 6, height: 11, rx: 3 }), h('path', { d: 'M5 11a7 7 0 0 0 14 0M12 18v3' })))),
       flash ? h('div', { key: flash.k, className: 'fl2-flash' }, flash.m) : null,
       h('div', { className: 'fl2-hearts', 'aria-hidden': true }, hearts.map(function (x) { return h('span', { key: x.id, style: { '--x': x.x + 'px', animationDelay: x.d + 'ms', transform: 'scale(' + x.s + ')' } }, h(F.Icon, { name: 'heart', filled: true, size: 20 })); })),
