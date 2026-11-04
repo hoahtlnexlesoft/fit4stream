@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104034301"</script>
+<script>window.__BUILD__="20261104034409"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2348,6 +2348,8 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .rv-bar i{height:7px!important;border-radius:4px!important;background:rgba(255,255,255,.07)!important}
 .rv-bar em{border-radius:4px!important;background:linear-gradient(90deg,#f4a425,#ffd27a)!important;box-shadow:0 0 10px rgba(244,164,37,.35)}
 .rv-bar small{width:32px!important;font-size:11.5px!important;color:rgba(255,255,255,.5)!important;font-variant-numeric:tabular-nums}
+.ok-later{display:block!important;width:100%;height:44px;margin-top:6px;text-align:center;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);background:none!important;border:0!important}
+.ok-later:active{color:#fff}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -2787,6 +2789,42 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('rect', { key: 'l', x: 98, y: 90, width: 44, height: 4, rx: 2, fill: 'rgba(199,181,230,.3)' })];
     }
   };
+
+  /* Registration success: a clean premium ticket — logo-tone gradient, soft glow, crisp check seal */
+  function SuccessArt(p) {
+    var W = p.width || 300;
+    return h('svg', { className: 'f4-empty-art f4-ok2', viewBox: '0 0 300 200', width: W, role: 'img', 'aria-label': p.label || 'Success' },
+      h('defs', null,
+        h('radialGradient', { id: 'ok2-glow', cx: '50%', cy: '50%', r: '50%' }, h('stop', { offset: 0, stopColor: '#a57ad8', stopOpacity: .45 }), h('stop', { offset: .6, stopColor: '#782f8d', stopOpacity: .12 }), h('stop', { offset: 1, stopColor: '#782f8d', stopOpacity: 0 })),
+        h('linearGradient', { id: 'ok2-tk', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#3a2a55' }), h('stop', { offset: .55, stopColor: '#2a2140' }), h('stop', { offset: 1, stopColor: '#1d1a28' })),
+        h('linearGradient', { id: 'ok2-edge', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: .35, stopColor: '#a57ad8' }), h('stop', { offset: .7, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#facd60' })),
+        h('linearGradient', { id: 'ok2-sheen', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .14 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: 0 })),
+        h('linearGradient', { id: 'ok2-seal', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#ffe29a' }), h('stop', { offset: 1, stopColor: '#f4a425' })),
+        h('filter', { id: 'ok2-sh', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feDropShadow', { dx: 0, dy: 14, stdDeviation: 14, floodColor: '#000', floodOpacity: .5 })),
+        h('filter', { id: 'ok2-sg', x: '-60%', y: '-60%', width: '220%', height: '220%' }, h('feDropShadow', { dx: 0, dy: 0, stdDeviation: 8, floodColor: '#f4a425', floodOpacity: .55 }))),
+      h('ellipse', { cx: 150, cy: 100, rx: 140, ry: 95, fill: 'url(#ok2-glow)' }),
+      h('g', { transform: 'rotate(-8 150 100)', filter: 'url(#ok2-sh)' },
+        h('path', { d: 'M62 58h176a12 12 0 0 1 12 12v14a16 16 0 0 0 0 32v14a12 12 0 0 1-12 12H62a12 12 0 0 1-12-12v-14a16 16 0 0 0 0-32V70a12 12 0 0 1 12-12z', fill: 'url(#ok2-tk)', stroke: 'url(#ok2-edge)', strokeWidth: 1.6 }),
+        h('path', { d: 'M62 58h176a12 12 0 0 1 12 12v14a16 16 0 0 0 0 32H50a16 16 0 0 0 0-32V70a12 12 0 0 1 12-12z', fill: 'url(#ok2-sheen)' }),
+        h('path', { d: 'M196 64v72', stroke: 'rgba(255,255,255,.22)', strokeWidth: 1.4, strokeDasharray: '3 5', strokeLinecap: 'round' }),
+        h('g', { transform: 'translate(70 78) scale(.06)' },
+          h('path', { d: 'M245.823 30.0916L30.7393 244.929C-4.1252 279.753 -4.12519 336.215 30.7393 371.04L245.823 585.877C280.687 620.702 337.214 620.702 372.078 585.877L587.162 371.04C622.026 336.215 622.026 279.753 587.162 244.929L372.078 30.0916C337.214 -4.73292 280.687 -4.73292 245.823 30.0916Z', fill: '#fff' }),
+          h('path', { d: 'M28.8 240.5L236.7 32.6c39.6-39.5 104.3-39.5 143.8 0l74 74C380 92 260 100 213 157c-21.7 20.8-22.7 40.2-24.6 77.3 0 0-2.5 163.4 1.3 178.2 2.6 10.1 6.9 19.4 13.9 26.4C136.9 409 48.8 320 28.7 240.6z', fill: '#39cae0' }),
+          h('path', { d: 'M454.5 106.5l129.8 129.6c39.6 39.5 39.6 104.2 0 143.7L380.5 583.4c-24.3 24.3-58.1 33.6-89.8 28 48.5-17.4 91.2-57.6 122.7-105 38.6-58.2 60.4-127.4 55-178.8-4.2-40.9-20-51.7-55.4-75.9L307.2 173c-11.9-8.1-26.2-16.8-40.9-21.1-9-2.7-18.1-3.7-27-2.1 40.5-29.4 135.1-55 215.2-43.3z', fill: '#782f8d' }),
+          h('path', { d: 'M454.8 332.7c-.3-3-1.7-11.2-1.9-12.4-1.7 9.9-6.9 18.7-13.9 26.3-11.1 12-17.5 16.8-31.1 23.9L284 434.7c-38 19.7-55 28.6-93.1 13C143 428.2 51.2 334.6 29.6 240.2c-35.4 39.8-34.1 101.2 4 139.4l203.8 203.6c18 18 34.5 25.7 53.9 28 50.6-15.2 85.7-58.6 118.4-107.9 38-57.2 50.2-120.4 45-170.6z', fill: '#f7924a' })),
+        h('rect', { x: 112, y: 80, width: 66, height: 7, rx: 3.5, fill: 'rgba(255,255,255,.75)' }),
+        h('rect', { x: 112, y: 95, width: 48, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.32)' }),
+        h('rect', { x: 70, y: 118, width: 108, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.16)' }),
+        h('rect', { x: 205, y: 82, width: 26, height: 26, rx: 4, fill: 'none', stroke: 'rgba(255,255,255,.35)', strokeWidth: 1.4 }),
+        h('path', { d: 'M210 87h6v6h-6zM220 87h6v6h-6zM210 97h6v6h-6zM221 98h4v4h-4z', fill: 'rgba(255,255,255,.5)' })),
+      h('g', { transform: 'translate(222 142)', filter: 'url(#ok2-sg)' },
+        h('circle', { r: 22, fill: 'url(#ok2-seal)' }),
+        h('circle', { r: 22, fill: 'none', stroke: 'rgba(255,255,255,.5)', strokeWidth: 1 }),
+        h('path', { d: 'M-9 0.5l6 6 12-13', fill: 'none', stroke: '#2a1803', strokeWidth: 3.2, strokeLinecap: 'round', strokeLinejoin: 'round' })),
+      h('circle', { cx: 58, cy: 40, r: 2, fill: '#facd60', opacity: .8 }),
+      h('circle', { cx: 252, cy: 50, r: 1.6, fill: '#39cae0', opacity: .8 }),
+      h('circle', { cx: 40, cy: 150, r: 1.4, fill: '#a57ad8', opacity: .8 }));
+  }
   function EmptyArtOld(p) {
     var f = ART[p.name] || ART.inbox;
     return h('svg', { className: 'f4-empty-art', viewBox: '0 0 240 160', width: p.width || 220, role: 'img', 'aria-label': p.label || 'Illustration' }, h('defs', null,
@@ -2805,7 +2843,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     inbox: { d: ['M3 13.5l2.6-7.2A2 2 0 0 1 7.5 5h9a2 2 0 0 1 1.9 1.3l2.6 7.2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 13.5h5l1.5 2.5h5l1.5-2.5h5'], badge: null }
   };
   function EmptyArt(p) {
-    if (p.name === 'success') return EmptyArtOld(p);
+    if (p.name === 'success') return SuccessArt(p);
     var g = GLYPH[p.name] || GLYPH.inbox, W = p.width || 220;
     var badge = g.badge === 'clock' ? [h('circle', { key: 'c', cx: 0, cy: 0, r: 5, fill: 'none', stroke: '#f4a425', strokeWidth: 1.5 }), h('path', { key: 'h', d: 'M0-2.6V0l1.8 1.3', fill: 'none', stroke: '#f4a425', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' })]
       : g.badge === 'x' ? [h('path', { key: 'x', d: 'M-3-3l6 6M3-3l-6 6', stroke: '#c9b4ec', strokeWidth: 1.6, strokeLinecap: 'round' })]
@@ -4196,7 +4234,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { style: { flex: 1 } }),
       h('div', { className: 'pad col gap12 bottom-safe', style: { alignSelf: 'stretch' } },
         h(Tap, { className: 'f4-btn f4-btn-live f4-btn-lg f4-btn-block', go: function () { p.nav.replace('player'); } }, 'Join live now'),
-        h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-lg f4-btn-block', go: p.nav.back }, 'Continue')));
+        h(Tap, { className: 'ok-later', go: p.nav.back }, 'Maybe later')));
   }
 
   function SocIc(p) {
