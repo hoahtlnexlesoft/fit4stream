@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104101924"</script>
+<script>window.__BUILD__="20261104130411"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3482,6 +3482,19 @@ input,textarea{caret-color:#F4A425}
 .nt2-empty{padding-top:40px}
 
 .l2-overlay{transition:opacity .52s cubic-bezier(.4,0,.2,1),transform .64s cubic-bezier(.2,.8,.2,1),filter .52s ease!important}
+
+.app.swiping{user-select:none;-webkit-user-select:none}
+.sw-under{pointer-events:none;z-index:0}
+.sw-dim{position:absolute;inset:0;background:#000;pointer-events:none;z-index:50}
+.sw-top{z-index:2;box-shadow:-18px 0 40px rgba(0,0,0,.45)}
+
+/* keep back / close buttons pinned while content scrolls (stage has will-change:transform, so fixed = pinned to the screen) */
+.stage .top,.stage .og-back,.stage .ch2-back,.stage .dt-close{position:fixed!important;z-index:40!important}
+.stage .top{left:0!important;right:0!important;width:auto!important}
+
+.stage .top{transition:background .2s,box-shadow .2s}
+.stage .top::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--st);background:inherit;-webkit-backdrop-filter:inherit;backdrop-filter:inherit;pointer-events:none}
+.stage.scrolled .top{background:rgba(17,15,23,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4973,6 +4986,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   };
   function evFrom(param) { return EV[param] || EV.xmas; }
   function fmtT(s) { s = Math.max(0, s); function z(n) { return (n < 10 ? '0' : '') + n; } return z(Math.floor(s / 3600)) + ':' + z(Math.floor(s / 60) % 60) + ':' + z(s % 60); }
+  /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
+  function wrLeft() { if (!window.__WR_T0) window.__WR_T0 = Date.now(); var el = Math.floor((Date.now() - window.__WR_T0) / 1000); return 299 - (el % 300); }
   function useTick() { var t = useState(0); useEffect(function () { var i = setInterval(function () { t[1](function (x) { return x + 1; }); }, 1000); return function () { clearInterval(i); }; }, []); return t[0]; }
 
   function EventTile(p) {
@@ -6310,7 +6325,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h('span', { className: 'fs-pip-sw', 'aria-hidden': true }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))))) : null,
       st.hand && !st.invite ? h('div', { className: 'fs-hand' }, h('span', { className: 'spinner sm' }), h('span', null, 'Hand raised · waiting for host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
       mode === 'waiting' ? (function () {
-        var rem = Math.max(0, 299 - (tk % 300)), mm = Math.floor(rem / 60), ss = rem % 60, R = 92, C = 2 * Math.PI * R, prog = rem / 300;
+        var rem = wrLeft(), mm = Math.floor(rem / 60), ss = rem % 60, R = 92, C = 2 * Math.PI * R, prog = rem / 300;
         function z(n) { return (n < 10 ? '0' : '') + n; }
         return h('div', { className: 'wr' },
           h('div', { className: 'wr-hero' },
@@ -6505,20 +6520,30 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     window.__jump = function (n) { if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
-    // swipe back from the left edge
-    var sw = useRef(null), dx = useState(0), drag = dx[0], setDrag = dx[1];
-    function ts(e) { var x = e.touches[0].clientX - e.currentTarget.getBoundingClientRect().left; if (x < 28 && stack.length > 1) sw.current = e.touches[0].clientX; }
-    function tm(e) { if (sw.current != null) setDrag(Math.max(0, e.touches[0].clientX - sw.current)); }
-    function te() { if (sw.current != null) { if (drag > 110) nav.back(); setDrag(0); sw.current = null; } }
+    // interactive swipe-back (iOS style): drag right from anywhere (or the left edge) to reveal the previous screen
+    var sw = useRef(null), dx = useState(0), drag = dx[0], setDrag = dx[1], sa = useState(0), swAnim = sa[0], setSwAnim = sa[1], appEl = useRef(null), swClick = useRef(false);
+    function canSwipe() { var t = stack[stack.length - 1].split(':')[0]; return stack.length > 1 && !MODALS.test(t) && !/^(player|full)$/.test(t) && !swAnim; }
+    function hScrollable(el) { while (el && el !== appEl.current) { if (el.classList && (el.classList.contains('cf2') || el.hasAttribute('data-noswipe'))) return true; var cs = getComputedStyle(el); if ((cs.overflowX === 'auto' || cs.overflowX === 'scroll') && el.scrollWidth > el.clientWidth + 2) return true; el = el.parentElement; } return false; }
+    function pd(e) { if (!canSwipe() || (e.pointerType === 'mouse' && e.button !== 0)) return; var r = appEl.current.getBoundingClientRect(), x = e.clientX - r.left; var edge = x < 36; if (!edge && hScrollable(e.target)) return; sw.current = { x0: e.clientX, y0: e.clientY, id: e.pointerId, on: false, edge: edge, w: r.width, t: Date.now(), lx: e.clientX, lt: Date.now(), v: 0 }; }
+    function pm(e) { var g = sw.current; if (!g || e.pointerId !== g.id) return; var ddx = e.clientX - g.x0, ddy = e.clientY - g.y0;
+      if (!g.on) { if (Math.abs(ddy) > 10 && Math.abs(ddy) > Math.abs(ddx)) { sw.current = null; return; } if (ddx > (g.edge ? 6 : 14) && ddx > Math.abs(ddy) * 1.6) { g.on = true; g.x0 = e.clientX - 1; if (g.id !== 't') try { appEl.current.setPointerCapture(e.pointerId); } catch (er) {} } else return; }
+      var now = Date.now(); g.v = (e.clientX - g.lx) / Math.max(1, now - g.lt); g.lx = e.clientX; g.lt = now; setDrag(Math.max(0, e.clientX - g.x0)); }
+    function pu(e) { var g = sw.current; if (!g) return; sw.current = null; if (!g.on) return; swClick.current = true; setTimeout(function () { swClick.current = false; }, 60);
+      var cur = Math.max(0, e.clientX - g.x0), go = cur > g.w * 0.35 || (g.v > 0.45 && cur > 40);
+      if (go) { setSwAnim(1); setDrag(g.w); setTimeout(function () { tap(6); setDir('none'); setStack(function (st) { return st.length > 1 ? st.slice(0, -1) : st; }); setDrag(0); setSwAnim(0); }, 230); }
+      else { setSwAnim(2); setDrag(0); setTimeout(function () { setSwAnim(0); }, 230); } }
+    function clickCap(e) { if (swClick.current) { e.preventDefault(); e.stopPropagation(); } }
 
     var tname = top.split(':')[0], tparam = top.split(':')[1];
     var Comp = SCREENS[tname];
     var tabbed = TABS.indexOf(tname) >= 0;
     var isModal = MODALS.test(tname), under = isModal && stack.length > 1 ? stack[stack.length - 2] : null;
-    return h('div', { className: cx('app', top === 'full' && 'land'), onTouchStart: ts, onTouchMove: tm, onTouchEnd: te },
+    var prevKey = stack.length > 1 ? stack[stack.length - 2] : null, swiping = (drag > 0 || swAnim) && prevKey && !isModal, swW = appEl.current ? appEl.current.clientWidth : 430, swP = Math.min(1, drag / swW);
+    return h('div', { ref: appEl, className: cx('app', top === 'full' && 'land', swiping && 'swiping'), onPointerDown: function (e) { if (e.pointerType === 'mouse') pd(e); }, onPointerMove: function (e) { if (e.pointerType === 'mouse') pm(e); }, onPointerUp: function (e) { if (e.pointerType === 'mouse') pu(e); }, onTouchStart: function (e) { var t = e.touches[0]; if (e.touches.length === 1) pd({ clientX: t.clientX, clientY: t.clientY, pointerId: 't', target: e.target, pointerType: 'touch', button: 0 }); }, onTouchMove: function (e) { var t = e.touches[0]; pm({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchEnd: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchCancel: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onClickCapture: clickCap, onScrollCapture: function (e) { var st = e.target && e.target.closest ? e.target.closest('.stage') : null; if (st && !st.classList.contains('under')) st.classList.toggle('scrolled', e.target.scrollTop > 24); } },
       window.__FRAME__ ? h(StatusBar, { light: top === 'player' }) : null,
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
-      h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir), style: drag && !isModal ? { transform: 'translateX(' + drag + 'px)', transition: 'none' } : null },
+      swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
+      h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
         h(Comp, { nav: nav, key: top, param: tparam })),
       tabbed ? h(TabBar, { active: tname, nav: nav }) : null,
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
