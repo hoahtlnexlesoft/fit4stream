@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104090244"</script>
+<script>window.__BUILD__="20261104090437"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3404,6 +3404,10 @@ input,textarea{caret-color:#F4A425}
 .ps2-rf{display:inline-flex;align-items:center;gap:4px;color:#7AD9EA}.ps2-rf b{color:#7AD9EA}
 .ps2-dn{margin-left:auto;display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:11px;background:rgba(57,200,124,.14);color:#7fe0a8;font-weight:700;font-size:11.5px}
 .rc-cut span{border-top:0!important;height:2px!important;background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 10px,transparent 10px 18px);border-radius:1px}
+.chat-in{animation:chat-in .45s cubic-bezier(.22,1,.36,1) both}
+@keyframes chat-in{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.fs-chat,.fl3-chat{transition:none}
+.rc-cut span{background:repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 7px,transparent 7px 13px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5720,6 +5724,15 @@ input,textarea{caret-color:#F4A425}
   function Skip10(p) { return h('svg', { width: 34, height: 34, viewBox: '0 0 34 34', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true, style: p.back ? null : { transform: 'scaleX(-1)' } }, h('path', { d: 'M9.5 9.5A11 11 0 1 1 6 17' }), h('path', { d: 'M9.5 4.5v5h5' }), h('text', { x: 17, y: 21.5, textAnchor: 'middle', fontSize: 10, fontWeight: 600, fill: 'currentColor', stroke: 'none', style: p.back ? null : { transform: 'scaleX(-1)', transformOrigin: '17px 17px' } }, '10')); }
   function FsIc() { return h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', 'aria-hidden': true }, h('path', { d: 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5' })); }
   function toApp(n) { var a = document.querySelector('.app'); return a ? ReactDOM.createPortal(n, a) : n; }
+  var LIVE_POOL = [['Hana Nguyen', 'This is so cozy \ud83c\udf84'], ['Tom Bradley', 'Greetings from Sydney!'], ['Sally', 'The fireplace \ud83d\ude0d'], ['Minh Pham', 'Can you show the food stalls?'], ['Linh Tran', 'Love the decorations \u2728'], ['Marc John', 'Great stream quality'], ['An Tran', 'Hi everyone \ud83d\udc4b'], ['Kee Desmond', 'Where is this exactly?'], ['Nhan Doan', 'Next stop: the gingerbread stand!', 'Organizer'], ['Thao 13', 'Merry Christmas from Saigon \ud83c\udf85'], ['Elon', 'First time here, amazing'], ['Sandra Smith', 'Can\u2019t wait for the Q&A'], ['Hieu LK', '\ud83d\udd25\ud83d\udd25\ud83d\udd25'], ['Business Demo', 'Booked tickets for next week!']];
+  function useLiveFeed() {
+    var fs = useState(window.__F4FEED || []), f = fs[0], setF = fs[1];
+    useEffect(function () {
+      var t; function next() { t = setTimeout(function () { var m = LIVE_POOL[Math.floor(Math.random() * LIVE_POOL.length)]; var it = { id: Date.now() + Math.random(), n: m[0], t: m[1], role: m[2] }; window.__F4FEED = (window.__F4FEED || []).concat([it]).slice(-30); setF(window.__F4FEED); next(); }, 1600 + Math.random() * 2200); }
+      next(); return function () { clearTimeout(t); };
+    }, []);
+    return f;
+  }
   function Player(p) {
     var mode = p.param || '';
     var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: (window.__F4MINE || []).slice(-6), draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect', ui: true, sheet: false, swap: true });
@@ -5754,6 +5767,7 @@ input,textarea{caret-color:#F4A425}
       }));
     }
     var tk = useTick();
+    var feedP = useLiveFeed();
     function heart(ch) { tap(15); var id = Date.now() + Math.random(); set({ hearts: st.hearts.concat([{ id: id, ch: typeof ch === 'string' ? ch : null }]).slice(-12), tray: false }); }
     function send(e) { e.preventDefault(); if (!st.draft.trim()) return; tap(8); window.__F4MINE = (window.__F4MINE || []).concat([st.draft]); set({ mine: window.__F4MINE.slice(-6), draft: '', tab: 'chat' }); }
     var elapsed = fmtT(Math.max(0, 8220 - (EV.xmas.left - tk)));
@@ -5764,10 +5778,10 @@ input,textarea{caret-color:#F4A425}
       { sys: 'Sandra Smith joined the stage' },
       { n: 'Thao 13', t: 'Hello from Saigon 👋' },
       { n: 'Linh Tran', t: 'The lights look amazing ✨' }
-    ].concat(st.mine.map(function (m) { return { n: 'You', t: m, me: true }; }));
+    ].concat(feedP.map(function (m) { return { n: m.n, t: m.t, role: m.role, id: m.id, fresh: true }; })).concat(st.mine.map(function (m) { return { n: 'You', t: m, me: true }; }));
     function Line(m, i) {
       if (m.sys) return h('div', { key: 's' + i, className: 'im-sys' }, h('i'), m.sys);
-      return h('div', { key: i, className: cx('im-msg', m.me && 'pop-in') }, h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 26 }),
+      return h('div', { key: m.id || ('m' + i + m.t), className: cx('im-msg', (m.me || m.fresh) && 'chat-in') }, h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 26 }),
         h('p', null, h('b', null, m.n, m.role ? h('i', { className: 'r-' + m.role.toLowerCase() }, m.role) : null), ' ', m.t));
     }
     var sheetBody = st.tab === 'chat' ? h('div', { className: 'col gap10 chat-list' }, pinned, MSGS.map(function (m, i) {
@@ -5895,6 +5909,7 @@ input,textarea{caret-color:#F4A425}
     var cs = useState(true), chat = cs[0], setChat = cs[1];
     var ps = useState(false), panel = ps[0], setPanel = ps[1];
     var msgs0 = [['thao15 nguyen15', 'Welcome everyone to the market tour!', true], ['Thao 13', 'Hello from Saigon'], ['Linh Tran', 'The lights look amazing \u2728'], ['Minh Pham', 'Joining from Da Nang!']];
+    var feedF = useLiveFeed();
     var mg = useState(msgs0.concat((window.__F4MINE || []).map(function (t) { return ['You', t]; }))), msgs = mg[0], setMsgs = mg[1], dr = useState(''), draft = dr[0], setDraft = dr[1];
     function send(e) { e && e.preventDefault && e.preventDefault(); var t = draft.trim(); if (!t) return; tap(6); window.__F4MINE = (window.__F4MINE || []).concat([t]); setMsgs(msgs.concat([['You', t]])); setDraft(''); }
     var us = useState(true), ui = us[0], setUi = us[1];
@@ -5918,7 +5933,7 @@ input,textarea{caret-color:#F4A425}
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, fmtT(Math.max(0, 8220 - (EV.xmas.left - ftk))))), h('span', { className: 'lv-view' }, h(F.Icon, { name: 'eye', size: 14 }), '2.4K')),
-      chat && !panel ? h('div', { className: 'full-chat fl2-ui fl3-chat' }, msgs.slice(-4).map(function (m, i) { return h('div', { key: msgs.length - 4 + i, className: cx('im-msg', m[0] === 'You' && 'pop-in') }, h(F.Avatar, { src: m[0] === 'You' ? AV.me : av(m[0]), name: m[0], initials: ini(m[0]), size: 26 }), h('p', null, h('b', null, m[0], m[2] ? h('i', { className: 'r-host' }, 'Host') : null), ' ', m[1])); })) : null,
+      chat && !panel ? h('div', { className: 'full-chat fl2-ui fl3-chat' }, msgs.concat(feedF.map(function (f) { return [f.n, f.t, false, f.id]; })).slice(-4).map(function (m, i) { return h('div', { key: m[3] || ('f' + m[1]), className: cx('im-msg', (m[0] === 'You' || m[3]) && 'chat-in') }, h(F.Avatar, { src: m[0] === 'You' ? AV.me : av(m[0]), name: m[0], initials: ini(m[0]), size: 26 }), h('p', null, h('b', null, m[0], m[2] ? h('i', { className: 'r-host' }, 'Host') : null), ' ', m[1])); })) : null,
       h('button', { type: 'button', className: 'fl2-cam fl2-ui', 'aria-label': swap ? 'Show screen share large' : 'Show host camera large', onClick: function () { tap(8); setSwap(!swap); } },
         h('div', { key: swap ? 'e' : 'h', className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
         h('span', { className: 'fl2-cam-tag' }, h('i', null), swap ? 'Screen share' : 'thao15 nguyen15'),
