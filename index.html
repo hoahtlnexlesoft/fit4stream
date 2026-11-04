@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104032745"</script>
+<script>window.__BUILD__="20261104033218"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2227,6 +2227,41 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 /* Launch v7: full-canvas composite (logo = 206/720 of width) -> logo shows at 150px */
 .l3-video{width:524px!important;height:932px!important;margin:-466px 0 0 -262px!important;object-fit:fill!important;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)!important;-webkit-mask-composite:source-in;mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%),linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%)!important;mask-composite:intersect}
 .l3 .l3-vbox{margin-top:-20px}
+
+/* Readability: one stronger scrim system for every text-on-photo card */
+.cf-cap,.feed-cap{padding-top:120px!important;background:linear-gradient(180deg,rgba(8,7,12,0) 0%,rgba(8,7,12,.45) 30%,rgba(8,7,12,.78) 62%,rgba(8,7,12,.94) 100%)!important}
+.et3-shade{background:linear-gradient(180deg,rgba(0,0,0,.28) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 34%,rgba(8,7,12,.55) 56%,rgba(8,7,12,.86) 80%,rgba(8,7,12,.96) 100%)!important}
+.up-shade{background:linear-gradient(180deg,rgba(10,12,18,.2) 0%,transparent 26%,rgba(8,7,12,.6) 52%,rgba(8,7,12,.97) 100%)!important}
+.og-shade{background:linear-gradient(180deg,rgba(10,10,16,.4),rgba(10,10,16,.2) 40%,rgba(10,10,16,.85))!important}
+.cf-cap b,.cf-cap span,.feed-cap b,.feed-cap span,.et3-cap b,.et3-cap span,.up-hero b,.up-hero span{text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 14px rgba(0,0,0,.4)}
+.feed-cap span,.et3-cap span{color:rgba(255,255,255,.82)!important}
+.up-th::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(180deg,transparent 45%,rgba(8,7,12,.6));pointer-events:none}
+.up-th em{z-index:1}
+
+/* Premium (upgraded) account: crown tag + gold accents */
+.mcard-plan.pro{display:inline-flex!important;align-items:center;gap:6px;padding:0 12px 0 10px!important;background:linear-gradient(135deg,#ffe29a 0%,#f4b740 45%,#d98a17 100%)!important;color:#3a2405!important;box-shadow:0 4px 16px rgba(244,164,37,.5),inset 0 1px 0 rgba(255,255,255,.55)!important;letter-spacing:.3px}
+.mcard-av{position:relative}
+.mcard-av.pro{background:conic-gradient(from 210deg,#ffe29a,#f4a425,#d98a17,#ffe29a)!important}
+.mcard-crown{position:absolute;right:-2px;top:-4px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffe29a,#f4a425);color:#3a2405;box-shadow:0 0 0 3px #2a1a44,0 4px 10px rgba(244,164,37,.5)}
+.acc .mcard.is-pro::before{background:linear-gradient(135deg,#ffe29a,#f4a425 30%,#a57ad8 65%,#ffe29a)!important}
+.mcard-av.pro{overflow:visible!important;display:inline-block}
+.mcard-crown{z-index:3;right:-4px!important;top:-6px!important;width:26px!important;height:26px!important}
+.mcard-crown svg{display:block}
+
+/* Confirm dialog (centered, above tab bar) */
+.cd-wrap{position:absolute;inset:0;z-index:9500;display:grid;place-items:center;padding:24px;background:rgba(6,6,10,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:cdFade .22s ease both}
+@keyframes cdFade{from{opacity:0}to{opacity:1}}
+.cd{width:100%;max-width:320px;box-sizing:border-box;padding:26px 22px 20px;border-radius:26px;text-align:center;background:linear-gradient(180deg,#25212f,#1a1822);box-shadow:0 30px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.08);animation:cdPop .32s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes cdPop{from{opacity:0;transform:scale(.9) translateY(8px)}to{opacity:1;transform:none}}
+.cd-ic{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;color:#f4a425;background:rgba(244,164,37,.14)}
+.cd.danger .cd-ic{color:#ff6b5e;background:rgba(231,70,69,.15)}
+.cd h2{margin:0 0 6px;font-size:19px;line-height:24px;font-weight:700;color:#fff}
+.cd p{margin:0 0 22px;font-size:14px;line-height:20px;color:rgba(255,255,255,.6)}
+.cd-acts{display:flex;gap:10px}
+.cd-btn{flex:1;height:46px;border-radius:23px;display:grid!important;place-items:center;font-size:15px;font-weight:600}
+.cd-cancel{background:rgba(255,255,255,.08);color:#fff}
+.cd-ok{background:#f4a425;color:#1b1306}
+.cd.danger .cd-ok{background:#e74645;color:#fff}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3840,14 +3875,14 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     return h('div', { className: 'screen tabscreen acc' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h('div', { className: 'tab-head' }, h('h1', null, 'Account'), h(SearchBtn, { nav: p.nav })),
-      h('section', { className: 'mcard' },
+      h('section', { className: cx('mcard', p.nav.pro && 'is-pro') },
         h('span', { className: 'mcard-glow', 'aria-hidden': true }),
         h('span', { className: 'mcard-mark', 'aria-hidden': true }, h(F.Logo, { size: 150, markOnly: true })),
         h('div', { className: 'mcard-top' },
           h('span', { className: 'mcard-brand' }, h(F.Logo, { size: 18, markOnly: true }), 'FIT4STREAM MEMBER'),
-          h('span', { className: 'mcard-plan' }, 'Free')),
+          p.nav.pro ? h('span', { className: 'mcard-plan pro' }, h('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': true }, h('path', { d: 'M2.5 8.2l4.6 3.6L12 4.5l4.9 7.3 4.6-3.6-1.9 10.3H4.4z' }), h('rect', { x: 4.4, y: 19.6, width: 15.2, height: 1.9, rx: .95 })), 'Premium') : h('span', { className: 'mcard-plan' }, 'Free')),
         h('div', { className: 'mcard-id' },
-          h('span', { className: 'mcard-av' }, h(F.Avatar, { src: AV.me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 64 })),
+          h('span', { className: cx('mcard-av', p.nav.pro && 'pro') }, h(F.Avatar, { src: AV.me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 64 }), p.nav.pro ? h('span', { className: 'mcard-crown', 'aria-label': 'Premium member' }, h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': true }, h('path', { d: 'M2.5 8.2l4.6 3.6L12 4.5l4.9 7.3 4.6-3.6-1.9 10.3H4.4z' }), h('rect', { x: 4.4, y: 19.6, width: 15.2, height: 1.9, rx: .95 }))) : null),
           h('div', { style: { minWidth: 0 } }, h('b', null, 'Thao 13 NGUYEN13'), h('span', null, 'thaonguyentest123+13@gmail.com'))),
         h('div', { className: 'mcard-stats' },
           h(Tap, { go: function () { p.nav.push('myevents'); } }, h('b', null, '1'), h('span', null, 'Tickets')),
@@ -3869,13 +3904,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { className: 'acc-foot' },
         h(Tap, { className: 'del-link', onClick: function () { setConfirm('delete'); } }, 'Delete account'),
         h('span', null, 'Fit4Stream \u00b7 v1.0')),
-      confirm ? h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) setConfirm(null); } },
-        h('div', { className: 'sheet', role: 'dialog', 'aria-label': confirm === 'delete' ? 'Delete account' : 'Log out' },
-          h('span', { className: 'grab' }),
-          h('h2', { className: 'h-md' }, confirm === 'delete' ? 'Delete your account?' : 'Log out of Fit4Stream?'),
-          h('p', { className: 'muted', style: { margin: 0 } }, confirm === 'delete' ? 'Your profile, channel and purchase history will be removed. This can\u2019t be undone.' : 'You can sign back in any time with your email.'),
-          h(Tap, { className: 'f4-btn f4-btn-danger f4-btn-lg f4-btn-block', go: function () { p.nav.setAuthed(false); p.nav.root('home'); p.nav.toast(confirm === 'delete' ? 'Account deleted' : 'Logged out'); } }, confirm === 'delete' ? 'Delete account' : 'Log out'),
-          h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-lg f4-btn-block', go: function () { setConfirm(null); } }, 'Cancel'))) : null,
+      confirm ? h(ConfirmDialog, { kind: confirm, close: function () { setConfirm(null); }, ok: function () { setConfirm(null); p.nav.setAuthed(false); p.nav.root('home'); p.nav.toast(confirm === 'delete' ? 'Account deleted' : 'Logged out'); } }) : null,
       h('div', { style: { height: 140 } }));
   }
 
@@ -3918,6 +3947,21 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('span', { className: 'trv-org' }, 'by ' + e.org),
         h('div', { className: 'trv-bar', onClick: seek }, h('i', { style: { width: (t / D * 100) + '%' } }), h('span', { style: { left: (t / D * 100) + '%' } })),
         h('div', { className: 'trv-time' }, h('span', null, fmtDur(t)), h('span', null, fmtDur(D)))));
+  }
+
+  /* Centered confirm dialog, portalled above the whole app (covers the tab bar) */
+  function ConfirmDialog(p) {
+    var del = p.kind === 'delete';
+    var host = document.querySelector('.app');
+    var node = h('div', { className: 'cd-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
+      h('div', { className: cx('cd', del && 'danger'), role: 'alertdialog', 'aria-label': del ? 'Delete account' : 'Log out' },
+        h('span', { className: 'cd-ic' }, h(F.Icon, { name: del ? 'trash' : 'logOut', size: 22 })),
+        h('h2', null, del ? 'Delete your account?' : 'Log out of Fit4Stream?'),
+        h('p', null, del ? 'Your profile, channel and purchase history will be removed. This can’t be undone.' : 'You can sign back in any time with your email.'),
+        h('div', { className: 'cd-acts' },
+          h(Tap, { className: 'cd-btn cd-cancel', go: p.close }, 'Cancel'),
+          h(Tap, { className: 'cd-btn cd-ok', go: p.ok }, del ? 'Delete' : 'Log out'))));
+    return host ? ReactDOM.createPortal(node, host) : node;
   }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
@@ -4275,7 +4319,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
-    window.__jump = function (n) { if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n)) setAuthed(true); if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n)) setAuthed(true); if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
     // swipe back from the left edge
@@ -4332,7 +4376,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   window.addEventListener('resize', fit); fit();
   var root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(React.createElement(window.__F4S_APP__));
-  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout'],['success','12 Registered'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['full','16 Fullscreen']];
+  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout'],['success','12 Registered'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['full','16 Fullscreen']];
   var jump = document.getElementById('jump');
   list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); }; jump.appendChild(b); });
   function mark(){ var k=(location.hash||'#welcome').slice(1); Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
