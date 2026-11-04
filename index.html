@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104092615"</script>
+<script>window.__BUILD__="20261104093021"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3431,6 +3431,8 @@ input,textarea{caret-color:#F4A425}
 .dg2{width:72px;height:72px;margin:0 auto 16px;border-radius:24px;display:grid;place-items:center;background:color-mix(in srgb,var(--dg) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--dg) 22%,transparent)}
 .em3{display:block;width:132px;height:110px;margin:-6px auto 8px}
 .em3 svg{display:block}
+
+.ac2{zoom:.8;max-width:390px;margin-left:auto!important;margin-right:auto!important;width:100%}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6094,7 +6096,7 @@ input,textarea{caret-color:#F4A425}
         h('button', { type: 'button', className: 'pip-x', 'aria-label': 'Close mini player', onClick: function (e) { e.stopPropagation(); setPip(false); } }, '×'),
         h('span', { className: 'pip-t' }, 'Danang Christmas Market 2026')) : null,
       launch ? h(Launch, { key: 'launch' + launch, nav: nav, onDone: function () { setLaunch(false); } }) : null,
-      loadKey && top !== 'welcome' && !/^(home|guide|onair|upcoming|detail|checkout|full|player)$/.test(tname) ? h('div', { key: loadKey, className: 'ldr-wrap' }, (window.__TICKS_UNTIL__ || 0) > loadKey ? h(TickLoader, null) : h(LogoLoader)) : null,
+      loadKey && top !== 'welcome' && !/^(home|guide|onair|upcoming|detail|checkout|success|full|player)$/.test(tname) ? h('div', { key: loadKey, className: 'ldr-wrap' }, (window.__TICKS_UNTIL__ || 0) > loadKey ? h(TickLoader, null) : h(LogoLoader)) : null,
       gate ? h(AuthSheet, { why: gate, close: function () { setGate(null); }, nav: nav }) : null,
       share ? h(ShareSheet, { title: share.title, img: share.img, slug: share.slug, close: function () { setShare(null); }, toast: nav.toast }) : null,
       toast ? h('div', { key: toast.k, className: 'toast', role: 'status' }, h(F.Icon, { name: 'check', size: 16 }), toast.m) : null,
