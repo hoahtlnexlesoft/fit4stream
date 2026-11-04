@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104071750"</script>
+<script>window.__BUILD__="20261104072304"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3001,6 +3001,23 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .fs-screen{top:calc(var(--st) + 96px)!important}
 .fs-rail{gap:12px}
 .fs-rb-ic{width:42px;height:42px}
+.fs-sub{align-items:flex-start;gap:12px}
+.fs-hostpill{flex:0 1 auto;min-width:0;max-width:none;height:48px;box-sizing:border-box;gap:10px;padding:0 6px 0 5px;border-radius:24px;background:rgba(12,11,16,.42);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.fs-hp-main{gap:9px;padding:0}
+.fs-hp-av{padding:2px;background:linear-gradient(135deg,#f4a425,#e5484d)}
+.fs-hp-av.speaking{box-shadow:none}
+.fs-hp-av:not(.speaking){background:rgba(255,255,255,.2)}
+.fs-hp-av .f4-avatar{width:34px!important;height:34px!important;box-shadow:0 0 0 2px #1a1820!important}
+.fs-hp-main b{font-size:13.5px;font-weight:700;letter-spacing:-.01em}
+.fs-hp-main span:not(.fs-hp-av){font-size:11.5px;color:rgba(255,255,255,.6);max-width:150px}
+.fs-hp-follow{width:auto;height:30px;padding:0 13px;border-radius:15px;font-size:12.5px;font-weight:700}
+.fs-hp-follow.on{width:30px;padding:0}
+.fs-pip{flex:none;width:108px;border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.25)}
+.fs-pip::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28);pointer-events:none}
+.fs-pip-tag{left:6px;bottom:6px;height:17px;border-radius:6px;background:rgba(10,9,14,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:10px}
+.fs-pip-sw{right:6px;top:6px;width:20px;height:20px;background:rgba(10,9,14,.55)}
+.fs-hp-av{padding:2.5px!important}.fs-hp-av .f4-avatar{width:33px!important;height:33px!important;box-shadow:0 0 0 1.5px #1a1820!important}
+.fs-hp-main span:not(.fs-hp-av){max-width:170px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5253,7 +5270,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
           h(Tap, { className: 'fs-hp-main', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
             h('span', { className: cx('fs-hp-av', !bigIsScreen && 'speaking') }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 34 })),
             h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
-          h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 15 }) : h(F.Icon, { name: 'plus', size: 15 }))),
+          h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : 'Follow')),
         h('button', { type: 'button', className: 'fs-pip', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show screen share large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
           h('span', { className: 'fs-pip-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
           h('span', { className: 'fs-pip-tag' }, bigIsScreen ? 'Host' : 'Screen'),
