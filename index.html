@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104131540"</script>
+<script>window.__BUILD__="20261104131740"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3493,7 +3493,6 @@ input,textarea{caret-color:#F4A425}
 .stage .top{left:0!important;right:0!important;width:auto!important;top:var(--st)!important}
 
 .stage .top{transition:background .2s,box-shadow .2s}
-.stage .top::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--st);background:inherit;-webkit-backdrop-filter:inherit;backdrop-filter:inherit;pointer-events:none}
 .stage.scrolled .top{background:rgba(17,15,23,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 
 .l3-skip{position:absolute;z-index:10;top:calc(var(--st,47px) + 10px);right:16px;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 14px;border:0;border-radius:999px;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);cursor:pointer;animation:fade .4s .6s both}
@@ -3503,11 +3502,14 @@ input,textarea{caret-color:#F4A425}
 .tabscreen>.top-sp{display:block;flex:none;height:56px}
 
 .stage.scrolled .og-back,.stage.scrolled .ch2-back,.stage.scrolled .dt-close{background:rgba(18,16,24,.78)!important;border-color:rgba(255,255,255,.14)!important;transition:background .2s}
+
+.sb-scrim{position:absolute;left:0;right:0;top:0;height:var(--st);z-index:39;pointer-events:none;background:rgba(17,15,23,.95);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);opacity:0;transition:opacity .2s}
+.stage.scrolled>.sb-scrim{opacity:1}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
     <h1>Fit4Stream · iPhone 16 Pro Max</h1>
-    <p>Tap inside the phone like the real app. Swipe from the left edge to go back. Jump to any screen:</p>
+    <p>Tap inside the phone like the real app. Swipe right on any screen with a back button to go back. Jump to any screen:</p>
     <div id="jump" style="display:flex;flex-direction:column;gap:2px"></div>
     <small>Viewer app prototype · 440 × 956 pt</small>
   </aside>
@@ -6531,7 +6533,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
     // interactive swipe-back (iOS style): drag right from anywhere (or the left edge) to reveal the previous screen
     var sw = useRef(null), dx = useState(0), drag = dx[0], setDrag = dx[1], sa = useState(0), swAnim = sa[0], setSwAnim = sa[1], appEl = useRef(null), swClick = useRef(false);
-    function canSwipe() { var t = stack[stack.length - 1].split(':')[0]; return stack.length > 1 && !MODALS.test(t) && t !== 'full' && !swAnim && !(appEl.current && appEl.current.querySelector('.sheet-wrap,.cd-wrap')); }
+    function canSwipe() { var t = stack[stack.length - 1].split(':')[0]; return stack.length > 1 && !MODALS.test(t) && !swAnim && !(appEl.current && appEl.current.querySelector('.sheet-wrap,.cd-wrap')); }
     function hScrollable(el) { while (el && el !== appEl.current) { if (el.classList && (el.classList.contains('cf2') || el.hasAttribute('data-noswipe'))) return true; var cs = getComputedStyle(el); if ((cs.overflowX === 'auto' || cs.overflowX === 'scroll') && el.scrollWidth > el.clientWidth + 2) return true; el = el.parentElement; } return false; }
     function pd(e) { if (!canSwipe() || (e.pointerType === 'mouse' && e.button !== 0)) return; var r = appEl.current.getBoundingClientRect(), x = e.clientX - r.left; var edge = x < 36; if (!edge && hScrollable(e.target)) return; sw.current = { x0: e.clientX, y0: e.clientY, id: e.pointerId, on: false, edge: edge, w: r.width, t: Date.now(), lx: e.clientX, lt: Date.now(), v: 0 }; }
     function pm(e) { var g = sw.current; if (!g || e.pointerId !== g.id) return; var ddx = e.clientX - g.x0, ddy = e.clientY - g.y0;
@@ -6553,7 +6555,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
       swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
       h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
-        h(Comp, { nav: nav, key: top, param: tparam })),
+        h(Comp, { nav: nav, key: top, param: tparam }), h('i', { className: 'sb-scrim', 'aria-hidden': true })),
       tabbed ? h(TabBar, { active: tname, nav: nav }) : null,
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
         h('span', { className: 'f4-badge f4-badge-live', style: { position: 'absolute', left: 8, top: 8 } }, h('span', { className: 'f4-live-dot' }), 'Live'),
