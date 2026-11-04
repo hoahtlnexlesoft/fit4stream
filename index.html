@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104130411"</script>
+<script>window.__BUILD__="20261104130627"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3495,6 +3495,9 @@ input,textarea{caret-color:#F4A425}
 .stage .top{transition:background .2s,box-shadow .2s}
 .stage .top::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--st);background:inherit;-webkit-backdrop-filter:inherit;backdrop-filter:inherit;pointer-events:none}
 .stage.scrolled .top{background:rgba(17,15,23,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+
+.l3-skip{position:absolute;z-index:10;top:calc(var(--st,47px) + 10px);right:16px;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 14px;border:0;border-radius:999px;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);cursor:pointer;animation:fade .4s .6s both}
+.l3-skip:active{transform:scale(.96);background:rgba(255,255,255,.16)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4766,6 +4769,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }
     return h('div', { ref: rootEl, className: cx('screen noscroll l2 l3', p.onDone && 'l2-overlay', out && 'l2-out'), onClick: tapScreen, role: 'progressbar', 'aria-label': 'Fit4Stream is loading' },
       h('div', { className: 'l3-vbox' }, h('video', { ref: vr, className: 'l3-video', src: 'launch8.mp4', playsInline: true, autoPlay: true, preload: 'auto', onEnded: enter, 'aria-hidden': true })),
+      h('button', { type: 'button', className: 'l3-skip', onClick: function (e) { e.stopPropagation(); tap(6); try { vr.current && vr.current.pause(); } catch (er) {} enter(); } }, 'Skip', h('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M6 6l7 6-7 6M15 6v12' }))),
       muted ? h('span', { className: 'l3-sound' }, h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M11 5L6 9H3v6h3l5 4z' }), h('path', { d: 'M22 9l-6 6M16 9l6 6' })), 'Tap for sound') : null);
   }
   function Welcome(p) {
