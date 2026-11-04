@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104084129"</script>
+<script>window.__BUILD__="20261104084439"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3326,6 +3326,46 @@ input,textarea{caret-color:#F4A425}
 .ac2-num{display:flex;justify-content:space-between;font-family:ui-monospace,"SF Mono",Menlo,monospace!important;font-size:21px!important;font-weight:600!important;letter-spacing:.06em!important;color:#fff;text-shadow:0 1px 0 rgba(255,255,255,.25),0 -1px 0 rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.3)}
 .ac2 .ac-meta i{color:rgba(255,255,255,.6)!important}
 .ac2 .ac-meta span{font-size:13.5px;letter-spacing:.04em}
+.et3-ring{position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;padding:2px;background:linear-gradient(120deg,#E5484D,#F4A425,#E5484D,#A57AD8,#E5484D);background-size:300% 100%;animation:et3-ring 4s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+@keyframes et3-ring{to{background-position:300% 0}}
+.et3-badge{position:absolute;right:12px;top:12px;z-index:3;display:inline-flex;align-items:center;gap:6px}
+.et3-badge .live-pill{box-shadow:0 0 0 4px rgba(229,72,77,.25),0 6px 16px rgba(229,72,77,.45);animation:et3-pulse 1.8s ease-out infinite}
+@keyframes et3-pulse{0%{box-shadow:0 0 0 0 rgba(229,72,77,.55),0 6px 16px rgba(229,72,77,.45)}100%{box-shadow:0 0 0 10px rgba(229,72,77,0),0 6px 16px rgba(229,72,77,.45)}}
+.et3-watch{height:26px;padding:0 9px;border-radius:9px;display:inline-flex;align-items:center;gap:5px;background:rgba(10,9,14,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:12px;font-weight:700}
+.et3-by{display:inline-flex!important;align-items:center;gap:6px}
+.et3-by .f4-avatar{box-shadow:0 0 0 1.5px #F4A425!important}
+.et3-join{height:32px;padding:0 14px;border-radius:16px;display:inline-flex;align-items:center;gap:6px;background:#E5484D;color:#fff;font-size:13px;font-weight:700;box-shadow:0 6px 16px rgba(229,72,77,.4)}
+.et3-time.on{color:#fff;background:rgba(229,72,77,.22)!important;font-variant-numeric:tabular-nums}
+.et3-badge{left:12px;right:12px!important;justify-content:space-between}
+.et3-join,.et3-time{white-space:nowrap;flex:none}
+.et3-foot{gap:8px;flex-wrap:nowrap}
+.et3:not(.wide) .et3-join{padding:0 12px}
+.chl{display:flex;flex-direction:column}.chl>*{flex:none}
+.chl-pod{display:grid;grid-template-columns:1fr 1.15fr 1fr;align-items:end;gap:8px;margin:8px 0 18px}
+.chl-pd{display:flex!important;flex-direction:column;align-items:center;gap:3px;text-align:center;min-width:0}
+.chl-pd b{max-width:100%;font-size:13.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:6px}
+.chl-pd>span:not(.chl-pav):not(.chl-step){font-size:11.5px;color:rgba(255,255,255,.5)}
+.chl-pav{position:relative;padding:3px;border-radius:50%;background:linear-gradient(135deg,#9aa3b5,#5d6578)}
+.chl-pd.r1 .chl-pav{background:linear-gradient(135deg,#FFE08A,#F4A425,#C9781A);box-shadow:0 0 30px rgba(244,164,37,.35)}
+.chl-pd.r3 .chl-pav{background:linear-gradient(135deg,#E8A47A,#A55B33)}
+.chl-pav .f4-avatar{box-shadow:0 0 0 3px #0f0e14!important}
+.chl-pav em{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11.5px;font-weight:800;color:#1b1306;background:#c7cdd9;box-shadow:0 0 0 3px #0f0e14}
+.chl-pd.r1 .chl-pav em{background:#F4A425}.chl-pd.r3 .chl-pav em{background:#E8A47A}
+.chl-livetag{position:absolute;top:-4px;right:-6px;height:18px;padding:0 6px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.06em;background:#E5484D;color:#fff;box-shadow:0 0 0 2px #0f0e14}
+.chl-step{width:100%;margin-top:8px;border-radius:12px 12px 0 0;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02))}
+.chl-pd.r1 .chl-step{height:40px;background:linear-gradient(180deg,rgba(244,164,37,.22),rgba(244,164,37,.03))}.chl-pd.r2 .chl-step{height:26px}.chl-pd.r3 .chl-step{height:16px}
+.chl-list{display:flex;flex-direction:column;gap:2px;margin-top:12px}
+.chl-row{display:flex!important;align-items:center;gap:12px;padding:10px 6px;border-radius:16px;text-align:left}
+.chl-rk{width:18px;text-align:center;font-size:13px;font-weight:700;color:rgba(255,255,255,.35)}
+.chl-av{flex:none;padding:2px;border-radius:50%}
+.chl-av.live{background:linear-gradient(135deg,#F4A425,#E5484D)}.chl-av.live .f4-avatar{box-shadow:0 0 0 2px #0f0e14!important}
+.chl-txt{flex:1;min-width:0}
+.chl-txt b{display:flex;align-items:center;gap:6px;font-size:15px;color:#fff}
+.chl-txt span{display:block;font-size:12.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chl-lv{height:17px;padding:0 6px;border-radius:5px;display:inline-flex;align-items:center;gap:4px;font-style:normal;font-size:9.5px;font-weight:800;background:#E5484D;color:#fff}
+.chl-lv em{width:4px;height:4px;border-radius:50%;background:#fff}
+.chl-fb{flex:none;height:34px;padding:0 16px;border-radius:17px;display:grid!important;place-items:center;background:#F4A425;color:#1b1306;font-size:13px;font-weight:700}
+.chl-fb.on{width:34px;padding:0;background:rgba(255,255,255,.1);color:#fff}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4442,13 +4482,15 @@ input,textarea{caret-color:#F4A425}
     return h(Tap, { className: cx('etile et3', p.wide && 'wide'), go: function () { p.nav.push('detail:' + e.id); } },
       h('span', { className: 'et3-bg', style: { backgroundImage: 'url(' + e.img + ')' } }),
       h('span', { className: 'et3-shade' }),
-      h('span', { className: 'et3-cat' }, e.cat),
+      live ? h('span', { className: 'et3-ring', 'aria-hidden': true }) : null,
+      live ? null : h('span', { className: 'et3-cat' }, e.cat),
+      live ? h('span', { className: 'et3-badge' }, h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { className: 'et3-watch' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))) : null,
       h('div', { className: 'et3-cap' },
         h('b', null, e.title),
-        h('span', { className: 'et3-by' }, 'by ' + e.org),
+        h('span', { className: 'et3-by' }, live ? h(F.Avatar, { src: av(e.org) || av('Thao'), initials: ini(e.org), size: 20 }) : null, 'by ' + e.org),
         h('div', { className: 'et3-foot' },
-          live ? h('span', { className: 'et3-live' }, h('i', null), 'Live now') : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 13 }), ended ? 'Ended' : e.date.replace(', 2026', '')),
-          h('span', { className: 'et3-time' }, live ? fmtT(e.left - t) : ended ? e.price : e.range.split('–')[0].trim()))));
+          live ? h('span', { className: 'et3-join' }, h(F.Icon, { name: 'play', size: 12 }), 'Watch now') : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 13 }), ended ? 'Ended' : e.date.replace(', 2026', '')),
+          h('span', { className: cx('et3-time', live && 'on') }, live ? fmtT(e.left - t) : ended ? e.price : e.range.split('–')[0].trim()))));
   }
   function CatBentoEv(p) {
     var t = useTick(), a = p.list[0], rest = p.list.slice(1, 3);
@@ -4466,7 +4508,7 @@ input,textarea{caret-color:#F4A425}
   /* ===== section header that always links somewhere ===== */
   function routeFor(title) {
     var t = title || '';
-    if (t === 'Top Channels') return 'search:channels';
+    if (t === 'Top Channels') return 'channels';
     if (t === 'Browse by Category') return 'categories';
     if (t === 'Live now' || t === 'On air') return 'list:Live now';
     if (/Rating/.test(t)) return 'reviews';
@@ -4477,6 +4519,27 @@ input,textarea{caret-color:#F4A425}
       p.action ? h(Tap, { className: 'f4-link', go: function () { var n = window.__nav; n && n.push(p.to || routeFor(p.title)); } }, p.action, h(F.Icon, { name: 'chevronRight', size: 16 })) : null);
   }
 
+  function Channels(p) {
+    var fs = useState('all'), f = fs[0], setF = fs[1], fl = useState({}), fol = fl[0], setFol = fl[1];
+    var DATA = CHANNELS.map(function (n, i) { return { n: n, live: i === 0 || n === 'Marc John', cat: ['Concerts', 'Talk shows', 'Workshops', 'Festivals', 'Conferences'][i % 5], fol: [12.4, 8.1, 5.6, 4.2, 3.9, 2.7, 2.1, 1.8, 1.2][i] || 1, ev: [24, 18, 9, 12, 7, 15, 4, 31, 6][i] || 3 }; });
+    var list = DATA.filter(function (c) { return f === 'all' || (f === 'live' ? c.live : f === 'following' ? fol[c.n] : true); });
+    var top = DATA.slice(0, 3);
+    return h('div', { className: 'screen tabscreen chl' },
+      h('div', { className: 'tab-amb', 'aria-hidden': true }),
+      h(Top, { back: p.nav.back, title: 'Top Channels', actions: h(Tap, { className: 'f4-iconbtn', label: 'Search channels', go: function () { p.nav.push('search'); } }, h(F.Icon, { name: 'search', size: 19 })) }),
+      h('div', { className: 'chl-pod pad' }, [1, 0, 2].map(function (k) { var c = top[k]; return h(Tap, { key: c.n, className: 'chl-pd r' + (k + 1), go: function () { p.nav.push('organizer:' + encodeURIComponent(c.n)); } },
+        h('span', { className: 'chl-pav' }, h(F.Avatar, { src: av(c.n), name: c.n, initials: ini(c.n), size: k === 0 ? 84 : 66, seed: k }), h('em', null, k + 1), c.live ? h('i', { className: 'chl-livetag' }, 'LIVE') : null),
+        h('b', null, c.n), h('span', null, c.fol + 'K followers'), h('span', { className: 'chl-step' })); })),
+      h('div', { className: 'nt2-chips' }, [['all', 'All'], ['live', 'Live now'], ['following', 'Following']].map(function (x) { return h(Tap, { key: x[0], className: cx('nt2-chip', f === x[0] && 'on'), onClick: function () { tap(5); setF(x[0]); } }, x[1]); })),
+      h('div', { className: 'pad chl-list' }, list.length ? list.map(function (c, i) {
+        return h(Tap, { key: c.n, className: 'chl-row', go: function () { p.nav.push('organizer:' + encodeURIComponent(c.n)); } },
+          h('span', { className: 'chl-rk' }, DATA.indexOf(c) + 1),
+          h('span', { className: cx('chl-av', c.live && 'live') }, h(F.Avatar, { src: av(c.n), name: c.n, initials: ini(c.n), size: 48, seed: i })),
+          h('div', { className: 'chl-txt' }, h('b', null, c.n, c.live ? h('i', { className: 'chl-lv' }, h('em'), 'LIVE') : null), h('span', null, c.cat + ' \u00b7 ' + c.fol + 'K followers')),
+          h(Tap, { className: cx('chl-fb', fol[c.n] && 'on'), onClick: function (e) { e.stopPropagation(); tap(8); var o = Object.assign({}, fol); o[c.n] = !o[c.n]; setFol(o); } }, fol[c.n] ? h(F.Icon, { name: 'check', size: 15 }) : 'Follow'));
+      }) : h(F.EmptyState, { art: 'users', title: 'No channels yet', body: 'Follow channels to see them here.' })),
+      h('div', { style: { height: 40 } }));
+  }
   function SubPage(p) {
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
@@ -5826,10 +5889,10 @@ input,textarea{caret-color:#F4A425}
         h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: function () { heart(); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
   }
 
-  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, receipt: Receipt, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
+  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, channels: Channels, receipt: Receipt, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
 
   function stackFor(n) {
-    var map = { categories: ['home', 'categories'], login: ['home', 'login'], signup: ['home', 'signup'], forgot: ['home', 'login', 'forgot'], notifications: ['home', 'notifications'], payments: ['account', 'payments'], security: ['account', 'security'], channel: ['account', 'channel'], profile: ['account', 'profile'], payout: ['home', 'detail:payout'], search: ['home', 'search'], myevents: ['account', 'myevents'], detail: ['home', 'detail:seo'], live: ['home', 'live'], checkout: ['home', 'live', 'checkout'], receipt: ['account', 'payments', 'receipt'], success: ['home', 'live', 'success'], organizer: ['home', 'detail', 'organizer'], reviews: ['home', 'detail', 'organizer', 'reviews'], player: ['home', 'live', 'player'], full: ['home', 'live', 'player', 'full'] };
+    var map = { categories: ['home', 'categories'], login: ['home', 'login'], signup: ['home', 'signup'], forgot: ['home', 'login', 'forgot'], notifications: ['home', 'notifications'], payments: ['account', 'payments'], security: ['account', 'security'], channel: ['account', 'channel'], profile: ['account', 'profile'], payout: ['home', 'detail:payout'], search: ['home', 'search'], myevents: ['account', 'myevents'], detail: ['home', 'detail:seo'], live: ['home', 'live'], checkout: ['home', 'live', 'checkout'], channels: ['home', 'channels'], receipt: ['account', 'payments', 'receipt'], success: ['home', 'live', 'success'], organizer: ['home', 'detail', 'organizer'], reviews: ['home', 'detail', 'organizer', 'reviews'], player: ['home', 'live', 'player'], full: ['home', 'live', 'player', 'full'] };
     return map[n] || [n];
   }
 
