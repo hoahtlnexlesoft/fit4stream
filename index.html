@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104085033"</script>
+<script>window.__BUILD__="20261104085241"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3373,6 +3373,13 @@ input,textarea{caret-color:#F4A425}
 .et3-time.on{background:rgba(10,9,14,.5)!important}
 .et3-by .f4-avatar{box-shadow:none!important}
 .ch2-avtap{display:block!important;border-radius:50%}.ch2-av .f4-avatar img{object-fit:cover}
+.et3-join{height:36px!important;padding:0 14px 0 4px!important;gap:8px!important;border-radius:18px!important;background:linear-gradient(180deg,#FFB840,#F4A425)!important;color:#1b1306!important;font-weight:800!important;box-shadow:0 8px 20px rgba(244,164,37,.35),inset 0 1px 0 rgba(255,255,255,.4)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.et3-jp{position:relative;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#1b1306;color:#F4A425}
+.et3-jp::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid rgba(27,19,6,.35);animation:et3-jpp 1.6s ease-out infinite}
+@keyframes et3-jpp{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.35);opacity:0}}
+.et3-jp svg{margin-left:2px}
+.et3 .et3-foot .et3-join,.et3 .et3-join{color:#1b1306!important;text-shadow:none!important}
+.et3 .et3-time.on{color:#fff!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4495,7 +4502,7 @@ input,textarea{caret-color:#F4A425}
         h('b', null, e.title),
         h('span', { className: 'et3-by' }, live ? h(F.Avatar, { src: av(e.org) || av('Thao'), initials: ini(e.org), size: 20 }) : null, 'by ' + e.org),
         h('div', { className: 'et3-foot' },
-          live ? h('span', { className: 'et3-join' }, h(F.Icon, { name: 'play', size: 12 }), 'Watch now') : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 13 }), ended ? 'Ended' : e.date.replace(', 2026', '')),
+          live ? h('span', { className: 'et3-join' }, h('span', { className: 'et3-jp' }, h(F.Icon, { name: 'play', size: 11 })), 'Watch now') : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 13 }), ended ? 'Ended' : e.date.replace(', 2026', '')),
           h('span', { className: cx('et3-time', live && 'on') }, live ? fmtT(e.left - t) : ended ? e.price : e.range.split('–')[0].trim()))));
   }
   function CatBentoEv(p) {
@@ -4567,10 +4574,13 @@ input,textarea{caret-color:#F4A425}
     });
     var cat = CATS.filter(function (c) { return c[0] === name; })[0];
     var look = cat && CAT_LOOK[cat[0]];
+    var used = list.map(function (e) { return e.img; });
+    var heroImg = look ? PH[look[0]] : null;
+    if (heroImg && used.indexOf(heroImg) >= 0) heroImg = ['festival', 'theater', 'hero-concert', 'comedy', 'movie', 'sports'].map(function (k) { return PH[k]; }).filter(function (x) { return x && used.indexOf(x) < 0; })[0] || heroImg;
     return h('div', { className: 'screen tabscreen' },
-      look ? h('div', { className: 'list-hero', style: { backgroundImage: 'linear-gradient(180deg, rgba(20,10,31,.2), var(--bg)), url(' + PH[look[0]] + ')' } }) : h('div', { className: 'tab-amb', 'aria-hidden': true }),
+      look ? h('div', { className: 'list-hero', style: { backgroundImage: 'linear-gradient(180deg, rgba(20,10,31,.2), var(--bg)), url(' + heroImg + ')' } }) : h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: look ? '' : name }),
-      look ? h('div', { className: 'pad', style: { marginTop: 40 } }, h('h1', { className: 'h-xl' }, name), h('p', { className: 'muted small', style: { marginTop: 4 } }, cat[1] + (cat[1] === 1 ? ' event' : ' events'))) : null,
+      look ? h('div', { className: 'pad', style: { marginTop: 40 } }, h('h1', { className: 'h-xl' }, name), h('p', { className: 'muted small', style: { marginTop: 4 } }, list.length + (list.length === 1 ? ' event' : ' events'))) : null,
       h('div', { className: 'pad col gap14', style: { marginTop: 16 } },
         list.length ? list.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav, wide: true }); })
           : h(F.EmptyState, { art: 'live', title: 'Nothing here yet', body: 'New events in this category will appear here as soon as they are scheduled.', action: 'Explore other categories', onAction: function () { p.nav.push('search:categories'); } })),
