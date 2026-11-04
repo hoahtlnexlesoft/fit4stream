@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104063957"</script>
+<script>window.__BUILD__="20261104070459"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2839,6 +2839,83 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .co2 .co-bar{padding-top:14px!important;border-top:1px solid rgba(255,255,255,.06)}
 .co2 .co-note{margin-bottom:16px}
 .im-host{display:none!important}.im-rail{bottom:170px!important}
+.im-pay{margin:0 14px;display:flex;align-items:center;gap:12px;padding:10px 10px 10px 16px;border-radius:20px;background:rgba(20,18,26,.82);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(244,164,37,.35)}
+.im-pay>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.im-pay b{font-size:14px;color:#f6c26b}.im-pay span{font-size:12px;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.im-pay-b{flex:none;height:44px;padding:0 18px;border-radius:22px;display:grid!important;place-items:center;background:#f4a425;color:#1b1306;font-size:14px;font-weight:700}
+
+/* ===================== Live player v3 (lv) ===================== */
+.player.lv{display:flex!important;flex-direction:column;background:#0c0b11!important;overflow:hidden}
+.player.lv>*{position:relative;z-index:1;flex:none}
+.lv-amb{position:absolute!important;left:-20%;right:-20%;top:-10%;height:62%;z-index:0!important;background-size:cover;background-position:center;filter:blur(60px) saturate(1.4);opacity:.42;pointer-events:none}
+.lv-amb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,17,0) 30%,#0c0b11 92%)}
+.lv-top{display:flex;align-items:center;gap:8px;padding:calc(var(--st) + 6px) 16px 12px 10px}
+.lv-tb{width:40px;height:40px;border-radius:50%;display:grid!important;place-items:center;color:#fff;background:rgba(255,255,255,.08)}
+.lv-top .lv-tb:first-child{background:none}
+.lv-tb.on{background:#f4a425;color:#1b1306}
+.lv-live{display:inline-flex;align-items:center;height:28px;border-radius:9px;overflow:hidden;background:rgba(255,255,255,.08);font-size:12.5px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+.lv-live b{height:100%;display:inline-flex;align-items:center;gap:5px;padding:0 9px;background:#e5484d;font-size:11.5px;font-weight:800;letter-spacing:.06em}
+.lv-live b i{width:6px;height:6px;border-radius:50%;background:#fff;animation:f4-pulse 1.4s infinite}
+.lv-live>span{padding:0 9px}
+.lv-live.off b{background:rgba(255,255,255,.14)}
+.lv-view{height:28px;padding:0 10px;border-radius:9px;display:inline-flex!important;align-items:center;gap:5px;background:rgba(255,255,255,.08);color:#fff;font-size:12.5px;font-weight:600}
+.lv-media{margin:0 12px;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background-size:cover;background-position:center;background-color:#16141c;box-shadow:0 18px 50px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.06)}
+.lv-who{position:absolute;left:10px;bottom:10px;height:26px;padding:0 4px 0 10px;border-radius:9px;display:inline-flex;align-items:center;gap:6px;background:rgba(10,9,14,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-size:12px;font-weight:600;color:#fff}
+.lv-who i{width:6px;height:6px;border-radius:50%;background:#3fd17f}
+.lv-who em{font-style:normal;height:18px;padding:0 6px;border-radius:6px;display:inline-grid;place-items:center;font-size:10px;font-weight:700}
+.lv-who em.r-organizer{background:#a57ad8;color:#fff}.lv-who em.r-host{background:#f4a425;color:#1b1306}
+.lv-pip{position:absolute;right:10px;top:10px;width:62px;height:82px;padding:0;border:0;border-radius:14px;overflow:hidden;background:#222;box-shadow:0 6px 18px rgba(0,0,0,.4),0 0 0 2px rgba(255,255,255,.85)}
+.lv-pip-img{position:absolute;inset:0;background-size:cover;background-position:center 25%}
+.lv-pip-tag{position:absolute;left:5px;bottom:5px;height:17px;padding:0 6px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;background:rgba(0,0,0,.55);font-size:9.5px;font-weight:700;color:#fff}
+.lv-pip-tag i{width:5px;height:5px;border-radius:50%;background:#e5484d}
+.lv-ctl{position:absolute;right:10px;bottom:10px;display:flex;gap:6px}
+.lv-cb{width:32px;height:32px;border-radius:10px;display:grid!important;place-items:center;background:rgba(10,9,14,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff}
+.lv-media .pv-rc{border-radius:inherit}
+.lv-grid{aspect-ratio:auto;height:min(360px,42vh);background:none;box-shadow:none;border-radius:0;overflow:visible}
+.lv-grid .stg{position:absolute!important;inset:0!important;top:0!important;bottom:0!important;left:0!important;right:0!important}
+.lv-state{aspect-ratio:auto;min-height:230px}
+.lv-state .lv-st-in{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 20px}
+.lv-hand{margin:10px 12px 0;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 14px;border-radius:16px;background:rgba(244,164,37,.12);font-size:13px;font-weight:600;color:#f6c26b}
+.lv-hand .hand-x{background:rgba(255,255,255,.1)!important;color:#fff}
+.lv-os{margin:10px 12px 0!important}
+.lv-info{display:flex;align-items:center;gap:12px;padding:16px 16px 0}
+.lv-host{flex:1;min-width:0;display:flex!important;align-items:center;gap:11px;text-align:left}
+.lv-host>div{min-width:0}
+.lv-host h1{margin:0;font-size:16.5px;line-height:21px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-host span{display:block;margin-top:2px;font-size:12.5px;color:rgba(255,255,255,.55)}
+.lv-follow{flex:none;height:36px;padding:0 16px;border-radius:18px;display:inline-flex!important;align-items:center;gap:5px;background:#f4a425;color:#1b1306;font-size:13.5px;font-weight:700}
+.lv-follow.on{background:rgba(255,255,255,.1);color:#fff}
+.lv-acts{display:flex;gap:8px;padding:14px 16px 0}
+.lv-a{flex:1;height:38px;border-radius:12px;display:flex!important;align-items:center;justify-content:center;gap:6px;background:rgba(255,255,255,.07);color:#fff;font-size:13px;font-weight:600}
+.lv-a.on{color:#f4a425;background:rgba(244,164,37,.12)}
+.lv-stack{display:inline-flex}.lv-stack .f4-avatar{margin-left:-6px;box-shadow:0 0 0 2px #1a1920!important}.lv-stack .f4-avatar:first-child{margin-left:0}
+.lv-chat{flex:1 1 auto!important;min-height:0;display:flex;flex-direction:column;margin:14px 12px 0;padding:12px 12px 0;border-radius:20px 20px 0 0;background:rgba(255,255,255,.035)}
+.lv-chat-h{display:flex;align-items:center;justify-content:space-between;padding:0 2px 8px}
+.lv-chat-h b{font-size:13px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.75)}
+.lv-chat-x{width:28px;height:28px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.lv-pin{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:rgba(244,164,37,.1)}
+.lv-pin-ic{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(244,164,37,.2);color:#f4a425}
+.lv-pin p{margin:0;font-size:12.5px;line-height:17px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv-pin b{color:#f6c26b;margin-right:6px}
+.lv-list{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:11px;padding:12px 2px 12px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18px);mask-image:linear-gradient(180deg,transparent 0,#000 18px)}
+.lv-list>:first-child{margin-top:auto}
+.lv-list .im-msg{gap:10px}
+.lv-list .im-msg p{padding:0;background:none;font-size:13.5px;line-height:19px;color:rgba(255,255,255,.92)}
+.lv-list .im-msg p b{color:rgba(255,255,255,.5)}
+.lv-list .im-sys{padding-left:36px;font-size:12px}
+.lv-chat-off{align-items:center;justify-content:center}.lv-chat-off p{margin:0;font-size:13px;color:rgba(255,255,255,.45)}
+.lv-comp{display:flex;align-items:center;gap:8px;padding:10px 12px calc(var(--sb) + 10px);background:#0c0b11;box-shadow:0 -1px 0 rgba(255,255,255,.05)}
+.lv-in{flex:1;min-width:0;height:46px;display:flex;align-items:center;padding:0 6px 0 16px;border-radius:23px;background:rgba(255,255,255,.08)}
+.lv-in input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:15px}
+.lv-in input::placeholder{color:rgba(255,255,255,.4)}
+.lv-emo{width:36px;height:36px;border:0;border-radius:50%;display:grid;place-items:center;background:none;color:rgba(255,255,255,.7)}
+.lv-heart,.lv-send{flex:none;width:46px;height:46px;border:0;border-radius:50%;display:grid;place-items:center;background:#f4a425;color:#1b1306}
+.lv-send{background:#fff}
+.lv-hearts{position:absolute!important;right:24px!important;left:auto!important;bottom:calc(var(--sb) + 64px)!important;z-index:6!important}
+.lv-tray{position:absolute!important;left:12px!important;right:auto!important;bottom:calc(var(--sb) + 68px)!important;z-index:6!important}
+.lv-grid{height:min(290px,34vh)}
+.player.lv.on-stage .lv-acts{display:none}
+.player.lv.on-stage .lv-info{padding-top:12px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5064,58 +5141,63 @@ i.r-you{background:#fff!important;color:#14121a!important}
         h('div', { className: 'pl-tags' }, h('span', { className: 'pl-cat' }, 'Concerts and Performances'), h('span', { className: 'pl-dot' }), h('span', null, '137 min · English')),
         h('div', { className: 'info-card' }, h(F.InfoRow, { icon: 'calendar', label: 'Date', value: '11/03/2026' }), h(F.InfoRow, { icon: 'clock', label: 'Started', value: '9:43 AM · 137 minutes' }), h(F.InfoRow, { icon: 'languages', label: 'Language', value: 'English' })));
     var live = mode !== 'waiting' && mode !== 'ended';
-    var railBtn = function (k, ic, label, on, go, filled) { return h(Tap, { key: k, className: cx('im-rb', on && 'on'), label: label, onClick: go }, h('span', { className: 'im-rb-ic' }, typeof ic === 'string' ? h(F.Icon, { name: ic, size: 22, filled: filled }) : ic), h('span', { className: 'im-rb-t' }, label)); };
-    return h('div', { className: cx('screen noscroll player imm', st.layout === 'grid' && live && 'is-grid', !st.ui && 'ui-off') },
-      h('div', { className: 'im-bg', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }),
-      h('div', { className: 'im-tint' }),
-      mode === 'waiting' ? h('div', { className: 'pvs-mid im-state' }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 64 }), h('span', { className: 'pvs-k' }, 'Starting soon'), h('b', { className: 'pvs-cd' }, fmtT(Math.max(0, 299 - (tk % 300))).replace(/^00:/, '')), h('span', { className: 'pvs-s' }, "You'll join automatically when the host goes live"), h('span', { className: 'im-wait' }, h(F.Icon, { name: 'eye', size: 13 }), '318 people waiting'))
-      : mode === 'ended' ? h('div', { className: 'pvs-mid im-state' }, h('span', { className: 'pvs-badge' }, 'Live ended'), h('b', { className: 'pvs-h' }, 'Thanks for watching!'), h('span', { className: 'pvs-s' }, '2h 17m · 2.4K watched · Replay coming soon'),
-          h('div', { className: 'pvs-acts' }, h(Tap, { className: 'pvs-btn pri', go: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 15, filled: true }), 'Rate event'), h(Tap, { className: 'pvs-btn', go: function () { p.nav.root('home'); } }, 'Back to Home')))
-      : st.layout === 'grid' ? h(Stage)
-      : h('div', { className: 'im-stream', onClick: function () { set({ ui: !st.ui }); } },
-          h('div', { className: 'im-frame', style: { backgroundImage: 'url(' + (st.swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' } },
-            h('span', { className: 'im-who' }, h('i', null), st.swap ? 'thao15 nguyen15 · Host camera' : 'Nhan Doan · Screen share', h('em', null, st.swap ? 'Host' : 'Organizer')),
-          h('button', { type: 'button', className: 'pv-cam im-cam', 'aria-label': st.swap ? 'Show screen share large' : 'Show host camera large', onClick: function (e) { e.stopPropagation(); tap(8); set({ swap: !st.swap }); } },
-            h('div', { className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (st.swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
-            h('span', { className: 'fl2-cam-tag' }, h('i', null), st.swap ? 'Screen' : 'Host'),
-            h('span', { className: 'fl2-cam-swap', 'aria-hidden': true }, h('svg', { width: 11, height: 11, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))))),
-          h('div', { className: 'im-ctl' },
-            h(Tap, { className: 'im-cb', label: st.muted ? 'Unmute' : 'Mute', onClick: function (e) { e.stopPropagation(); tap(6); set({ muted: !st.muted }); p.nav.toast(st.muted ? 'Sound on' : 'Muted'); } }, st.muted ? h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M11 5L6 9H3v6h3l5 4zM22 9l-6 6M16 9l6 6' })) : h(F.Icon, { name: 'volume', size: 20 })),
-            h(Tap, { className: 'im-cb', label: 'Full screen', onClick: function (e) { e.stopPropagation(); p.nav.push('full'); } }, h(FsIc, null)))),
-      st.rc ? h('div', { className: 'pv-rc', role: 'status' }, h('span', { className: 'spinner' }), h('b', null, 'Reconnecting…'), h('span', null, 'Your connection is weak')) : null,
-      h('div', { className: 'im-top' },
-        h(Tap, { className: 'im-back', label: 'Minimize', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 24 })),
-        live ? h('span', { className: 'pv-live' }, h('i', null), 'LIVE') : null,
-        h(Tap, { className: 'im-pill', label: 'Viewers', onClick: function () { set({ sheet: true, tab: 'people' }); } }, h(F.Icon, { name: 'user', size: 13, filled: true }), mode === 'waiting' ? '318' : '2.4K'),
-        live ? h('span', { className: 'im-pill mono' }, h(F.Icon, { name: 'clock', size: 13 }), elapsed) : null,
+    var pinIc = h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M15 4l5 5-3 1-4 4 1 4-2 1-4-4-5 5M9 10l5 5' }));
+    var expandIc = h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M7 14l5-5 5 5' }));
+    var media = mode === 'waiting' ? h('div', { className: 'lv-media lv-state', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('div', { className: 'pvs-dim' }),
+        h('div', { className: 'lv-st-in' }, h('span', { className: 'pvs-k' }, 'Starting soon'), h('b', { className: 'pvs-cd' }, fmtT(Math.max(0, 299 - (tk % 300))).replace(/^00:/, '')), h('span', { className: 'pvs-s' }, "You'll join automatically when the host goes live")))
+      : mode === 'ended' ? h('div', { className: 'lv-media lv-state', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('div', { className: 'pvs-dim' }),
+        h('div', { className: 'lv-st-in' }, h('span', { className: 'pvs-badge' }, 'Live ended'), h('b', { className: 'pvs-h' }, 'Thanks for watching!'), h('span', { className: 'pvs-s' }, '2h 17m · 2.4K watched · Replay soon'),
+          h('div', { className: 'pvs-acts' }, h(Tap, { className: 'pvs-btn pri', go: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 15, filled: true }), 'Rate event'), h(Tap, { className: 'pvs-btn', go: function () { p.nav.root('home'); } }, 'Home'))))
+      : st.layout === 'grid' ? h('div', { className: 'lv-media lv-grid' }, h(Stage))
+      : h('div', { className: 'lv-media', style: { backgroundImage: 'url(' + (st.swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' }, onClick: function () { set({ ui: !st.ui }); } },
+          h('span', { className: 'lv-who' }, h('i', null), st.swap ? 'thao15 nguyen15' : 'Screen share', h('em', { className: st.swap ? 'r-host' : 'r-organizer' }, st.swap ? 'Host' : 'Organizer')),
+          h('button', { type: 'button', className: 'lv-pip', 'aria-label': st.swap ? 'Show screen share large' : 'Show host camera large', onClick: function (e) { e.stopPropagation(); tap(8); set({ swap: !st.swap }); } },
+            h('span', { className: 'lv-pip-img', style: { backgroundImage: 'url(' + (st.swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
+            h('span', { className: 'lv-pip-tag' }, h('i', null), st.swap ? 'Screen' : 'Host')),
+          h('div', { className: 'lv-ctl' },
+            h(Tap, { className: 'lv-cb', label: st.muted ? 'Unmute' : 'Mute', onClick: function (e) { e.stopPropagation(); tap(6); set({ muted: !st.muted }); } }, st.muted ? h('svg', { width: 17, height: 17, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M11 5L6 9H3v6h3l5 4zM22 9l-6 6M16 9l6 6' })) : h(F.Icon, { name: 'volume', size: 17 })),
+            h(Tap, { className: 'lv-cb', label: 'Picture in picture', onClick: function (e) { e.stopPropagation(); p.nav.pip(); } }, h(F.Icon, { name: 'pip', size: 17 })),
+            h(Tap, { className: 'lv-cb', label: 'Full screen', onClick: function (e) { e.stopPropagation(); p.nav.push('full'); } }, h(FsIc, null))),
+          st.rc ? h('div', { className: 'pv-rc', role: 'status' }, h('span', { className: 'spinner' }), h('b', null, 'Reconnecting…'), h('span', null, 'Your connection is weak')) : null);
+    return h('div', { className: cx('screen noscroll player lv', st.layout === 'grid' && live && 'is-grid', st.onstage && live && 'on-stage') },
+      h('div', { className: 'lv-amb', style: { backgroundImage: 'url(' + EV.xmas.img + ')' }, 'aria-hidden': true }),
+      h('header', { className: 'lv-top' },
+        h(Tap, { className: 'lv-tb', label: 'Minimize', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 22 })),
+        live ? h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, elapsed)) : h('span', { className: 'lv-live off' }, h('b', null, mode === 'ended' ? 'ENDED' : 'SOON')),
+        h(Tap, { className: 'lv-view', label: 'Viewers', onClick: function () { set({ sheet: true, tab: 'people' }); } }, h(F.Icon, { name: 'eye', size: 14 }), mode === 'waiting' ? '318' : '2.4K'),
         h('span', { style: { flex: 1 } }),
-        live ? h(Tap, { className: 'im-tb', label: st.layout === 'grid' ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); set({ layout: st.layout === 'grid' ? 'focus' : 'grid' }); } }, gridIc) : null,
-        live && !st.onstage ? h(Tap, { className: cx('im-tb', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 20 })) : null),
-      st.hand && !st.invite ? h('div', { className: 'hand-toast hand2 im-hand' }, h('span', { className: 'spinner sm' }), 'Waiting for the host to invite you', h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
-      live ? h('div', { className: 'im-rail' },
-        h(Tap, { className: 'im-host', label: 'Host profile', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 44 }), st.follow ? null : h('span', { className: 'im-plus', onClick: function (e) { e.stopPropagation(); tap(10); set({ follow: true }); p.nav.toast('Following thao15 nguyen15'); } }, h(F.Icon, { name: 'plus', size: 12 }))),
-        railBtn('like', 'thumbsUp', st.liked ? '1.2K' : '1.2K', st.liked, function () { tap(10); set({ liked: !st.liked }); if (!st.liked) heart(); }, st.liked),
-        railBtn('rate', 'star', st.rate ? st.rate.toFixed(1) : 'Rate', !!st.rate, function () { set({ rateOpen: true }); }, !!st.rate),
-        railBtn('chat', 'message', 'Chat', false, function () { set({ sheet: true, tab: 'chat' }); }),
-        railBtn('share', 'share', 'Share', false, function () { p.nav.share({}); })) : null,
-      h('div', { className: 'hearts im-hearts', 'aria-hidden': true }, st.hearts.map(function (x, i) { return h('span', { key: x.id, className: 'hrt', style: { left: (i * 9) % 22 + 'px' } }, x.ch ? h('span', { style: { fontSize: 26 } }, x.ch) : h(F.Icon, { name: 'heart', filled: true, size: 24 })); })),
-      h('div', { className: 'im-bottom' },
-        live ? h('div', { className: 'im-chat', onClick: function () { set({ sheet: true, tab: 'chat' }); } }, h('div', { className: 'im-pin' }, h('b', null, '📌 Host'), ' Market tour starts at the fountain at 10:00'), MSGS.slice(-4).map(Line)) : null,
-        h('div', { className: 'im-meta' },
-          h('h1', null, 'Danang Christmas Market 2026'),
-          h('div', { className: 'im-by' }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 24 }), h('b', null, 'thao15 nguyen15'), h('span', null, '· Concerts'), st.follow ? null : h(Tap, { className: 'im-follow', onClick: function () { tap(10); set({ follow: true }); } }, 'Follow'))),
-        st.onstage && live ? h('div', { className: 'onstage im-os' },
-          h('span', { className: 'os-live' }, h('i'), "You're on stage"),
-          h('span', { style: { flex: 1 } }),
-          h(Tap, { className: cx('os-b', !st.mic && 'off'), label: st.mic ? 'Mute mic' : 'Unmute mic', onClick: function () { tap(6); set({ mic: !st.mic }); } }, h('span', { style: { transform: 'scale(1.4)', display: 'grid' } }, st.mic ? micOn : micOff)),
-          h(Tap, { className: cx('os-b', !st.cam && 'off'), label: st.cam ? 'Turn camera off' : 'Turn camera on', onClick: function () { tap(6); set({ cam: !st.cam }); } }, camIc(!st.cam)),
-          h(Tap, { className: 'os-leave', onClick: leaveStage }, 'Leave')) : null,
-        st.tray ? h('div', { className: 'etray im-tray' }, ['👏', '❤️', '😂', '🔥', '🎄', '👍'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
-        live ? h('form', { className: 'composer im-comp', onSubmit: send },
-          h('label', { className: 'compose-in', htmlFor: 'chat-msg' }, h('input', { id: 'chat-msg', ref: function (el) { if (el && window.__focusChat) { window.__focusChat = false; setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (_) {} }, 450); } }, placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } }),
-            st.draft ? h('button', { type: 'submit', className: 'im-send', 'aria-label': 'Send' }, h(F.Icon, { name: 'send', size: 16 })) : null),
-          h('button', { type: 'button', className: 'f4-iconbtn f4-iconbtn-soft', 'aria-label': 'Reactions', onClick: function () { set({ tray: !st.tray }); } }, h(F.Icon, { name: 'smile', size: 20 })),
-          h('button', { type: 'button', className: 'f4-iconbtn heart-btn pl-heart', 'aria-label': 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 20 }))) : h('div', { style: { height: 8 } })),
+        live ? h(Tap, { className: 'lv-tb', label: st.layout === 'grid' ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); set({ layout: st.layout === 'grid' ? 'focus' : 'grid' }); } }, gridIc) : null,
+        live && !st.onstage ? h(Tap, { className: cx('lv-tb', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 19 })) : null),
+      media,
+      st.hand && !st.invite ? h('div', { className: 'lv-hand' }, h('span', { className: 'spinner sm' }), h('span', { style: { flex: 1 } }, 'Hand raised · waiting for the host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
+      st.onstage && live ? h('div', { className: 'onstage lv-os' },
+        h('span', { className: 'os-live' }, h('i'), "You're on stage"),
+        h('span', { style: { flex: 1 } }),
+        h(Tap, { className: cx('os-b', !st.mic && 'off'), label: st.mic ? 'Mute mic' : 'Unmute mic', onClick: function () { tap(6); set({ mic: !st.mic }); } }, h('span', { style: { transform: 'scale(1.4)', display: 'grid' } }, st.mic ? micOn : micOff)),
+        h(Tap, { className: cx('os-b', !st.cam && 'off'), label: st.cam ? 'Turn camera off' : 'Turn camera on', onClick: function () { tap(6); set({ cam: !st.cam }); } }, camIc(!st.cam)),
+        h(Tap, { className: 'os-leave', onClick: leaveStage }, 'Leave')) : null,
+      h('section', { className: 'lv-info' },
+        h(Tap, { className: 'lv-host', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
+          h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 42 }),
+          h('div', null, h('h1', null, 'Danang Christmas Market 2026'), h('span', null, 'thao15 nguyen15 · Concerts'))),
+        h(Tap, { className: cx('lv-follow', st.follow && 'on'), onClick: function () { tap(10); set({ follow: !st.follow }); } }, st.follow ? h(F.Icon, { name: 'check', size: 15 }) : null, st.follow ? 'Following' : 'Follow')),
+      live ? h('div', { className: 'lv-acts' },
+        h(Tap, { className: cx('lv-a', st.liked && 'on'), onClick: function () { tap(10); if (!st.liked) heart(); set({ liked: !st.liked }); } }, h(F.Icon, { name: 'thumbsUp', size: 17, filled: st.liked }), st.liked ? '1.2K' : '1.2K'),
+        h(Tap, { className: cx('lv-a', st.rate && 'on'), onClick: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 17, filled: !!st.rate }), st.rate ? st.rate.toFixed(1) : 'Rate'),
+        h(Tap, { className: 'lv-a', onClick: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Share'),
+        h(Tap, { className: 'lv-a lv-a-ppl', onClick: function () { set({ sheet: true, tab: 'people' }); } }, h('span', { className: 'lv-stack' }, ['Sandra Smith', 'Nhan Doan', 'Linh Tran'].map(function (n, i) { return h(F.Avatar, { key: n, src: av(n), name: n, initials: ini(n), size: 20, seed: i }); })), '2.4K')) : null,
+      live ? h('section', { className: 'lv-chat' },
+        h('div', { className: 'lv-chat-h' }, h('b', null, 'Live chat'), h(Tap, { className: 'lv-chat-x', label: 'Open chat', onClick: function () { set({ sheet: true, tab: 'chat' }); } }, expandIc)),
+        h('div', { className: 'lv-pin' }, h('span', { className: 'lv-pin-ic' }, pinIc), h('p', null, h('b', null, 'Host'), 'Market tour starts at the fountain at 10:00 🎄')),
+        h('div', { className: 'lv-list', ref: function (el) { if (el) el.scrollTop = el.scrollHeight; } }, MSGS.map(Line)))
+      : h('section', { className: 'lv-chat lv-chat-off' }, h('p', null, mode === 'ended' ? 'Chat is closed. Thanks for joining!' : 'Chat opens when the event starts.')),
+      h('div', { className: 'hearts lv-hearts', 'aria-hidden': true }, st.hearts.map(function (x, i) { return h('span', { key: x.id, className: 'hrt', style: { left: (i * 9) % 22 + 'px' } }, x.ch ? h('span', { style: { fontSize: 26 } }, x.ch) : h(F.Icon, { name: 'heart', filled: true, size: 24 })); })),
+      st.tray ? h('div', { className: 'etray lv-tray' }, ['👏', '❤️', '😂', '🔥', '🎄', '👍'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
+      live ? h('form', { className: 'lv-comp', onSubmit: send },
+        h('label', { className: 'lv-in', htmlFor: 'chat-msg' }, h('input', { id: 'chat-msg', ref: function (el) { if (el && window.__focusChat) { window.__focusChat = false; setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (_) {} }, 450); } }, placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } }),
+          h('button', { type: 'button', className: 'lv-emo', 'aria-label': 'Reactions', onClick: function () { set({ tray: !st.tray }); } }, h(F.Icon, { name: 'smile', size: 20 }))),
+        st.draft ? h('button', { type: 'submit', className: 'lv-send', 'aria-label': 'Send' }, h(F.Icon, { name: 'send', size: 18 }))
+          : h('button', { type: 'button', className: 'lv-heart', 'aria-label': 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 20 }))) : h('div', { style: { height: 'calc(var(--sb) + 12px)' } }),
       st.sheet ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ sheet: false }); } },
         h('div', { className: 'sheet im-sheet', role: 'dialog', 'aria-label': 'Live chat' },
           h('span', { className: 'grab' }),
