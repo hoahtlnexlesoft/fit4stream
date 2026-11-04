@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104080658"</script>
+<script>window.__BUILD__="20261104080812"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3126,6 +3126,23 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .me2-card.st-live{background:linear-gradient(120deg,rgba(231,70,69,.12),rgba(255,255,255,.04) 60%)!important}
 .me2-card.st-soon{background:linear-gradient(120deg,rgba(244,164,37,.12),rgba(255,255,255,.04) 60%)!important}
 .me2-card.st-live .me2-chev,.me2-card.st-soon .me2-chev{display:none}
+.rc-paper{position:relative;border-radius:24px;background:rgba(255,255,255,.055);overflow:hidden}
+.rc-top{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:26px 16px 22px;background:radial-gradient(120% 100% at 50% 0%,var(--rc-tint,rgba(57,200,124,.18)),transparent 70%)}
+.rc-paper.st-pending{--rc-tint:rgba(244,164,37,.2);--rc-c:#F4A425}.rc-paper.st-refunded{--rc-tint:rgba(57,202,224,.18);--rc-c:#39CAE0}.rc-paper.st-failed{--rc-tint:rgba(231,70,69,.2);--rc-c:#E74645}
+.rc-badge{position:relative;width:60px;height:60px;display:grid;place-items:center;margin-bottom:10px}
+.rc-badge-glow{position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(closest-side,var(--rc-tint,rgba(57,200,124,.35)),transparent);filter:blur(2px)}
+.rc-badge-in{position:relative;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;color:#0d1a12;background:var(--rc-c,#39C87C);box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+.rc-paper.st-failed .rc-badge-in,.rc-paper.st-refunded .rc-badge-in{color:#fff}
+.rc-k{font-size:13px;font-weight:600;color:rgba(255,255,255,.7)}
+.rc-top .rc-amt{font-size:42px!important;line-height:48px!important;letter-spacing:-1px!important}
+.rc-top .rc-when{font-size:12.5px;color:rgba(255,255,255,.5)}
+.rc-top .rc-st{margin-top:10px}
+.rc-cut{position:relative;display:flex;align-items:center;height:22px}
+.rc-cut i{flex:none;width:22px;height:22px;border-radius:50%;background:#0f0e14}
+.rc-cut i:first-child{margin-left:-11px}.rc-cut i:last-child{margin-right:-11px}
+.rc-cut span{flex:1;height:0;border-top:2px dashed rgba(255,255,255,.14);margin:0 6px}
+.rc-bot{padding:6px 16px 16px;display:flex;flex-direction:column;gap:12px}
+.rc-bot .rc-lines{border-top:0!important;padding-top:6px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5130,20 +5147,23 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
-        h('div', { className: 'rc-hero' },
-          h('span', { className: 'rc-st ' + stt[1] }, h('i'), stt[0]),
-          h('b', { className: 'rc-amt' }, money(o.total)),
-          h('span', { className: 'rc-when' }, o.when),
-          h('div', { className: 'rc-perf', 'aria-hidden': true })),
+        h('div', { className: 'rc-paper st-' + st.st },
+          h('div', { className: 'rc-top' },
+            h('span', { className: 'rc-badge' }, h('span', { className: 'rc-badge-glow' }), h('span', { className: 'rc-badge-in' }, h(F.Icon, { name: ({ paid: 'check', pending: 'clock', refunded: 'rotateCcw', failed: 'x' })[st.st], size: 26, stroke: 2.4 }))),
+            h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
+            h('b', { className: 'rc-amt' }, money(o.total)),
+            h('span', { className: 'rc-when' }, o.when),
+            h('span', { className: 'rc-st ' + stt[1] }, h('i'), stt[0])),
+          h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
+          h('div', { className: 'rc-bot' },
+          h('div', { className: 'rc-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
+          h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
+            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total)))))),
         st.st === 'pending' || st.st === 'refunded' ? h('div', { className: 'rc-tl' },
           [['Refund requested', 'Nov 04, 10:12 AM', true], ['Approved by organizer', st.st === 'refunded' ? 'Nov 04, 2:30 PM' : 'Usually within 24h', st.st === 'refunded'], ['Back on ' + o.pmT.replace('Apple Pay · ', ''), st.st === 'refunded' ? 'Nov 06 · ' + money(o.total - FEE) : '5–10 business days', st.st === 'refunded']].map(function (r, i) {
             return h('div', { key: i, className: cx('rc-step', r[2] && 'done') }, h('span', { className: 'rc-dot' }, r[2] ? h(F.Icon, { name: 'check', size: 12, stroke: 3 }) : null), h('div', null, h('b', null, r[0]), h('span', null, r[1])));
           })) : null,
         st.st === 'failed' ? h('div', { className: 'rc-failbox' }, h(F.Icon, { name: 'x', size: 16 }), h('span', null, 'Declined by bank · Insufficient funds. You were not charged.')) : null,
-        h('div', { className: 'rc-card' },
-          h('div', { className: 'rc-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
-          h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
-            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total))))),
         h('div', { className: 'rc-card rc-meta' },
           h('div', null, h('span', null, 'Payment method'), h('b', { className: 'rc-pm' }, h(CardLogo, { k: o.pm }), o.pmT)),
           h('div', null, h('span', null, 'Transaction ID'), h('b', null, 'ch_3Q' + id.slice(-4) + 'Xa9LkT')),
