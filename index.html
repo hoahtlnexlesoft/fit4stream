@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104080812"</script>
+<script>window.__BUILD__="20261104081725"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3143,6 +3143,8 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .rc-cut span{flex:1;height:0;border-top:2px dashed rgba(255,255,255,.14);margin:0 6px}
 .rc-bot{padding:6px 16px 16px;display:flex;flex-direction:column;gap:12px}
 .rc-bot .rc-lines{border-top:0!important;padding-top:6px!important}
+.soon5{color:#F6C26B!important;font-weight:600}
+.f4-icon.nofill,.f4-icon.nofill path{fill:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4547,9 +4549,9 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'cf2', ref: box, onPointerDown: down, onPointerMove: move, onPointerUp: up, onPointerCancel: up,
         onClickCapture: function (e) { if (S.current.moved) { e.stopPropagation(); e.preventDefault(); S.current.moved = false; } } },
         list.map(function (v) {
-          var e = heroes[v % N], live = e.status === 'live', reg = p.reg;
+          var e = heroes[v % N], live = e.status === 'live', reg = p.reg, soon = e.id === 'seo' && p.nav.authed;
           return h('div', { key: v, className: 'cf-card cf2-card', ref: function (el) { cards.current[v] = el; }, style: { backgroundImage: 'url(' + e.img + ')' } },
-            h(Tap, { className: 'cf-hit', label: e.title, go: function () { if (live && reg && p.nav.authed) { window.__focusChat = false; p.nav.push('player'); } else p.nav.push('detail:' + e.id); } }),
+            h(Tap, { className: 'cf-hit', label: e.title, go: function () { if (soon) return p.nav.push('player:waiting'); if (live && reg && p.nav.authed) { window.__focusChat = false; p.nav.push('player'); } else p.nav.push('detail:' + e.id); } }),
             h('div', { className: 'cf-top' }, h('span', { className: 'cat-tag' }, e.cat)),
             h('div', { className: 'cf-cap' },
               live ? h('div', { className: 'cf-livebar' },
@@ -4557,7 +4559,8 @@ i.r-you{background:#fff!important;color:#14121a!important}
                 h('span', { className: 'live-view' }, h('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z' }), h('circle', { cx: 12, cy: 12, r: 3 })), (e.viewers || '2.4K') + ' watching')) : null,
               h('b', null, e.title), h('span', { className: 'org' }, 'by ' + e.org),
               h('div', { className: 'cf-foot' },
-                live ? h('span', { className: 'live-since' }, h('i'), 'Started 12 min ago') : h('span', { className: 'soon' }, h(F.Icon, { name: 'clock', size: 14 }), e.date.replace(', 2026', '')),
+                live ? h('span', { className: 'live-since' }, h('i'), 'Started 12 min ago') : soon ? h('span', { className: 'soon soon5' }, h(F.Icon, { name: 'clock', size: 14 }), 'Starts in 5 min') : h('span', { className: 'soon' }, h(F.Icon, { name: 'clock', size: 14 }), e.date.replace(', 2026', '')),
+                soon ? h(Tap, { className: 'mini-cta live', go: function () { p.nav.push('player:waiting'); } }, h('span', { className: 'row gap6' }, h(F.Icon, { name: 'clock', size: 14, className: 'nofill', stroke: 2.2 }), 'Enter waiting room')) :
                 h(Tap, { className: live && reg ? 'mini-cta live' : 'mini-cta', go: function () { if (live && !p.nav.authed) return p.nav.requireAuth('Sign in to register for this event'); p.nav.push(live && reg ? 'player' : (live ? 'checkout' : 'detail:' + e.id)); } }, live && reg ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Join Live Event') : 'Register'))));
         })),
       h('div', { className: 'dots' }, heroes.map(function (x, i) { return h('span', { key: i, className: i === slide ? 'on' : '', onClick: function () { go(i); } }); })));
@@ -4934,6 +4937,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
           h('span', { className: 'dt-b soft' }, h(F.Icon, { name: 'users', size: 13 }), e.registers + ' registered')),
         h('div', { className: 'dt-meta' }, h('span', null, e.date.replace(', 2026', '')), h('i', null), h('span', { className: 'dt-box' }, e.price), h('i', null), h('span', null, start + ' · ' + dur), h('i', null), h('span', null, e.cat)),
         ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
+          : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room \u00b7 starts in 5 min')
           : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
         h('div', { className: 'dt-acts' },
           h(Tap, { className: cx('dt-act', saved && 'on'), onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h('span', null, h(F.Icon, { name: saved ? 'check' : 'plus', size: 22 })), saved ? 'Saved' : 'Save'),
