@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104084707"</script>
+<script>window.__BUILD__="20261104084908"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3368,6 +3368,10 @@ input,textarea{caret-color:#F4A425}
 .chl-fb.on{width:34px;padding:0;background:rgba(255,255,255,.1);color:#fff}
 .tabscreen.ch2{padding-top:0!important}
 .ch2-cover{height:calc(var(--st) + 170px)!important}
+.et3-badge .live-pill{animation:none!important;box-shadow:none!important}
+.et3-join{background:rgba(255,255,255,.14)!important;box-shadow:none!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.et3-time.on{background:rgba(10,9,14,.5)!important}
+.et3-by .f4-avatar{box-shadow:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4484,7 +4488,6 @@ input,textarea{caret-color:#F4A425}
     return h(Tap, { className: cx('etile et3', p.wide && 'wide'), go: function () { if (live && p.nav.authed && p.nav.registered !== false) { window.__focusChat = false; return p.nav.push('player'); } p.nav.push('detail:' + e.id); } },
       h('span', { className: 'et3-bg', style: { backgroundImage: 'url(' + e.img + ')' } }),
       h('span', { className: 'et3-shade' }),
-      live ? h('span', { className: 'et3-ring', 'aria-hidden': true }) : null,
       live ? null : h('span', { className: 'et3-cat' }, e.cat),
       live ? h('span', { className: 'et3-badge' }, h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { className: 'et3-watch' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))) : null,
       h('div', { className: 'et3-cap' },
