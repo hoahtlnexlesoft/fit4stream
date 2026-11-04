@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104090839"</script>
+<script>window.__BUILD__="20261104091005"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3416,6 +3416,8 @@ input,textarea{caret-color:#F4A425}
 .fs-hearts .hrt:nth-child(3n){--dx:-18px}.fs-hearts .hrt:nth-child(3n+1){--dx:8px}.fs-hearts .hrt:nth-child(3n+2){--dx:-30px}
 .fs-hearts .hrt svg,.fs-hearts .hrt>span{width:30px!important;height:30px!important}
 .player.fs .fs-hearts{z-index:20!important}
+.list-hero{height:calc(var(--st) + 300px)!important;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 45%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 45%,transparent 100%);z-index:0}
+.list-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,14,.25),rgba(10,9,14,.55))}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4614,7 +4616,7 @@ input,textarea{caret-color:#F4A425}
     var heroImg = look ? PH[look[0]] : null;
     if (heroImg && used.indexOf(heroImg) >= 0) heroImg = ['festival', 'theater', 'hero-concert', 'comedy', 'movie', 'sports'].map(function (k) { return PH[k]; }).filter(function (x) { return x && used.indexOf(x) < 0; })[0] || heroImg;
     return h('div', { className: 'screen tabscreen' },
-      look ? h('div', { className: 'list-hero', style: { backgroundImage: 'linear-gradient(180deg, rgba(20,10,31,.2), var(--bg)), url(' + heroImg + ')' } }) : h('div', { className: 'tab-amb', 'aria-hidden': true }),
+      look ? h('div', { className: 'list-hero', style: { backgroundImage: 'url(' + heroImg + ')' } }) : h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: look ? '' : name }),
       look ? h('div', { className: 'pad', style: { marginTop: 40 } }, h('h1', { className: 'h-xl' }, name), h('p', { className: 'muted small', style: { marginTop: 4 } }, list.length + (list.length === 1 ? ' event' : ' events'))) : null,
       h('div', { className: 'pad col gap14', style: { marginTop: 16 } },
