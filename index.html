@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104034925"</script>
+<script>window.__BUILD__="20261104035045"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2365,6 +2365,24 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .fl2 .full-chat{left:44px!important}
 .fl2 .full-bar{padding:0 24px 14px 44px!important}
 .fl2 .cam.big{right:24px!important}
+
+/* Fullscreen chat panel */
+.fl2-panel{position:absolute;top:12px;right:12px;bottom:12px;width:300px;z-index:6;display:flex;flex-direction:column;border-radius:22px;background:rgba(14,13,20,.78);-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);animation:fl2In .3s cubic-bezier(.2,.8,.2,1) both;overflow:hidden}
+@keyframes fl2In{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.fl2-ph{display:flex;align-items:center;gap:8px;padding:14px 12px 10px 16px}
+.fl2-ph b{font-size:15px;color:#fff}
+.fl2-ph span{flex:1;font-size:12px;color:rgba(255,255,255,.5)}
+.fl2-px{width:30px;height:30px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.08);color:#fff}
+.fl2-list{flex:1;overflow-y:auto;padding:4px 12px 10px;display:flex;flex-direction:column;gap:8px;scrollbar-width:none}
+.fl2-list .f4-chat-bub{background:rgba(255,255,255,.06)}
+.fl2-input{display:flex;gap:8px;padding:10px 12px 12px}
+.fl2-input input{flex:1;min-width:0;height:40px;padding:0 14px;border:0;border-radius:20px;background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:14px;outline:none}
+.fl2-send{width:40px;height:40px;border:0;border-radius:50%;display:grid;place-items:center;background:#f4a425;color:#1b1306;cursor:pointer}
+.fl2-send:disabled{opacity:.4}
+.fl2 .ctl{position:relative}
+.fl2-cnt{position:absolute;top:-3px;right:-3px;min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:700;background:#f4a425;color:#1b1306}
+.fl2:has(.fl2-panel) .full-top{right:324px!important}
+.fl2:has(.fl2-panel) .full-bar{padding-right:324px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4397,6 +4415,10 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     var s = useState(0), q = s[0], setQ = s[1];
     var ms = useState(false), muted = ms[0], setMuted = ms[1];
     var cs = useState(true), chat = cs[0], setChat = cs[1];
+    var ps = useState(false), panel = ps[0], setPanel = ps[1];
+    var msgs0 = [['thao15 nguyen15', 'Welcome everyone to the market tour!', true], ['Thao 13', 'Hello from Saigon'], ['Linh Tran', 'The lights look amazing \u2728'], ['Minh Pham', 'Joining from Da Nang!']];
+    var mg = useState(msgs0), msgs = mg[0], setMsgs = mg[1], dr = useState(''), draft = dr[0], setDraft = dr[1];
+    function send(e) { e && e.preventDefault && e.preventDefault(); var t = draft.trim(); if (!t) return; tap(6); setMsgs(msgs.concat([['Thao 13', t]])); setDraft(''); }
     var us = useState(true), ui = us[0], setUi = us[1];
     var ls = useState(false), liked = ls[0], setLiked = ls[1];
     var hs = useState([]), hearts = hs[0], setHearts = hs[1];
@@ -4416,15 +4438,19 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h(F.Badge, { tone: 'live' }, 'Live'), h('span', { className: 'pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'), h('span', { className: 'pill' }, h(F.Icon, { name: 'clock', size: 12 }), '02:14:47 left')),
-      chat ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
+      chat && !panel ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
       flash ? h('div', { key: flash.k, className: 'fl2-flash' }, flash.m) : null,
       h('div', { className: 'fl2-hearts', 'aria-hidden': true }, hearts.map(function (x) { return h('span', { key: x.id, style: { '--x': x.x + 'px', animationDelay: x.d + 'ms', transform: 'scale(' + x.s + ')' } }, h(F.Icon, { name: 'heart', filled: true, size: 20 })); })),
+      panel ? h('aside', { className: 'fl2-panel', role: 'dialog', 'aria-label': 'Live chat' },
+        h('div', { className: 'fl2-ph' }, h('b', null, 'Live chat'), h('span', null, msgs.length + ' messages'), h(Tap, { className: 'fl2-px', label: 'Close chat', onClick: function () { setPanel(false); } }, h(F.Icon, { name: 'x', size: 16 }))),
+        h('div', { className: 'fl2-list', ref: function (el) { if (el) el.scrollTop = el.scrollHeight; } }, msgs.map(function (m, i) { return h(F.ChatMessage, { key: i, src: av(m[0]), name: m[0], initials: ini(m[0]), seed: i, host: !!m[2], text: m[1] }); })),
+        h('form', { className: 'fl2-input', onSubmit: send }, h('input', { value: draft, placeholder: 'Say something\u2026', onChange: function (e) { setDraft(e.target.value); } }), h('button', { type: 'submit', className: 'fl2-send', 'aria-label': 'Send', disabled: !draft.trim() }, h(F.Icon, { name: 'send', size: 16 })))) : null,
       h('div', { className: 'full-bar fl2-ui' },
         h(Tap, { className: cx('ctl', muted && 'on'), label: muted ? 'Unmute' : 'Mute', onClick: function () { tap(5); setMuted(!muted); say(muted ? 'Sound on' : 'Muted'); } }, vol),
         h('span', { style: { flex: 1 } }),
         h('span', { style: { fontSize: 12, opacity: .75 } }, 'Quality'),
         ['Auto', '1080p', '720p', '480p'].map(function (t, i) { return h('button', { key: t, type: 'button', className: cx('q', i === q && 'on'), onClick: function () { tap(5); setQ(i); say('Quality: ' + t); } }, t); }),
-        h(Tap, { className: cx('ctl', chat && 'on'), label: chat ? 'Hide chat' : 'Show chat', onClick: function () { tap(5); setChat(!chat); say(chat ? 'Chat hidden' : 'Chat shown'); } }, h(F.Icon, { name: 'message', size: 18 })),
+        h(Tap, { className: cx('ctl', panel && 'on'), label: panel ? 'Close chat' : 'Open chat', onClick: function () { tap(5); setPanel(!panel); setUi(true); } }, h(F.Icon, { name: 'message', size: 18 }), msgs.length ? h('i', { className: 'fl2-cnt' }, msgs.length) : null),
         h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
   }
 
