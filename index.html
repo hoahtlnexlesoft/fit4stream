@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104131740"</script>
+<script>window.__BUILD__="20261104131902"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3493,7 +3493,6 @@ input,textarea{caret-color:#F4A425}
 .stage .top{left:0!important;right:0!important;width:auto!important;top:var(--st)!important}
 
 .stage .top{transition:background .2s,box-shadow .2s}
-.stage.scrolled .top{background:rgba(17,15,23,.86)!important;-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 
 .l3-skip{position:absolute;z-index:10;top:calc(var(--st,47px) + 10px);right:16px;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px 0 14px;border:0;border-radius:999px;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);cursor:pointer;animation:fade .4s .6s both}
 .l3-skip:active{transform:scale(.96);background:rgba(255,255,255,.16)}
@@ -3503,8 +3502,11 @@ input,textarea{caret-color:#F4A425}
 
 .stage.scrolled .og-back,.stage.scrolled .ch2-back,.stage.scrolled .dt-close{background:rgba(18,16,24,.78)!important;border-color:rgba(255,255,255,.14)!important;transition:background .2s}
 
-.sb-scrim{position:absolute;left:0;right:0;top:0;height:var(--st);z-index:39;pointer-events:none;background:rgba(17,15,23,.95);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);opacity:0;transition:opacity .2s}
-.stage.scrolled>.sb-scrim{opacity:1}
+
+/* iOS-like transparent header: no bar background, just a soft shadow so text/icons stay legible over content */
+.stage .top .top-title{text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 12px rgba(0,0,0,.45)}
+.stage .top .f4-iconbtn{background:#25232c!important;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.statusbar{text-shadow:0 1px 3px rgba(0,0,0,.5)}.statusbar svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6555,7 +6557,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
       swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
       h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
-        h(Comp, { nav: nav, key: top, param: tparam }), h('i', { className: 'sb-scrim', 'aria-hidden': true })),
+        h(Comp, { nav: nav, key: top, param: tparam })),
       tabbed ? h(TabBar, { active: tname, nav: nav }) : null,
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
         h('span', { className: 'f4-badge f4-badge-live', style: { position: 'absolute', left: 8, top: 8 } }, h('span', { className: 'f4-live-dot' }), 'Live'),
