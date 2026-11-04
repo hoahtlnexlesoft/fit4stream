@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104100251"</script>
+<script>window.__BUILD__="20261104100918"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3474,6 +3474,12 @@ input,textarea{caret-color:#F4A425}
 .as2-emb{display:flex;justify-content:center;margin:-4px 0 4px}
 .ed-emb{display:flex;justify-content:center;margin:0 auto 6px}
 .sc-emb{flex:none;margin:-10px -6px -10px -10px}
+
+.nt2-sh{display:flex;align-items:center;justify-content:space-between;margin:0 2px 6px 0}
+.nt2-sh h3{margin-bottom:0}
+.nt2-clr{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);padding:6px 2px;cursor:pointer}
+.nt2-clr:active{color:#F6C26B}
+.nt2-empty{padding-top:40px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4770,6 +4776,7 @@ input,textarea{caret-color:#F4A425}
   function Notifications(p) {
     var fs = useState('all'), f = fs[0], setF = fs[1];
     var rs = useState({}), read = rs[0], setRead = rs[1];
+    var cs = useState(window.__NT_EMPTY ? { 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1 } : {}), gone = cs[0], setGone = cs[1];
     var N = [
       { id: 1, g: 'Today', k: 'live', img: EV.xmas.img, ic: 'radio', c: '#E5484D', t: 'Danang Christmas Market 2026 is live', d: 'thao15 nguyen15 just went live \u2014 2.4K watching', time: '2m', cta: 'Join', go: 'player', unread: true },
       { id: 2, g: 'Today', k: 'tickets', img: EV.xmas.img, ic: 'ticket', c: '#39C87C', t: 'Ticket confirmed', d: '2 \u00d7 Standard \u00b7 $6.87 paid with Visa \u2022\u2022\u2022\u2022 4242', time: '15m', cta: 'Receipt', go: 'receipt:F4S-261103-0412', unread: true },
@@ -4778,6 +4785,8 @@ input,textarea{caret-color:#F4A425}
       { id: 5, g: 'Earlier', k: 'reminders', img: PH.concert, ic: 'star', c: '#F4A425', t: 'How was \u201cFor payout batch 5.Nov-1\u201d?', d: 'Tap a star to rate the event', time: 'Yesterday', stars: true, go: 'reviews' },
       { id: 6, g: 'Earlier', k: 'tickets', img: PH.concert, ic: 'rotateCcw', c: '#39CAE0', t: 'Refund completed', d: '$10.48 is back on your Visa \u2022\u2022\u2022\u2022 4242', time: 'Oct 31', go: 'receipt:F4S-261030-0977' }
     ];
+    N = N.filter(function (n) { return !gone[n.id]; });
+    var EMP = { all: ['bell', 'You\u2019re all caught up', 'New notifications about your events will appear here.'], live: ['live', 'No live alerts', 'When channels you follow go live, you\u2019ll see it here.'], tickets: ['ticket', 'No ticket updates', 'Purchases, receipts and refunds will show up here.'], reminders: ['calendar', 'No reminders', 'Events you register for will remind you before they start.'], social: ['users', 'No social activity', 'New followers and mentions will appear here.'] };
     var FL = [['all', 'All'], ['live', 'Live'], ['tickets', 'Tickets'], ['reminders', 'Reminders'], ['social', 'Social']];
     var list = N.filter(function (n) { return f === 'all' || n.k === f; });
     var groups = ['Today', 'Earlier'].map(function (g) { return [g, list.filter(function (n) { return n.g === g; })]; }).filter(function (x) { return x[1].length; });
@@ -4787,7 +4796,7 @@ input,textarea{caret-color:#F4A425}
       h(Top, { back: p.nav.back, title: 'Notifications', actions: h(Tap, { className: 'nt2-mark', label: 'Mark all as read', onClick: function () { var r = {}; N.forEach(function (n) { r[n.id] = 1; }); setRead(r); p.nav.toast('All caught up'); } }, h(F.Icon, { name: 'check', size: 18 })) }),
       h('div', { className: 'nt2-chips' }, FL.map(function (x) { return h(Tap, { key: x[0], className: cx('nt2-chip', f === x[0] && 'on'), onClick: function () { tap(5); setF(x[0]); } }, x[1], x[0] === 'all' && unread ? h('em', null, unread) : null); })),
       groups.length ? groups.map(function (gr) {
-        return h('section', { key: gr[0], className: 'nt2-sec' }, h('h3', null, gr[0]),
+        return h('section', { key: gr[0], className: 'nt2-sec' }, h('div', { className: 'nt2-sh' }, h('h3', null, gr[0]), h(Tap, { className: 'nt2-clr', onClick: function () { tap(6); var o = Object.assign({}, gone); gr[1].forEach(function (n) { o[n.id] = 1; }); setGone(o); } }, 'Clear')),
           h('div', { className: 'nt2-list' }, gr[1].map(function (n) {
             var un = n.unread && !read[n.id];
             return h(Tap, { key: n.id, className: cx('nt2-it', un && 'un'), go: function () { setRead(Object.assign({}, read, (function () { var o = {}; o[n.id] = 1; return o; })())); if (n.go) p.nav.push(n.go); } },
@@ -4799,7 +4808,7 @@ input,textarea{caret-color:#F4A425}
                 n.stars ? h('span', { className: 'nt2-stars' }, [1, 2, 3, 4, 5].map(function (i) { return h(F.Icon, { key: i, name: 'star', size: 18, filled: true }); })) : null),
               un ? h('i', { className: 'nt2-dot' }) : null);
           })));
-      }) : h(F.EmptyState, { art: 'bell', title: 'You\u2019re all caught up', body: 'New notifications about your events will appear here.' }),
+      }) : h('div', { className: 'nt2-empty' }, h(F.EmptyState, { key: f, art: EMP[f][0], title: EMP[f][1], body: EMP[f][2] })),
       h('div', { style: { height: 40 } }));
   }
 
@@ -6193,7 +6202,7 @@ input,textarea{caret-color:#F4A425}
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
-    window.__jump = function (n) { if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
     // swipe back from the left edge
