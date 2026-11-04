@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104134916"</script>
+<script>window.__BUILD__="20261104135407"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3525,17 +3525,19 @@ input,textarea{caret-color:#F4A425}
 .stage::before{content:none}
 
 /* progressive blur under the floating header (stacked bands, no mask, so it also works in iOS Safari) */
-.top-blur{position:fixed!important;left:0;right:0;top:0;height:calc(var(--st) + 100px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(180deg,rgba(15,14,20,.72) 0%,rgba(15,14,20,.55) 55%,rgba(15,14,20,.2) 80%,rgba(15,14,20,0) 100%)}
+.top-blur{position:fixed!important;left:0;right:0;top:0;height:calc(var(--st) + 84px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(180deg,rgba(15,14,20,.5) 0%,rgba(15,14,20,.32) 55%,rgba(15,14,20,.1) 80%,rgba(15,14,20,0) 100%)}
 .top-blur b{position:absolute;left:0;right:0;top:0;display:block;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 70%,transparent 100%)}
-.top-blur b:nth-child(1){height:100%;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
-.top-blur b:nth-child(2){height:calc(var(--st) + 86px);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.top-blur b:nth-child(3){height:calc(var(--st) + 72px);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.top-blur b:nth-child(4){height:calc(var(--st) + 56px);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
+.top-blur b:nth-child(1){height:100%;-webkit-backdrop-filter:blur(.8px);backdrop-filter:blur(.8px)}
+.top-blur b:nth-child(2){height:calc(var(--st) + 72px);-webkit-backdrop-filter:blur(1.6px);backdrop-filter:blur(1.6px)}
+.top-blur b:nth-child(3){height:calc(var(--st) + 62px);-webkit-backdrop-filter:blur(2.6px);backdrop-filter:blur(2.6px)}
+.top-blur b:nth-child(4){height:calc(var(--st) + 56px);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .stage.scrolled .top-blur{opacity:1}
 
 .stage .brand-head,.stage .d-top{z-index:35!important}
 
 .stage .top,.stage .brand-head,.stage .d-top,.stage .og-back,.stage .ch2-back,.stage .dt-close{z-index:40!important}
+
+.top-blur.nohd{height:calc(var(--st) + 30px)!important}.top-blur.nohd b{height:100%!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6581,7 +6583,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     useEffect(function () {
       var st = stageEl.current; if (!st || /^(player|full)$/.test(top.split(':')[0])) return;
       function place() {
-        var hd = st.querySelector('.top, .brand-head, .d-top, .og-back, .ch2-back, .dt-close'); if (!hd || !hd.parentNode) return;
+        var hd = st.querySelector('.top, .brand-head, .d-top, .og-back, .ch2-back, .dt-close');
+        if (!hd) { var scr = st.querySelector('.screen'); if (!scr) return; var c0 = st.querySelector('.top-blur'); if (c0 && c0.parentNode === scr) return; if (c0) c0.remove(); var b0 = document.createElement('i'); b0.className = 'top-blur nohd'; b0.setAttribute('aria-hidden', 'true'); b0.innerHTML = '<b></b><b></b><b></b><b></b>'; scr.insertBefore(b0, scr.firstChild); return; }
         var sc = hd.parentNode; while (sc && sc !== st && !/(auto|scroll)/.test(getComputedStyle(sc).overflowY)) sc = sc.parentNode;
         var host = sc && sc !== st ? sc : hd.parentNode, cur = st.querySelector('.top-blur');
         if (cur && cur.parentNode === host) return;
