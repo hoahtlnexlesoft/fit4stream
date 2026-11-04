@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104074214"</script>
+<script>window.__BUILD__="20261104074335"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3033,6 +3033,33 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .fl3-chat{-webkit-mask-image:none!important;mask-image:none!important}
 .fl3-chat .im-msg:first-child{opacity:.75}
 .fs-chat .im-sys{align-self:flex-start;margin-left:35px;padding:4px 10px;border-radius:10px;background:rgba(10,9,14,.5);color:rgba(255,255,255,.75)!important}
+.wr-bg{animation:wr-kb 24s ease-in-out infinite alternate;filter:saturate(1.1)}
+@keyframes wr-kb{from{transform:scale(1.04)}to{transform:scale(1.14) translateY(-10px)}}
+.player.fs.is-state .fs-scrim-b{height:100%;background:linear-gradient(180deg,rgba(8,7,12,.55) 0%,rgba(8,7,12,.62) 35%,rgba(8,7,12,.9) 70%,#0b0a10 100%)}
+.wr{position:absolute;left:0;right:0;top:calc(var(--st) + 70px);bottom:calc(var(--sb) + 20px);z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;text-align:center}
+.wr-hero{position:relative;width:204px;height:204px;display:grid;place-items:center}
+.wr-prog{position:absolute;inset:0}
+.wr-av{position:relative;border-radius:50%;box-shadow:0 0 0 6px rgba(10,9,14,.55),0 20px 50px rgba(0,0,0,.5)}
+.wr-av .f4-avatar{box-shadow:none!important}
+.wr-ring{position:absolute;left:50%;top:50%;width:204px;height:204px;margin:-102px 0 0 -102px;border-radius:50%;border:1.5px solid rgba(244,164,37,.45);animation:wr-pulse 3.6s ease-out infinite;opacity:0}
+.wr-ring.r2{animation-delay:1.2s}.wr-ring.r3{animation-delay:2.4s}
+@keyframes wr-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.7);opacity:0}}
+.wr-tag{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);height:28px;padding:0 12px;border-radius:14px;display:inline-flex;align-items:center;gap:7px;background:linear-gradient(90deg,#F4A425,#E5484D);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;box-shadow:0 8px 20px rgba(229,72,77,.35)}
+.wr-tag i{width:6px;height:6px;border-radius:50%;background:#fff;animation:f4-pulse 1.4s infinite}
+.wr-cd{margin-top:34px;display:flex;align-items:flex-start;gap:10px}
+.wr-cd>div{width:92px;padding:12px 0 10px;border-radius:20px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.wr-cd b{display:block;font-size:46px;line-height:50px;font-weight:800;color:#fff;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.wr-cd span{display:block;margin-top:2px;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.5)}
+.wr-cd em{font-style:normal;font-size:40px;line-height:70px;font-weight:700;color:rgba(255,255,255,.4)}
+.wr-t{margin:26px 0 0;font-size:22px;line-height:28px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.wr-s{margin:6px 0 0;font-size:13.5px;color:rgba(255,255,255,.6)}.wr-s b{color:#fff;font-weight:600}
+.wr-crowd{margin-top:18px;display:inline-flex;align-items:center;gap:10px;height:38px;padding:0 14px 0 8px;border-radius:19px;background:rgba(255,255,255,.07);font-size:13px;color:rgba(255,255,255,.7)}
+.wr-crowd b{color:#fff}
+.wr-crowd .lv-stack .f4-avatar{box-shadow:0 0 0 2px #1d1b22!important}
+.wr-acts{margin-top:26px;display:flex;gap:10px;width:100%;max-width:360px}
+.wr-b{flex:1;height:50px;border-radius:25px;display:flex!important;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.1);color:#fff;font-size:14.5px;font-weight:700}
+.wr-b.on{background:rgba(57,200,124,.16);color:#7fe0a8}
+.wr-b.pri{background:#F4A425;color:#1b1306}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5262,7 +5289,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
     var muteIc = st.muted ? h('svg', { width: 19, height: 19, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M11 5L6 9H3v6h3l5 4zM22 9l-6 6M16 9l6 6' })) : h(F.Icon, { name: 'volume', size: 19 });
     var HOSTCAM = av('thao15 nguyen15'), SCREEN = EV.xmas.img;
     var bigIsScreen = !!st.swap;
-    var media = mode === 'waiting' || mode === 'ended' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
+    var media = mode === 'waiting' ? h('div', { className: 'fs-media wr-bg', style: { backgroundImage: 'url(' + SCREEN + ')' } }) : mode === 'ended' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
       : st.layout === 'grid' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
       : bigIsScreen ? h('div', { className: 'fs-media fs-feed', style: { backgroundImage: 'url(' + SCREEN + ')' }, onClick: function () { set({ ui: !st.ui }); } })
       : h('div', { className: 'fs-media', style: { backgroundImage: 'url(' + HOSTCAM + ')' }, onClick: function () { set({ ui: !st.ui }); } });
@@ -5291,7 +5318,27 @@ i.r-you{background:#fff!important;color:#14121a!important}
           h('span', { className: 'fs-pip-tag' }, h('i', null), bigIsScreen ? 'Host cam' : 'Live'),
           h('span', { className: 'fs-pip-sw', 'aria-hidden': true }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))))) : null,
       st.hand && !st.invite ? h('div', { className: 'fs-hand' }, h('span', { className: 'spinner sm' }), h('span', null, 'Hand raised · waiting for host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
-      mode === 'waiting' ? h('div', { className: 'fs-state' }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 64 }), h('span', { className: 'pvs-k' }, 'Starting soon'), h('b', { className: 'pvs-cd' }, fmtT(Math.max(0, 299 - (tk % 300))).replace(/^00:/, '')), h('span', { className: 'pvs-s' }, "You'll join automatically when the host goes live")) : null,
+      mode === 'waiting' ? (function () {
+        var rem = Math.max(0, 299 - (tk % 300)), mm = Math.floor(rem / 60), ss = rem % 60, R = 92, C = 2 * Math.PI * R, prog = rem / 300;
+        function z(n) { return (n < 10 ? '0' : '') + n; }
+        return h('div', { className: 'wr' },
+          h('div', { className: 'wr-hero' },
+            h('span', { className: 'wr-ring r1' }), h('span', { className: 'wr-ring r2' }), h('span', { className: 'wr-ring r3' }),
+            h('svg', { className: 'wr-prog', width: 204, height: 204, viewBox: '0 0 204 204', 'aria-hidden': true },
+              h('defs', null, h('linearGradient', { id: 'wrg', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#FACD60' }), h('stop', { offset: 1, stopColor: '#E74645' }))),
+              h('circle', { cx: 102, cy: 102, r: R, fill: 'none', stroke: 'rgba(255,255,255,.12)', strokeWidth: 4 }),
+              h('circle', { cx: 102, cy: 102, r: R, fill: 'none', stroke: 'url(#wrg)', strokeWidth: 4, strokeLinecap: 'round', strokeDasharray: C, strokeDashoffset: C * (1 - prog), transform: 'rotate(-90 102 102)', style: { transition: 'stroke-dashoffset 1s linear' } })),
+            h('span', { className: 'wr-av' }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 152 })),
+            h('span', { className: 'wr-tag' }, h('i'), 'Starting soon')),
+          h('div', { className: 'wr-cd', role: 'timer', 'aria-label': mm + ' minutes ' + ss + ' seconds' },
+            h('div', null, h('b', null, z(mm)), h('span', null, 'MIN')), h('em', null, ':'), h('div', null, h('b', null, z(ss)), h('span', null, 'SEC'))),
+          h('h2', { className: 'wr-t' }, 'Danang Christmas Market 2026'),
+          h('p', { className: 'wr-s' }, 'Hosted by ', h('b', null, 'thao15 nguyen15'), ' \u00b7 starts at 9:43 AM'),
+          h('div', { className: 'wr-crowd' }, h('span', { className: 'lv-stack' }, ['Sandra Smith', 'Nhan Doan', 'Linh Tran', 'Minh Pham'].map(function (n, i) { return h(F.Avatar, { key: n, src: av(n), name: n, initials: ini(n), size: 24, seed: i }); })), h('span', null, h('b', null, '318'), ' people are waiting')),
+          h('div', { className: 'wr-acts' },
+            h(Tap, { className: cx('wr-b', st.remind && 'on'), onClick: function () { tap(10); set({ remind: !st.remind }); p.nav.toast(st.remind ? 'Reminder off' : 'We\u2019ll ping you when it starts'); } }, h(F.Icon, { name: st.remind ? 'check' : 'bell', size: 17 }), st.remind ? 'Reminder on' : 'Remind me'),
+            h(Tap, { className: 'wr-b pri', onClick: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Invite friends')));
+      })() : null,
       mode === 'ended' ? h('div', { className: 'fs-state' }, h('span', { className: 'pvs-badge' }, 'Live ended'), h('b', { className: 'pvs-h' }, 'Thanks for watching!'), h('span', { className: 'pvs-s' }, '2h 17m · 2.4K watched · Replay soon'),
         h('div', { className: 'pvs-acts' }, h(Tap, { className: 'pvs-btn pri', go: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 15, filled: true }), 'Rate event'), h(Tap, { className: 'pvs-btn', go: function () { p.nav.root('home'); } }, 'Home'))) : null,
       live ? h('div', { className: 'fs-rail' },
