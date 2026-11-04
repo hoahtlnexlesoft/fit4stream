@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104052137"</script>
+<script>window.__BUILD__="20261104060930"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2746,6 +2746,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .pay-cards span{flex:1;text-align:left}.pay-cards svg:last-child{color:rgba(255,255,255,.4)}
 .ok-rc{align-self:center;margin-top:12px;height:34px;padding:0 14px;border-radius:17px;display:inline-flex!important;align-items:center;gap:6px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);font-size:13px;font-weight:600}
 .co-bar{position:sticky!important;bottom:0;margin-top:auto}.co2{display:flex;flex-direction:column}.co-fail-a .cd-btn{height:48px!important;flex:none!important;display:grid!important;place-items:center;border-radius:24px!important}
+.mbtn.me-av{background:transparent!important;overflow:hidden}.mbtn.me-av .f4-avatar{width:44px!important;height:44px!important;border:0!important;outline:0!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4202,7 +4203,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
           h('span', { className: 'brand' }, h(F.Logo, { size: 34, markOnly: true }), h('b', null, 'Fit4Stream')),
           h('span', { style: { flex: 1 } }),
           h(Tap, { className: 'mbtn ring bell', label: 'Notifications, 2 new', go: function () { p.nav.push('notifications'); } }, h('svg', { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z' }), h('path', { d: 'M10 20.5a2.2 2.2 0 0 0 4 0' }), h('path', { d: 'M12 3v2' })), h('span', { className: 'bdot' })),
-          p.nav.authed ? h(Tap, { className: 'mbtn me-av', label: 'Account', go: function () { p.nav.tab('account'); } }, h(F.Avatar, { src: AV.me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 36 })) : h(Tap, { className: 'mbtn signin-pill', label: 'Sign in', go: function () { p.nav.push('login'); } }, 'Sign in'),
+          p.nav.authed ? h(Tap, { className: 'mbtn me-av', label: 'Account', go: function () { p.nav.tab('account'); } }, h(F.Avatar, { src: AV.me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 44 })) : h(Tap, { className: 'mbtn signin-pill', label: 'Sign in', go: function () { p.nav.push('login'); } }, 'Sign in'),
           h(Tap, { className: 'mbtn ring', label: 'Search', go: function () { p.nav.push('search'); } }, h(F.Icon, { name: 'search', size: 19 }))),
         h('div', { className: 'pillrow top', role: 'tablist' }, chipNames.map(function (c, i) { return h('button', { key: c, type: 'button', role: 'tab', 'aria-selected': i === cat, className: cx('gchip', i === cat && 'on'), onClick: function () { tap(6); setCat(i); } }, c === 'All' ? 'For you' : c.replace(' and Performances', '').replace('Virtual ', '').replace(' and Demonstrations', '').replace(' and Community', '').replace(' and Training', '')); }))),
       h('div', { className: 'screen under-head', ref: ref, onTouchStart: ts, onTouchMove: tm, onTouchEnd: te, onScroll: function (e) { var v = e.currentTarget.scrollTop > 8; if (v !== solid) setSolid(v); } },
