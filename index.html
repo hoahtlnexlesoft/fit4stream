@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104084908"</script>
+<script>window.__BUILD__="20261104085033"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3372,6 +3372,7 @@ input,textarea{caret-color:#F4A425}
 .et3-join{background:rgba(255,255,255,.14)!important;box-shadow:none!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .et3-time.on{background:rgba(10,9,14,.5)!important}
 .et3-by .f4-avatar{box-shadow:none!important}
+.ch2-avtap{display:block!important;border-radius:50%}.ch2-av .f4-avatar img{object-fit:cover}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4627,14 +4628,17 @@ input,textarea{caret-color:#F4A425}
     var ds = useState(''), desc = ds[0], setDesc = ds[1];
     var tg = useState(['Concerts', 'Training', 'Live music']), tags = tg[0], setTags = tg[1];
     var camIc = h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.9, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z' }), h('circle', { cx: 12, cy: 13, r: 3.5 }));
+    var am = useState(window.__chAv || AV.me), avSrc = am[0], setAv = am[1];
+    var cm = useState(window.__chCover || PH.concert), cover = cm[0], setCover = cm[1];
+    function pick(kind) { var i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.onchange = function () { var f = i.files && i.files[0]; if (!f) return; var r = new FileReader(); r.onload = function () { if (kind === 'av') { window.__chAv = r.result; setAv(r.result); p.nav.toast('Profile photo updated'); } else { window.__chCover = r.result; setCover(r.result); p.nav.toast('Cover updated'); } }; r.readAsDataURL(f); }; i.click(); }
     var SOC = [['in', 'LinkedIn', ''], ['yt', 'YouTube', 'youtube.com/@thao13'], ['ig', 'Instagram', ''], ['fb', 'Facebook', '']];
     return h('div', { className: 'screen tabscreen ch2' },
-      h('div', { className: 'ch2-cover', style: { backgroundImage: 'url(' + PH.concert + ')' } },
+      h('div', { className: 'ch2-cover', style: { backgroundImage: 'url(' + cover + ')' } },
         h('span', { className: 'ch2-shade' }),
         h(Tap, { className: 'dt-glass ch2-back', label: 'Back', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 20 })),
-        h(Tap, { className: 'ch2-edit', onClick: function () { p.nav.toast('Choose a cover photo'); } }, camIc, 'Edit cover')),
+        h(Tap, { className: 'ch2-edit', onClick: function () { pick('cover'); } }, camIc, 'Edit cover')),
       h('div', { className: 'ch2-head' },
-        h('span', { className: 'ch2-av' }, h(F.Avatar, { src: AV.me, initials: 'T1', size: 96 }), h(Tap, { className: 'ch2-avb', label: 'Change photo', onClick: function () { p.nav.toast('Choose a profile photo'); } }, camIc)),
+        h('span', { className: 'ch2-av' }, h(Tap, { className: 'ch2-avtap', label: 'Change photo', onClick: function () { pick('av'); } }, h(F.Avatar, { src: avSrc, initials: 'T1', size: 96 })), h(Tap, { className: 'ch2-avb', label: 'Change photo', onClick: function () { pick('av'); } }, camIc)),
         h('h1', null, 'Thao 13 NGUYEN13'),
         h('span', { className: 'ch2-handle' }, '@thao13 \u00b7 Viewer channel'),
         h('div', { className: 'ch2-stats' }, [['128', 'Followers'], ['46', 'Following'], ['12', 'Events joined']].map(function (x, i) { return h(React.Fragment, { key: x[1] }, i ? h('i') : null, h('div', null, h('b', null, x[0]), h('span', null, x[1]))); }))),
