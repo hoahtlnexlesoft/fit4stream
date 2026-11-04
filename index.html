@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104045020"</script>
+<script>window.__BUILD__="20261104052137"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2505,6 +2505,247 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .cg-live{height:20px!important;font-size:10px!important}
 .cg-it:last-child:nth-child(odd){min-height:0!important;padding:12px 16px!important}
 .tl-arr{color:rgba(255,255,255,.35)!important}
+
+/* ===== Live: multi-speaker stage ===== */
+.pv.is-grid .pv-center,.pv.is-grid .pv-cam{display:none!important}
+.pv.is-grid{background-image:none!important;background:#0b0b10!important}
+.stg{position:absolute;left:8px;right:8px;top:calc(var(--st) + 58px);bottom:50px;display:grid;gap:6px;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;z-index:1}
+.stg.n1 .stg-t{grid-column:1/-1}
+.stg.n3 .stg-t:first-child{grid-column:1/-1}
+.stg-t{position:relative;border-radius:14px;overflow:hidden;background:#1a1922}
+.stg-t.speaking{box-shadow:0 0 0 2px #f4a425,0 0 18px rgba(244,164,37,.35)}
+.stg-img{position:absolute;inset:0;background-size:cover;background-position:center 30%}
+.stg-noc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:radial-gradient(circle,#2a2438,#16151c)}
+.stg-noc span{font-size:11px;color:rgba(255,255,255,.5)}
+.stg-tag{position:absolute;left:6px;bottom:6px;right:6px;display:flex;align-items:center;gap:5px;min-width:0}
+.stg-tag b{font-size:11.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.stg-mic{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.55);color:#fff}
+.stg-mic.off{background:#e74645}
+.stg-tag i,.ppl-r i{flex:none;font-style:normal;height:16px;padding:0 6px;border-radius:5px;display:inline-flex;align-items:center;font-size:9.5px;font-weight:700;letter-spacing:.02em;background:rgba(0,0,0,.55);color:#fff}
+i.r-host{background:#f4a425!important;color:#1b1306!important}
+i.r-organizer{background:#a57ad8!important;color:#fff!important}
+i.r-guest{background:rgba(57,202,224,.9)!important;color:#08202a!important}
+i.r-you{background:#fff!important;color:#14121a!important}
+.stg-eq{position:absolute;right:8px;top:8px;display:flex;align-items:flex-end;gap:2px;height:14px;padding:4px 5px;box-sizing:content-box;border-radius:7px;background:rgba(0,0,0,.5)}
+.stg-eq i{width:3px;border-radius:2px;background:#f4a425;animation:eqb .9s ease-in-out infinite;transform-origin:bottom;height:14px}
+.stg-eq i:nth-child(1){animation-delay:-.3s}.stg-eq i:nth-child(2){animation-delay:-.6s}
+.f4-chat-host.r-organizer{background:rgba(165,122,216,.22)!important;color:#d6bcfb!important}
+/* raise hand pending */
+.hand-toast.hand2{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 12px!important}
+.spinner.sm{width:14px;height:14px;border-width:2px}
+.hand-x{margin-left:4px;height:26px;padding:0 10px;border-radius:13px;display:inline-grid!important;place-items:center;background:rgba(255,255,255,.14);font-size:12px;font-weight:600}
+/* on stage bar */
+.onstage{display:flex;align-items:center;gap:8px;margin:10px 16px 0;padding:8px 8px 8px 14px;border-radius:18px;background:linear-gradient(90deg,rgba(244,164,37,.16),rgba(255,255,255,.05))}
+.os-live{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#fff}
+.os-live i{width:8px;height:8px;border-radius:50%;background:#f4a425;box-shadow:0 0 0 4px rgba(244,164,37,.2);animation:f4-pulse 1.4s infinite}
+.os-b{width:40px;height:40px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+.os-b.off{background:rgba(231,70,69,.18);color:#ff8a80}
+.os-leave{height:40px;padding:0 16px;border-radius:20px;display:inline-grid!important;place-items:center;background:#e74645;color:#fff;font-size:13.5px;font-weight:700}
+/* invite sheet */
+.inv{align-items:center;text-align:center;gap:0!important;padding:10px 22px calc(var(--sb) + 14px)!important;background:linear-gradient(180deg,#221c30,#17141f)!important}
+.inv-av{position:relative;margin:6px 0 14px}
+.inv-av span{position:absolute;right:-6px;bottom:-4px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#f4a425;font-size:15px;box-shadow:0 0 0 3px #1f1a2b}
+.inv h2{margin:0 0 6px;font-size:19px;line-height:25px;font-weight:700;color:#fff}
+.inv p{margin:0 0 16px;font-size:13.5px;line-height:19px;color:rgba(255,255,255,.6);max-width:300px}
+.inv-pre{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:10px 12px;margin-bottom:16px;border-radius:16px;background:rgba(255,255,255,.05);text-align:left}
+.inv-pre b{display:block;font-size:14px;color:#fff}.inv-pre span{font-size:12px;color:rgba(255,255,255,.5)}
+.inv-pre .os-b{flex:none}
+.inv .ok-later{margin-top:2px!important}
+/* chat extras */
+.pin-msg{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(244,164,37,.1)}
+.pin-ic{flex:none;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:rgba(244,164,37,.2);color:#f4a425}
+.pin-msg b{display:block;font-size:11.5px;font-weight:700;color:#f4a425;letter-spacing:.02em}
+.pin-msg span{display:block;font-size:13.5px;color:#fff;margin-top:1px}
+.sys-msg{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:rgba(255,255,255,.45)}
+.sys-msg i{width:5px;height:5px;border-radius:50%;background:rgba(57,202,224,.8)}
+/* people tab */
+.ppl{display:flex;flex-direction:column}
+.ppl-h{display:flex;align-items:center;gap:8px;margin:14px 0 6px!important;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.ppl-h:first-child{margin-top:4px!important}
+.ppl-h em{font-style:normal;height:18px;padding:0 7px;border-radius:9px;display:inline-grid;place-items:center;font-size:11px;background:rgba(255,255,255,.08);color:#fff;letter-spacing:0}
+.ppl-r{display:flex;align-items:center;gap:10px;padding:7px 0}
+.ppl-r b{font-size:14.5px;font-weight:600;color:#fff}
+.ppl-r i{margin-right:auto}
+.ppl-r .ppl-hand{margin-left:auto;font-size:18px}
+.ppl-mic{margin-left:auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);color:#fff}
+.ppl-mic.off{background:rgba(231,70,69,.15);color:#ff8a80}
+.ppl-stack{display:flex;align-items:center;padding:4px 0}
+.ppl-stack .f4-avatar{margin-right:-8px;box-shadow:0 0 0 2px #121116}
+.ppl-stack span{margin-left:16px;font-size:13px;color:rgba(255,255,255,.55)}
+/* waiting / ended / reconnect */
+.pv-state{background-size:cover;background-position:center}
+.pvs-dim{position:absolute;inset:0;background:rgba(10,9,14,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.pvs-mid{position:absolute;left:0;right:0;top:calc(var(--st) + 40px);bottom:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:0 24px}
+.pvs-k{margin-top:8px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#f4a425}
+.pvs-cd{font-size:44px;line-height:48px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.pvs-s{font-size:13px;color:rgba(255,255,255,.6)}
+.pvs-badge{height:24px;padding:0 10px;border-radius:12px;display:inline-grid;place-items:center;background:rgba(255,255,255,.12);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.pvs-h{font-size:24px;line-height:30px;font-weight:700;color:#fff;margin-top:4px}
+.pvs-acts{display:flex;gap:10px;margin-top:14px}
+.pvs-btn{height:42px;padding:0 18px;border-radius:21px;display:inline-flex!important;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:600}
+.pvs-btn.pri{background:#f4a425;color:#1b1306}
+.pv-rc{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:rgba(8,8,12,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff}
+.pv-rc b{font-size:15px;margin-top:6px}.pv-rc span:last-child{font-size:12.5px;color:rgba(255,255,255,.6)}
+.inv-av{margin:18px 0 14px!important}.stg-noc{padding-bottom:26px}.stg-noc span{display:none}
+
+/* ===================== Payment ===================== */
+.co2 .co-ev{display:flex;gap:12px;align-items:center;padding:10px;border-radius:18px;background:rgba(255,255,255,.05)}
+.co-ev-img{flex:none;width:72px;height:72px;border-radius:13px;background-size:cover;background-position:center}
+.co-ev-t{min-width:0;display:flex;flex-direction:column;gap:3px}
+.co-ev-t b{font-size:15px;line-height:20px;color:#fff}
+.co-ev-t>span:last-child{font-size:12.5px;color:rgba(255,255,255,.55)}
+.co-live{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#ff6b6b}
+.co-live i{width:6px;height:6px;border-radius:50%;background:#ff4d4d;animation:f4-pulse 1.4s infinite}
+.co-sec{display:flex;flex-direction:column;gap:10px}
+.co-sec h3{margin:0;font-size:15px;font-weight:700;color:#fff}
+.co-tix,.co-pm{display:flex;flex-direction:column;gap:8px}
+.co-tk,.co-pmr{display:flex!important;align-items:center;gap:12px;padding:14px;border-radius:16px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1.5px transparent;transition:box-shadow .2s,background .2s;text-align:left;width:100%}
+.co-tk.on,.co-pmr.on{background:rgba(244,164,37,.08);box-shadow:inset 0 0 0 1.5px #f4a425}
+.co-rad{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.75px rgba(255,255,255,.3);position:relative;transition:box-shadow .2s}
+.on>.co-rad{box-shadow:inset 0 0 0 6px #f4a425}
+.co-tk-t,.co-pmr-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.co-tk-t b,.co-pmr-t b{font-size:14.5px;color:#fff;display:flex;align-items:center;gap:8px}
+.co-tk-t em{font-style:normal;height:18px;padding:0 7px;border-radius:6px;display:inline-grid;place-items:center;font-size:10.5px;font-weight:700;background:rgba(165,122,216,.22);color:#d6bcfb}
+.co-tk-t span,.co-pmr-t span{font-size:12.5px;color:rgba(255,255,255,.5)}
+.co-tk-p{font-size:15.5px;color:#fff}
+.co-qty{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.05)}
+.co-qty>div:first-child{flex:1;display:flex;flex-direction:column;gap:2px}
+.co-qty b{font-size:14.5px;color:#fff}.co-qty>div:first-child span{font-size:12px;color:rgba(255,255,255,.5)}
+.stp{display:flex;align-items:center;gap:4px;padding:3px;border-radius:14px;background:rgba(255,255,255,.07)}
+.stp b{min-width:28px;text-align:center;font-size:16px;font-variant-numeric:tabular-nums}
+.stp-b{width:34px;height:34px;border-radius:11px;display:grid!important;place-items:center;background:rgba(255,255,255,.1);color:#fff}
+.stp-b.dis{opacity:.3}
+.co-cp{display:flex;align-items:center;gap:10px;height:52px;padding:0 6px 0 14px;border-radius:16px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1.5px transparent;color:rgba(255,255,255,.5)}
+.co-cp:focus-within{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
+.co-cp.err{box-shadow:inset 0 0 0 1.5px #e74645;animation:co-shake .35s}
+@keyframes co-shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.co-cp input{flex:1;min-width:0;background:none;border:0;outline:0;color:#fff;font:inherit;font-size:15px;font-weight:600;letter-spacing:.06em}
+.co-cp input::placeholder{letter-spacing:0;font-weight:400;color:rgba(255,255,255,.35)}
+.co-cp-apply{height:40px;padding:0 16px;border-radius:12px;display:inline-grid!important;place-items:center;background:#f4a425;color:#1b1306;font-size:14px;font-weight:700}
+.co-cp-apply.dis{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35)}
+.co-err,.co-hint{margin:6px 2px 0;font-size:12.5px;display:flex;align-items:center;gap:5px}
+.co-err{color:#ff7b7a}.co-hint{color:rgba(255,255,255,.4)}
+.co-cp-ok{display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:16px;background:linear-gradient(90deg,rgba(57,202,124,.14),rgba(57,202,124,.04));box-shadow:inset 0 0 0 1.5px rgba(57,202,124,.45)}
+.co-cp-ok>div{flex:1;display:flex;flex-direction:column;gap:1px}
+.co-cp-ok b{font-size:14.5px;letter-spacing:.06em;color:#fff}.co-cp-ok span{font-size:12.5px;color:#7fe0a8}
+.co-cp-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(57,202,124,.18);color:#7fe0a8}
+.co-cp-x{width:32px;height:32px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.08);color:#fff}
+.pm-logo{flex:none;width:46px;height:32px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;gap:1px;font-size:12px;font-weight:800;letter-spacing:.02em}
+.pm-apple{background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}.pm-apple svg{width:13px;height:13px;margin-top:-2px}
+.pm-google{background:#fff;color:#3c4043}.pm-google svg{width:12px;height:12px}
+.pm-apple b,.pm-google b{font-size:12.5px;font-weight:600}
+.pm-visa{background:linear-gradient(135deg,#1a1f71,#2b3bb0);color:#fff;font-style:italic;font-size:12.5px}
+.pm-mc{background:#24222b;gap:0}.pm-mc i{width:15px;height:15px;border-radius:50%;background:#eb001b}.pm-mc i+i{background:#f79e1b;margin-left:-6px;mix-blend-mode:screen}
+.pm-new{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18);color:#fff}
+.co-chev{color:rgba(255,255,255,.4)}
+.co-sum{display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:16px;background:rgba(255,255,255,.05)}
+.co-sum>div{display:flex;justify-content:space-between;font-size:14px;color:rgba(255,255,255,.65)}
+.co-sum .co-disc{color:#7fe0a8}
+.co-sum .co-tot{padding-top:10px;border-top:1px dashed rgba(255,255,255,.14);color:#fff;font-weight:600;align-items:baseline}
+.co-tot b{font-size:20px}
+.co-note{margin:0;display:flex;gap:8px;font-size:12px;line-height:17px;color:rgba(255,255,255,.45)}
+.co-note svg{flex:none;margin-top:1px}.co-note u{color:rgba(255,255,255,.75)}
+.co-bar{gap:16px!important}
+.co-bar-t{display:flex;flex-direction:column}
+.co-bar-t span{font-size:12px;color:rgba(255,255,255,.5)}.co-bar-t b{font-size:20px;color:#fff;font-variant-numeric:tabular-nums}
+.co-paybtn{flex:1;height:54px;border-radius:27px;display:grid!important;place-items:center;background:#f4a425;color:#1b1306;font-size:16px;font-weight:700}
+.co-paybtn.wallet{background:#000;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.co-paybtn-in{display:inline-flex;align-items:center;gap:3px}.co-paybtn-in svg{width:17px;height:17px;margin:-2px 0 0 4px}
+.co-proc{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 40px;text-align:center;background:rgba(10,9,14,.82);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);animation:sheet-scrim .3s ease both}
+.co-proc-ring{position:relative;width:96px;height:96px;margin-bottom:18px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 3px rgba(255,255,255,.07)}
+.co-proc-arc{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;border-top-color:#f4a425;border-right-color:#f4a425;animation:f4spin .9s linear infinite}
+@keyframes f4spin{to{transform:rotate(360deg)}}
+.co-proc b{font-size:18px;color:#fff}.co-proc>span{font-size:14px;color:rgba(255,255,255,.65)}
+.co-proc p{margin:14px 0 0;font-size:12.5px;color:rgba(255,255,255,.4)}
+.cd.co-fail .cd-ic{background:rgba(231,70,69,.16)!important;color:#ff7b7a!important}
+.co-fail-r{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;padding:10px 12px;margin:2px 0 16px;border-radius:14px;background:rgba(255,255,255,.05);text-align:left}
+.co-fail-r b{display:block;font-size:14px;color:#fff}.co-fail-r span{font-size:12px;color:#ff8a80}
+.co-fail-a{display:flex;flex-direction:column;gap:8px;width:100%}
+.co-fail-a .cd-btn{width:100%}
+.co-fail-pri{background:#f4a425!important;color:#1b1306!important}
+/* add card */
+.ac{gap:12px!important;padding-bottom:calc(var(--sb) + 12px)!important}
+.ac-head{display:flex;align-items:center;justify-content:space-between}
+.ac-head h2{margin:0;font-size:19px;font-weight:700;color:#fff}
+.ac-card{position:relative;height:178px;border-radius:20px;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;gap:16px;overflow:hidden;background:linear-gradient(135deg,#3a3446,#211d2a);transition:background .4s}
+.ac-card::after{content:"";position:absolute;right:-60px;top:-80px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06)}
+.ac-card.b-visa{background:linear-gradient(135deg,#2e3db8,#141a5c)}
+.ac-card.b-mc{background:linear-gradient(135deg,#3a2a1c,#1d1712)}
+.ac-chip{position:absolute;left:20px;top:22px;width:38px;height:28px;border-radius:7px;background:linear-gradient(135deg,#e9cf8f,#b48d3e)}
+.ac-brand{position:absolute;right:20px;top:20px;font-size:20px;font-weight:800;font-style:italic;color:#fff}
+.ac-brand .pm-logo{background:none}
+.ac-num{position:relative;z-index:1;font-size:21px;letter-spacing:.08em;color:#fff;font-variant-numeric:tabular-nums;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:600}
+.ac-meta{position:relative;z-index:1;display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:#fff}
+.ac-meta span{display:flex;flex-direction:column;gap:2px}.ac-meta span:last-child{text-align:right}
+.ac-meta i{font-style:normal;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:600}
+.ac-f{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.ac-f span{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.6)}
+.ac-f input{height:50px;padding:0 14px;border-radius:14px;border:0;outline:0;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1.5px transparent;color:#fff;font:inherit;font-size:15.5px;width:100%;box-sizing:border-box}
+.ac-f input:focus{box-shadow:inset 0 0 0 1.5px #f4a425}
+.ac-f input::placeholder{color:rgba(255,255,255,.3)}
+.ac-row{display:flex;gap:10px}
+.ac-save{display:flex!important;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.8);padding:4px 0}
+.ac-sw{flex:none;width:42px;height:26px;border-radius:13px;background:rgba(255,255,255,.15);position:relative;transition:background .2s}
+.ac-sw i{position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.ac-sw.on{background:#39c87c}.ac-sw.on i{transform:translateX(16px)}
+.ac-dis{opacity:.4}
+.ac-sec{margin:0;display:flex;justify-content:center;align-items:center;gap:6px;font-size:11.5px;color:rgba(255,255,255,.4)}
+/* receipt */
+.rc-hero{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 16px 30px;border-radius:22px 22px 6px 6px;background:radial-gradient(120% 90% at 50% 0%,rgba(244,164,37,.14),rgba(255,255,255,.04))}
+.rc-perf{position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 6px,transparent 6px 12px)}
+.rc-st{height:26px;padding:0 10px;border-radius:13px;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+.rc-st i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.rc-st.ok,.pay-st.ok{background:rgba(57,200,124,.14);color:#7fe0a8}
+.rc-st.rf,.pay-st.rf{background:rgba(57,202,224,.14);color:#7ad9ea}
+.rc-st.pd,.pay-st.pd{background:rgba(244,164,37,.14);color:#f6c26b}
+.rc-st.bad,.pay-st.bad{background:rgba(231,70,69,.14);color:#ff8a80}
+.rc-amt{font-size:40px;line-height:46px;font-weight:700;color:#fff;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.rc-when{font-size:13px;color:rgba(255,255,255,.55)}
+.rc-card{padding:14px;border-radius:18px;background:rgba(255,255,255,.05);display:flex;flex-direction:column;gap:12px}
+.rc-ev{display:flex;align-items:center;gap:12px}
+.rc-ev .thumb{flex:none;width:48px;height:48px;border-radius:12px;background-size:cover;background-position:center}
+.rc-ev b{display:block;font-size:14.5px;color:#fff}.rc-ev span{font-size:12px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums}
+.rc-lines{display:flex;flex-direction:column;gap:9px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07)}
+.rc-lines>div{display:flex;justify-content:space-between;font-size:14px;color:rgba(255,255,255,.65)}
+.rc-lines .neg{color:#7fe0a8}
+.rc-lines .rc-tot{padding-top:10px;border-top:1px dashed rgba(255,255,255,.14);color:#fff;font-weight:600}
+.rc-tot b{font-size:17px}
+.rc-meta>div{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13.5px}
+.rc-meta span{color:rgba(255,255,255,.5)}.rc-meta b{color:#fff;font-weight:600;text-align:right}
+.rc-pm{display:inline-flex;align-items:center;gap:8px}.rc-pm .pm-logo{width:34px;height:23px;border-radius:6px;font-size:9.5px}
+.rc-pm .pm-logo svg{width:10px;height:10px}.rc-pm .pm-logo b{font-size:9.5px}.rc-pm .pm-mc i{width:11px;height:11px}
+.rc-acts{display:flex;gap:10px}
+.rc-act{flex:1;height:48px;border-radius:15px;display:flex!important;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.07);color:#fff;font-size:14px;font-weight:600}
+.rc-refund{align-self:center;height:40px;padding:0 14px;display:inline-grid!important;place-items:center;color:#ff8a80;font-size:14.5px;font-weight:600}
+.rc-help{margin:0;text-align:center;font-size:12.5px;color:rgba(255,255,255,.4)}.rc-help u{color:rgba(255,255,255,.7)}
+.rc-tl{display:flex;flex-direction:column;padding:14px;border-radius:18px;background:rgba(244,164,37,.06)}
+.rc-step{position:relative;display:flex;gap:12px;padding-bottom:14px}
+.rc-step:last-child{padding-bottom:0}
+.rc-step:not(:last-child)::before{content:"";position:absolute;left:10px;top:24px;bottom:2px;width:2px;background:rgba(255,255,255,.1)}
+.rc-step.done:not(:last-child)::before{background:#f4a425}
+.rc-dot{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18);color:#1b1306}
+.rc-step.done .rc-dot{background:#f4a425;box-shadow:none}
+.rc-step b{display:block;font-size:14px;color:#fff}.rc-step span{font-size:12.5px;color:rgba(255,255,255,.5)}
+.rc-step:not(.done) b{color:rgba(255,255,255,.6)}
+.rc-failbox{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:rgba(231,70,69,.1);color:#ff8a80;font-size:13px}
+.rc-failbox svg{flex:none}
+/* refund sheet */
+.rf{gap:14px!important}
+.rf-amt{padding:14px;border-radius:16px;background:rgba(57,202,224,.08)}
+.rf-amt>div{display:flex;justify-content:space-between;align-items:baseline}
+.rf-amt span{font-size:13px;color:rgba(255,255,255,.6)}.rf-amt b{font-size:22px;color:#fff}
+.rf-amt p{margin:6px 0 0;font-size:12.5px;line-height:17px;color:rgba(255,255,255,.5)}
+.rf-list{display:flex;flex-direction:column}
+.rf-list h3{margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.rf-r{display:flex!important;align-items:center;gap:12px;height:46px;font-size:14.5px;color:#fff;text-align:left}
+.rf-warn{margin:0;font-size:12.5px;line-height:17px;color:#f6c26b}
+/* history */
+.pay-st{display:inline-block;height:20px;line-height:20px;padding:0 8px;border-radius:7px;font-size:11px;font-weight:700}
+.pay-amt.x{color:rgba(255,255,255,.45);text-decoration:line-through}
+.pay-cards{display:flex!important;align-items:center;gap:12px;height:54px;padding:0 16px;border-radius:16px;background:rgba(255,255,255,.05);color:#fff;font-size:14.5px;font-weight:600}
+.pay-cards span{flex:1;text-align:left}.pay-cards svg:last-child{color:rgba(255,255,255,.4)}
+.ok-rc{align-self:center;margin-top:12px;height:34px;padding:0 14px;border-radius:17px;display:inline-flex!important;align-items:center;gap:6px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);font-size:13px;font-weight:600}
+.co-bar{position:sticky!important;bottom:0;margin-top:auto}.co2{display:flex;flex-direction:column}.co-fail-a .cd-btn{height:48px!important;flex:none!important;display:grid!important;place-items:center;border-radius:24px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3053,7 +3294,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
   function ChatMessage(p) {
     return h('div', { className: cx('f4-chat', p.host && 'is-host') }, h(Avatar, { name: p.name, initials: p.initials, src: p.src, size: 26, seed: p.seed }),
-      h('div', { className: 'f4-chat-bub' }, h('div', { className: 'f4-chat-who' }, h('b', null, p.name), p.host ? h('span', { className: 'f4-chat-host' }, 'Host') : null), h('p', null, p.text)));
+      h('div', { className: 'f4-chat-bub' }, h('div', { className: 'f4-chat-who' }, h('b', null, p.name), (p.role || p.host) ? h('span', { className: cx('f4-chat-host', p.role && 'r-' + String(p.role).toLowerCase()) }, p.role || 'Host') : null), h('p', null, p.text)));
   }
 
   function Skeleton(p) {
@@ -3721,17 +3962,6 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { className: 'f4-field' }, h('span', { className: 'f4-field-label' }, 'Tags'), h('div', { className: 'd-tags' }, ['Concerts', 'Training', '+ Add tag'].map(function (t) { return h('span', { key: t, className: 't' }, t); }))),
       h(F.TextField, { label: 'Social link', icon: 'globe', placeholder: 'https://instagram.com/your-channel' }));
   }
-  function Payments(p) {
-    var rows = [['Danang Christmas Market 2026', 'Nov 03, 2026 · Visa •••• 4242', '$3.99', 'Paid'], ['Payout 3 - pay on 31.Oct - USD', 'Oct 30, 2026 · Visa •••• 4242', '$9.99', 'Paid']];
-    return h(SubPage, { nav: p.nav, title: 'Payment History' },
-      h('div', { className: 'pay-sum' }, h('span', null, 'Spent this month'), h('b', null, '$13.98'), h('i', null, '2 transactions')),
-      h('div', { className: 'mgroup', style: { margin: 0 } }, rows.map(function (r, i) {
-        return h(Tap, { key: i, className: 'mrow', go: function () { p.nav.toast('Invoice opened'); } },
-          h('span', { className: 'mrow-ic', style: { '--tint': '#a57ad8' } }, h(F.Icon, { name: 'ticket', size: 19 })),
-          h('div', { className: 'mrow-txt' }, h('b', null, r[0]), h('span', null, r[1])),
-          h('div', { style: { textAlign: 'right' } }, h('b', { style: { display: 'block', fontSize: 15 } }, r[2]), h('span', { className: 'paid' }, r[3])));
-      })));
-  }
   function Security(p) {
     return h(SubPage, { nav: p.nav, title: 'Security', bottom: h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Password updated'); p.nav.back(); } }, 'Update password') },
       h('p', { className: 'muted small', style: { margin: 0 } }, 'Use at least 8 characters with a number and a symbol.'),
@@ -4383,26 +4613,184 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         : h('div', { className: 'fade-in' }, h(F.EmptyState, { art: 'ticket', title: 'No events here yet', body: 'Events you register for, get invited to or attend will show up in this list.', action: 'Discover events', onAction: function () { p.nav.tab('home'); } })));
   }
 
+  /* ===================== Payment flow ===================== */
+  var TIX = [{ id: 'std', name: 'Standard', desc: 'Live access · 48h replay', price: 3.99 }, { id: 'vip', name: 'All-access', desc: 'Live + backstage chat · 30-day replay', price: 9.99 }];
+  var FEE = 0.49;
+  function money(n) { return '$' + (Math.round(n * 100) / 100).toFixed(2); }
+  function CardLogo(p) {
+    if (p.k === 'apple') return h('span', { className: 'pm-logo pm-apple' }, h(AppleA), h('b', null, 'Pay'));
+    if (p.k === 'google') return h('span', { className: 'pm-logo pm-google' }, h(GoogleG), h('b', null, 'Pay'));
+    if (p.k === 'mc') return h('span', { className: 'pm-logo pm-mc' }, h('i'), h('i'));
+    if (p.k === 'new') return h('span', { className: 'pm-logo pm-new' }, h(F.Icon, { name: 'plus', size: 18 }));
+    return h('span', { className: 'pm-logo pm-visa' }, 'VISA');
+  }
+  var METHODS = [{ k: 'apple', t: 'Apple Pay', s: 'Visa •••• 4242' }, { k: 'google', t: 'Google Pay', s: 'Fast checkout' }, { k: 'visa', t: 'Visa •••• 4242', s: 'Expires 12/27 · Default' }, { k: 'mc', t: 'Mastercard •••• 8812', s: 'Expires 05/27' }];
+  function Stepper(p) {
+    return h('div', { className: 'stp' },
+      h(Tap, { className: cx('stp-b', p.v <= p.min && 'dis'), label: 'Fewer', go: function () { if (p.v > p.min) { tap(6); p.set(p.v - 1); } } }, h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round' }, h('path', { d: 'M5 12h14' }))),
+      h('b', { 'aria-live': 'polite' }, p.v),
+      h(Tap, { className: cx('stp-b', p.v >= p.max && 'dis'), label: 'More', go: function () { if (p.v < p.max) { tap(6); p.set(p.v + 1); } } }, h(F.Icon, { name: 'plus', size: 16 })));
+  }
   function Checkout(p) {
-    var s = useState(false), paying = s[0], setPaying = s[1];
-    function pay() { setPaying(true); tap(12); setTimeout(function () { p.nav.registered = true; p.nav.replace('success'); }, 900); }
-    return h('div', { className: 'screen noscroll co-screen' },
-      h('div', { className: 'scrim co-scrim', onClick: p.nav.back }),
-      h('section', { className: 'sheet sheet-up', role: 'dialog', 'aria-label': 'Complete registration' },
+    var mode = p.param || '';
+    var s = useState({ tix: 'std', qty: mode === 'coupon' ? 2 : 1, code: mode === 'coupon' ? 'XMAS20' : '', coupon: mode === 'coupon' ? 'XMAS20' : null, cErr: mode === 'coupon-bad', open: mode === 'coupon' || mode === 'coupon-bad', m: mode === 'declined' ? 'mc' : 'apple', add: mode === 'addcard', proc: mode === 'processing', fail: mode === 'declined', newCard: null });
+    var st = s[0], set = function (o) { s[1](function (prev) { return Object.assign({}, prev, o); }); };
+    if (mode === 'coupon-bad' && !st.code) st.code = 'NOEL50';
+    var t = TIX.filter(function (x) { return x.id === st.tix; })[0];
+    var sub = t.price * st.qty, disc = st.coupon ? sub * 0.2 : 0, total = sub - disc + FEE;
+    var timer = useRef(null);
+    useEffect(function () { if (mode === 'processing') timer.current = setTimeout(function () { set({ proc: false }); p.nav.registered = true; p.nav.replace('success'); }, 2600); return function () { clearTimeout(timer.current); }; }, []);
+    function apply() { var c = (st.code || '').trim().toUpperCase(); if (!c) return; if (c === 'XMAS20') { tap(10); set({ coupon: c, cErr: false }); p.nav.toast('Code applied — 20% off'); } else { tap(20); set({ coupon: null, cErr: true }); } }
+    function pay() {
+      tap(12); set({ proc: true, fail: false });
+      timer.current = setTimeout(function () { if (st.m === 'mc') { set({ proc: false, fail: true }); tap(30); } else { set({ proc: false }); p.nav.registered = true; p.nav.replace('success'); } }, 2200);
+    }
+    var meth = METHODS.concat(st.newCard ? [{ k: 'visa2', t: 'Visa •••• ' + st.newCard, s: 'Just added' }] : []);
+    var curM = meth.filter(function (x) { return x.k === st.m; })[0] || meth[0];
+    var cta = st.m === 'apple' ? h('span', { className: 'co-paybtn-in' }, 'Pay with ', h(AppleA), 'Pay') : st.m === 'google' ? h('span', { className: 'co-paybtn-in' }, 'Pay with ', h(GoogleG), ' Pay') : 'Pay ' + money(total);
+    return h('div', { className: 'screen tabscreen co2' },
+      h('div', { className: 'tab-amb', 'aria-hidden': true }),
+      h(Top, { back: p.nav.back, title: 'Checkout' }),
+      h('div', { className: 'pad col gap20', style: { paddingTop: 6 } },
+        h('div', { className: 'co-ev' }, h('span', { className: 'co-ev-img', style: { backgroundImage: 'url(' + IMG + ')' } }),
+          h('div', { className: 'co-ev-t' }, h('span', { className: 'co-live' }, h('i'), 'Live now'), h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Tue, Nov 3 · 9:43 AM · 137 min'))),
+        h('section', { className: 'co-sec' }, h('h3', null, 'Ticket'),
+          h('div', { className: 'co-tix' }, TIX.map(function (x) {
+            var on = x.id === st.tix;
+            return h(Tap, { key: x.id, className: cx('co-tk', on && 'on'), go: function () { tap(6); set({ tix: x.id }); } },
+              h('span', { className: 'co-rad' }), h('div', { className: 'co-tk-t' }, h('b', null, x.name, x.id === 'vip' ? h('em', null, 'Best value') : null), h('span', null, x.desc)), h('b', { className: 'co-tk-p' }, money(x.price)));
+          })),
+          h('div', { className: 'co-qty' }, h('div', null, h('b', null, 'Quantity'), h('span', null, 'Max 5 per order · gift extra tickets by email')), h(Stepper, { v: st.qty, min: 1, max: 5, set: function (v) { set({ qty: v }); } }))),
+        h('section', { className: 'co-sec' }, h('h3', null, 'Promo code'),
+          st.coupon ? h('div', { className: 'co-cp-ok' }, h('span', { className: 'co-cp-ic' }, h(F.Icon, { name: 'gift', size: 18 })), h('div', null, h('b', null, st.coupon), h('span', null, '20% off tickets · −' + money(disc))), h(Tap, { className: 'co-cp-x', label: 'Remove code', go: function () { set({ coupon: null, code: '' }); } }, h(F.Icon, { name: 'x', size: 16 })))
+            : h('div', null, h('div', { className: cx('co-cp', st.cErr && 'err') },
+                h(F.Icon, { name: 'gift', size: 18 }),
+                h('input', { value: st.code, placeholder: 'Enter code', autoCapitalize: 'characters', onChange: function (e) { set({ code: e.target.value.toUpperCase(), cErr: false }); }, onKeyDown: function (e) { if (e.key === 'Enter') apply(); } }),
+                h(Tap, { className: cx('co-cp-apply', !st.code && 'dis'), go: apply }, 'Apply')),
+              st.cErr ? h('p', { className: 'co-err' }, h(F.Icon, { name: 'x', size: 13 }), 'This code is invalid or has expired') : h('p', { className: 'co-hint' }, 'Try XMAS20 for 20% off'))),
+        h('section', { className: 'co-sec' }, h('h3', null, 'Payment method'),
+          h('div', { className: 'co-pm' }, meth.map(function (m) {
+            var on = m.k === st.m;
+            return h(Tap, { key: m.k, className: cx('co-pmr', on && 'on'), go: function () { tap(6); set({ m: m.k }); } }, h(CardLogo, { k: m.k === 'visa2' ? 'visa' : m.k }), h('div', { className: 'co-pmr-t' }, h('b', null, m.t), h('span', null, m.s)), h('span', { className: 'co-rad' }));
+          }), h(Tap, { className: 'co-pmr', go: function () { set({ add: true }); } }, h(CardLogo, { k: 'new' }), h('div', { className: 'co-pmr-t' }, h('b', null, 'Add debit or credit card'), h('span', null, 'Visa, Mastercard, JCB, Amex')), h(F.Icon, { name: 'chevronRight', size: 18, className: 'co-chev' })))),
+        h('section', { className: 'co-sec' }, h('h3', null, 'Order summary'),
+          h('div', { className: 'co-sum' },
+            h('div', null, h('span', null, st.qty + ' × ' + t.name + ' ticket'), h('span', null, money(sub))),
+            st.coupon ? h('div', { className: 'co-disc' }, h('span', null, 'Promo ' + st.coupon), h('span', null, '−' + money(disc))) : null,
+            h('div', null, h('span', null, 'Service fee'), h('span', null, money(FEE))),
+            h('div', { className: 'co-tot' }, h('span', null, 'Total'), h('b', null, money(total))))),
+        h('p', { className: 'co-note' }, h(F.Icon, { name: 'lock', size: 14 }), h('span', null, 'Payments are encrypted. Full refund up to 24 hours before the event starts. ', h('u', null, 'Refund policy')))),
+      h('div', { style: { height: 24 } }),
+      h('div', { className: 'd-bar co-bar' }, h('div', { className: 'co-bar-t' }, h('span', null, 'Total'), h('b', null, money(total))),
+        h(Tap, { className: cx('co-paybtn', (st.m === 'apple' || st.m === 'google') && 'wallet'), go: pay }, cta)),
+      st.add ? toApp(h(AddCard, { close: function () { set({ add: false }); }, done: function (last) { set({ add: false, newCard: last, m: 'visa2' }); p.nav.toast('Card added'); } })) : null,
+      st.proc ? toApp(h('div', { className: 'co-proc', role: 'status' },
+        h('div', { className: 'co-proc-ring' }, h('span', { className: 'co-proc-arc' }), h(CardLogo, { k: curM.k === 'visa2' ? 'visa' : curM.k })),
+        h('b', null, st.m === 'apple' ? 'Confirming with Apple Pay…' : st.m === 'google' ? 'Confirming with Google Pay…' : 'Processing payment…'),
+        h('span', null, money(total) + ' · ' + curM.t),
+        h('p', null, 'Please keep the app open. This usually takes a few seconds.'))) : null,
+      st.fail ? toApp(h('div', { className: 'cd-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ fail: false }); } },
+        h('div', { className: 'cd co-fail', role: 'alertdialog', 'aria-label': 'Payment declined' },
+          h('span', { className: 'cd-ic' }, h(F.Icon, { name: 'x', size: 24 })),
+          h('h2', null, 'Payment declined'),
+          h('p', null, 'Your bank declined this charge, so no money was taken. Try again or choose another method.'),
+          h('div', { className: 'co-fail-r' }, h(CardLogo, { k: 'mc' }), h('div', null, h('b', null, 'Mastercard •••• 8812'), h('span', null, 'Insufficient funds · code 51'))),
+          h('div', { className: 'co-fail-a' },
+            h(Tap, { className: 'cd-btn co-fail-pri', go: function () { set({ fail: false, m: 'visa' }); } }, 'Use another method'),
+            h(Tap, { className: 'cd-btn cd-cancel', go: function () { set({ fail: false }); setTimeout(pay, 50); } }, 'Try again'))))) : null);
+  }
+  function AddCard(p) {
+    var s = useState({ n: '', e: '', c: '', name: '', save: true, busy: false }), st = s[0], set = function (o) { s[1](function (x) { return Object.assign({}, x, o); }); };
+    var digits = st.n.replace(/\D/g, '');
+    var brand = /^4/.test(digits) ? 'visa' : /^5/.test(digits) ? 'mc' : '';
+    var ok = digits.length >= 15 && /^\d\d\/\d\d$/.test(st.e) && st.c.length >= 3 && st.name.trim().length > 1;
+    function fmtN(v) { return v.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 '); }
+    function fmtE(v) { v = v.replace(/\D/g, '').slice(0, 4); return v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v; }
+    var shown = (fmtN(st.n) + '•••• •••• •••• ••••'.slice(fmtN(st.n).length)).slice(0, 19);
+    return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
+      h('div', { className: 'sheet ac', role: 'dialog', 'aria-label': 'Add card' },
         h('span', { className: 'grab' }),
-        h('div', { className: 'row-between' }, h('h2', { className: 'h-md' }, 'Complete registration'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.nav.back }, h(F.Icon, { name: 'x', size: 18 }))),
-        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + IMG + ')' } }), h('b', { style: { flex: 1, fontSize: 14, lineHeight: '18px' } }, 'Danang Christmas Market 2026'), h('b', { style: { color: 'var(--primary)', fontSize: 16 } }, '$3.99')),
-        h('div', { className: 'info-card', style: { background: 'var(--bg)' } },
-          h(F.InfoRow, { icon: 'calendar', label: 'Date', value: '11/03/2026' }),
-          h(F.InfoRow, { icon: 'clock', label: 'Time', value: '9:43 AM · 137 min' }),
-          h(F.InfoRow, { icon: 'mapPin', label: 'Venue', value: 'N/A' }),
-          h(F.InfoRow, { icon: 'languages', label: 'Language', value: 'English' })),
-        h('div', { className: 'col gap8' }, h('h3', { className: 'h-sm' }, 'Payment info'),
-          h('p', { className: 'row gap6 subtle small', style: { margin: 0 } }, h(F.Icon, { name: 'lock', size: 14 }), 'Your payment information is safe with us'),
-          h('div', { className: 'card-line' }, h('span', { className: 'visa' }, 'VISA'), h('div', { style: { flex: 1 } }, h('b', { style: { display: 'block', fontSize: 14 } }, 'Visa •••• 4242'), h('span', { className: 'subtle', style: { fontSize: 12 } }, 'Expires 12/2026')), h(Tap, { className: 'f4-link', onClick: function () { p.nav.toast('Card picker opens here (Apple Pay / saved cards)'); } }, 'Change'))),
-        h('div', { className: 'totals' }, h('div', { className: 'row-between subtle small' }, h('span', null, 'Original price'), h('span', null, '$3.99')),
-          h('div', { className: 'row-between', style: { color: 'var(--primary)', fontWeight: 700 } }, h('span', null, 'Final price'), h('span', { style: { fontSize: 20 } }, '$3.99'))),
-        h(Tap, { className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block', paying && 'is-loading'), go: paying ? null : pay }, paying ? h('span', { className: 'spinner' }) : 'Pay $3.99 & register')));
+        h('div', { className: 'ac-head' }, h('h2', null, 'Add card'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 }))),
+        h('div', { className: cx('ac-card', brand && 'b-' + brand) },
+          h('div', { className: 'ac-chip' }), h('span', { className: 'ac-brand' }, brand === 'mc' ? h(CardLogo, { k: 'mc' }) : brand === 'visa' ? 'VISA' : ''),
+          h('b', { className: 'ac-num' }, shown),
+          h('div', { className: 'ac-meta' }, h('span', null, h('i', null, 'Card holder'), (st.name || 'YOUR NAME').toUpperCase()), h('span', null, h('i', null, 'Expires'), st.e || 'MM/YY'))),
+        h('label', { className: 'ac-f' }, h('span', null, 'Card number'), h('input', { inputMode: 'numeric', autoComplete: 'cc-number', placeholder: '1234 5678 9012 3456', value: fmtN(st.n), onChange: function (e) { set({ n: e.target.value }); } })),
+        h('div', { className: 'ac-row' },
+          h('label', { className: 'ac-f' }, h('span', null, 'Expiry'), h('input', { inputMode: 'numeric', autoComplete: 'cc-exp', placeholder: 'MM/YY', value: st.e, onChange: function (e) { set({ e: fmtE(e.target.value) }); } })),
+          h('label', { className: 'ac-f' }, h('span', null, 'CVC'), h('input', { inputMode: 'numeric', autoComplete: 'cc-csc', placeholder: '123', value: st.c, onChange: function (e) { set({ c: e.target.value.replace(/\D/g, '').slice(0, 4) }); } }))),
+        h('label', { className: 'ac-f' }, h('span', null, 'Name on card'), h('input', { autoComplete: 'cc-name', placeholder: 'As shown on card', value: st.name, onChange: function (e) { set({ name: e.target.value }); } })),
+        h(Tap, { className: 'ac-save', go: function () { set({ save: !st.save }); } }, h('span', { className: cx('ac-sw', st.save && 'on') }, h('i')), 'Save this card for faster checkout'),
+        h(Tap, { className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block', !ok && 'ac-dis'), go: function () { if (!ok) return; set({ busy: true }); setTimeout(function () { p.done(digits.slice(-4)); }, 700); } }, st.busy ? h('span', { className: 'spinner' }) : 'Add card'),
+        h('p', { className: 'ac-sec' }, h(F.Icon, { name: 'lock', size: 13 }), 'Secured by PCI-DSS certified processor')));
+  }
+  var ORDERS = {
+    'F4S-261103-0412': { ev: 'Danang Christmas Market 2026', when: 'Nov 03, 2026 · 9:41 AM', lines: [['2 × Standard ticket', 7.98], ['Promo XMAS20', -1.60], ['Service fee', 0.49]], total: 6.87, pm: 'visa', pmT: 'Visa •••• 4242', st: 'paid' },
+    'F4S-261030-0977': { ev: 'Payout 3 — Live Q&A', when: 'Oct 30, 2026 · 7:02 PM', lines: [['1 × All-access ticket', 9.99], ['Service fee', 0.49]], total: 10.48, pm: 'apple', pmT: 'Apple Pay · Visa •••• 4242', st: 'refunded' },
+    'F4S-261022-0315': { ev: 'Jazz Night Saigon', when: 'Oct 22, 2026 · 8:15 PM', lines: [['1 × Standard ticket', 3.99], ['Service fee', 0.49]], total: 4.48, pm: 'mc', pmT: 'Mastercard •••• 8812', st: 'failed' }
+  };
+  var STAT = { paid: ['Paid', 'ok'], refunded: ['Refunded', 'rf'], pending: ['Refund pending', 'pd'], failed: ['Failed', 'bad'] };
+  function Receipt(p) {
+    var parts = (p.param || '').split('|'), id = ORDERS[parts[0]] ? parts[0] : 'F4S-261103-0412', o = ORDERS[id], flag = parts[1] || '';
+    var s = useState({ ref: flag === 'refund', st: flag === 'pending' ? 'pending' : o.st }), st = s[0], set = function (x) { s[1](function (y) { return Object.assign({}, y, x); }); };
+    var stt = STAT[st.st];
+    return h('div', { className: 'screen tabscreen rc2' },
+      h('div', { className: 'tab-amb', 'aria-hidden': true }),
+      h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
+      h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
+        h('div', { className: 'rc-hero' },
+          h('span', { className: 'rc-st ' + stt[1] }, h('i'), stt[0]),
+          h('b', { className: 'rc-amt' }, money(o.total)),
+          h('span', { className: 'rc-when' }, o.when),
+          h('div', { className: 'rc-perf', 'aria-hidden': true })),
+        st.st === 'pending' || st.st === 'refunded' ? h('div', { className: 'rc-tl' },
+          [['Refund requested', 'Nov 04, 10:12 AM', true], ['Approved by organizer', st.st === 'refunded' ? 'Nov 04, 2:30 PM' : 'Usually within 24h', st.st === 'refunded'], ['Back on ' + o.pmT.replace('Apple Pay · ', ''), st.st === 'refunded' ? 'Nov 06 · ' + money(o.total - FEE) : '5–10 business days', st.st === 'refunded']].map(function (r, i) {
+            return h('div', { key: i, className: cx('rc-step', r[2] && 'done') }, h('span', { className: 'rc-dot' }, r[2] ? h(F.Icon, { name: 'check', size: 12, stroke: 3 }) : null), h('div', null, h('b', null, r[0]), h('span', null, r[1])));
+          })) : null,
+        st.st === 'failed' ? h('div', { className: 'rc-failbox' }, h(F.Icon, { name: 'x', size: 16 }), h('span', null, 'Declined by bank · Insufficient funds. You were not charged.')) : null,
+        h('div', { className: 'rc-card' },
+          h('div', { className: 'rc-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
+          h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
+            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total))))),
+        h('div', { className: 'rc-card rc-meta' },
+          h('div', null, h('span', null, 'Payment method'), h('b', { className: 'rc-pm' }, h(CardLogo, { k: o.pm }), o.pmT)),
+          h('div', null, h('span', null, 'Transaction ID'), h('b', null, 'ch_3Q' + id.slice(-4) + 'Xa9LkT')),
+          h('div', null, h('span', null, 'Billed to'), h('b', null, 'Tran Nguyen'))),
+        h('div', { className: 'rc-acts' },
+          h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt PDF saved'); } }, h(F.Icon, { name: 'inbox', size: 18 }), 'Download PDF'),
+          h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt sent to your email'); } }, h(F.Icon, { name: 'mail', size: 18 }), 'Email receipt')),
+        st.st === 'paid' ? h(Tap, { className: 'rc-refund', go: function () { set({ ref: true }); } }, 'Request a refund') : null,
+        st.st === 'failed' ? h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { p.nav.push('checkout'); } }, 'Try payment again') : null,
+        h('p', { className: 'rc-help' }, 'Questions about this charge? ', h('u', null, 'Contact support'))),
+      h('div', { style: { height: 40 } }),
+      st.ref ? toApp(h(RefundSheet, { o: o, close: function () { set({ ref: false }); }, done: function () { set({ ref: false, st: 'pending' }); p.nav.toast('Refund requested'); } })) : null);
+  }
+  function RefundSheet(p) {
+    var R = ["I can't attend anymore", 'Bought by mistake', 'Event changed or rescheduled', 'Stream quality issues', 'Other'];
+    var s = useState({ r: 0, busy: false }), st = s[0], set = function (o) { s[1](function (x) { return Object.assign({}, x, o); }); };
+    return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
+      h('div', { className: 'sheet rf', role: 'dialog', 'aria-label': 'Request refund' },
+        h('span', { className: 'grab' }),
+        h('div', { className: 'ac-head' }, h('h2', null, 'Request a refund'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 }))),
+        h('div', { className: 'rf-amt' }, h('div', null, h('span', null, 'You’ll get back'), h('b', null, money(p.o.total - FEE))), h('p', null, 'To ', p.o.pmT.replace('Apple Pay · ', ''), ' in 5–10 business days. Service fee (', money(FEE), ') is non-refundable.')),
+        h('div', { className: 'rf-list', role: 'radiogroup' }, h('h3', null, 'Reason'), R.map(function (r, i) {
+          return h(Tap, { key: i, className: cx('rf-r', st.r === i && 'on'), go: function () { tap(5); set({ r: i }); } }, h('span', { className: 'co-rad' }), r);
+        })),
+        h('p', { className: 'rf-warn' }, 'Your tickets will be cancelled and you’ll lose access to the live and replay.'),
+        h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { set({ busy: true }); setTimeout(p.done, 800); } }, st.busy ? h('span', { className: 'spinner' }) : 'Submit refund request')));
+  }
+  function Payments(p) {
+    var ids = Object.keys(ORDERS);
+    return h(SubPage, { nav: p.nav, title: 'Payment History' },
+      h('div', { className: 'pay-sum' }, h('span', null, 'Spent this month'), h('b', null, '$6.87'), h('i', null, '3 transactions · 1 refunded')),
+      h('div', { className: 'mgroup', style: { margin: 0 } }, ids.map(function (id) {
+        var o = ORDERS[id], stt = STAT[o.st];
+        return h(Tap, { key: id, className: 'mrow', go: function () { p.nav.push('receipt:' + id); } },
+          h('span', { className: 'mrow-ic', style: { '--tint': '#a57ad8' } }, h(F.Icon, { name: 'ticket', size: 19 })),
+          h('div', { className: 'mrow-txt' }, h('b', null, o.ev), h('span', null, o.when.split(' · ')[0] + ' · ' + o.pmT.replace('Apple Pay · ', ''))),
+          h('div', { style: { textAlign: 'right' } }, h('b', { className: cx('pay-amt', o.st !== 'paid' && 'x'), style: { display: 'block', fontSize: 15 } }, money(o.total)), h('span', { className: 'pay-st ' + stt[1] }, stt[0])));
+      })),
+      h(Tap, { className: 'pay-cards', go: function () { p.nav.push('checkout:addcard'); } }, h(F.Icon, { name: 'dollar', size: 18 }), h('span', null, 'Manage payment methods'), h(F.Icon, { name: 'chevronRight', size: 18 })));
   }
 
   function Success(p) {
@@ -4507,14 +4895,56 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
   function Skip10(p) { return h('svg', { width: 34, height: 34, viewBox: '0 0 34 34', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true, style: p.back ? null : { transform: 'scaleX(-1)' } }, h('path', { d: 'M9.5 9.5A11 11 0 1 1 6 17' }), h('path', { d: 'M9.5 4.5v5h5' }), h('text', { x: 17, y: 21.5, textAnchor: 'middle', fontSize: 10, fontWeight: 600, fill: 'currentColor', stroke: 'none', style: p.back ? null : { transform: 'scaleX(-1)', transformOrigin: '17px 17px' } }, '10')); }
   function FsIc() { return h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', 'aria-hidden': true }, h('path', { d: 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5' })); }
+  function toApp(n) { var a = document.querySelector('.app'); return a ? ReactDOM.createPortal(n, a) : n; }
   function Player(p) {
-    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: [], draft: '', muted: false, q: false, hand: false, tray: false, rateOpen: false, rate: 0 });
-    var st = s[0], set = function (o) { s[1](Object.assign({}, st, o)); };
+    var mode = p.param || '';
+    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: [], draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect' });
+    var st = s[0], set = function (o) { s[1](function (prev) { return Object.assign({}, prev, o); }); };
+    var inviteT = useRef(0);
+    useEffect(function () { return function () { clearTimeout(inviteT.current); }; }, []);
+    useEffect(function () { if (!st.rc) return; var t = setTimeout(function () { set({ rc: false }); p.nav.toast('Back online'); }, 3500); return function () { clearTimeout(t); }; }, [st.rc]);
+    function raiseHand() {
+      if (st.onstage) return; tap(14);
+      if (st.hand) { clearTimeout(inviteT.current); set({ hand: false }); return; }
+      set({ hand: true, layout: 'grid' });
+      inviteT.current = setTimeout(function () { s[1](function (prev) { return prev.hand ? Object.assign({}, prev, { invite: true }) : prev; }); }, 2800);
+    }
+    function joinStage() { tap(12); set({ invite: false, hand: false, onstage: true, mic: true, layout: 'grid' }); p.nav.toast("You're on stage"); }
+    function leaveStage() { tap(8); set({ onstage: false, cam: false }); p.nav.toast('You left the stage'); }
+    var speakers = [
+      { n: 'thao15 nguyen15', role: 'Host', img: av('thao15 nguyen15'), speaking: true, mic: true },
+      { n: 'Nhan Doan', role: 'Organizer', img: av('Nhan Doan'), mic: true },
+      { n: 'Sandra Smith', role: 'Guest', img: av('Sandra Smith'), mic: false }
+    ].concat(st.onstage ? [{ n: 'You', role: 'You', img: st.cam ? AV.me : null, mic: st.mic, me: true }] : []);
+    var micOff = h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M9 9v2a3 3 0 0 0 5.1 2.1M15 9.3V6a3 3 0 0 0-5.7-1.3M5 11a7 7 0 0 0 11.5 5.3M19 11a7 7 0 0 1-.6 2.9M12 18v3M3 3l18 18' }));
+    var micOn = h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('rect', { x: 9, y: 3, width: 6, height: 11, rx: 3 }), h('path', { d: 'M5 11a7 7 0 0 0 14 0M12 18v3' }));
+    var camIc = function (off) { return h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('rect', { x: 2.5, y: 6.5, width: 13, height: 11, rx: 2.5 }), h('path', { d: 'M15.5 10.5l6-3.5v10l-6-3.5' }), off ? h('path', { d: 'M3 3l18 18' }) : null); };
+    var gridIc = h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round', 'aria-hidden': true }, st.layout === 'grid' ? h('rect', { x: 3.5, y: 4.5, width: 17, height: 15, rx: 2.5 }) : [h('rect', { key: 1, x: 3.5, y: 3.5, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 2, x: 13, y: 3.5, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 3, x: 3.5, y: 13, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 4, x: 13, y: 13, width: 7.5, height: 7.5, rx: 2 })]);
+    function Stage() {
+      return h('div', { className: cx('stg', 'n' + speakers.length) }, speakers.map(function (x) {
+        return h('div', { key: x.n, className: cx('stg-t', x.speaking && 'speaking', x.me && 'me') },
+          x.img ? h('div', { className: 'stg-img', style: { backgroundImage: 'url(' + x.img + ')' } }) : h('div', { className: 'stg-noc' }, h(F.Avatar, { src: AV.me, name: 'You', initials: 'TN', size: 52 }), h('span', null, 'Camera off')),
+          h('div', { className: 'stg-tag' }, h('span', { className: cx('stg-mic', !x.mic && 'off') }, x.mic ? micOn : micOff), h('b', null, x.n), h('i', { className: 'r-' + x.role.toLowerCase() }, x.role)),
+          x.speaking ? h('span', { className: 'stg-eq', 'aria-label': 'Speaking' }, h('i'), h('i'), h('i')) : null);
+      }));
+    }
     var tk = useTick();
     function heart(ch) { tap(15); var id = Date.now() + Math.random(); set({ hearts: st.hearts.concat([{ id: id, ch: typeof ch === 'string' ? ch : null }]).slice(-12), tray: false }); }
     function send(e) { e.preventDefault(); if (!st.draft.trim()) return; tap(8); set({ mine: st.mine.concat([st.draft]).slice(-4), draft: '', tab: 'chat' }); }
     return h('div', { className: 'screen noscroll player' },
-      h('section', { className: cx('video pv', st.paused && 'is-paused', st.swap && 'is-cam'), 'aria-label': 'Video player', style: { backgroundImage: 'url(' + (st.swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' } },
+      mode === 'waiting' ? h('section', { className: 'video pv pv-state', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } },
+        h('div', { className: 'pvs-dim' }),
+        h(Tap, { className: 'pv-glass pv-back', label: 'Back', go: p.nav.back }, h(Arr, { dir: 'l' })),
+        h('div', { className: 'pv-tr' }, h('span', { className: 'pv-pill' }, h(F.Icon, { name: 'clock', size: 12 }), 'Waiting room'), h('span', { className: 'pv-pill' }, h(F.Icon, { name: 'eye', size: 12 }), '318 waiting')),
+        h('div', { className: 'pvs-mid' }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 56 }), h('span', { className: 'pvs-k' }, 'Starting soon'), h('b', { className: 'pvs-cd' }, fmtT(Math.max(0, 299 - (tk % 300))).replace(/^00:/, '')), h('span', { className: 'pvs-s' }, "You'll join automatically when the host goes live"))) :
+      mode === 'ended' ? h('section', { className: 'video pv pv-state', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } },
+        h('div', { className: 'pvs-dim' }),
+        h(Tap, { className: 'pv-glass pv-back', label: 'Back', go: p.nav.back }, h(Arr, { dir: 'l' })),
+        h('div', { className: 'pvs-mid' }, h('span', { className: 'pvs-badge' }, 'Live ended'), h('b', { className: 'pvs-h' }, 'Thanks for watching!'), h('span', { className: 'pvs-s' }, '2h 17m \u00b7 2.4K watched \u00b7 Replay coming soon'),
+          h('div', { className: 'pvs-acts' }, h(Tap, { className: 'pvs-btn pri', go: function () { set({ rateOpen: true }); } }, h(F.Icon, { name: 'star', size: 15, filled: true }), 'Rate event'), h(Tap, { className: 'pvs-btn', go: function () { p.nav.root('home'); } }, 'Back to Home')))) :
+      h('section', { className: cx('video pv', st.paused && 'is-paused', st.swap && 'is-cam', st.layout === 'grid' && 'is-grid'), 'aria-label': 'Video player', style: { backgroundImage: 'url(' + (st.swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' } },
+        st.layout === 'grid' ? h(Stage) : null,
+        st.rc ? h('div', { className: 'pv-rc', role: 'status' }, h('span', { className: 'spinner' }), h('b', null, 'Reconnecting\u2026'), h('span', null, 'Your connection is weak')) : null,
         h('button', { type: 'button', className: 'pv-cam', 'aria-label': st.swap ? 'Show screen share large' : 'Show host camera large', onClick: function (e) { e.stopPropagation(); tap(8); set({ swap: !st.swap }); } },
           h('div', { className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (st.swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
           h('span', { className: 'fl2-cam-tag' }, h('i', null), st.swap ? 'Screen' : 'Host'),
@@ -4523,9 +4953,10 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h(Tap, { className: 'pv-glass pv-back', label: 'Minimize', go: p.nav.back }, h(Arr, { dir: 'l' })),
         h('div', { className: 'pv-tr' },
           h('span', { className: 'pv-live' }, h('i', null), 'LIVE'), h('span', { className: 'pv-pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'),
-          h(Tap, { className: cx('pv-glass pv-sm', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: function () { tap(14); set({ hand: !st.hand }); } }, h(F.Icon, { name: 'hand', size: 17 })),
+          h(Tap, { className: 'pv-glass pv-sm', label: st.layout === 'grid' ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); set({ layout: st.layout === 'grid' ? 'focus' : 'grid' }); } }, gridIc),
+          st.onstage ? null : h(Tap, { className: cx('pv-glass pv-sm', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 17 })),
           h(Tap, { className: 'pv-glass pv-sm', label: 'Quality', onClick: function () { set({ q: !st.q }); } }, h(F.Icon, { name: 'settings', size: 16 }))),
-        st.hand ? h('div', { className: 'hand-toast' }, 'Hand raised · the host has been notified') : null,
+        st.hand && !st.invite ? h('div', { className: 'hand-toast hand2' }, h('span', { className: 'spinner sm' }), 'Waiting for the host to invite you', h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
         st.q ? h('div', { className: 'qmenu' }, ['Auto', '1080p', '720p', '480p'].map(function (q, i) { return h('button', { key: q, type: 'button', className: i === 0 ? 'on' : '', onClick: function () { set({ q: false }); } }, q); })) : null,
         h('div', { className: 'pv-center' },
           h(Tap, { className: 'pv-skip', label: 'Back 10 seconds', onClick: function () { tap(6); p.nav.toast('−10s'); } }, h(Skip10, { back: true })),
@@ -4538,6 +4969,12 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
           h(Tap, { className: 'pv-ic', label: st.muted ? 'Unmute' : 'Mute', onClick: function () { set({ muted: !st.muted }); } }, h(F.Icon, { name: st.muted ? 'x' : 'volume', size: 17 })),
           h(Tap, { className: 'pv-ic', label: 'Picture in picture', go: function () { p.nav.pip(); } }, h(F.Icon, { name: 'pip', size: 17 })),
           h(Tap, { className: 'pv-ic', label: 'Full screen', go: function () { p.nav.push('full'); } }, h(FsIc, null)))),
+      st.onstage && mode !== 'waiting' && mode !== 'ended' ? h('div', { className: 'onstage' },
+        h('span', { className: 'os-live' }, h('i'), "You're on stage"),
+        h('span', { style: { flex: 1 } }),
+        h(Tap, { className: cx('os-b', !st.mic && 'off'), label: st.mic ? 'Mute mic' : 'Unmute mic', onClick: function () { tap(6); set({ mic: !st.mic }); } }, h('span', { style: { transform: 'scale(1.4)', display: 'grid' } }, st.mic ? micOn : micOff)),
+        h(Tap, { className: cx('os-b', !st.cam && 'off'), label: st.cam ? 'Turn camera off' : 'Turn camera on', onClick: function () { tap(6); set({ cam: !st.cam }); } }, camIc(!st.cam)),
+        h(Tap, { className: 'os-leave', onClick: leaveStage }, 'Leave')) : null,
       h('section', { className: 'pl-info' },
         h('div', { className: 'pl-tags' }, h('span', { className: 'pl-cat' }, 'Concerts and Performances'), h('span', { className: 'pl-dot' }), h('span', null, '137 min · English')),
         h('h1', { className: 'pl-title' }, 'Danang Christmas Market 2026'),
@@ -4552,14 +4989,33 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
           h(Tap, { className: 'pl-act', onClick: function () { set({ tab: 'chat' }); var i = document.getElementById('chat-msg'); i && i.focus(); } }, h(F.Icon, { name: 'message', size: 17 }), 'Chat'),
           h(Tap, { className: 'pl-act', onClick: function () { p.nav.share({}); } }, h(F.Icon, { name: 'share', size: 17 }), 'Share'))),
       h('section', { className: 'chatbox pl-chat' },
-        h('div', { className: 'f4-seg', role: 'tablist' }, ['chat', 'about'].map(function (t) { return h('button', { key: t, type: 'button', role: 'tab', 'aria-selected': st.tab === t, className: cx('f4-seg-item', st.tab === t && 'is-on'), onClick: function () { set({ tab: t }); } }, t === 'chat' ? 'Chat' : 'About'); })),
+        h('div', { className: 'f4-seg', role: 'tablist' }, ['chat', 'people', 'about'].map(function (t) { return h('button', { key: t, type: 'button', role: 'tab', 'aria-selected': st.tab === t, className: cx('f4-seg-item', st.tab === t && 'is-on'), onClick: function () { set({ tab: t }); } }, t === 'chat' ? 'Chat' : t === 'people' ? 'People' : 'About'); })),
         st.tab === 'chat' ? h('div', { className: 'col gap10 chat-list' },
+          h('div', { className: 'pin-msg' }, h('span', { className: 'pin-ic' }, h('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M15 4l5 5-3 1-4 4 1 4-2 1-4-4-5 5M9 10l5 5' }))), h('div', null, h('b', null, 'Pinned by Host'), h('span', null, 'Market tour starts at the fountain at 10:00 \ud83c\udf84'))),
           h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }),
+          h(F.ChatMessage, { src: av('Nhan Doan'), name: 'Nhan Doan', initials: 'ND', seed: 1, role: 'Organizer', text: 'Q&A opens after the tour \u2014 raise your hand to join the stage!' }),
+          h('div', { className: 'sys-msg' }, h('i'), 'Sandra Smith joined the stage'),
           h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' }),
           st.mine.map(function (m, i) { return h('div', { key: i, className: 'pop-in' }, h(F.ChatMessage, { src: av('You'), src: av('You'), name: 'You', initials: 'TN', seed: 3, text: m })); }))
+          : st.tab === 'people' ? h('div', { className: 'ppl' },
+            h('p', { className: 'ppl-h' }, 'On stage', h('em', null, speakers.length)),
+            speakers.map(function (x) { return h('div', { key: x.n, className: 'ppl-r' }, h(F.Avatar, { src: x.me ? AV.me : x.img, name: x.n, initials: ini(x.n), size: 36 }), h('b', null, x.n), h('i', { className: 'r-' + x.role.toLowerCase() }, x.role), h('span', { className: cx('ppl-mic', !x.mic && 'off') }, x.mic ? micOn : micOff)); }),
+            h('p', { className: 'ppl-h' }, 'Raised hands', h('em', null, st.hand ? 2 : 1)),
+            h('div', { className: 'ppl-r' }, h(F.Avatar, { src: av('Minh Pham'), name: 'Minh Pham', initials: 'MP', size: 36 }), h('b', null, 'Minh Pham'), h('span', { className: 'ppl-hand' }, '\u270b')),
+            st.hand ? h('div', { className: 'ppl-r' }, h(F.Avatar, { src: AV.me, name: 'You', initials: 'TN', size: 36 }), h('b', null, 'You'), h('span', { className: 'ppl-hand' }, '\u270b')) : null,
+            h('p', { className: 'ppl-h' }, 'Watching', h('em', null, '2.4K')),
+            h('div', { className: 'ppl-stack' }, ['Linh Tran', 'Hana Nguyen', 'Tom Bradley', 'Sally', 'Marc John'].map(function (n, i) { return h(F.Avatar, { key: n, src: av(n), name: n, initials: ini(n), size: 30, seed: i }); }), h('span', null, '+2.4K viewers')))
           : h('div', { className: 'info-card' }, h(F.InfoRow, { icon: 'calendar', label: 'Date', value: '11/03/2026' }), h(F.InfoRow, { icon: 'clock', label: 'Duration', value: '137 minutes' }), h(F.InfoRow, { icon: 'languages', label: 'Language', value: 'English' })),
         h('div', { className: 'hearts', 'aria-hidden': true }, st.hearts.map(function (x, i) { return h('span', { key: x.id, className: 'hrt', style: { left: (i * 9) % 22 + 'px' } }, x.ch ? h('span', { style: { fontSize: 26 } }, x.ch) : h(F.Icon, { name: 'heart', filled: true, size: 24 })); })),
         st.tray ? h('div', { className: 'etray' }, ['\ud83d\udc4f', '\u2764\ufe0f', '\ud83d\ude02', '\ud83d\udd25', '\ud83c\udf84', '\ud83d\udc4d'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
+        st.invite ? toApp(h('div', { className: 'sheet-wrap inv-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ invite: false, hand: false }); } }, h('div', { className: 'sheet inv', role: 'dialog', 'aria-label': 'Invitation to speak' },
+          h('span', { className: 'grab' }),
+          h('div', { className: 'inv-av' }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 64 }), h('span', null, '\u270b')),
+          h('h2', null, 'thao15 nguyen15 invited you to speak'),
+          h('p', null, 'Everyone watching will hear you. You can turn your camera on after joining.'),
+          h('div', { className: 'inv-pre' }, h('span', { className: 'os-b' }, h('span', { style: { transform: 'scale(1.4)', display: 'grid' } }, micOn)), h('div', null, h('b', null, 'Microphone on'), h('span', null, 'Camera off \u00b7 you can change this anytime'))),
+          h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: joinStage }, 'Join stage'),
+          h(Tap, { className: 'ok-later', go: function () { set({ invite: false, hand: false }); p.nav.toast('Invitation declined'); } }, 'Not now')))) : null,
         st.rateOpen ? h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ rateOpen: false }); } }, h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Rate this event' }, h('span', { className: 'grab' }), h('h2', { className: 'h-md' }, 'Rate this event'), h('div', { className: 'rate-stars' }, [1, 2, 3, 4, 5].map(function (n) { return h('button', { key: n, type: 'button', 'aria-label': n + ' stars', className: n <= st.rate ? 'on' : '', onClick: function () { tap(8); set({ rate: n }); } }, h(F.Icon, { name: 'star', size: 34, filled: true })); })), h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { set({ rateOpen: false }); } }, st.rate ? 'Submit rating' : 'Not now'))) : null),
       h('form', { className: 'composer', onSubmit: send },
         h('label', { className: 'compose-in', htmlFor: 'chat-msg' }, h('input', { id: 'chat-msg', ref: function (el) { if (el && window.__focusChat) { window.__focusChat = false; setTimeout(function () { try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); el.focus({ preventScroll: true }); } catch (_) {} }, 450); } }, placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } })),
@@ -4621,10 +5077,10 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: function () { heart(); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
   }
 
-  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
+  var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, receipt: Receipt, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
 
   function stackFor(n) {
-    var map = { categories: ['home', 'categories'], login: ['home', 'login'], signup: ['home', 'signup'], forgot: ['home', 'login', 'forgot'], notifications: ['home', 'notifications'], payments: ['account', 'payments'], security: ['account', 'security'], channel: ['account', 'channel'], profile: ['account', 'profile'], payout: ['home', 'detail:payout'], search: ['home', 'search'], myevents: ['account', 'myevents'], detail: ['home', 'detail:seo'], live: ['home', 'live'], checkout: ['home', 'live', 'checkout'], success: ['home', 'live', 'success'], organizer: ['home', 'detail', 'organizer'], reviews: ['home', 'detail', 'organizer', 'reviews'], player: ['home', 'live', 'player'], full: ['home', 'live', 'player', 'full'] };
+    var map = { categories: ['home', 'categories'], login: ['home', 'login'], signup: ['home', 'signup'], forgot: ['home', 'login', 'forgot'], notifications: ['home', 'notifications'], payments: ['account', 'payments'], security: ['account', 'security'], channel: ['account', 'channel'], profile: ['account', 'profile'], payout: ['home', 'detail:payout'], search: ['home', 'search'], myevents: ['account', 'myevents'], detail: ['home', 'detail:seo'], live: ['home', 'live'], checkout: ['home', 'live', 'checkout'], receipt: ['account', 'payments', 'receipt'], success: ['home', 'live', 'success'], organizer: ['home', 'detail', 'organizer'], reviews: ['home', 'detail', 'organizer', 'reviews'], player: ['home', 'live', 'player'], full: ['home', 'live', 'player', 'full'] };
     return map[n] || [n];
   }
 
@@ -4639,7 +5095,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   }
 
   /* ---------- app shell with navigation stack ---------- */
-  var MODALS = /^(checkout)$/;
+  var MODALS = /^(nomodal)$/;
   function App() {
     var startHash = (location.hash || '').replace('#', '');
     var init = (SCREENS[startHash.split(':')[0]] || startHash === 'payout') ? stackFor(startHash) : ['welcome'];
@@ -4653,7 +5109,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     var tts = useState(null), toast = tts[0], setToast = tts[1];
     var navRef = useRef({ firstHome: true, registered: false });
     var nav = navRef.current;
-    var AUTHED = /^(account|myevents|payments|security|profile|channel|notifications|checkout|success|player|full)$/;
+    var AUTHED = /^(account|myevents|payments|receipt|security|profile|channel|notifications|checkout|success|player|full)$/;
     var aus = useState(AUTHED.test(startHash.split(':')[0])), authed = aus[0], setAuthed = aus[1];
     var ags = useState(null), gate = ags[0], setGate = ags[1];
     nav.authed = authed;
@@ -4672,7 +5128,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
-    window.__jump = function (n) { if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
     // swipe back from the left edge
@@ -4729,7 +5185,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   window.addEventListener('resize', fit); fit();
   var root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(React.createElement(window.__F4S_APP__));
-  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout'],['success','12 Registered'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['full','16 Fullscreen']];
+  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout — choose method & tickets'],['checkout-coupon','11b Checkout — promo applied, 2 tickets'],['checkout-coupon-bad','11c Checkout — invalid promo'],['checkout-addcard','11d Checkout — add new card'],['checkout-processing','11e Payment processing'],['checkout-declined','11f Payment declined'],['success','12 Registered'],['payments','12b Payment history'],['receipt-paid','12c Receipt — paid'],['receipt-refund','12d Receipt — request refund'],['receipt-pending','12e Receipt — refund pending'],['receipt-refunded','12f Receipt — refunded'],['receipt-failed','12g Receipt — failed payment'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['player-stage','15b Live — multi-speaker stage'],['player-invite','15c Live — invited to speak'],['player-onstage','15d Live — you are on stage'],['player-waiting','15e Live — waiting room'],['player-ended','15f Live — ended'],['player-reconnect','15g Live — reconnecting'],['full','16 Fullscreen']];
   var jump = document.getElementById('jump');
   list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); sel={k:it[0],h:null}; setTimeout(function(){ if(sel&&sel.k===it[0]) sel.h=location.hash; mark(); },120); mark(); }; jump.appendChild(b); });
   var sel=null;
