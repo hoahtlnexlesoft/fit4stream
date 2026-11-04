@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104034844"</script>
+<script>window.__BUILD__="20261104034925"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2359,6 +2359,12 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .f4-chat-who b{font-size:13px;font-weight:700;color:#f6b73c;margin:0!important}
 .f4-chat .f4-chat-host{display:inline-flex;align-items:center;height:16px;margin:0!important;padding:0 6px!important;border-radius:5px!important;font-size:10px!important;font-weight:700!important;letter-spacing:.02em;line-height:1!important;vertical-align:0!important;background:rgba(244,164,37,.18)!important;color:#f6b73c!important}
 .f4-chat-bub p{margin:0!important;padding:0!important;background:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;font-size:14px;line-height:19px;color:#fff;border-radius:0!important}
+
+/* Fullscreen: tighter side margins (notch side keeps a little extra) */
+.fl2 .full-top{left:44px!important;right:24px!important}
+.fl2 .full-chat{left:44px!important}
+.fl2 .full-bar{padding:0 24px 14px 44px!important}
+.fl2 .cam.big{right:24px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4411,7 +4417,6 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h(F.Badge, { tone: 'live' }, 'Live'), h('span', { className: 'pill' }, h(F.Icon, { name: 'eye', size: 12 }), '2'), h('span', { className: 'pill' }, h(F.Icon, { name: 'clock', size: 12 }), '02:14:47 left')),
       chat ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
-      h('div', { className: 'cam big fl2-ui' }, h('span', null, 'TN')),
       flash ? h('div', { key: flash.k, className: 'fl2-flash' }, flash.m) : null,
       h('div', { className: 'fl2-hearts', 'aria-hidden': true }, hearts.map(function (x) { return h('span', { key: x.id, style: { '--x': x.x + 'px', animationDelay: x.d + 'ms', transform: 'scale(' + x.s + ')' } }, h(F.Icon, { name: 'heart', filled: true, size: 20 })); })),
       h('div', { className: 'full-bar fl2-ui' },
