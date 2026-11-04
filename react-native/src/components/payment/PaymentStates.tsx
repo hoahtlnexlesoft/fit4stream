@@ -27,7 +27,7 @@ export function ProcessingOverlay({ visible, brand, title, amountLine }: { visib
 /** Payment declined dialog with the failed method + reason. */
 export function PaymentDeclinedDialog({ visible, method, reason, onRetry, onChangeMethod, onClose }: { visible: boolean; method: { brand: PaymentBrand; title: string }; reason: string; onRetry: () => void; onChangeMethod: () => void; onClose: () => void }) {
   return (
-    <ConfirmDialog visible={visible} onClose={onClose} onConfirm={onChangeMethod} onCancel={onRetry} title="Payment declined" icon="x" tone="danger" stacked
+    <ConfirmDialog visible={visible} onClose={onClose} onConfirm={onChangeMethod} onCancel={onRetry} title="Payment declined" icon="cardOff" tone="danger" stacked
       message="Your bank declined this charge, so no money was taken. Try again or choose another method." confirmLabel="Use another method" cancelLabel="Try again">
       <View style={s.fail}>
         <PaymentLogo brand={method.brand} />
