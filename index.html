@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104024054"</script>
+<script>window.__BUILD__="20261104030320"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2180,6 +2180,35 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
 /* Sheet grab handle: iOS-style — thin, light, translucent */
 .grab,.sheet .grab,.as2 .grab{width:36px!important;height:4px!important;border-radius:2px!important;background:rgba(255,255,255,.28)!important;box-shadow:none!important;margin:2px auto 14px!important;flex:none}
+
+/* Detail: labelled Trailer pill (only when the event has a trailer) */
+.dt-trailer{position:absolute;right:16px;bottom:22px;z-index:3;display:inline-flex!important;align-items:center;gap:8px;height:38px;padding:0 14px 0 6px;border-radius:19px;background:linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12)),rgba(16,16,22,.42);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);color:#fff;font-size:13.5px;font-weight:600}
+.dt-trailer .dt-tr-ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#14121a}
+.dt-trailer .dt-tr-ic svg{margin-left:2px}
+.dt-trailer em{font-style:normal;font-weight:500;color:rgba(255,255,255,.65);font-variant-numeric:tabular-nums}
+/* Trailer viewer */
+.trv{position:absolute;inset:0;z-index:60;background:#000;overflow:hidden;animation:trvIn .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes trvIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+.trv-img{position:absolute;inset:-4%;background-size:cover;background-position:center;animation:trvKB 24s ease-in-out infinite alternate;animation-play-state:paused}
+.trv.is-playing .trv-img{animation-play-state:running}
+@keyframes trvKB{from{transform:scale(1) translate(0,0)}to{transform:scale(1.14) translate(-3%,2%)}}
+.trv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 22%,transparent 50%,rgba(0,0,0,.85) 100%)}
+.trv-top{position:absolute;left:16px;right:16px;top:calc(var(--st) + 8px);display:flex;align-items:center;justify-content:space-between;z-index:3}
+.trv-tag{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:14px;background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.trv-x{position:relative!important}
+.trv-hit{position:absolute;inset:90px 0 170px;z-index:1}
+.trv-play{position:absolute;left:50%;top:46%;z-index:2;width:72px;height:72px;margin:-36px 0 0 -36px;border:0;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);transition:opacity .3s,transform .3s;cursor:pointer}
+.trv-play.hide{opacity:0;transform:scale(.85);pointer-events:none}
+.trv-play svg{margin-left:3px}
+.trv-bot{position:absolute;left:22px;right:22px;bottom:calc(var(--sb) + 26px);z-index:3;display:flex;flex-direction:column;gap:4px;color:#fff}
+.trv-kicker{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#f4a425}
+.trv-title{font-size:22px;line-height:28px;font-weight:700}
+.trv-org{font-size:13.5px;color:rgba(255,255,255,.7);margin-bottom:14px}
+.trv-bar{position:relative;height:18px;cursor:pointer}
+.trv-bar::before{content:"";position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:rgba(255,255,255,.22)}
+.trv-bar i{position:absolute;left:0;top:7px;height:4px;border-radius:2px;background:#fff;transition:width .2s linear}
+.trv-bar span{position:absolute;top:3px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.18);transition:left .2s linear}
+.trv-time{display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.65);font-variant-numeric:tabular-nums}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3244,10 +3273,10 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   var CHANNELS = ['Thao', 'Hieu LK', 'Thao NGUYEN2', 'An Tran', 'Nhan Doan', 'Business Demo', 'Kee Desmond', 'Marc John', 'Sandra Smith'];
   function ini(n) { var w = n.trim().split(/\s+/); return ((w[0] || '')[0] + ((w[1] || w[0] || '')[w[1] ? 0 : 1] || '')).toUpperCase(); }
   var EV = {
-    xmas: { id: 'xmas', title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
+    xmas: { id: 'xmas', trailer: 48, title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
       about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
-    seo: { id: 'seo', title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: '[Sample upcoming event]' },
+    seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: '[Sample upcoming event]' },
     gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
   };
   function evFrom(param) { return EV[param] || EV.xmas; }
@@ -3840,6 +3869,38 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     return h('div', { className: 'dt-rh' }, h('h2', null, p.title),
       h('div', { className: 'dt-arrows' }, h(Tap, { className: 'dt-arw', label: 'Previous', onClick: function () { by(-1); } }, h(Arr, { dir: 'l' })), h(Tap, { className: 'dt-arw', label: 'Next', onClick: function () { by(1); } }, h(Arr, { dir: 'r' }))));
   }
+
+  function fmtDur(sec) { sec = Math.max(0, Math.round(sec)); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
+  /* Trailer viewer: a pre-recorded promo clip — clearly not the live stream (no LIVE badge, no chat) */
+  function TrailerView(p) {
+    var e = p.e, D = e.trailer || 45;
+    var ts = useState(0), t = ts[0], setT = ts[1], ps = useState(true), playing = ps[0], setPlaying = ps[1], ms = useState(true), muted = ms[0], setMuted = ms[1];
+    useEffect(function () {
+      if (!playing) return;
+      var last = performance.now(), id = setInterval(function () { var now = performance.now(); setT(function (v) { var nv = v + (now - last) / 1000; if (nv >= D) { setPlaying(false); return D; } return nv; }); last = now; }, 200);
+      return function () { clearInterval(id); };
+    }, [playing]);
+    var done = t >= D;
+    function toggle() { if (done) { setT(0); setPlaying(true); return; } setPlaying(!playing); }
+    function seek(ev) { var r = ev.currentTarget.getBoundingClientRect(); setT(Math.max(0, Math.min(D, (ev.clientX - r.left) / r.width * D))); }
+    return h('div', { className: cx('trv', playing && 'is-playing'), role: 'dialog', 'aria-label': 'Trailer: ' + e.title },
+      h('div', { className: 'trv-img', style: { backgroundImage: 'url(' + e.img + ')' } }),
+      h('div', { className: 'trv-shade' }),
+      h('div', { className: 'trv-top' },
+        h(Tap, { className: 'dt-glass trv-x', label: 'Close trailer', go: p.close }, h(F.Icon, { name: 'x', size: 18 })),
+        h('span', { className: 'trv-tag' }, h(F.Icon, { name: 'play', size: 11 }), 'Trailer'),
+        h(Tap, { className: 'dt-glass trv-x', label: muted ? 'Unmute' : 'Mute', go: function () { setMuted(!muted); } },
+          h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M11 5L6 9H3v6h3l5 4z' }), muted ? h('path', { d: 'M22 9l-6 6M16 9l6 6' }) : h('path', { d: 'M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13' })))),
+      h('button', { type: 'button', className: cx('trv-play', playing && !done && 'hide'), 'aria-label': done ? 'Replay' : playing ? 'Pause' : 'Play', onClick: toggle },
+        done ? h('svg', { width: 26, height: 26, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M3 12a9 9 0 1 0 3-6.7L3 8' }), h('path', { d: 'M3 3v5h5' })) : h(F.Icon, { name: playing ? 'pause' : 'play', size: 28 })),
+      h('div', { className: 'trv-hit', onClick: toggle }),
+      h('div', { className: 'trv-bot' },
+        h('span', { className: 'trv-kicker' }, 'Official trailer'),
+        h('b', { className: 'trv-title' }, e.title),
+        h('span', { className: 'trv-org' }, 'by ' + e.org),
+        h('div', { className: 'trv-bar', onClick: seek }, h('i', { style: { width: (t / D * 100) + '%' } }), h('span', { style: { left: (t / D * 100) + '%' } })),
+        h('div', { className: 'trv-time' }, h('span', null, fmtDur(t)), h('span', null, fmtDur(D)))));
+  }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
     var reg = e.id === 'xmas' && p.nav.registered;
@@ -3848,6 +3909,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     var rm = useState(false), remind = rm[0], setRemind = rm[1];
     var m = useState(false), more = m[0], setMore = m[1];
     var r1 = useRef(null), r2 = useRef(null);
+    var trs = useState(false), tr = trs[0], setTr = trs[1];
     var live = e.status === 'live', ended = e.status === 'ended';
     var dur = e.time.split('–')[1].trim(), start = e.time.split('–')[0].trim();
     function go() { p.nav.requireAuth('Sign in to register for this event', function () { p.nav.push(reg ? 'player' : 'checkout'); }); }
@@ -3855,13 +3917,14 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     function info(icon, v, l) { return h('div', { className: 'dt-card' }, h('span', { className: 'dt-ic' }, h(F.Icon, { name: icon, size: 22 })), h('b', null, v), h('span', null, l)); }
     var about = e.about || 'The organizer hasn’t added a description yet.';
     return h('div', { className: 'screen dt' },
+      tr ? h(TrailerView, { e: e, close: function () { setTr(false); } }) : null,
       h('div', { className: 'dt-sbar', 'aria-hidden': true }),
       h('div', { className: 'dt-hero' },
         h('div', { className: 'dt-himg', style: { backgroundImage: 'url(' + e.img + ')' } }),
         h('div', { className: 'dt-hshade' }),
         h(Tap, { className: 'dt-glass dt-close', label: 'Close', go: p.nav.back }, h(F.Icon, { name: 'x', size: 20 })),
         live ? h('span', { className: 'dt-live' }, h('i', null), 'LIVE · ' + fmtT(e.left - t)) : null,
-        h(Tap, { className: 'dt-glass dt-prev', label: 'Watch preview', go: function () { p.nav.push('player'); } }, h(F.Icon, { name: 'play', size: 18 }))),
+        e.trailer ? h(Tap, { className: 'dt-trailer', label: 'Watch trailer', go: function () { setTr(true); } }, h('span', { className: 'dt-tr-ic' }, h(F.Icon, { name: 'play', size: 12 })), 'Trailer', h('em', null, fmtDur(e.trailer))) : null),
       h('div', { className: 'dt-main' },
         h('h1', { className: 'dt-title' }, e.title),
         h('div', { className: 'dt-badges' },
