@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104073313"</script>
+<script>window.__BUILD__="20261104074035"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3021,6 +3021,12 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .fs-media.fs-feed{background-position:center 40%;image-rendering:auto}
 .fs-pip-tag{display:inline-flex!important;align-items:center;gap:4px}.fs-pip-tag i{width:5px;height:5px;border-radius:50%;background:#e5484d}
 .fl2-ui .lv-live,.fl2-ui .lv-view,.full .lv-live,.full .lv-view{background:rgba(10,9,14,.42);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.fl3-chat{display:flex!important;flex-direction:column;gap:8px;max-width:46%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 24px);mask-image:linear-gradient(180deg,transparent 0,#000 24px)}
+.fl3-chat .im-msg{display:flex;align-items:flex-start;gap:9px}
+.fl3-chat .im-msg .f4-avatar{flex:none}
+.fl3-chat .im-msg p{margin:0;padding:0;background:none;font-size:13.5px;line-height:19px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.fl3-chat .im-msg p b{color:rgba(255,255,255,.65);font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.fl3-chat .im-msg p b i{font-style:normal;height:15px;padding:0 5px;border-radius:4px;display:inline-grid;place-items:center;font-size:9px;font-weight:700;background:#f4a425;color:#1b1306;text-shadow:none}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5184,7 +5190,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
   function toApp(n) { var a = document.querySelector('.app'); return a ? ReactDOM.createPortal(n, a) : n; }
   function Player(p) {
     var mode = p.param || '';
-    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: [], draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect', ui: true, sheet: false, swap: true });
+    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: (window.__F4MINE || []).slice(-6), draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect', ui: true, sheet: false, swap: true });
     var st = s[0], set = function (o) { s[1](function (prev) { return Object.assign({}, prev, o); }); };
     var inviteT = useRef(0);
     useEffect(function () { return function () { clearTimeout(inviteT.current); }; }, []);
@@ -5216,7 +5222,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
     }
     var tk = useTick();
     function heart(ch) { tap(15); var id = Date.now() + Math.random(); set({ hearts: st.hearts.concat([{ id: id, ch: typeof ch === 'string' ? ch : null }]).slice(-12), tray: false }); }
-    function send(e) { e.preventDefault(); if (!st.draft.trim()) return; tap(8); set({ mine: st.mine.concat([st.draft]).slice(-4), draft: '', tab: 'chat' }); }
+    function send(e) { e.preventDefault(); if (!st.draft.trim()) return; tap(8); window.__F4MINE = (window.__F4MINE || []).concat([st.draft]); set({ mine: window.__F4MINE.slice(-6), draft: '', tab: 'chat' }); }
     var elapsed = fmtT(Math.max(0, 8220 - (EV.xmas.left - tk)));
     var pinned = h('div', { className: 'pin-msg' }, h('span', { className: 'pin-ic' }, h('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M15 4l5 5-3 1-4 4 1 4-2 1-4-4-5 5M9 10l5 5' }))), h('div', null, h('b', null, 'Pinned by Host'), h('span', null, 'Market tour starts at the fountain at 10:00 🎄')));
     var MSGS = [
@@ -5327,8 +5333,8 @@ i.r-you{background:#fff!important;color:#14121a!important}
     var cs = useState(true), chat = cs[0], setChat = cs[1];
     var ps = useState(false), panel = ps[0], setPanel = ps[1];
     var msgs0 = [['thao15 nguyen15', 'Welcome everyone to the market tour!', true], ['Thao 13', 'Hello from Saigon'], ['Linh Tran', 'The lights look amazing \u2728'], ['Minh Pham', 'Joining from Da Nang!']];
-    var mg = useState(msgs0), msgs = mg[0], setMsgs = mg[1], dr = useState(''), draft = dr[0], setDraft = dr[1];
-    function send(e) { e && e.preventDefault && e.preventDefault(); var t = draft.trim(); if (!t) return; tap(6); setMsgs(msgs.concat([['Thao 13', t]])); setDraft(''); }
+    var mg = useState(msgs0.concat((window.__F4MINE || []).map(function (t) { return ['You', t]; }))), msgs = mg[0], setMsgs = mg[1], dr = useState(''), draft = dr[0], setDraft = dr[1];
+    function send(e) { e && e.preventDefault && e.preventDefault(); var t = draft.trim(); if (!t) return; tap(6); window.__F4MINE = (window.__F4MINE || []).concat([t]); setMsgs(msgs.concat([['You', t]])); setDraft(''); }
     var us = useState(true), ui = us[0], setUi = us[1];
     var sw = useState(false), swap = sw[0], setSwap = sw[1];
     var ls = useState(false), liked = ls[0], setLiked = ls[1];
@@ -5350,7 +5356,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
         h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, fmtT(Math.max(0, 8220 - (EV.xmas.left - ftk))))), h('span', { className: 'lv-view' }, h(F.Icon, { name: 'eye', size: 14 }), '2.4K')),
-      chat && !panel ? h('div', { className: 'full-chat fl2-ui' }, h(F.ChatMessage, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', seed: 0, host: true, text: 'Welcome everyone to the market tour!' }), h(F.ChatMessage, { src: av('Thao 13'), name: 'Thao 13', initials: 'TN', seed: 3, text: 'Hello from Saigon' })) : null,
+      chat && !panel ? h('div', { className: 'full-chat fl2-ui fl3-chat' }, msgs.slice(-4).map(function (m, i) { return h('div', { key: msgs.length - 4 + i, className: cx('im-msg', m[0] === 'You' && 'pop-in') }, h(F.Avatar, { src: m[0] === 'You' ? AV.me : av(m[0]), name: m[0], initials: ini(m[0]), size: 26 }), h('p', null, h('b', null, m[0], m[2] ? h('i', { className: 'r-host' }, 'Host') : null), ' ', m[1])); })) : null,
       h('button', { type: 'button', className: 'fl2-cam fl2-ui', 'aria-label': swap ? 'Show screen share large' : 'Show host camera large', onClick: function () { tap(8); setSwap(!swap); } },
         h('div', { key: swap ? 'e' : 'h', className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
         h('span', { className: 'fl2-cam-tag' }, h('i', null), swap ? 'Screen share' : 'thao15 nguyen15'),
