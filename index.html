@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104132128"</script>
+<script>window.__BUILD__="20261104132531"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3505,12 +3505,26 @@ input,textarea{caret-color:#F4A425}
 
 /* iOS-like transparent header: no bar background, just a soft shadow so text/icons stay legible over content */
 .stage .top .top-title{text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 12px rgba(0,0,0,.45)}
-.stage .top .f4-iconbtn{background:#25232c!important;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+
 .statusbar{text-shadow:0 1px 3px rgba(0,0,0,.5)}.statusbar svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
 
 /* no header backgrounds on scroll — transparent like iOS, text keeps a shadow */
 .brand-head.solid,.hello-head.solid,.d-top.solid{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-bottom-color:transparent!important;box-shadow:none!important}
 .brand-head,.hello-head,.d-top{text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 12px rgba(0,0,0,.4)}
+
+/* ===== iOS 26 "liquid glass" floating header ===== */
+.app{--glass-bg:rgba(44,40,54,.55);--glass-hi:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.07);--glass-sh:0 6px 20px rgba(0,0,0,.32)}
+.stage .top .f4-iconbtn,.stage .top .top-act .f4-iconbtn,.brand-head .mbtn:not(.me-av):not(.signin-pill),.stage .og-back,.stage .ch2-back,.stage .dt-close,.stage.scrolled .og-back,.stage.scrolled .ch2-back,.stage.scrolled .dt-close{background:var(--glass-bg)!important;-webkit-backdrop-filter:blur(18px) saturate(170%)!important;backdrop-filter:blur(18px) saturate(170%)!important;box-shadow:var(--glass-hi),var(--glass-sh)!important;border:0!important}
+.stage .top{gap:10px!important}
+.stage .top .top-title{transition:background .22s,box-shadow .22s,padding .22s,margin .22s}
+.stage.scrolled .top .top-title{flex:0 1 auto;margin:0 auto 0 0;max-width:58%;height:44px;line-height:44px;padding:0 18px;border-radius:22px;text-align:left;font-size:16px;background:var(--glass-bg);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:var(--glass-hi),var(--glass-sh);text-shadow:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-head .brand{transition:background .22s,box-shadow .22s,padding .22s;border-radius:22px}
+.brand-head.solid .brand{height:44px;padding:0 18px 0 5px;background:var(--glass-bg);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:var(--glass-hi),var(--glass-sh);text-shadow:none}
+.brand-head.solid .me-av{box-shadow:var(--glass-sh)}
+/* soft fade under the status bar (no solid bar) */
+.stage::before{content:none}
+.stage.scrolled .top::after,.brand-head.solid::after{content:'';position:absolute;left:0;right:0;top:calc(-1 * var(--st));height:calc(var(--st) + 30px);z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(15,14,20,.88) 0%,rgba(15,14,20,.55) 50%,rgba(15,14,20,0) 100%)}
+.brand-head.solid::after{top:0;height:calc(var(--st) + 40px)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
