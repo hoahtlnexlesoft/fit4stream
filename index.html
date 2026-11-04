@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104083437"</script>
+<script>window.__BUILD__="20261104083711"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3286,6 +3286,21 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .nt2-it:not(.un) .nt2-cta{background:rgba(255,255,255,.1)!important;color:#fff!important}
 .nt2-it.un .nt2-top b{font-weight:800!important;color:#fff!important}
 .nt2-it.un .nt2-body p{color:rgba(255,255,255,.72)!important}
+.rc-top{overflow:hidden}
+.rc-wm{position:absolute;right:-50px;top:-40px;opacity:.05;transform:rotate(-14deg);pointer-events:none}
+.rs{position:relative;width:84px;height:84px;display:grid;place-items:center;margin-bottom:12px}
+.rs-glow{position:absolute;inset:-26px;border-radius:50%;animation:ed-g 3s ease-in-out infinite alternate}
+.rs-svg{position:relative;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45));animation:rs-in .7s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes rs-in{from{transform:scale(.4) rotate(-40deg);opacity:0}to{transform:none;opacity:1}}
+.rs-spark{position:absolute;display:block;animation:rs-tw 2.4s ease-in-out infinite}
+.rs-spark.s1{left:-14px;top:8px}.rs-spark.s2{right:-16px;top:-2px;animation-delay:.6s;transform:scale(.7)}
+.rs-spark.s3{right:-10px;bottom:6px;animation-delay:1.2s;transform:scale(.55)}.rs-spark.s4{left:-6px;bottom:-4px;animation-delay:1.8s;transform:scale(.6)}
+@keyframes rs-tw{0%,100%{opacity:.2}50%{opacity:1}}
+.rc-top .rc-amt{display:flex;align-items:flex-start;font-size:46px!important;line-height:50px!important;font-weight:800;letter-spacing:-1.5px!important}
+.rc-top .rc-amt sup{font-size:22px;line-height:30px;margin-right:2px;color:rgba(255,255,255,.7);letter-spacing:0}
+.rc-top .rc-amt small{font-size:24px;line-height:32px;color:rgba(255,255,255,.55);letter-spacing:-.5px;align-self:flex-end}
+.rc-paper{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 50px rgba(0,0,0,.35)}
+.rc-bot .rc-ev .thumb{border-radius:14px!important;box-shadow:0 6px 14px rgba(0,0,0,.35)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5358,6 +5373,22 @@ i.r-you{background:#fff!important;color:#14121a!important}
     'F4S-261022-0315': { ev: 'Jazz Night Saigon', when: 'Oct 22, 2026 · 8:15 PM', lines: [['1 × Standard ticket', 3.99], ['Service fee', 0.49]], total: 4.48, pm: 'mc', pmT: 'Mastercard •••• 8812', st: 'failed' }
   };
   var STAT = { paid: ['Paid', 'ok'], refunded: ['Refunded', 'rf'], pending: ['Refund pending', 'pd'], failed: ['Failed', 'bad'] };
+  function sealPath(cx, cy, r, n, amp) { var d = '', N = 180; for (var i = 0; i <= N; i++) { var a = i / N * Math.PI * 2, rr = r + amp * Math.cos(n * a); d += (i ? 'L' : 'M') + (cx + Math.cos(a) * rr).toFixed(2) + ' ' + (cy + Math.sin(a) * rr).toFixed(2); } return d + 'Z'; }
+  var SEAL = { paid: ['#7FE7A8', '#1FA463', 'M27 40.5l8.5 8.5L53 31.5'], pending: ['#FFD27A', '#E08A0B', 'M40 28v13l8 5'], refunded: ['#8BE6F3', '#1C9CB3', 'M30 36a12 12 0 1 1 3 12M30 28v8h8'], failed: ['#FF9A93', '#D9363A', 'M31 31l18 18M49 31L31 49'] };
+  function ReceiptSeal(p) {
+    var c = SEAL[p.st] || SEAL.paid, id = 'sg' + p.st;
+    return h('span', { className: 'rs' },
+      h('span', { className: 'rs-glow', style: { background: 'radial-gradient(closest-side,' + c[1] + '66,transparent)' } }),
+      ['s1', 's2', 's3', 's4'].map(function (k) { return h('i', { key: k, className: 'rs-spark ' + k, style: { color: c[0] } }, h('svg', { viewBox: '0 0 24 24', width: 12, height: 12 }, h('path', { d: 'M12 0c.6 6 5.4 11.4 12 12-6.6.6-11.4 6-12 12-.6-6-5.4-11.4-12-12C6.6 11.4 11.4 6 12 0z', fill: 'currentColor' }))); }),
+      h('svg', { className: 'rs-svg', viewBox: '0 0 80 80', width: 84, height: 84, 'aria-hidden': true },
+        h('defs', null,
+          h('linearGradient', { id: id, x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: c[0] }), h('stop', { offset: 1, stopColor: c[1] })),
+          h('linearGradient', { id: id + 'h', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .55 }), h('stop', { offset: .55, stopColor: '#fff', stopOpacity: 0 }))),
+        h('path', { d: sealPath(40, 40, 34, 14, 2.6), fill: 'url(#' + id + ')' }),
+        h('circle', { cx: 40, cy: 40, r: 25, fill: 'none', stroke: 'rgba(255,255,255,.45)', strokeWidth: 1.2, strokeDasharray: '2 3' }),
+        h('path', { d: sealPath(40, 40, 34, 14, 2.6), fill: 'url(#' + id + 'h)' }),
+        h('path', { d: c[2], fill: 'none', stroke: '#fff', strokeWidth: 4.5, strokeLinecap: 'round', strokeLinejoin: 'round' })));
+  }
   function Receipt(p) {
     var parts = (p.param || '').split('|'), id = ORDERS[parts[0]] ? parts[0] : 'F4S-261103-0412', o = ORDERS[id], flag = parts[1] || '';
     var s = useState({ ref: flag === 'refund', st: flag === 'pending' ? 'pending' : o.st }), st = s[0], set = function (x) { s[1](function (y) { return Object.assign({}, y, x); }); };
@@ -5368,9 +5399,10 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
         h('div', { className: 'rc-paper st-' + st.st },
           h('div', { className: 'rc-top' },
-            h('span', { className: 'rc-badge' }, h('span', { className: 'rc-badge-glow' }), h('span', { className: 'rc-badge-in' }, h(F.Icon, { name: ({ paid: 'check', pending: 'clock', refunded: 'rotateCcw', failed: 'x' })[st.st], size: 26, stroke: 2.4 }))),
+            h('span', { className: 'rc-wm', 'aria-hidden': true }, h(F.Logo, { size: 190, markOnly: true })),
+            h(ReceiptSeal, { st: st.st }),
             h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
-            h('b', { className: 'rc-amt' }, money(o.total)),
+            h('b', { className: 'rc-amt' }, h('sup', null, '$'), money(o.total).slice(1).split('.')[0], h('small', null, '.' + money(o.total).split('.')[1])),
             h('span', { className: 'rc-when' }, o.when),
             h('span', { className: 'rc-st ' + stt[1] }, h('i'), stt[0])),
           h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
