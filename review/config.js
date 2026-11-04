@@ -1,7 +1,7 @@
-/* Fit4Stream feedback storage. Fill url + key (Supabase publishable key) to share comments between everyone.
-   While empty, comments are kept only in this browser (localStorage). */
+/* Fit4Stream feedback storage: Supabase project "fit4stream-review" (Nexle JOY), table fit4stream_review_comments.
+   The publishable key is meant to be public; access is limited by the table's row-level security. */
 window.REE_REVIEW = {
-  url: '',
-  key: '',
+  url: 'https://lheljoasgiilrxpaladz.supabase.co',
+  key: 'sb_publishable_wAWqjxoJ7Gd-uUZhE29STw_hJYDRGxT',
   table: 'fit4stream_review_comments'
 };
