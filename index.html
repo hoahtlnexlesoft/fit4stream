@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104140241"</script>
+<script>window.__BUILD__="20261104140525"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3592,6 +3592,28 @@ input,textarea{caret-color:#F4A425}
 .cd{background:var(--modal-bg)!important;border-radius:28px!important;box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.09)!important}
 .sheet .grab{background:rgba(255,255,255,.22)!important}
 .cs-comp{background:transparent!important}
+
+/* chat sheet: calmer, tidier */
+.cs-head{padding:2px 14px 6px 20px}
+.cs-title b{font-size:17px}
+.cs-x{width:34px;height:34px}
+.cs-tab{font-size:13.5px;padding:8px 0 10px}
+.cs-b>*{padding:12px 18px 8px}
+.cs-list{gap:12px}
+.cs-pin{align-items:center;gap:10px;padding:8px 12px 8px 8px;border-radius:12px;background:rgba(255,255,255,.05);box-shadow:none;margin-bottom:2px}
+.cs-pin-ic{width:24px;height:24px;border-radius:7px}
+.cs-pin-t{flex:1;min-width:0;font-size:13px;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cs-sys{align-self:flex-start;padding:0 0 0 38px;background:none;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.42)}
+.cs-sys i{background:#39CAE0;width:5px;height:5px}
+.cs-row{gap:10px}
+.cs-row .f4-avatar,.cs-row>span:first-child{margin-top:1px}
+.cs-meta{gap:6px;margin-bottom:1px}
+.cs-meta b{font-size:12.5px;font-weight:700}
+.cs-role{font-size:9.5px;letter-spacing:.02em;text-transform:none;padding:1px 6px;border-radius:999px;font-weight:700}
+.cs-body p{font-size:14px;line-height:1.4;color:rgba(255,255,255,.88)}
+.cs-comp{padding:8px 14px max(12px,calc(var(--sb) - 6px));border-top:0}
+.cs-in{height:46px;padding:0 5px 0 16px}
+.cs-send.heart{background:transparent;color:#E5484D}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6376,15 +6398,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }
     var sheetBody = st.tab === 'chat' ? h('div', { className: 'cs-list', ref: function (el) { if (el && !el.__f4) { el.__f4 = 1; el.scrollTop = el.scrollHeight; } } },
         h('div', { className: 'cs-pin' }, h('span', { className: 'cs-pin-ic' }, h('svg', { width: 13, height: 13, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M15 4l5 5-3 1-4 4 1 4-2 1-4-4-5 5M9 10l5 5' }))),
-          h('div', null, h('em', null, 'Pinned · thao15 nguyen15'), h('span', null, 'Market tour starts at the fountain at 10:00 \ud83c\udf84'))),
-        h('div', { className: 'cs-day' }, h('span', null, 'Live chat · started 9:43 AM')),
+          h('span', { className: 'cs-pin-t' }, 'Market tour starts at the fountain at 10:00 \ud83c\udf84')),
         MSGS.map(function (m, i) {
           if (m.sys) return h('div', { key: 's' + i, className: 'cs-sys' }, h('i'), m.sys);
           var role = m.role ? m.role.toLowerCase() : '';
           return h('div', { key: m.id || ('m' + i + m.t), className: cx('cs-row', m.me && 'me', (m.me || m.fresh) && 'chat-in') },
-            h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 32, seed: i }),
+            h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 28, seed: i }),
             h('div', { className: 'cs-body' },
-              h('div', { className: 'cs-meta' }, h('b', { className: role ? 'n-' + role : '' }, m.me ? 'You' : m.n), m.role ? h('i', { className: 'cs-role r-' + role }, m.role) : null, h('time', null, m.fresh || m.me ? 'now' : (i < 2 ? '12m' : '8m'))),
+              h('div', { className: 'cs-meta' }, h('b', { className: role ? 'n-' + role : '' }, m.me ? 'You' : m.n), m.role ? h('i', { className: 'cs-role r-' + role }, m.role) : null),
               h('p', null, m.t)));
         }))
       : st.tab === 'people' ? h('div', { className: 'ppl' },
@@ -6495,9 +6516,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h('div', { className: 'cs-tabs', role: 'tablist' }, ['chat', 'people', 'about'].map(function (t) { return h('button', { key: t, type: 'button', role: 'tab', 'aria-selected': st.tab === t, className: cx('cs-tab', st.tab === t && 'on'), onClick: function () { tap(5); set({ tab: t }); } }, t === 'chat' ? 'Chat' : t === 'people' ? 'People' : 'About', t === 'people' ? h('em', null, '2.4K') : null); }), h('span', { className: 'cs-ink', style: { transform: 'translateX(' + (['chat', 'people', 'about'].indexOf(st.tab) * 100) + '%)' } })),
           h('div', { className: 'im-sheet-b cs-b' }, sheetBody),
           st.tab === 'chat' ? h('form', { className: 'cs-comp', onSubmit: send },
-            h('div', { className: 'cs-quick' }, ['\u2764\ufe0f', '\ud83d\udd25', '\ud83d\udc4f', '\ud83d\ude02', '\ud83c\udf84'].map(function (e) { return h('button', { key: e, type: 'button', onClick: function () { heart(e); } }, e); })),
-            h('div', { className: 'cs-in' }, h(F.Avatar, { src: AV.me, name: 'You', initials: 'T1', size: 30 }), h('input', { placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } }),
-              h('button', { type: 'submit', className: cx('cs-send', st.draft.trim() && 'on'), 'aria-label': 'Send', disabled: !st.draft.trim() }, h(F.Icon, { name: 'send', size: 17 })))) : h('div', { style: { height: 'calc(var(--sb) + 8px)' } })))) : null,
+            h('div', { className: 'cs-in' }, h('input', { placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } }),
+              st.draft.trim() ? h('button', { type: 'submit', className: 'cs-send on', 'aria-label': 'Send' }, h(F.Icon, { name: 'send', size: 17 })) : h('button', { type: 'button', className: 'cs-send heart', 'aria-label': 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 18 })))) : h('div', { style: { height: 'calc(var(--sb) + 8px)' } })))) : null,
       st.invite ? toApp(h('div', { className: 'sheet-wrap inv-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ invite: false, hand: false }); } }, h('div', { className: 'sheet inv', role: 'dialog', 'aria-label': 'Invitation to speak' },
         h('span', { className: 'grab' }),
         h('div', { className: 'inv-av' }, h(F.Avatar, { src: av('thao15 nguyen15'), initials: 'TH', size: 64 }), h('span', null, '✋')),
