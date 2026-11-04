@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104092137"</script>
+<script>window.__BUILD__="20261104092615"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3429,6 +3429,8 @@ input,textarea{caret-color:#F4A425}
 .rs-svg{filter:none!important}
 .rs-glow{opacity:.5}
 .dg2{width:72px;height:72px;margin:0 auto 16px;border-radius:24px;display:grid;place-items:center;background:color-mix(in srgb,var(--dg) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--dg) 22%,transparent)}
+.em3{display:block;width:132px;height:110px;margin:-6px auto 8px}
+.em3 svg{display:block}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5285,22 +5287,38 @@ input,textarea{caret-color:#F4A425}
   }
 
   /* Centered confirm dialog, portalled above the whole app (covers the tab bar) */
-  var DUO = {
-    logout: function (c) { return [h('path', { key: 1, d: 'M4 5.5A2.5 2.5 0 0 1 6.5 3h5A2.5 2.5 0 0 1 14 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 4 18.5z', fill: c, fillOpacity: .28 }),
-      h('circle', { key: 2, cx: 11, cy: 12, r: 1.1, fill: c }),
-      h('path', { key: 3, d: 'M13 12h8M18 8.5l3.5 3.5-3.5 3.5', fill: 'none', stroke: c, strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' })]; },
-    del: function (c) { return [h('path', { key: 1, d: 'M6 8h12l-1 11.2A2 2 0 0 1 15 21H9a2 2 0 0 1-2-1.8z', fill: c, fillOpacity: .28 }),
-      h('path', { key: 2, d: 'M4 6.5h16M9.5 6.5V4.8c0-.7.6-1.3 1.3-1.3h2.4c.7 0 1.3.6 1.3 1.3v1.7M10.2 11v6M13.8 11v6', fill: 'none', stroke: c, strokeWidth: 2, strokeLinecap: 'round' })]; },
-    card: function (c) { return [h('rect', { key: 1, x: 2.5, y: 5, width: 19, height: 14, rx: 3, fill: c, fillOpacity: .28 }),
-      h('rect', { key: 2, x: 2.5, y: 8.5, width: 19, height: 2.4, fill: c, fillOpacity: .5 }),
-      h('rect', { key: 3, x: 5.5, y: 14, width: 5, height: 2, rx: 1, fill: c }),
-      h('path', { key: 4, d: 'M3.5 3.5l17 17', fill: 'none', stroke: c, strokeWidth: 2.3, strokeLinecap: 'round' })]; }
-  };
-  var DLG = { logout: '#F4A425', del: '#FF6B6B', card: '#FF6B6B' };
+  /* illustrated emblems in the success-ticket style: plum card + brand-gradient outline + corner badge */
   function DlgEmblem(p) {
-    var c = DLG[p.k] || DLG.logout;
-    return h('span', { className: 'dg2', style: { '--dg': c } },
-      h('svg', { viewBox: '0 0 24 24', width: 34, height: 34, 'aria-hidden': true }, (DUO[p.k] || DUO.logout)(c)));
+    var k = p.k, id = 'em' + k;
+    var badge = k === 'logout' ? ['#FFD27A', '#F4A425', '#1b1306', 'M9 12h7M13 8.5l3.5 3.5-3.5 3.5'] : k === 'del' ? ['#FF9A93', '#E5484D', '#fff', 'M8 9h8M10.5 9V7.8h3V9M9.2 9l.6 7.2h4.4l.6-7.2'] : ['#FF9A93', '#E5484D', '#fff', 'M9 9l6 6M15 9l-6 6'];
+    var body;
+    if (k === 'logout') body = [
+      h('rect', { key: 'b', x: 30, y: 16, width: 54, height: 66, rx: 12, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
+      h('rect', { key: 'd', x: 40, y: 26, width: 34, height: 46, rx: 7, fill: 'rgba(255,255,255,.06)' }),
+      h('circle', { key: 'k', cx: 70, cy: 54, r: 2.4, fill: '#F4A425' }),
+      h('rect', { key: 'r1', x: 44, y: 62, width: 20, height: 4, rx: 2, fill: 'rgba(255,255,255,.25)' }),
+      h('g', { key: 'l', transform: 'translate(44 32) scale(.034)' }, LOGO_P.map(function (d, i) { return h('path', { key: i, d: d, fill: ['#fff', '#782F8D', '#33438D', '#E74645'][i] }); }))];
+    else if (k === 'del') body = [
+      h('rect', { key: 'b', x: 18, y: 22, width: 80, height: 56, rx: 12, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
+      h('circle', { key: 'a', cx: 40, cy: 44, r: 10, fill: 'url(#' + id + 'g)' }),
+      h('circle', { key: 'a2', cx: 40, cy: 41, r: 4, fill: '#2A2340' }), h('path', { key: 'a3', d: 'M33 51a7.5 7.5 0 0 1 14 0', fill: '#2A2340' }),
+      h('rect', { key: 'l1', x: 56, y: 37, width: 28, height: 6, rx: 3, fill: 'rgba(255,255,255,.55)' }),
+      h('rect', { key: 'l2', x: 56, y: 48, width: 18, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.25)' }),
+      h('rect', { key: 'l3', x: 28, y: 63, width: 50, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.14)' })];
+    else body = [
+      h('rect', { key: 'b', x: 16, y: 22, width: 84, height: 56, rx: 11, fill: '#2A2340', stroke: 'url(#' + id + 'g)', strokeWidth: 2.4 }),
+      h('rect', { key: 's', x: 17, y: 34, width: 82, height: 9, fill: 'rgba(255,255,255,.14)' }),
+      h('rect', { key: 'c', x: 27, y: 52, width: 15, height: 11, rx: 2.5, fill: '#E9C46A' }),
+      h('rect', { key: 'n', x: 48, y: 55, width: 34, height: 5, rx: 2.5, fill: 'rgba(255,255,255,.3)' })];
+    return h('span', { className: 'em3' },
+      h('svg', { viewBox: '0 0 120 100', width: 132, height: 110, 'aria-hidden': true },
+        h('defs', null,
+          h('linearGradient', { id: id + 'g', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39CAE0' }), h('stop', { offset: .35, stopColor: '#A57AD8' }), h('stop', { offset: .7, stopColor: '#E74645' }), h('stop', { offset: 1, stopColor: '#FACD60' })),
+          h('linearGradient', { id: id + 'b', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: badge[0] }), h('stop', { offset: 1, stopColor: badge[1] }))),
+        h('circle', { cx: 12, cy: 18, r: 2.4, fill: '#FACD60', opacity: .8 }), h('circle', { cx: 108, cy: 26, r: 2, fill: '#39CAE0', opacity: .8 }), h('circle', { cx: 10, cy: 84, r: 1.6, fill: '#A57AD8', opacity: .8 }),
+        h('g', { transform: 'rotate(-8 60 50)' }, body),
+        h('circle', { cx: 92, cy: 76, r: 15, fill: 'url(#' + id + 'b)', stroke: '#1e1b26', strokeWidth: 3 }),
+        h('g', { transform: 'translate(80 64)' }, h('path', { d: badge[3], fill: 'none', stroke: badge[2], strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }))));
   }
   function ConfirmDialog(p) {
     var del = p.kind === 'delete';
