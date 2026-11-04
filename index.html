@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104035758"</script>
+<script>window.__BUILD__="20261104040053"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 <title>Fit4Stream iPhone Prototype</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&display=swap">
 <style>
 /* Fit4Stream Mobile — generated from tokens.json */
 :root, [data-theme="dark"] {
@@ -81,8 +81,8 @@
   --nav-height: 64px;
   --header-height: 52px;
   --tap-min: 44px;
-  --font-sans: Inter, "SF Pro Text", system-ui, -apple-system, Roboto, sans-serif;
-  --font-display: Inter, "SF Pro Display", system-ui, -apple-system, Roboto, sans-serif;
+  --font-sans: "Plus Jakarta Sans", Inter, "SF Pro Text", system-ui, -apple-system, Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", Inter, "SF Pro Display", system-ui, -apple-system, Roboto, sans-serif;
 }
 .display-xl { font-family: var(--font-display); font-size: 34px; line-height: 40px; font-weight: 800; letter-spacing: -0.8px; }
 .display-lg { font-family: var(--font-display); font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: -0.6px; }
@@ -2407,6 +2407,29 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .pv-cam .fl2-cam-tag{max-width:80px;font-size:10px}
 .rv-bottom{position:sticky!important;bottom:0!important;left:auto!important;right:auto!important;margin-top:8px}
 .ok-h{font-size:26px!important;line-height:32px!important;font-weight:600!important;letter-spacing:-.3px!important}
+
+/* Share sheet v2 */
+.sh2{gap:0!important;padding:10px 20px calc(var(--sb) + 18px)!important}
+.sh2-head{display:flex;align-items:center;justify-content:space-between;margin:2px 0 14px}
+.sh2-head b{font-size:18px;font-weight:700;color:#fff}
+.sh2-x{width:32px;height:32px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8)}
+.sh2-card{display:flex;align-items:center;gap:12px;padding:10px;border-radius:18px;background:rgba(255,255,255,.05)}
+.sh2-th{flex:none;width:56px;height:56px;border-radius:12px;background-size:cover;background-position:center}
+.sh2-meta{min-width:0;display:flex;flex-direction:column;gap:3px}
+.sh2-meta b{font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh2-meta span{font-size:12.5px;color:rgba(255,255,255,.55)}
+.sh2-link{display:flex;align-items:center;gap:10px;height:48px;margin-top:10px;padding:0 6px 0 14px;border-radius:16px;background:rgba(0,0,0,.25);color:rgba(255,255,255,.5)}
+.sh2-url{flex:1;min-width:0;font-size:13px;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sh2-copy{display:inline-flex!important;align-items:center;gap:5px;height:36px;padding:0 16px;border-radius:12px;background:#f4a425;color:#1b1306;font-size:13.5px;font-weight:700;transition:background .2s}
+.sh2-copy.done{background:#22c55e;color:#fff}
+.sh2-lab{margin:20px 0 12px!important;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.sh2-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.sh2-it{display:flex!important;flex-direction:column;align-items:center;gap:8px;font-size:11.5px;color:rgba(255,255,255,.7)}
+.sh2-it>span{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.sh2-it:active>span{transform:scale(.92)}
+/* liked state: brand amber instead of red */
+.fa.on{color:#f4a425!important}
+.sheet.sh2{background:linear-gradient(180deg,#1f1d27,#17161d)!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -3496,7 +3519,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('div', { className: 'feed-cap' }, h('b', null, p.title), h('span', null, p.meta))),
       h('div', { className: 'feed-acts' },
         h(Tap, { className: cx('fa', liked && 'on'), onClick: function () { tap(12); setL(!liked); } }, h(F.Icon, { name: 'thumbsUp', size: 20, filled: liked }), liked ? '1' : '0'),
-        h(Tap, { className: 'fa', go: p.go }, h(F.Icon, { name: 'message', size: 20 }), 'Comment'),
+        h(Tap, { className: 'fa', go: p.onComment || p.go }, h(F.Icon, { name: 'message', size: 20 }), 'Comment'),
         h(Tap, { className: 'fa', onClick: function () { window.__nav.share({}); } }, h(F.Icon, { name: 'send', size: 19 }), 'Share'),
         h('span', { style: { flex: 1 } }),
         h(Tap, { className: 'watch-mini', go: p.go }, h(F.Icon, { name: 'play', size: 14 }), 'Watch')));
@@ -3656,13 +3679,25 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
   /* ---------- global share sheet + toast ---------- */
   function ShareSheet(p) {
-    var opts = [['Copy link', 'external'], ['Messages', 'message'], ['Facebook', 'globe'], ['Instagram', 'video'], ['Zalo', 'send'], ['More', 'more']];
+    var cs = useState(false), copied = cs[0], setCopied = cs[1];
+    var url = 'fit4stream.com/e/' + (p.slug || 'danang-christmas-market-2026');
+    var opts = [['Messages', 'message', '#34c759'], ['Facebook', 'globe', '#3b82f6'], ['Instagram', 'video', '#e1306c'], ['Zalo', 'send', '#0a84ff'], ['Email', 'mail', '#f4a425'], ['More', 'more', '#9aa0aa']];
+    function copy() { tap(8); setCopied(true); try { navigator.clipboard && navigator.clipboard.writeText('https://' + url); } catch (_) {} setTimeout(function () { p.close(); p.toast('Link copied'); }, 650); }
     return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
-      h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Share' },
+      h('div', { className: 'sheet sh2', role: 'dialog', 'aria-label': 'Share' },
         h('span', { className: 'grab' }),
-        h('div', { className: 'row gap12' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + (p.img || IMG) + ')' } }), h('div', { style: { minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, p.title || 'Danang Christmas Market 2026'), h('span', { className: 'subtle', style: { fontSize: 12.5 } }, 'fit4stream.com/e/' + (p.slug || 'danang-christmas-market-2026')))),
-        h('div', { className: 'share-grid' }, opts.map(function (o) { return h(Tap, { key: o[0], className: 'share-it', go: function () { p.close(); p.toast(o[0] === 'Copy link' ? 'Link copied' : 'Shared to ' + o[0]); } }, h('span', null, h(F.Icon, { name: o[1], size: 22 })), o[0]); })),
-        h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-lg f4-btn-block', go: p.close }, 'Cancel')));
+        h('div', { className: 'sh2-head' }, h('b', null, 'Share event'), h(Tap, { className: 'sh2-x', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 16 }))),
+        h('div', { className: 'sh2-card' },
+          h('span', { className: 'sh2-th', style: { backgroundImage: 'url(' + (p.img || IMG) + ')' } }),
+          h('div', { className: 'sh2-meta' }, h('b', null, p.title || 'Danang Christmas Market 2026'), h('span', null, 'Live now · by thao15 nguyen15'))),
+        h('div', { className: 'sh2-link' },
+          h('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L11.6 6' }), h('path', { d: 'M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.6-1.6' })),
+          h('span', { className: 'sh2-url' }, url),
+          h(Tap, { className: cx('sh2-copy', copied && 'done'), go: copy }, copied ? h(F.Icon, { name: 'check', size: 14 }) : null, copied ? 'Copied' : 'Copy')),
+        h('p', { className: 'sh2-lab' }, 'Share to'),
+        h('div', { className: 'sh2-row' }, opts.map(function (o) {
+          return h(Tap, { key: o[0], className: 'sh2-it', go: function () { p.close(); p.toast('Shared to ' + o[0]); } }, h('span', { style: { '--c': o[2] } }, h(F.Icon, { name: o[1], size: 22 })), o[0]);
+        }))));
   }
 
   var CAT_LOOK = { 'Concerts and Performances': ['concert', '#c63d63'], 'Broadcast Events': ['hero', '#33438d'], 'Talk Shows': ['comedy', '#f4a425'], 'Social and Community': ['festival', '#e74645'], 'Product Launches and Demonstrations': ['conference', '#39cae0'], 'Virtual Conferencing': ['conference', '#33438d'], 'Others': ['movie', '#8a9ab0'], 'Virtual Workshops and Training': ['theater', '#f08a24'], 'Virtual Networking': ['sports', '#a57ad8'] };
@@ -3897,7 +3932,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h('div', { className: 'tab-head' }, h('h1', null, 'On-air', h(F.Badge, { tone: 'live' }, lives.length + ' live')), h(SearchBtn, { nav: p.nav })),
       h('div', { className: 'pad col', style: { gap: 18, marginTop: 6 } },
-        lives.map(function (e) { return h(FeedCard, { key: e.id, avatar: av('Thao'), name: e.org, handle: e.cat, image: e.img, title: e.title, meta: e.format + ' · ' + e.watching + ' watching · ' + e.likes + ' likes', viewers: String(e.watching), go: function () { p.nav.push('detail:' + e.id); }, onProfile: function () { p.nav.push('organizer'); } }); }),
+        lives.map(function (e) { return h(FeedCard, { key: e.id, avatar: av('Thao'), name: e.org, handle: e.cat, image: e.img, title: e.title, meta: e.format + ' · ' + e.watching + ' watching · ' + e.likes + ' likes', viewers: String(e.watching), go: function () { p.nav.push('detail:' + e.id); }, onComment: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to join the live chat'); p.nav.registered = true; window.__focusChat = true; p.nav.push('player'); }, onProfile: function () { p.nav.push('organizer'); } }); }),
         h(SH, { title: 'Concerts and Performances' }),
         h('div', { className: 'col gap12' }, lives.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav, wide: true }); }))),
       h('div', { style: { height: 140 } }));
@@ -4433,7 +4468,7 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         st.tray ? h('div', { className: 'etray' }, ['\ud83d\udc4f', '\u2764\ufe0f', '\ud83d\ude02', '\ud83d\udd25', '\ud83c\udf84', '\ud83d\udc4d'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
         st.rateOpen ? h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ rateOpen: false }); } }, h('div', { className: 'sheet', role: 'dialog', 'aria-label': 'Rate this event' }, h('span', { className: 'grab' }), h('h2', { className: 'h-md' }, 'Rate this event'), h('div', { className: 'rate-stars' }, [1, 2, 3, 4, 5].map(function (n) { return h('button', { key: n, type: 'button', 'aria-label': n + ' stars', className: n <= st.rate ? 'on' : '', onClick: function () { tap(8); set({ rate: n }); } }, h(F.Icon, { name: 'star', size: 34, filled: true })); })), h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { set({ rateOpen: false }); } }, st.rate ? 'Submit rating' : 'Not now'))) : null),
       h('form', { className: 'composer', onSubmit: send },
-        h('label', { className: 'compose-in', htmlFor: 'chat-msg' }, h('input', { id: 'chat-msg', placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } })),
+        h('label', { className: 'compose-in', htmlFor: 'chat-msg' }, h('input', { id: 'chat-msg', ref: function (el) { if (el && window.__focusChat) { window.__focusChat = false; setTimeout(function () { try { el.scrollIntoView({ block: 'center', behavior: 'smooth' }); el.focus({ preventScroll: true }); } catch (_) {} }, 450); } }, placeholder: 'Say something…', value: st.draft, onChange: function (e) { set({ draft: e.target.value }); } })),
         h('button', { type: 'button', className: 'f4-iconbtn f4-iconbtn-soft', 'aria-label': 'Reactions', onClick: function () { set({ tray: !st.tray }); } }, h(F.Icon, { name: 'smile', size: 20 })),
         h('button', { type: 'submit', className: 'f4-iconbtn f4-iconbtn-soft', 'aria-label': 'Send' }, h(F.Icon, { name: 'send', size: 18 })),
         h('button', { type: 'button', className: 'f4-iconbtn heart-btn pl-heart', 'aria-label': 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 20 }))));
