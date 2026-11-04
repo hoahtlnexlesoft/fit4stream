@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104040152"</script>
+<script>window.__BUILD__="20261104040307"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2443,6 +2443,18 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .yt-body b{font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .yt-body span{font-size:12.5px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .yt-go{flex:none;display:inline-flex;align-items:center;gap:5px;height:36px;padding:0 14px;border-radius:18px;background:#f4a425;color:#1b1306;font-size:13.5px;font-weight:700}
+
+/* Fullscreen reactions */
+.fl2-tray{position:absolute;right:24px;bottom:68px;z-index:5;display:flex;gap:2px;padding:6px;border-radius:999px;background:rgba(14,13,20,.72);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);animation:fl2In .25s ease both}
+.fl2:has(.fl2-panel) .fl2-tray{right:324px}
+.fl2-tray button,.fl2-qe button{all:unset;cursor:pointer;width:40px;height:40px;display:grid;place-items:center;font-size:24px;border-radius:50%;transition:transform .15s}
+.fl2-tray button:active,.fl2-qe button:active{transform:scale(1.3)}
+.fl2-qe{display:flex;justify-content:space-between;padding:4px 12px 0}
+.fl2-qe button{width:36px;height:36px;font-size:21px}
+.fl2-emo{font-size:26px;line-height:1}
+.fl2:has(.fl2-panel) .fl2-hearts{right:340px}
+.fl2-cam{transition:right .3s ease,bottom .3s ease,opacity .3s ease}
+.fl2:has(.fl2-tray) .fl2-cam{bottom:124px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4508,9 +4520,10 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
     var fs = useState(null), flash = fs[0], setFlash = fs[1];
     var ft = useRef(0), hid = useRef(0);
     function say(m) { setFlash({ m: m, k: Date.now() }); clearTimeout(ft.current); ft.current = setTimeout(function () { setFlash(null); }, 1400); }
-    function heart() {
-      tap(15); setLiked(true);
-      var batch = [0, 1, 2, 3, 4].map(function (i) { hid.current += 1; return { id: hid.current, x: (Math.random() * 40 - 20) | 0, d: i * 90, s: .8 + Math.random() * .5 }; });
+    var ts = useState(false), tray = ts[0], setTray = ts[1];
+    function heart(ch) {
+      tap(15); if (!ch) setLiked(true);
+      var batch = [0, 1, 2, 3, 4].map(function (i) { hid.current += 1; return { id: hid.current, ch: typeof ch === 'string' ? ch : null, x: (Math.random() * 40 - 20) | 0, d: i * 90, s: .8 + Math.random() * .5 }; });
       setHearts(function (hh) { return hh.concat(batch); });
       setTimeout(function () { setHearts(function (hh) { return hh.filter(function (x) { return batch.indexOf(x) < 0; }); }); }, 1900);
     }
@@ -4528,18 +4541,21 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
         h('span', { className: 'fl2-cam-swap', 'aria-hidden': true }, h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))),
         h('span', { className: 'fl2-cam-mic' }, h('svg', { width: 12, height: 12, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('rect', { x: 9, y: 3, width: 6, height: 11, rx: 3 }), h('path', { d: 'M5 11a7 7 0 0 0 14 0M12 18v3' })))),
       flash ? h('div', { key: flash.k, className: 'fl2-flash' }, flash.m) : null,
-      h('div', { className: 'fl2-hearts', 'aria-hidden': true }, hearts.map(function (x) { return h('span', { key: x.id, style: { '--x': x.x + 'px', animationDelay: x.d + 'ms', transform: 'scale(' + x.s + ')' } }, h(F.Icon, { name: 'heart', filled: true, size: 20 })); })),
+      h('div', { className: 'fl2-hearts', 'aria-hidden': true }, hearts.map(function (x) { return h('span', { key: x.id, style: { '--x': x.x + 'px', animationDelay: x.d + 'ms', transform: 'scale(' + x.s + ')' } }, x.ch ? h('b', { className: 'fl2-emo' }, x.ch) : h(F.Icon, { name: 'heart', filled: true, size: 20 })); })),
       panel ? h('aside', { className: 'fl2-panel', role: 'dialog', 'aria-label': 'Live chat' },
         h('div', { className: 'fl2-ph' }, h('b', null, 'Live chat'), h('span', null, msgs.length + ' messages'), h(Tap, { className: 'fl2-px', label: 'Close chat', onClick: function () { setPanel(false); } }, h(F.Icon, { name: 'x', size: 16 }))),
         h('div', { className: 'fl2-list', ref: function (el) { if (el) el.scrollTop = el.scrollHeight; } }, msgs.map(function (m, i) { return h(F.ChatMessage, { key: i, src: av(m[0]), name: m[0], initials: ini(m[0]), seed: i, host: !!m[2], text: m[1] }); })),
+        h('div', { className: 'fl2-qe' }, ['\ud83d\udc4f', '\u2764\ufe0f', '\ud83d\ude02', '\ud83d\udd25', '\ud83c\udf84', '\ud83d\udc4d'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); setMsgs(msgs.concat([['Thao 13', c]])); } }, c); })),
         h('form', { className: 'fl2-input', onSubmit: send }, h('input', { value: draft, placeholder: 'Say something\u2026', onChange: function (e) { setDraft(e.target.value); } }), h('button', { type: 'submit', className: 'fl2-send', 'aria-label': 'Send', disabled: !draft.trim() }, h(F.Icon, { name: 'send', size: 16 })))) : null,
+      tray ? h('div', { className: 'fl2-tray fl2-ui' }, ['\ud83d\udc4f', '\u2764\ufe0f', '\ud83d\ude02', '\ud83d\udd25', '\ud83c\udf84', '\ud83d\udc4d'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
       h('div', { className: 'full-bar fl2-ui' },
         h(Tap, { className: cx('ctl', muted && 'on'), label: muted ? 'Unmute' : 'Mute', onClick: function () { tap(5); setMuted(!muted); say(muted ? 'Sound on' : 'Muted'); } }, vol),
         h('span', { style: { flex: 1 } }),
         h('span', { style: { fontSize: 12, opacity: .75 } }, 'Quality'),
         ['Auto', '1080p', '720p', '480p'].map(function (t, i) { return h('button', { key: t, type: 'button', className: cx('q', i === q && 'on'), onClick: function () { tap(5); setQ(i); say('Quality: ' + t); } }, t); }),
         h(Tap, { className: cx('ctl', panel && 'on'), label: panel ? 'Close chat' : 'Open chat', onClick: function () { tap(5); setPanel(!panel); setUi(true); } }, h(F.Icon, { name: 'message', size: 18 }), msgs.length ? h('i', { className: 'fl2-cnt' }, msgs.length) : null),
-        h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: heart }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
+        h(Tap, { className: cx('ctl', tray && 'on'), label: 'Reactions', onClick: function () { tap(5); setTray(!tray); } }, h(F.Icon, { name: 'smile', size: 18 })),
+        h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: function () { heart(); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
   }
 
   var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
