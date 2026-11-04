@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104134118"</script>
+<script>window.__BUILD__="20261104134916"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3525,15 +3525,17 @@ input,textarea{caret-color:#F4A425}
 .stage::before{content:none}
 
 /* progressive blur under the floating header (stacked bands, no mask, so it also works in iOS Safari) */
-.top-blur{position:absolute;left:0;right:0;top:0;height:calc(var(--st) + 100px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(180deg,rgba(15,14,20,.72) 0%,rgba(15,14,20,.55) 55%,rgba(15,14,20,.2) 80%,rgba(15,14,20,0) 100%)}
+.top-blur{position:fixed!important;left:0;right:0;top:0;height:calc(var(--st) + 100px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(180deg,rgba(15,14,20,.72) 0%,rgba(15,14,20,.55) 55%,rgba(15,14,20,.2) 80%,rgba(15,14,20,0) 100%)}
 .top-blur b{position:absolute;left:0;right:0;top:0;display:block;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 70%,transparent 100%)}
 .top-blur b:nth-child(1){height:100%;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .top-blur b:nth-child(2){height:calc(var(--st) + 86px);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .top-blur b:nth-child(3){height:calc(var(--st) + 72px);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .top-blur b:nth-child(4){height:calc(var(--st) + 56px);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px)}
-.stage.scrolled>.top-blur{opacity:1}
+.stage.scrolled .top-blur{opacity:1}
 
 .stage .brand-head,.stage .d-top{z-index:35!important}
+
+.stage .top,.stage .brand-head,.stage .d-top,.stage .og-back,.stage .ch2-back,.stage .dt-close{z-index:40!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6574,6 +6576,23 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       else { setSwAnim(2); setDrag(0); setTimeout(function () { setSwAnim(0); }, 230); } }
     function clickCap(e) { if (swClick.current) { e.preventDefault(); e.stopPropagation(); } }
 
+    // progressive-blur layer: inserted next to the screen's header (same scroll layer) so iOS Safari keeps the header above it
+    var stageEl = useRef(null);
+    useEffect(function () {
+      var st = stageEl.current; if (!st || /^(player|full)$/.test(top.split(':')[0])) return;
+      function place() {
+        var hd = st.querySelector('.top, .brand-head, .d-top, .og-back, .ch2-back, .dt-close'); if (!hd || !hd.parentNode) return;
+        var sc = hd.parentNode; while (sc && sc !== st && !/(auto|scroll)/.test(getComputedStyle(sc).overflowY)) sc = sc.parentNode;
+        var host = sc && sc !== st ? sc : hd.parentNode, cur = st.querySelector('.top-blur');
+        if (cur && cur.parentNode === host) return;
+        if (cur) cur.remove();
+        var bl = document.createElement('i'); bl.className = 'top-blur'; bl.setAttribute('aria-hidden', 'true'); bl.innerHTML = '<b></b><b></b><b></b><b></b>';
+        if (host === hd.parentNode && host !== sc) host.insertBefore(bl, hd); else host.insertBefore(bl, host.firstChild);
+      }
+      var raf = requestAnimationFrame(place), mo = new MutationObserver(function () { place(); });
+      mo.observe(st, { childList: true, subtree: true });
+      return function () { cancelAnimationFrame(raf); mo.disconnect(); };
+    }, [top, stack.length]);
     var tname = top.split(':')[0], tparam = top.split(':')[1];
     var Comp = SCREENS[tname];
     var tabbed = TABS.indexOf(tname) >= 0;
@@ -6583,8 +6602,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       window.__FRAME__ ? h(StatusBar, { light: top === 'player' }) : null,
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
       swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
-      h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
-        h(Comp, { nav: nav, key: top, param: tparam }), tname !== 'player' && tname !== 'full' ? h('i', { className: 'top-blur', 'aria-hidden': true }, h('b'), h('b'), h('b'), h('b')) : null),
+      h('div', { key: top + stack.length, ref: stageEl, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
+        h(Comp, { nav: nav, key: top, param: tparam })),
       tabbed ? h(TabBar, { active: tname, nav: nav }) : null,
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
         h('span', { className: 'f4-badge f4-badge-live', style: { position: 'absolute', left: 8, top: 8 } }, h('span', { className: 'f4-live-dot' }), 'Live'),
