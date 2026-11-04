@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104132531"</script>
+<script>window.__BUILD__="20261104132912"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3523,8 +3523,15 @@ input,textarea{caret-color:#F4A425}
 .brand-head.solid .me-av{box-shadow:var(--glass-sh)}
 /* soft fade under the status bar (no solid bar) */
 .stage::before{content:none}
-.stage.scrolled .top::after,.brand-head.solid::after{content:'';position:absolute;left:0;right:0;top:calc(-1 * var(--st));height:calc(var(--st) + 30px);z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(15,14,20,.88) 0%,rgba(15,14,20,.55) 50%,rgba(15,14,20,0) 100%)}
-.brand-head.solid::after{top:0;height:calc(var(--st) + 40px)}
+
+/* progressive blur under the floating header: content scrolling up gets softly blurred + dimmed */
+.top-blur{position:absolute;left:0;right:0;top:0;height:calc(var(--st) + 78px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;
+  -webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%);
+  background:linear-gradient(180deg,rgba(15,14,20,.55) 0%,rgba(15,14,20,.25) 60%,rgba(15,14,20,0) 100%);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%)}
+.stage.scrolled>.top-blur{opacity:1}
+
+.stage .brand-head,.stage .d-top{z-index:35!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6575,7 +6582,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
       swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
       h('div', { key: top + stack.length, className: cx('stage', isModal ? 'modal-stage' : 'anim-' + dir, swiping && 'sw-top'), style: swiping ? { transform: 'translateX(' + drag + 'px)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none', animation: 'none' } : null },
-        h(Comp, { nav: nav, key: top, param: tparam })),
+        h(Comp, { nav: nav, key: top, param: tparam }), tname !== 'player' && tname !== 'full' ? h('i', { className: 'top-blur', 'aria-hidden': true }) : null),
       tabbed ? h(TabBar, { active: tname, nav: nav }) : null,
       pip && tname !== 'player' ? h('div', { className: 'pipwin', onClick: function () { setPip(false); nav.push('player'); } },
         h('span', { className: 'f4-badge f4-badge-live', style: { position: 'absolute', left: 8, top: 8 } }, h('span', { className: 'f4-live-dot' }), 'Live'),
