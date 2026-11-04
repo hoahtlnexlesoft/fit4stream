@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104072304"</script>
+<script>window.__BUILD__="20261104072411"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3018,6 +3018,8 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .fs-pip-sw{right:6px;top:6px;width:20px;height:20px;background:rgba(10,9,14,.55)}
 .fs-hp-av{padding:2.5px!important}.fs-hp-av .f4-avatar{width:33px!important;height:33px!important;box-shadow:0 0 0 1.5px #1a1820!important}
 .fs-hp-main span:not(.fs-hp-av){max-width:170px}
+.fs-media.fs-feed{background-position:center 40%;image-rendering:auto}
+.fs-pip-tag{display:inline-flex!important;align-items:center;gap:4px}.fs-pip-tag i{width:5px;height:5px;border-radius:50%;background:#e5484d}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5181,7 +5183,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
   function toApp(n) { var a = document.querySelector('.app'); return a ? ReactDOM.createPortal(n, a) : n; }
   function Player(p) {
     var mode = p.param || '';
-    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: [], draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect', ui: true, sheet: false });
+    var s = useState({ tab: 'chat', paused: false, liked: false, hearts: [], mine: [], draft: '', muted: false, q: false, hand: mode === 'invite', tray: false, rateOpen: false, rate: 0, layout: /stage|invite|onstage/.test(mode) ? 'grid' : 'focus', invite: mode === 'invite', onstage: mode === 'onstage', mic: true, cam: false, rc: mode === 'reconnect', ui: true, sheet: false, swap: true });
     var st = s[0], set = function (o) { s[1](function (prev) { return Object.assign({}, prev, o); }); };
     var inviteT = useRef(0);
     useEffect(function () { return function () { clearTimeout(inviteT.current); }; }, []);
@@ -5249,7 +5251,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
     var bigIsScreen = !!st.swap;
     var media = mode === 'waiting' || mode === 'ended' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
       : st.layout === 'grid' ? h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } })
-      : bigIsScreen ? h('div', { className: 'fs-wrap', onClick: function () { set({ ui: !st.ui }); } }, h('div', { className: 'fs-media fs-blur', style: { backgroundImage: 'url(' + SCREEN + ')' } }), h('div', { className: 'fs-screen', style: { backgroundImage: 'url(' + SCREEN + ')' } }, h('span', { className: 'lv-who' }, h(F.Icon, { name: 'monitor', size: 12 }), 'Nhan Doan', h('em', { className: 'r-organizer' }, 'Screen share'))))
+      : bigIsScreen ? h('div', { className: 'fs-media fs-feed', style: { backgroundImage: 'url(' + SCREEN + ')' }, onClick: function () { set({ ui: !st.ui }); } })
       : h('div', { className: 'fs-media', style: { backgroundImage: 'url(' + HOSTCAM + ')' }, onClick: function () { set({ ui: !st.ui }); } });
     var railBtn = function (k, ic, label, on, go, filled) { return h(Tap, { key: k, className: cx('fs-rb', on && 'on'), label: label, onClick: go }, h('span', { className: 'fs-rb-ic' }, h(F.Icon, { name: ic, size: 21, filled: filled })), h('span', { className: 'fs-rb-t' }, label)); };
     return h('div', { className: cx('screen noscroll player fs', st.layout === 'grid' && live && 'is-grid', st.onstage && live && 'on-stage', !st.ui && 'ui-off', !live && 'is-state') },
@@ -5268,12 +5270,12 @@ i.r-you{background:#fff!important;color:#14121a!important}
       live && st.layout !== 'grid' ? h('div', { className: 'fs-sub' },
         h('div', { className: 'fs-hostpill' },
           h(Tap, { className: 'fs-hp-main', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
-            h('span', { className: cx('fs-hp-av', !bigIsScreen && 'speaking') }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 34 })),
+            h('span', { className: 'fs-hp-av speaking' }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 34 })),
             h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
           h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : 'Follow')),
         h('button', { type: 'button', className: 'fs-pip', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show screen share large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
           h('span', { className: 'fs-pip-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
-          h('span', { className: 'fs-pip-tag' }, bigIsScreen ? 'Host' : 'Screen'),
+          h('span', { className: 'fs-pip-tag' }, h('i', null), bigIsScreen ? 'Host cam' : 'Live'),
           h('span', { className: 'fs-pip-sw', 'aria-hidden': true }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))))) : null,
       st.hand && !st.invite ? h('div', { className: 'fs-hand' }, h('span', { className: 'spinner sm' }), h('span', null, 'Hand raised · waiting for host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
       mode === 'waiting' ? h('div', { className: 'fs-state' }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 64 }), h('span', { className: 'pvs-k' }, 'Starting soon'), h('b', { className: 'pvs-cd' }, fmtT(Math.max(0, 299 - (tk % 300))).replace(/^00:/, '')), h('span', { className: 'pvs-s' }, "You'll join automatically when the host goes live")) : null,
