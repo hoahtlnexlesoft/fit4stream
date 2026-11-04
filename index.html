@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104091238"</script>
+<script>window.__BUILD__="20261104091520"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5282,6 +5282,22 @@ input,textarea{caret-color:#F4A425}
   /* Centered confirm dialog, portalled above the whole app (covers the tab bar) */
   /* premium dialog emblem: tilted gradient squircle + glass plate + orbit ring + sparkles */
   var DLG = { logout: ['#FFD27A', '#F4A425', '#C9781A', 'M14 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M9 16l-4-4 4-4M5 12h10'], del: ['#FF9A93', '#E5484D', '#A8222A', 'M5 7h14M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3'], card: ['#FF9A93', '#E5484D', '#A8222A', 'M21 15V7a2 2 0 0 0-2-2H9M5 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14M3 10h7M14 10h7M3 3l18 18'] };
+  var W = '#fff';
+  var DUO = {
+    /* door (soft fill) + bold arrow leaving it */
+    logout: [h('path', { key: 1, d: 'M4 5.5A2.5 2.5 0 0 1 6.5 3h5A2.5 2.5 0 0 1 14 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-5A2.5 2.5 0 0 1 4 18.5z', fill: W, fillOpacity: .32 }),
+      h('circle', { key: 2, cx: 11, cy: 12, r: 1.1, fill: W }),
+      h('path', { key: 3, d: 'M13 12h8M18 8.5l3.5 3.5-3.5 3.5', fill: 'none', stroke: W, strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' })],
+    /* bin body (soft) + lid + bold lines */
+    del: [h('path', { key: 1, d: 'M6 8h12l-1 11.2A2 2 0 0 1 15 21H9a2 2 0 0 1-2-1.8z', fill: W, fillOpacity: .32 }),
+      h('path', { key: 2, d: 'M4 6.5h16M9.5 6.5V4.8c0-.7.6-1.3 1.3-1.3h2.4c.7 0 1.3.6 1.3 1.3v1.7', fill: 'none', stroke: W, strokeWidth: 2.2, strokeLinecap: 'round' }),
+      h('path', { key: 3, d: 'M10.2 11v6M13.8 11v6', fill: 'none', stroke: W, strokeWidth: 2.2, strokeLinecap: 'round' })],
+    /* card (soft) + stripe + bold slash */
+    card: [h('rect', { key: 1, x: 2.5, y: 5, width: 19, height: 14, rx: 3, fill: W, fillOpacity: .32 }),
+      h('rect', { key: 2, x: 2.5, y: 8.5, width: 19, height: 2.6, fill: W, fillOpacity: .55 }),
+      h('rect', { key: 3, x: 5.5, y: 14, width: 5, height: 2, rx: 1, fill: W }),
+      h('path', { key: 4, d: 'M3.5 3.5l17 17', fill: 'none', stroke: W, strokeWidth: 2.6, strokeLinecap: 'round' })]
+  };
   function DlgEmblem(p) {
     var c = DLG[p.k] || DLG.logout, id = 'dg' + p.k;
     return h('span', { className: 'dg', style: { '--dg': c[1] } },
@@ -5292,7 +5308,7 @@ input,textarea{caret-color:#F4A425}
         h('rect', { x: 8, y: 8, width: 64, height: 64, rx: 22, fill: 'url(#' + id + ')', transform: 'rotate(-8 40 40)' }),
         h('rect', { x: 8, y: 8, width: 64, height: 64, rx: 22, fill: 'url(#' + id + 'h)', transform: 'rotate(-8 40 40)' }),
         h('rect', { x: 14, y: 14, width: 52, height: 52, rx: 17, fill: 'none', stroke: 'rgba(255,255,255,.35)', strokeWidth: 1, strokeDasharray: '2 3', transform: 'rotate(-8 40 40)' }),
-        h('g', { transform: 'translate(22 22) scale(1.5)' }, h('path', { d: c[3], fill: 'none', stroke: '#fff', strokeWidth: 2.1, strokeLinecap: 'round', strokeLinejoin: 'round' }))));
+        h('g', { transform: 'translate(20 20) scale(1.6667)' }, DUO[p.k] || DUO.logout)));
   }
   function ConfirmDialog(p) {
     var del = p.kind === 'delete';
