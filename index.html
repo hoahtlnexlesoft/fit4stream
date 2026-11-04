@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104080512"</script>
+<script>window.__BUILD__="20261104080658"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3119,6 +3119,13 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .co-proc-logo{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,rgba(255,255,255,.08),rgba(255,255,255,.02));box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);animation:ldr-breathe 1.2s ease-in-out infinite}
 .co-proc-logo .pm-logo{transform:scale(1.15)}
 .co-proc{background:rgba(12,10,18,.94)!important}
+.me2-list{display:flex;flex-direction:column;gap:12px}
+.me2-th{position:relative}
+.me2-th .yt-live{position:absolute;left:6px;bottom:6px}
+.me2-cta{height:34px!important;padding:0 14px!important;font-size:13px!important}
+.me2-card.st-live{background:linear-gradient(120deg,rgba(231,70,69,.12),rgba(255,255,255,.04) 60%)!important}
+.me2-card.st-soon{background:linear-gradient(120deg,rgba(244,164,37,.12),rgba(255,255,255,.04) 60%)!important}
+.me2-card.st-live .me2-chev,.me2-card.st-soon .me2-chev{display:none}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4965,8 +4972,15 @@ i.r-you{background:#fff!important;color:#14121a!important}
   }
 
   function MyEvents(p) {
-    var t = useState(3), tab = t[0], setTab = t[1];
-    var tabs = [['Upcoming', 0], ['Past', 0], ['Invited', 0], ['Purchased', 1]];
+    var t = useState(0), tab = t[0], setTab = t[1];
+    var ITEMS = [
+      { id: 'xmas', img: EV.xmas.img, title: 'Danang Christmas Market 2026', when: 'Live now \u00b7 started 9:43 AM', by: 'thao15 nguyen15', st: 'live', price: '$3.99', go: function () { p.nav.push('player'); } },
+      { id: 'seo', img: EV.seo.img, title: EV.seo.title, when: 'Today \u00b7 starts in 5 min', by: 'Marc John', st: 'soon', price: 'Free', go: function () { p.nav.push('player:waiting'); } },
+      { id: 'payout', img: PH.concert, title: 'Payout 3 - pay on 31.Oct - USD', when: 'Oct 30, 2026 \u00b7 10:40 AM', by: 'Thao11 Nguyen11', st: 'ended', price: '$9.99', go: function () { p.nav.push('detail:payout'); } }
+    ];
+    var lists = [ITEMS.filter(function (x) { return x.st !== 'ended'; }), ITEMS.filter(function (x) { return x.st === 'ended'; }), [], ITEMS];
+    var tabs = [['Upcoming', lists[0].length], ['Past', 0], ['Invited', 0], ['Purchased', ITEMS.length]];
+    var list = lists[tab];
     return h('div', { className: 'screen tabscreen me2' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'My Events' }),
@@ -4975,17 +4989,19 @@ i.r-you{background:#fff!important;color:#14121a!important}
         h('div', { className: 'me2-seg', role: 'tablist' }, tabs.map(function (x, i) {
           return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': i === tab, className: cx('me2-segi', i === tab && 'on'), onClick: function () { tap(5); setTab(i); } }, x[0], x[1] ? h('em', null, x[1]) : null);
         }))),
-      tab === 3 ? h('section', { className: 'pad fade-in me2-list' },
-        h(Tap, { className: 'me2-card', go: function () { p.nav.push('detail:payout'); } },
-          h('span', { className: 'me2-th', style: { backgroundImage: 'url(' + PH.concert + ')' } }),
+      list.length ? h('section', { className: 'pad fade-in me2-list', key: tab }, list.map(function (e) {
+        return h(Tap, { key: e.id, className: cx('me2-card', 'st-' + e.st), go: e.go },
+          h('span', { className: 'me2-th', style: { backgroundImage: 'url(' + e.img + ')' } }, e.st === 'live' ? h('i', { className: 'yt-live' }, h('em', null), 'LIVE') : e.st === 'soon' ? h('i', { className: 'yt-live yt-sn' }, '5 MIN') : null),
           h('div', { className: 'me2-body' },
-            h('b', null, 'Payout 3 - pay on 31.Oct - USD'),
-            h('span', { className: 'me2-date' }, h(F.Icon, { name: 'calendar', size: 13 }), 'Oct 30, 2026 · 10:40 AM'),
-            h('span', { className: 'me2-org' }, 'by Thao11 Nguyen11'),
+            h('b', null, e.title),
+            h('span', { className: 'me2-date' }, h(F.Icon, { name: e.st === 'ended' ? 'calendar' : 'clock', size: 13 }), e.when),
+            h('span', { className: 'me2-org' }, 'by ' + e.by),
             h('div', { className: 'me2-foot' },
-              h('span', { className: 'me2-tags' }, h('i', { className: 'me2-tag paid' }, h(F.Icon, { name: 'ticket', size: 12 }), 'Purchased'), h('i', { className: 'me2-tag' }, 'Ended')),
-              h('strong', null, '$9.99'))),
-          h('span', { className: 'me2-chev' }, h(F.Icon, { name: 'chevronRight', size: 16 }))))
+              h('span', { className: 'me2-tags' }, h('i', { className: 'me2-tag paid' }, h(F.Icon, { name: 'ticket', size: 12 }), 'Purchased'), e.st === 'ended' ? h('i', { className: 'me2-tag' }, 'Ended') : null),
+              e.st === 'live' ? h('span', { className: 'yt-go me2-cta' }, h(F.Icon, { name: 'play', size: 13 }), 'Join')
+                : e.st === 'soon' ? h('span', { className: 'yt-go yt-go2 me2-cta' }, h(F.Icon, { name: 'clock', size: 13 }), 'Enter')
+                : h('strong', null, e.price))));
+      }))
         : h('div', { className: 'fade-in' }, h(F.EmptyState, { art: 'ticket', title: 'No events here yet', body: 'Events you register for, get invited to or attend will show up in this list.', action: 'Discover events', onAction: function () { p.nav.tab('home'); } })));
   }
 
