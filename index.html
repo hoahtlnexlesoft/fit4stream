@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104131902"</script>
+<script>window.__BUILD__="20261104132128"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3507,6 +3507,10 @@ input,textarea{caret-color:#F4A425}
 .stage .top .top-title{text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 12px rgba(0,0,0,.45)}
 .stage .top .f4-iconbtn{background:#25232c!important;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .statusbar{text-shadow:0 1px 3px rgba(0,0,0,.5)}.statusbar svg{filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+
+/* no header backgrounds on scroll — transparent like iOS, text keeps a shadow */
+.brand-head.solid,.hello-head.solid,.d-top.solid{background:transparent!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-bottom-color:transparent!important;box-shadow:none!important}
+.brand-head,.hello-head,.d-top{text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 12px rgba(0,0,0,.4)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
