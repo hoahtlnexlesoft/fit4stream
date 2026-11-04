@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104075047"</script>
+<script>window.__BUILD__="20261104075628"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4551,7 +4551,6 @@ i.r-you{background:#fff!important;color:#14121a!important}
       h('div', { className: 'screen under-head', ref: ref, onTouchStart: ts, onTouchMove: tm, onTouchEnd: te, onScroll: function (e) { var v = e.currentTarget.scrollTop > 8; if (v !== solid) setSolid(v); } },
         h('div', { className: 'ptr', style: { height: pull, opacity: pull / 70 } }, h('span', { className: pull > 64 ? 'spin' : '', style: { transform: 'rotate(' + pull * 4 + 'deg)' } }, h(F.Logo, { size: 28, markOnly: true }))),
         loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : h('div', { className: 'fade-in' },
-          p.nav.authed ? h('div', { className: 'hi-row pad' }, h('div', null, h('span', null, 'Good evening,'), h('b', null, 'Thao \ud83d\udc4b'))) : null,
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
             h('div', { className: 'pad col gap10' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
