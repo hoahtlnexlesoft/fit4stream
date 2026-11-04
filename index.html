@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104084515"</script>
+<script>window.__BUILD__="20261104084707"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4481,7 +4481,7 @@ input,textarea{caret-color:#F4A425}
   function EventTile(p) {
     var e = p.e, t = useTick();
     var live = e.status === 'live', ended = e.status === 'ended';
-    return h(Tap, { className: cx('etile et3', p.wide && 'wide'), go: function () { p.nav.push('detail:' + e.id); } },
+    return h(Tap, { className: cx('etile et3', p.wide && 'wide'), go: function () { if (live && p.nav.authed && p.nav.registered !== false) { window.__focusChat = false; return p.nav.push('player'); } p.nav.push('detail:' + e.id); } },
       h('span', { className: 'et3-bg', style: { backgroundImage: 'url(' + e.img + ')' } }),
       h('span', { className: 'et3-shade' }),
       live ? h('span', { className: 'et3-ring', 'aria-hidden': true }) : null,
