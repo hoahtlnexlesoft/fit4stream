@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104033218"</script>
+<script>window.__BUILD__="20261104033319"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2262,6 +2262,29 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 .cd-cancel{background:rgba(255,255,255,.08);color:#fff}
 .cd-ok{background:#f4a425;color:#1b1306}
 .cd.danger .cd-ok{background:#e74645;color:#fff}
+
+/* My Events — cleaner */
+.me2-head{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.me2-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.06)}
+.me2-segi{height:38px;border:0;border-radius:12px;background:transparent;color:rgba(255,255,255,.6);font-size:13px;font-weight:600;line-height:1;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:5px;cursor:pointer;white-space:nowrap}
+.me2-segi.on{background:#f4a425;color:#1b1306}
+.me2-segi em{font-style:normal;min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;display:inline-grid;place-items:center;font-size:11px;background:rgba(255,255,255,.14);color:#fff}
+.me2-segi.on em{background:rgba(27,19,6,.18);color:#1b1306}
+.me2-list{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.me2-card{display:flex!important;align-items:center;gap:14px;padding:12px;border-radius:20px;background:rgba(255,255,255,.05);text-align:left;width:100%}
+.me2-th{flex:none;width:88px;height:88px;border-radius:14px;background-size:cover;background-position:center}
+.me2-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.me2-body b{font-size:15.5px;line-height:20px;font-weight:600;color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.me2-date{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.6)}
+.me2-org{font-size:12.5px;color:rgba(255,255,255,.45)}
+.me2-foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.me2-tags{display:inline-flex;gap:6px}
+.me2-tag{font-style:normal;display:inline-flex;align-items:center;gap:4px;height:22px;padding:0 8px;border-radius:11px;font-size:11px;font-weight:600;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65)}
+.me2-tag.paid{background:rgba(244,164,37,.15);color:#f4b740}
+.me2-foot strong{font-size:15px;color:#fff}
+.me2-chev{flex:none;color:rgba(255,255,255,.35)}
+.top .f4-iconbtn,.top .tap.f4-iconbtn{border:0!important;outline:0!important;box-shadow:none!important;background:rgba(255,255,255,.08)!important}
+.top .f4-iconbtn::before,.top .f4-iconbtn::after{display:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4050,24 +4073,26 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
 
   function MyEvents(p) {
     var t = useState(3), tab = t[0], setTab = t[1];
-    var tabs = [{ label: 'Upcoming', count: 0 }, { label: 'Past', count: 0 }, { label: 'Invited', count: 0 }, { label: 'Purchased', count: 1 }];
-    return h('div', { className: 'screen tabscreen' },
+    var tabs = [['Upcoming', 0], ['Past', 0], ['Invited', 0], ['Purchased', 1]];
+    return h('div', { className: 'screen tabscreen me2' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'My Events' }),
-      h('div', { className: 'pad col gap12' },
-        h('p', { className: 'muted small', style: { margin: 0 } }, 'All your events in one place, including upcoming, past, purchased, and invited events.'),
-        h(F.SearchField, { placeholder: 'Search events...' }),
-        h('div', { onClick: function (e) { var b = e.target.closest('.f4-seg-item'); if (b) { tap(5); setTab(Array.prototype.indexOf.call(b.parentNode.children, b)); } } }, h(F.SegmentedTabs, { items: tabs, value: tab }))),
-      tab === 3 ? h('section', { className: 'pad fade-in', style: { marginTop: 20 } },
-        h('p', { className: 'overline' }, 'PAST (1)'),
-        h('div', { className: 'ticket' },
-          h('div', { className: 'row gap12' }, h('div', { style: { width: 96, flex: 'none' } }, h(F.Art, { src: PH.concert, ratio: '4 / 3', radius: 12 })),
-            h('div', { className: 'col', style: { gap: 6, minWidth: 0 } },
-              h('div', { className: 'row gap6' }, h(F.Badge, { tone: 'purchased' }, 'Purchased'), h(F.Badge, { tone: 'ended' }, 'Ended')),
-              h('h3', { className: 'h-sm' }, 'Payout 3 - pay on 31.Oct - USD'),
-              h('p', { className: 'subtle small', style: { margin: 0 } }, 'Oct 30, 2026 at 10:40 AM'))),
-          h('div', { className: 'row-between ticket-foot' }, h('span', { className: 'subtle small' }, 'by Thao11 Nguyen11 · ', h('b', { style: { color: 'var(--text)' } }, '$9.99')),
-            h('div', { className: 'row gap8' }, h('button', { type: 'button', className: 'f4-btn f4-btn-secondary f4-btn-sm', disabled: true }, 'Refund'), h(Tap, { className: 'f4-btn f4-btn-secondary f4-btn-sm', go: function () { p.nav.push('detail:seo'); } }, 'View')))))
+      h('div', { className: 'pad me2-head' },
+        h(F.SearchField, { placeholder: 'Search your events' }),
+        h('div', { className: 'me2-seg', role: 'tablist' }, tabs.map(function (x, i) {
+          return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': i === tab, className: cx('me2-segi', i === tab && 'on'), onClick: function () { tap(5); setTab(i); } }, x[0], x[1] ? h('em', null, x[1]) : null);
+        }))),
+      tab === 3 ? h('section', { className: 'pad fade-in me2-list' },
+        h(Tap, { className: 'me2-card', go: function () { p.nav.push('detail:payout'); } },
+          h('span', { className: 'me2-th', style: { backgroundImage: 'url(' + PH.concert + ')' } }),
+          h('div', { className: 'me2-body' },
+            h('b', null, 'Payout 3 - pay on 31.Oct - USD'),
+            h('span', { className: 'me2-date' }, h(F.Icon, { name: 'calendar', size: 13 }), 'Oct 30, 2026 · 10:40 AM'),
+            h('span', { className: 'me2-org' }, 'by Thao11 Nguyen11'),
+            h('div', { className: 'me2-foot' },
+              h('span', { className: 'me2-tags' }, h('i', { className: 'me2-tag paid' }, h(F.Icon, { name: 'ticket', size: 12 }), 'Purchased'), h('i', { className: 'me2-tag' }, 'Ended')),
+              h('strong', null, '$9.99'))),
+          h('span', { className: 'me2-chev' }, h(F.Icon, { name: 'chevronRight', size: 16 }))))
         : h('div', { className: 'fade-in' }, h(F.EmptyState, { art: 'ticket', title: 'No events here yet', body: 'Events you register for, get invited to or attend will show up in this list.', action: 'Discover events', onAction: function () { p.nav.tab('home'); } })));
   }
 
