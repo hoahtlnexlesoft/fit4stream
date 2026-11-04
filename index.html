@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104034107"</script>
+<script>window.__BUILD__="20261104034136"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4431,8 +4431,9 @@ html,body,body.devmode,body.devmode .scaler,body.devmode .device,body.devmode .s
   root.render(React.createElement(window.__F4S_APP__));
   var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout'],['success','12 Registered'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['full','16 Fullscreen']];
   var jump = document.getElementById('jump');
-  list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); }; jump.appendChild(b); });
-  function mark(){ var k=(location.hash||'#welcome').slice(1); Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
+  list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); sel={k:it[0],h:null}; setTimeout(function(){ if(sel&&sel.k===it[0]) sel.h=location.hash; mark(); },120); mark(); }; jump.appendChild(b); });
+  var sel=null;
+  function mark(){ var h=location.hash, k; if(sel&&(sel.h===null||sel.h===h)) k=sel.k; else { sel=null; k=(h||'#welcome').slice(1); } Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
   setInterval(mark, 400); mark();
 })();
 </script>
