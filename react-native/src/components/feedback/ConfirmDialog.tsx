@@ -29,7 +29,7 @@ export function ConfirmDialog({ visible, onClose, onConfirm, onCancel, title, me
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
       <Pressable style={s.scrim} onPress={onClose}>
         <Pressable style={s.card} accessibilityRole="alert">
-          <View style={[s.ic, danger && { backgroundColor: colors.dangerSoft }]}><Icon name={icon} size={22} color={danger ? colors.dangerText : colors.primary} /></View>
+          <View style={[s.ic, danger && { backgroundColor: colors.dangerSoft }]}><Icon name={icon} size={33} color={danger ? colors.dangerText : colors.primary} /></View>
           <Text style={s.title}>{title}</Text>
           <Text style={s.msg}>{message}</Text>
           {children}
@@ -51,7 +51,7 @@ export function ConfirmDialog({ visible, onClose, onConfirm, onCancel, title, me
 const s = StyleSheet.create({
   scrim: { flex: 1, backgroundColor: colors.scrim, alignItems: 'center', justifyContent: 'center', padding: 28 },
   card: { width: '100%', maxWidth: 340, alignItems: 'center', padding: 22, borderRadius: 24, backgroundColor: colors.surfaceSolid },
-  ic: { width: 52, height: 52, borderRadius: 26, backgroundColor: colors.primarySoft, alignItems: 'center', justifyContent: 'center', marginBottom: 14 },
+  ic: { width: 68, height: 68, borderRadius: 34, backgroundColor: colors.primarySoft, alignItems: 'center', justifyContent: 'center', marginBottom: 16 },
   title: { fontFamily: fonts.bold, fontSize: 18, color: colors.text, textAlign: 'center' },
   msg: { marginTop: 8, marginBottom: 18, fontFamily: fonts.regular, fontSize: 14, lineHeight: 20, color: colors.textSecondary, textAlign: 'center' },
   row: { flexDirection: 'row', gap: 10, alignSelf: 'stretch' },

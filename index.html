@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104080235"</script>
+<script>window.__BUILD__="20261104080401"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3112,6 +3112,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .player.fs.is-grid .fs-rail{gap:8px}.player.fs.is-grid .fs-rb-t{display:none}
 .player.fs.is-grid .fs-chat{padding-right:70px}
 .cd.co-fail .cd-ic{color:#ff6b5e!important;background:rgba(231,70,69,.15)!important}
+.cd-ic{width:68px!important;height:68px!important;margin-bottom:16px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4864,7 +4865,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
     var host = document.querySelector('.app');
     var node = h('div', { className: 'cd-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
       h('div', { className: cx('cd', del && 'danger'), role: 'alertdialog', 'aria-label': del ? 'Delete account' : 'Log out' },
-        h('span', { className: 'cd-ic' }, h(F.Icon, { name: del ? 'trash' : 'logOut', size: 22 })),
+        h('span', { className: 'cd-ic' }, h(F.Icon, { name: del ? 'trash' : 'logOut', size: 32 })),
         h('h2', null, del ? 'Delete your account?' : 'Log out of Fit4Stream?'),
         h('p', null, del ? 'Your profile, channel and purchase history will be removed. This can’t be undone.' : 'You can sign back in any time with your email.'),
         h('div', { className: 'cd-acts' },
@@ -5060,7 +5061,7 @@ i.r-you{background:#fff!important;color:#14121a!important}
         h('p', null, 'Please keep the app open. This usually takes a few seconds.'))) : null,
       st.fail ? toApp(h('div', { className: 'cd-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ fail: false }); } },
         h('div', { className: 'cd co-fail', role: 'alertdialog', 'aria-label': 'Payment declined' },
-          h('span', { className: 'cd-ic' }, h('svg', { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M21 15V7a2 2 0 0 0-2-2H9M5 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14M3 10h7M14 10h7M3 3l18 18' }))),
+          h('span', { className: 'cd-ic' }, h('svg', { width: 34, height: 34, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M21 15V7a2 2 0 0 0-2-2H9M5 5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14M3 10h7M14 10h7M3 3l18 18' }))),
           h('h2', null, 'Payment declined'),
           h('p', null, 'Your bank declined this charge, so no money was taken. Try again or choose another method.'),
           h('div', { className: 'co-fail-r' }, h(CardLogo, { k: 'mc' }), h('div', null, h('b', null, 'Mastercard •••• 8812'), h('span', null, 'Insufficient funds · code 51'))),
