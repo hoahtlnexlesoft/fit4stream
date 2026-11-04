@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104093021"</script>
+<script>window.__BUILD__="20261104093150"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3433,6 +3433,18 @@ input,textarea{caret-color:#F4A425}
 .em3 svg{display:block}
 
 .ac2{zoom:.8;max-width:390px;margin-left:auto!important;margin-right:auto!important;width:100%}
+
+.co-proc .cp-t{font-size:19px;font-weight:700;letter-spacing:-.2px}
+.co-proc .cp-amt{display:flex;align-items:center;gap:10px;margin-top:10px}
+.cp-sum{font-size:30px;font-weight:800;letter-spacing:-.6px;color:#fff;font-variant-numeric:tabular-nums}
+.cp-via{font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7)}
+.cp-steps{list-style:none;margin:26px 0 0;padding:14px 18px;width:100%;max-width:280px;border-radius:18px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);display:flex;flex-direction:column;gap:12px;text-align:left}
+.cp-st{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:rgba(255,255,255,.35);transition:color .3s}
+.cp-st.now{color:#fff}.cp-st.done{color:rgba(255,255,255,.7)}
+.cp-dot{box-sizing:border-box;flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 2px rgba(255,255,255,.14);transition:all .3s}
+.cp-st.done .cp-dot{background:#39C87C;box-shadow:none;color:#0c1a12}
+.cp-st.now .cp-dot{box-shadow:none;border:2px solid rgba(244,164,37,.25);border-top-color:#F4A425;animation:f4spin .8s linear infinite}
+.co-proc p.cp-note{margin:20px 0 0;display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.45)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5473,6 +5485,14 @@ input,textarea{caret-color:#F4A425}
       h('b', { 'aria-live': 'polite' }, p.v),
       h(Tap, { className: cx('stp-b', p.v >= p.max && 'dis'), label: 'More', go: function () { if (p.v < p.max) { tap(6); p.set(p.v + 1); } } }, h(F.Icon, { name: 'plus', size: 16 })));
   }
+  function ProcSteps() {
+    var a = useState(0), i = a[0], setI = a[1];
+    useEffect(function () { var t1 = setTimeout(function () { setI(1); }, 700), t2 = setTimeout(function () { setI(2); }, 1500); return function () { clearTimeout(t1); clearTimeout(t2); }; }, []);
+    return h('ul', { className: 'cp-steps' }, ['Verifying payment', 'Confirming with bank', 'Issuing your ticket'].map(function (l, k) {
+      var stt = k < i ? 'done' : k === i ? 'now' : 'next';
+      return h('li', { key: k, className: 'cp-st ' + stt }, h('span', { className: 'cp-dot' }, stt === 'done' ? h(F.Icon, { name: 'check', size: 12 }) : null), l);
+    }));
+  }
   function Checkout(p) {
     var mode = p.param || '';
     var s = useState({ tix: 'std', qty: mode === 'coupon' ? 2 : 1, code: mode === 'coupon' ? 'XMAS20' : '', coupon: mode === 'coupon' ? 'XMAS20' : null, cErr: mode === 'coupon-bad', open: mode === 'coupon' || mode === 'coupon-bad', m: mode === 'declined' ? 'mc' : 'apple', add: mode === 'addcard', proc: mode === 'processing', fail: mode === 'declined', newCard: null });
@@ -5528,9 +5548,10 @@ input,textarea{caret-color:#F4A425}
       st.add ? toApp(h(AddCard, { close: function () { set({ add: false }); }, done: function (last) { set({ add: false, newCard: last, m: 'visa2' }); p.nav.toast('Card added'); } })) : null,
       st.proc ? toApp(h('div', { className: 'co-proc', role: 'status' },
         h('div', { className: 'co-proc-ring' }, h('svg', { className: 'co-proc-ticks', viewBox: '0 0 140 140', 'aria-hidden': true }, Array.apply(null, { length: 40 }).map(function (_, i) { var a = i / 40 * Math.PI * 2, r1 = 60, r2 = 66; return h('line', { key: i, x1: 70 + Math.cos(a) * r1, y1: 70 + Math.sin(a) * r1, x2: 70 + Math.cos(a) * r2, y2: 70 + Math.sin(a) * r2, stroke: 'rgba(255,255,255,.12)', strokeWidth: 2, strokeLinecap: 'round' }); })), h('span', { className: 'ldr-ring co-proc-comet' }), h('span', { className: 'co-proc-logo' }, h(CardLogo, { k: curM.k === 'visa2' ? 'visa' : curM.k }))),
-        h('b', null, st.m === 'apple' ? 'Confirming with Apple Pay…' : st.m === 'google' ? 'Confirming with Google Pay…' : 'Processing payment…'),
-        h('span', null, money(total) + ' · ' + curM.t),
-        h('p', null, 'Please keep the app open. This usually takes a few seconds.'))) : null,
+        h('b', { className: 'cp-t' }, st.m === 'apple' ? 'Confirming with Apple Pay' : st.m === 'google' ? 'Confirming with Google Pay' : 'Processing payment'),
+        h('div', { className: 'cp-amt' }, h('span', { className: 'cp-sum' }, money(total)), h('span', { className: 'cp-via' }, curM.t)),
+        h(ProcSteps),
+        h('p', { className: 'cp-note' }, h(F.Icon, { name: 'lock', size: 13 }), 'Secure payment · keep the app open'))) : null,
       st.fail ? toApp(h('div', { className: 'cd-wrap', onClick: function (e) { if (e.target === e.currentTarget) set({ fail: false }); } },
         h('div', { className: 'cd co-fail', role: 'alertdialog', 'aria-label': 'Payment declined' },
           h(DlgEmblem, { k: 'card' }),
