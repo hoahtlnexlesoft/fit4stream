@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104100918"</script>
+<script>window.__BUILD__="20261104101450"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3480,6 +3480,8 @@ input,textarea{caret-color:#F4A425}
 .nt2-clr{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);padding:6px 2px;cursor:pointer}
 .nt2-clr:active{color:#F6C26B}
 .nt2-empty{padding-top:40px}
+
+.l2-overlay{transition:opacity .52s cubic-bezier(.4,0,.2,1),transform .64s cubic-bezier(.2,.8,.2,1),filter .52s ease!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -4432,13 +4434,13 @@ input,textarea{caret-color:#F4A425}
     var ms = useState(false), muted = ms[0], setMuted = ms[1];
     function enter() {
       if (dn.current) return; dn.current = true;
-      if (p.onDone) { setOut(1); setTimeout(p.onDone, 760); }
+      if (p.onDone) { setOut(1); setTimeout(p.onDone, 560); }
       else { window.__fromLaunch = true; p.nav.root('home'); }
     }
     useEffect(function () {
       var v = vr.current, guard = setTimeout(enter, 13000);
       if (v) {
-        v.playsInline = true; v.muted = false; v.volume = 1;
+        v.playsInline = true; v.muted = false; v.volume = 1; v.defaultPlaybackRate = 1.3; v.playbackRate = 1.3; v.preservesPitch = true;
         var pr = v.play();
         if (pr && pr.catch) pr.catch(function () {
           // Browser blocked autoplay with sound: keep the animation running muted and offer a tap to turn sound on.
