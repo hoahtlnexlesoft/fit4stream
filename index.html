@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104060930"</script>
+<script>window.__BUILD__="20261104061033"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2747,6 +2747,10 @@ i.r-you{background:#fff!important;color:#14121a!important}
 .ok-rc{align-self:center;margin-top:12px;height:34px;padding:0 14px;border-radius:17px;display:inline-flex!important;align-items:center;gap:6px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.8);font-size:13px;font-weight:600}
 .co-bar{position:sticky!important;bottom:0;margin-top:auto}.co2{display:flex;flex-direction:column}.co-fail-a .cd-btn{height:48px!important;flex:none!important;display:grid!important;place-items:center;border-radius:24px!important}
 .mbtn.me-av{background:transparent!important;overflow:hidden}.mbtn.me-av .f4-avatar{width:44px!important;height:44px!important;border:0!important;outline:0!important}
+
+/* iOS: backdrop-filter on small round buttons leaves a seam line while layers composite -> use a solid fill, no blur */
+.mbtn,.mbtn.ring,.rbtn,.dbtn,.f4-iconbtn,.f4-iconbtn-glass,.f4-iconbtn-soft,.round-s,.as2-x,.lg-back,.up-bell,.og-ic,.og-back,.og-share,.dt-arw,.ctl,.clear-x{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;transform:translateZ(0)}
+.mbtn:not(.me-av):not(.signin-pill),.mbtn.ring,.rbtn,.f4-iconbtn:not(.f4-iconbtn-glass),.round-s,.as2-x,.lg-back,.up-bell{background:#25232c!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
