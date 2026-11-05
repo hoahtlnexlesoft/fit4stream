@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105063655"</script>
+<script>window.__BUILD__="20261105064028"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3836,7 +3836,8 @@ body[data-phone=mini] .cf2 .cf-foot .mini-cta{padding:0 12px;font-size:13px}
 .devcol{width:150px!important;align-self:center}
 .devcol .devsw{margin:6px 0 0}
 .devcol small{margin-top:12px}
-@media (max-width:1180px){.devcol{display:none!important}}
+@media (max-width:900px){.devcol{display:none!important}}
+.devcol{order:3}.stagewrap>.side#side{order:1}.stagewrap>.scaler{order:2}
 
 body[data-phone=mini] .device::before{border-radius:53px!important}
 body[data-phone=mini] .device::after{border-radius:58px!important}
@@ -7003,7 +7004,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (dev) return;
     var d = DEVS[cur], W = d.w + 28, H = d.h + 28;
     var w = land ? H : W, hgt = land ? W : H;
-    var side = window.innerWidth > 900 ? (window.innerWidth > 1180 ? 268 + 188 : 268) : 0;
+    var side = window.innerWidth > 900 ? 268 + 198 : 0;
     var k = Math.min((window.innerHeight - 32) / hgt, (window.innerWidth - 32 - side) / w, 1);
     scaler.style.width = w * k + 'px'; scaler.style.height = hgt * k + 'px';
     device.style.transform = 'scale(' + k + ')'; device.style.transformOrigin = 'top left';
