@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105021906"</script>
+<script>window.__BUILD__="20261105022048"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3667,7 +3667,10 @@ input,textarea{caret-color:#F4A425}
 .sx-live i{width:6px;height:6px;border-radius:50%;background:#E5484D}
 .sx-none{padding-top:30px}
 
-.fs-hostpill{padding:0 6px 0 16px!important}
+.fs-hostpill{height:56px!important;padding:0 6px 0 5px!important;border-radius:28px!important;gap:10px!important}
+.fs-hp-cam{position:relative;flex:none;width:46px;height:46px;padding:0;border:0;border-radius:50%;cursor:pointer;background:none;box-shadow:0 0 0 2px #E5484D,0 0 0 4px rgba(229,72,77,.25)}
+.fs-hp-cam-img{position:absolute;inset:0;border-radius:50%;background-size:cover;background-position:center 30%}
+.fs-hp-cam-sw{position:absolute;right:-3px;bottom:-3px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:#25232c;color:#fff;box-shadow:0 0 0 2px rgba(12,11,16,.9)}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6517,13 +6520,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         live && !st.onstage ? h(Tap, { className: cx('fs-tb', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 19 })) : null),
       live && st.layout !== 'grid' ? h('div', { className: 'fs-sub' },
         h('div', { className: 'fs-hostpill' },
+          h('button', { type: 'button', className: 'fs-hp-cam', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show event large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
+            h('span', { className: 'fs-hp-cam-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
+            h('span', { className: 'fs-hp-cam-sw', 'aria-hidden': true }, h('svg', { width: 9, height: 9, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.6, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' })))),
           h(Tap, { className: 'fs-hp-main', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
             h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
-          h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : 'Follow')),
-        h('button', { type: 'button', className: 'fs-pip', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show screen share large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
-          h('span', { className: 'fs-pip-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
-          h('span', { className: 'fs-pip-tag' }, h('i', null), bigIsScreen ? 'Host cam' : 'Live'),
-          h('span', { className: 'fs-pip-sw', 'aria-hidden': true }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' }))))) : null,
+          h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : 'Follow'))) : null,
       st.hand && !st.invite ? h('div', { className: 'fs-hand' }, h('span', { className: 'spinner sm' }), h('span', null, 'Hand raised · waiting for host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
       mode === 'waiting' ? (function () {
         var rem = wrLeft(), mm = Math.floor(rem / 60), ss = rem % 60, R = 92, C = 2 * Math.PI * R, prog = rem / 300;
