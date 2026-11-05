@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105020241"</script>
+<script>window.__BUILD__="20261105021906"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3666,6 +3666,8 @@ input,textarea{caret-color:#F4A425}
 .sx-live{display:inline-flex;align-items:center;gap:5px;color:#FF7B7A!important;font-weight:700}
 .sx-live i{width:6px;height:6px;border-radius:50%;background:#E5484D}
 .sx-none{padding-top:30px}
+
+.fs-hostpill{padding:0 6px 0 16px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6516,7 +6518,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       live && st.layout !== 'grid' ? h('div', { className: 'fs-sub' },
         h('div', { className: 'fs-hostpill' },
           h(Tap, { className: 'fs-hp-main', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } },
-            h('span', { className: 'fs-hp-av speaking' }, h(F.Avatar, { src: HOSTCAM, initials: 'TH', size: 34 })),
             h('div', null, h('b', null, 'thao15 nguyen15'), h('span', null, 'Danang Christmas Market 2026'))),
           h(Tap, { className: cx('fs-hp-follow', st.follow && 'on'), label: st.follow ? 'Following' : 'Follow', onClick: function () { tap(10); set({ follow: !st.follow }); if (!st.follow) p.nav.toast('Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : 'Follow')),
         h('button', { type: 'button', className: 'fs-pip', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show screen share large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
