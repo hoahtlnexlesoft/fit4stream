@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105022851"</script>
+<script>window.__BUILD__="20261105022927"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3702,6 +3702,10 @@ input,textarea{caret-color:#F4A425}
 .fs-pip-fol{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:26px;height:26px;border:0;border-radius:50%;display:grid;place-items:center;background:#F4A425;color:#1b1306;box-shadow:0 0 0 2.5px rgba(12,11,16,.85),0 4px 10px rgba(0,0,0,.4);cursor:pointer;transition:background .2s,transform .15s}
 .fs-pip-fol:active{transform:translateX(-50%) scale(.88)}
 .fs-pip-fol.on{background:#39C87C;color:#0c1a12}
+
+.fs-pip-v .fs-pip-tag{height:20px!important;padding:0 7px 0 6px!important;gap:5px!important;bottom:18px!important;font-size:10.5px!important}
+.fs-pip-v .fs-pip-tag i{flex:none;width:6px;height:6px}
+.fs-pip-v .fs-pip-tag em{font-style:normal;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6553,7 +6557,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'fs-pipwrap' },
           h('button', { type: 'button', className: 'fs-pip fs-pip-v', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show event large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
             h('span', { className: 'fs-pip-img', style: { backgroundImage: 'url(' + (bigIsScreen ? HOSTCAM : SCREEN) + ')' } }),
-            h('span', { className: 'fs-pip-tag' }, h('i', null), bigIsScreen ? 'thao15 nguyen15' : 'Live'),
+            h('span', { className: 'fs-pip-tag' }, h('i', null), h('em', null, bigIsScreen ? 'thao15 nguyen15' : 'Live')),
             h('span', { className: 'fs-pip-sw', 'aria-hidden': true }, h('svg', { width: 10, height: 10, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.4, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: 'M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7' })))),
           h('button', { type: 'button', className: cx('fs-pip-fol', st.follow && 'on'), 'aria-label': st.follow ? 'Unfollow thao15 nguyen15' : 'Follow thao15 nguyen15', 'aria-pressed': !!st.follow, onClick: function () { tap(10); set({ follow: !st.follow }); p.nav.toast(st.follow ? 'Unfollowed thao15 nguyen15' : 'Following thao15 nguyen15'); } }, h(F.Icon, { name: st.follow ? 'check' : 'plus', size: 14, stroke: 3 })))) : null,
       st.hand && !st.invite ? h('div', { className: 'fs-hand' }, h('span', { className: 'spinner sm' }), h('span', null, 'Hand raised · waiting for host'), h(Tap, { className: 'hand-x', onClick: raiseHand }, 'Lower')) : null,
