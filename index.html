@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105093136"</script>
+<script>window.__BUILD__="20261105094201"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4113,6 +4113,36 @@ body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-bottom{top
 
 /* iPhone Duo open: keep reading-width content centred on non-player screens */
 body[data-phone=foldopen] .screen:not(.player){padding-left:max(0px,calc((100% - 720px) / 2))!important;padding-right:max(0px,calc((100% - 720px) / 2))!important;box-sizing:border-box}
+
+/* ===== Unified 16:9 event cards (streams are landscape from desktop) ===== */
+.ev16{flex:none;width:min(300px,calc(min(var(--dw,100vw),100vw) * .74));display:flex!important;flex-direction:column;align-items:stretch;padding:0!important;border:0;margin:0;text-align:left;color:inherit;font:inherit;background:#1d1a25!important;border-radius:20px!important;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06);scroll-snap-align:start;cursor:pointer;position:relative}
+.ev16.wide{width:100%}
+.ev16 .cf3-body{padding:11px 13px 13px;gap:7px}
+.ev16 .cf3-body>b{font-size:15.5px;line-height:20px}
+.ev16 .cf3-by{font-size:12px}
+.ev16 .cf-foot{margin-top:2px}
+.ev16 .cf-foot .live-since,.ev16 .cf-foot .soon{font-size:12.5px}
+.ev16 .mini-cta{height:32px!important;padding:0 14px!important;font-size:13px!important;box-shadow:none!important;pointer-events:none}
+.ev16 .cf3-play{width:44px;height:44px;margin:-22px 0 0 -22px}
+.rail{scroll-snap-type:x mandatory}
+.sec.pad>.rail{margin-left:-16px;margin-right:-16px}
+.dt-rail .ev16{width:min(280px,calc(min(var(--dw,100vw),100vw) * .7))}
+/* social feed on On-air: landscape media */
+.feed-media{height:auto!important;aspect-ratio:16/9}
+/* list thumbnails follow the same 16:9 shape */
+.up-th{width:112px!important;height:63px!important;border-radius:12px!important}
+.me2-th{width:112px!important;height:63px!important;border-radius:12px!important;align-self:flex-start}
+.yt-th{width:96px!important;height:54px!important;border-radius:12px!important}
+.sx-th{width:80px!important;height:45px!important;border-radius:10px!important}
+
+/* Upcoming 'Next up': 16:9 media on top, info below (same as other cards) */
+.up-hero{height:auto!important;display:flex!important;flex-direction:column;background:#1d1a25!important;border-radius:22px!important;box-shadow:0 16px 34px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.06)!important}
+.up-hero .up-img{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;aspect-ratio:16/9;flex:none;background-size:cover;background-position:center;transform:none!important}
+.up-hero .up-shade{position:absolute!important;left:0;right:0;top:0;bottom:auto!important;height:auto!important;aspect-ratio:16/9;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 40%,transparent 70%,rgba(0,0,0,.3))!important}
+.up-hero .up-cat{position:absolute!important;left:10px!important;top:10px!important;height:24px;display:inline-flex;align-items:center;padding:0 9px;border-radius:999px;font-size:11.5px;font-weight:700;background:rgba(10,9,14,.55)!important;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-shadow:none!important}
+.up-hero .up-body{position:relative!important;inset:auto!important;left:auto!important;right:auto!important;bottom:auto!important;padding:12px 14px 14px!important}
+.up-hero .up-body h2{font-size:18px!important;line-height:23px!important;margin:0 0 4px!important}
+.up-hero b,.up-hero span{text-shadow:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -5637,36 +5667,28 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function wrLeft() { if (!window.__WR_T0) window.__WR_T0 = Date.now(); var el = Math.floor((Date.now() - window.__WR_T0) / 1000); return 299 - (el % 300); }
   function useTick() { var t = useState(0); useEffect(function () { var i = setInterval(function () { t[1](function (x) { return x + 1; }); }, 1000); return function () { clearInterval(i); }; }, []); return t[0]; }
 
+  /* Unified event card: 16:9 media (streams come from a desktop, landscape) + info body - same look as the Home hero */
   function EventTile(p) {
     var e = p.e, t = useTick();
     var live = e.status === 'live', ended = e.status === 'ended';
-    return h(Tap, { className: cx('etile et3', p.wide && 'wide'), go: function () { if (live && p.nav.authed && p.nav.registered !== false) { window.__focusChat = false; return p.nav.push('player'); } p.nav.push('detail:' + e.id); } },
-      h('span', { className: 'et3-bg', style: { backgroundImage: 'url(' + e.img + ')' } }),
-      h('span', { className: 'et3-shade' }),
-      live ? null : h('span', { className: 'et3-cat' }, e.cat),
-      live ? h('span', { className: 'et3-badge' }, h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { className: 'et3-watch' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))) : null,
-      h('div', { className: 'et3-cap' },
+    var open = function () { if (live && p.nav.authed && p.nav.registered !== false) { window.__focusChat = false; return p.nav.push('player'); } p.nav.push('detail:' + e.id); };
+    var cat = e.cat.replace(' and Performances', '').replace('Virtual ', '').replace(' and Training', '');
+    return h(Tap, { className: cx('ev16 cf3', p.wide && 'wide'), label: e.title, go: open },
+      h('div', { className: 'cf3-media', style: { backgroundImage: 'url(' + e.img + ')' } },
+        h('i', { className: 'cf3-shade' }),
+        h('div', { className: 'cf3-tl' }, live ? [h('span', { key: 'l', className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { key: 'v', className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))] :
+          h('span', { className: 'cf3-chip' }, ended ? 'Ended' : e.date.replace(', 2026', ''))),
+        live ? h('span', { className: 'cf3-time' }, fmtT(e.left - t)) : h('span', { className: 'cf3-time' }, ended ? 'Replay' : e.range.split('\u2013')[0].trim()),
+        live ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 18 })) : null),
+      h('div', { className: 'cf3-body' },
         h('b', null, e.title),
-        h('span', { className: 'et3-by' }, live ? h(F.Avatar, { src: av(e.org) || av('Thao'), initials: ini(e.org), size: 20 }) : null, 'by ' + e.org),
-        h('div', { className: 'et3-foot' },
-          live ? h('span', { className: 'et3-join' }, h('span', { className: 'et3-jp' }, h(F.Icon, { name: 'play', size: 11 })), 'Watch now') : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 13 }), ended ? 'Ended' : e.date.replace(', 2026', '')),
-          h('span', { className: cx('et3-time', live && 'on') }, live ? fmtT(e.left - t) : ended ? e.price : e.range.split('–')[0].trim()))));
+        h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, cat)),
+        h('div', { className: 'cf-foot' },
+          live ? h('span', { className: 'live-since' }, h('i'), 'Live now') : h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
+          h('span', { className: cx('mini-cta', live && 'live') }, live ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Watch') : ended ? 'Replay' : 'Details'))));
   }
   function CatBentoEv(p) {
-    var t = useTick(), a = p.list[0], rest = p.list.slice(1, 3);
-    function chip(e) {
-      if (e.status === 'live') return h('span', { className: 'cb-chip live' }, h('i'), 'LIVE');
-      if (e.status === 'ended') return h('span', { className: 'cb-chip' }, 'Ended');
-      return h('span', { className: 'cb-chip' }, e.date.replace(', 2026', '').replace(/^\w+ /, function (m) { return m.slice(0, 3) + ' '; }));
-    }
-    function meta(e) { return h('span', { className: 'cb-meta' }, 'by ' + e.org + (e.status === 'live' ? ' \u00b7 2.4K watching' : ' \u00b7 ' + e.price)); }
-    function card(e, big) {
-      return h('div', { key: e.id, className: cx('cbi', big ? 'big' : 'sm'), role: 'link', tabIndex: 0, style: { backgroundImage: 'url(' + e.img + ')' }, onClick: function () { tap(); p.nav.push('detail:' + e.id); } },
-        h('span', { className: 'cb-shade' }),
-        chip(e),
-        h('div', { className: 'cb-cap' }, h('b', null, e.title), big ? meta(e) : null));
-    }
-    return h('div', { className: cx('cbe', !rest.length && 'one') }, card(a, true), rest.length ? h('div', { className: 'cbe-col' }, rest.map(function (e) { return card(e, false); })) : null);
+    return h(Rail, null, p.list.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }));
   }
   function SearchBtn(p) { return h(Tap, { className: 'rbtn', label: 'Search', go: function () { p.nav.push('search'); } }, h(F.Icon, { name: 'search', size: 21 })); }
 
@@ -6485,14 +6507,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('section', { className: 'dt-sec' },
         h(RailHead, { title: 'More like this', rail: r2 }),
         h('div', { className: 'dt-rail', ref: r2 }, others.map(function (o) {
-          var ol = o.status === 'live';
-          return h(Tap, { key: o.id, className: 'dt-poster', go: function () { p.nav.push('detail:' + o.id); } },
-            h('div', { className: 'dt-pimg', style: { backgroundImage: 'url(' + o.img + ')' } },
-              ol ? h('span', { className: 'dt-pb live' }, 'LIVE') : o.status === 'upcoming' ? h('span', { className: 'dt-pb' }, 'NEW') : null,
-              ol ? h('span', { className: 'dt-pplay' }, h(F.Icon, { name: 'play', size: 18 })) : null,
-              ol ? h('span', { className: 'dt-pprog' }, h('i', { style: { width: '38%' } })) : null),
-            h('b', null, o.title),
-            h('span', { className: 'dt-pmeta' }, ol ? h(F.Icon, { name: 'clock', size: 14 }) : null, ol ? fmtT(o.left - t).slice(0, 5) + ' left' : o.status === 'ended' ? 'Ended · ' + o.price : o.date.replace(', 2026', '') + ' · ' + o.price));
+          return h(EventTile, { key: o.id, e: o, nav: p.nav });
         }))),
       h('section', { className: 'dt-sec' },
         h('div', { className: 'dt-rh' }, h('h2', null, 'Ratings & Reviews'), h(Tap, { className: 'f4-link', go: function () { p.nav.push('reviews'); } }, 'See all')),
