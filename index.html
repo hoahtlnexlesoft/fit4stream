@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105092053"</script>
+<script>window.__BUILD__="20261105093136"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4075,6 +4075,44 @@ body[data-phone=foldopen] .device:not(.land) .island{left:calc(75% - 5px)!import
 
 body[data-phone=foldopen] .device .island{z-index:80!important}
 @media (max-height:680px){ body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail .fs-rb:nth-child(2){display:none!important} }
+
+/* ===== iPhone Duo · mở: one app on the whole inner display (no split) ===== */
+body[data-phone=foldopen] .screenhost .app{right:0!important}
+body[data-phone=foldopen] .screenhost::before,body[data-phone=foldopen] .screenhost::after{display:none!important}
+body[data-phone=foldopen] .device .island{display:none!important}
+/* ===== iPhone Duo · gập: outer display, near-square iPhone ===== */
+body[data-phone=duo] .device{border-radius:60px!important}
+body[data-phone=duo] .device::before{border-radius:55px!important}
+body[data-phone=duo] .screenhost{border-radius:47px!important}
+
+/* --- iPhone Duo open: vertical tab rail on the left (iOS 27 style) --- */
+body[data-phone=foldopen] .tabbar{left:0!important;right:auto!important;top:0!important;bottom:0!important;width:96px!important;padding:calc(var(--st) + 8px) 0 calc(var(--sb) + 8px) 10px!important;display:flex!important;align-items:center!important;background:none!important}
+body[data-phone=foldopen] .f4-tabbar{flex-direction:column!important;width:80px!important;height:auto!important;margin:0!important;padding:8px 6px!important;gap:6px!important;border-radius:28px!important;position:relative!important;left:auto!important;right:auto!important;bottom:auto!important;transform:none!important}
+body[data-phone=foldopen] .f4-tab{flex:none!important;width:68px!important;height:58px!important}
+body[data-phone=foldopen] .f4-tab.is-center{height:76px!important}
+body[data-phone=foldopen] .f4-tab-orb{width:54px!important;height:54px!important}
+body[data-phone=foldopen] .f4-tab-arc{display:none!important}
+body[data-phone=foldopen] .app:has(.tabbar) .stage{left:96px!important;width:auto!important;right:0!important}
+body[data-phone=foldopen] .app:has(.tabbar) .stage .top-blur{left:0!important;right:0!important;width:auto!important}
+
+/* --- live player: video + info on the left, chat column on the right --- */
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state){--cw:320px;--vw:calc(var(--dw) - var(--cw));--vh:calc(var(--vw) * .5625);--vt:calc(var(--st) + 44px + (var(--dh) - var(--st) - 44px - var(--sb) - var(--vh) - 87px) / 2)}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-media{right:var(--cw)!important;width:auto!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-frame{left:0!important;right:0!important;width:auto!important;top:var(--vt)!important;height:var(--vh)!important;bottom:auto!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-info{top:calc(var(--vt) + var(--vh))!important;right:var(--cw)!important;border-bottom:0!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-sub{top:calc(var(--vt) + 8px)!important;right:var(--cw)!important;width:auto!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-bottom{left:auto!important;right:0!important;width:var(--cw)!important;top:calc(var(--st) + 52px)!important;bottom:0!important;border-left:1px solid rgba(255,255,255,.07);background:rgba(10,9,14,.55)}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-chat{padding-right:62px!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-chat .im-msg{max-width:100%!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-rail{right:8px!important;bottom:calc(var(--sb) + 72px)!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-comp{padding-left:10px!important;padding-right:10px!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-rot{display:none!important}
+
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-media{overflow:hidden!important}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-bottom{top:0!important;padding-top:calc(var(--st) + 56px)!important;box-sizing:border-box}
+
+/* iPhone Duo open: keep reading-width content centred on non-player screens */
+body[data-phone=foldopen] .screen:not(.player){padding-left:max(0px,calc((100% - 720px) / 2))!important;padding-right:max(0px,calc((100% - 720px) / 2))!important;box-sizing:border-box}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4084,7 +4122,8 @@ body[data-phone=foldopen] .device .island{z-index:80!important}
             <button type="button" data-phone="se">iPhone SE</button>
       <button type="button" data-phone="android">Android · Pixel 8</button>
       <button type="button" data-phone="fold">Galaxy Z Flip</button>
-      <button type="button" data-phone="foldopen">iPhone Duo</button>
+      <button type="button" data-phone="duo">iPhone Duo · gập</button>
+      <button type="button" data-phone="foldopen">iPhone Duo · mở</button>
     </div>
     <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
@@ -7263,7 +7302,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
-  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, foldopen: { w: 890, h: 626, st: 30, sb: 14, name: 'iPhone Duo' } };
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, duo: { w: 466, h: 678, st: 54, sb: 20, name: 'iPhone Duo \u00b7 g\u1eadp' }, foldopen: { w: 890, h: 626, st: 24, sb: 12, name: 'iPhone Duo \u00b7 m\u1edf' } };
   var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur] || cur === 'mini') cur = 'max';
   function applyDev(k){
     cur = k; var d = DEVS[k]; var r = document.documentElement;
@@ -7275,7 +7314,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.classList.toggle('on', b.dataset.phone === k); });
     if (!pane2) try { localStorage.setItem('f4-dev', k); } catch (e) {}
     fit(); window.dispatchEvent(new Event('resize'));
-    duo(k === 'foldopen');
+    duo(false);
   }
   function duo(on){
     if (dev) return; var host = document.querySelector('.device'); var f = document.getElementById('duo-pane');
