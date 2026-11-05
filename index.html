@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105094938"</script>
+<script>window.__BUILD__="20261105095148"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4180,6 +4180,10 @@ body[data-phone=foldopen] .screen:not(.player){padding-left:max(0px,calc((100% -
 .fs-info3 .fs-info-who em{font-style:normal;font-size:14px!important;line-height:18px;font-weight:700;color:#F6C26B!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fs-info3 .fs-info-who small{font-size:12px!important;line-height:15px;color:rgba(255,255,255,.55)}
 .fs-info3 .fs-info-fol{flex:none;height:32px!important;padding:0 16px!important;font-size:13px!important}
+
+/* fullscreen: exit-fullscreen (back to portrait) button, YouTube-style at the end of the control row */
+.fl2-sep{width:1px;height:22px;background:rgba(255,255,255,.18);margin:0 2px;flex:none}
+.ctl.fl2-min{background:rgba(255,255,255,.16)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7228,7 +7232,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         ['Auto', '1080p', '720p', '480p'].map(function (t, i) { return h('button', { key: t, type: 'button', className: cx('q', i === q && 'on'), onClick: function () { tap(5); setQ(i); say('Quality: ' + t); } }, t); }),
         h(Tap, { className: cx('ctl', panel && 'on'), label: panel ? 'Close chat' : 'Open chat', onClick: function () { tap(5); setPanel(!panel); setUi(true); } }, h(F.Icon, { name: 'message', size: 18 }), msgs.length ? h('i', { className: 'fl2-cnt' }, msgs.length) : null),
         h(Tap, { className: cx('ctl', tray && 'on'), label: 'Reactions', onClick: function () { tap(5); setTray(!tray); } }, h(F.Icon, { name: 'smile', size: 18 })),
-        h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: function () { heart(); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 }))));
+        h(Tap, { className: cx('ctl coral', liked && 'liked'), label: 'Send a heart', onClick: function () { heart(); } }, h(F.Icon, { name: 'heart', filled: true, size: 18 })),
+        h('span', { className: 'fl2-sep', 'aria-hidden': true }),
+        h(Tap, { className: 'ctl fl2-min', label: 'Exit full screen', go: function () { tap(6); p.nav.back(); } }, h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2.2, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5' })))));
   }
 
   var SCREENS = { guide: withSkel(Guide, GuideSkeleton, 'guide', 'Event Guide'), onair: withSkel(OnAir, OnAirSkeleton, 'onair', 'On-air'), upcoming: withSkel(Upcoming, UpcomingSkeleton, 'upcoming', 'Upcoming'), detail: withSkel(Detail, DetailSkeleton, 'detail'), categories: Categories, splash: Launch, list: List, notifications: Notifications, profile: EditProfile, channel: MyChannel, payments: Payments, channels: Channels, receipt: Receipt, security: Security, signup: Signup, forgot: Forgot, search: Search, welcome: Launch, login: Login, home: Home, account: Account, myevents: MyEvents, live: Detail, checkout: Checkout, success: Success, organizer: Organizer, reviews: Reviews, player: Player, full: Full };
