@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105072132"</script>
+<script>window.__BUILD__="20261105072214"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3924,6 +3924,13 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
   .rv .rv-rail .rv-side{width:36px!important;height:36px!important;border-radius:12px!important;color:#e2e8f0!important;margin:0!important}
 }
 @media (max-width:640px){.rv .rv-rail,.rv .rv-pill .rv-seg{width:44px!important;box-sizing:border-box!important;align-items:center!important}}
+
+/* feedback panel on phones: clear the iOS status bar so the close button is tappable */
+@media (max-width:640px){
+  .rv .rv-panel{padding-top:env(safe-area-inset-top,0px)!important;padding-bottom:env(safe-area-inset-bottom,0px)!important;box-sizing:border-box}
+  .rv .rv-panel .rv-head{padding-top:max(14px,calc(env(safe-area-inset-top,0px) * 0 + 14px))!important}
+  .rv .rv-panel .rv-head button,.rv .rv-panel .rv-head [role=button]{min-width:44px;min-height:44px}
+}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
