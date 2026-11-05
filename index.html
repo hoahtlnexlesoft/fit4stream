@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105015719"</script>
+<script>window.__BUILD__="20261105015836"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3525,13 +3525,13 @@ input,textarea{caret-color:#F4A425}
 .stage::before{content:none}
 
 /* progressive blur under the floating header (stacked bands, no mask, so it also works in iOS Safari) */
-.top-blur{position:fixed!important;left:0;right:0;top:0;height:calc(var(--st) + 84px);z-index:30;pointer-events:none;opacity:0;transition:opacity .25s;background:linear-gradient(180deg,rgba(15,14,20,.5) 0%,rgba(15,14,20,.32) 55%,rgba(15,14,20,.1) 80%,rgba(15,14,20,0) 100%)}
+.top-blur{position:fixed!important;left:0;right:0;top:0;height:calc(var(--st) + 84px);z-index:30;pointer-events:none;opacity:var(--sp,0);transition:none;will-change:opacity;background:linear-gradient(180deg,rgba(15,14,20,.5) 0%,rgba(15,14,20,.32) 55%,rgba(15,14,20,.1) 80%,rgba(15,14,20,0) 100%)}
 .top-blur b{position:absolute;left:0;right:0;top:0;display:block;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 70%,transparent 100%)}
 .top-blur b:nth-child(1){height:100%;-webkit-backdrop-filter:blur(.8px);backdrop-filter:blur(.8px)}
 .top-blur b:nth-child(2){height:calc(var(--st) + 72px);-webkit-backdrop-filter:blur(1.6px);backdrop-filter:blur(1.6px)}
 .top-blur b:nth-child(3){height:calc(var(--st) + 62px);-webkit-backdrop-filter:blur(2.6px);backdrop-filter:blur(2.6px)}
 .top-blur b:nth-child(4){height:calc(var(--st) + 56px);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
-.stage.scrolled .top-blur{opacity:1}
+
 
 .stage .brand-head,.stage .d-top{z-index:35!important}
 
@@ -6762,7 +6762,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var tabbed = TABS.indexOf(tname) >= 0;
     var isModal = MODALS.test(tname), under = isModal && stack.length > 1 ? stack[stack.length - 2] : null;
     var prevKey = stack.length > 1 ? stack[stack.length - 2] : null, swiping = (drag > 0 || swAnim) && prevKey && !isModal, swW = appEl.current ? appEl.current.clientWidth : 430, swP = Math.min(1, drag / swW);
-    return h('div', { ref: appEl, className: cx('app', top === 'full' && 'land', swiping && 'swiping'), onPointerDown: function (e) { if (e.pointerType === 'mouse') pd(e); }, onPointerMove: function (e) { if (e.pointerType === 'mouse') pm(e); }, onPointerUp: function (e) { if (e.pointerType === 'mouse') pu(e); }, onTouchStart: function (e) { var t = e.touches[0]; if (e.touches.length === 1) pd({ clientX: t.clientX, clientY: t.clientY, pointerId: 't', target: e.target, pointerType: 'touch', button: 0 }); }, onTouchMove: function (e) { var t = e.touches[0]; pm({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchEnd: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchCancel: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onClickCapture: clickCap, onScrollCapture: function (e) { var st = e.target && e.target.closest ? e.target.closest('.stage') : null; if (st && !st.classList.contains('under')) if (e.target.scrollHeight > e.target.clientHeight + 4) st.classList.toggle('scrolled', e.target.scrollTop > 24); } },
+    return h('div', { ref: appEl, className: cx('app', top === 'full' && 'land', swiping && 'swiping'), onPointerDown: function (e) { if (e.pointerType === 'mouse') pd(e); }, onPointerMove: function (e) { if (e.pointerType === 'mouse') pm(e); }, onPointerUp: function (e) { if (e.pointerType === 'mouse') pu(e); }, onTouchStart: function (e) { var t = e.touches[0]; if (e.touches.length === 1) pd({ clientX: t.clientX, clientY: t.clientY, pointerId: 't', target: e.target, pointerType: 'touch', button: 0 }); }, onTouchMove: function (e) { var t = e.touches[0]; pm({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchEnd: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onTouchCancel: function (e) { var t = e.changedTouches[0]; pu({ clientX: t.clientX, clientY: t.clientY, pointerId: 't' }); }, onClickCapture: clickCap, onScrollCapture: function (e) { var st = e.target && e.target.closest ? e.target.closest('.stage') : null; if (st && !st.classList.contains('under')) if (e.target.scrollHeight > e.target.clientHeight + 4) { var y = Math.max(0, e.target.scrollTop); st.style.setProperty('--sp', Math.min(1, y / 90).toFixed(3)); st.classList.toggle('scrolled', y > 24); } } },
       window.__FRAME__ ? h(StatusBar, { light: top === 'player' }) : null,
       isModal && under ? h('div', { key: 'under-' + under + (stack.length - 1), className: 'stage under', 'aria-hidden': true }, h(SCREENS[under.split(':')[0]], { nav: nav, key: under, param: under.split(':')[1] })) : null,
       swiping ? h('div', { key: 'swu-' + prevKey + stack.length, className: 'stage sw-under', 'aria-hidden': true, style: { transform: 'translateX(' + (-28 * (1 - swP)) + '%)', transition: swAnim ? 'transform .23s cubic-bezier(.2,.8,.2,1)' : 'none' } }, h(SCREENS[prevKey.split(':')[0]], { nav: nav, key: prevKey, param: prevKey.split(':')[1] }), h('i', { className: 'sw-dim', style: { opacity: .45 * (1 - swP), transition: swAnim ? 'opacity .23s' : 'none' } }), TABS.indexOf(prevKey.split(':')[0]) >= 0 ? h(TabBar, { active: prevKey.split(':')[0], nav: nav }) : null) : null,
