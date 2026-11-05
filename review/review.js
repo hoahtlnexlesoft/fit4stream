@@ -21,6 +21,12 @@
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (rows) { return rows.map(function (x) { return x.data; }); });
   }
+  /* cheap poll: only small fields (no images/screenshots) - full load only when something changed */
+  var SIG_SEL = 'id,v:data->>rev,s:data->>resolved,e:data->>edited,x:data->>text,r:data->replies,k:data->>kind';
+  function remoteSig() {
+    return fetch(SB_URL + '/rest/v1/' + TABLE + '?select=' + SIG_SEL + '&order=created_at.asc', { headers: H })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); });
+  }
   function remoteUpsert(ts) {
     if (!ts.length) return Promise.resolve();
     return fetch(SB_URL + '/rest/v1/' + TABLE + '?on_conflict=id', {
@@ -118,20 +124,30 @@
     var prev = S.threads; writes++; S.threads = next; renderAll();
     if (!REMOTE) { lsSet(KEY, JSON.stringify(next)); return; }
     var pm = {}; prev.forEach(function (t) { pm[t.id] = JSON.stringify(t); });
-    var changed = next.filter(function (t) { return pm[t.id] !== JSON.stringify(t); });
+    var changed = next.filter(function (t) { return pm[t.id] !== JSON.stringify(t); }).map(function (t) { var o = Object.assign({}, t, { rev: Date.now() }); return o; });
+    if (changed.length) { var cm = {}; changed.forEach(function (t) { cm[t.id] = t; }); S.threads = S.threads.map(function (t) { return cm[t.id] || t; }); }
+    lastSig = null;
     var gone = prev.filter(function (t) { return !next.some(function (n) { return n.id === t.id; }); }).map(function (t) { return t.id; });
     pending++;
     Promise.all([remoteUpsert(changed), remoteDelete(gone)]).catch(function () { toast('Could not save. Please check your connection.'); })
       .then(function () { pending--; });
   }
   function saveAll(next) { save(next); }
+  var lastSig = null, quotaWarned = false;
   function pull() {
     if (!REMOTE || pending > 0 || (document.hidden && Date.now() - lastPull < 30000)) return;
     lastPull = Date.now(); var w = writes;
-    remoteLoad().then(function (rows) {
+    remoteSig().then(function (sig) {
+      if (LOADED && sig === lastSig) return null;
+      lastSig = sig; return remoteLoad();
+    }).then(function (rows) {
+      if (!rows) return;
       if (!LOADED) { LOADED = true; if (JSON.stringify(rows) === JSON.stringify(S.threads)) renderAll(); }
       if (pending === 0 && writes === w && JSON.stringify(rows) !== JSON.stringify(S.threads)) { S.threads = rows; renderAll(); }
-    }).catch(function () {});
+    }).catch(function (e) {
+      lastSig = null;
+      if (String(e && e.message) === '402' && !quotaWarned) { quotaWarned = true; try { toast('Comment server is over its quota \u2014 existing comments are safe but cannot load until the plan is restored.'); } catch (x) {} }
+    });
   }
 
   /* ---------- styles ---------- */
@@ -1060,5 +1076,5 @@
   /* ---------- start ---------- */
   if (!REMOTE) { try { S.threads = JSON.parse(lsGet(KEY, '[]')) || []; } catch (e) { S.threads = []; } }
   if (document.body) mount(); else document.addEventListener('DOMContentLoaded', mount);
-  if (REMOTE) { pull(); setInterval(pull, 5000); document.addEventListener('visibilitychange', pull); }
+  if (REMOTE) { pull(); setInterval(function () { if (!document.hidden) pull(); }, 15000); document.addEventListener('visibilitychange', function () { if (!document.hidden) pull(); }); }
 })();
