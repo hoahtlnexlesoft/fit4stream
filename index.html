@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105023522"</script>
+<script>window.__BUILD__="20261105024126"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3720,6 +3720,40 @@ input,textarea{caret-color:#F4A425}
   .f4-avatar.is-initials{padding-bottom:.12em;box-sizing:border-box}
   .cs-role{padding-bottom:1.5px!important}
 }
+
+/* ===================== MODAL SYSTEM (consistent across all sheets & dialogs) ===================== */
+.app{--m-pad:20px;--m-surface:rgba(255,255,255,.05);--m-line:inset 0 0 0 1px rgba(255,255,255,.07);--m-r:16px;--m-muted:rgba(255,255,255,.6)}
+/* container */
+.sheet:not(.im-sheet){padding:8px var(--m-pad) calc(var(--sb) + 16px)!important;gap:14px!important}
+.sheet .grab{width:38px!important;height:4px!important;border-radius:4px!important;margin:0 auto 4px!important;display:block}
+/* header row: title left + close right */
+.sh2-head,.ac-head,.cs-head{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:36px}
+.sh2-head b,.ac-head h2,.cs-title b{margin:0!important;font-size:19px!important;font-weight:800!important;letter-spacing:-.25px!important;color:#fff!important}
+.cs-head{padding:2px 14px 2px var(--m-pad)!important}
+/* close buttons — one style */
+.sh2-x,.as2-x,.cs-x,.ac-head .f4-iconbtn,.rt-x{width:34px!important;height:34px!important;min-width:34px!important;border:0!important;border-radius:50%!important;display:grid!important;place-items:center!important;background:rgba(255,255,255,.08)!important;color:rgba(255,255,255,.85)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+/* centered "hero" sheets: one title + body style */
+.as2 h2,.inv h2,.rt-q h2,.rv-sheet h2,.cd h3,.cd h2{font-size:20px!important;font-weight:800!important;letter-spacing:-.3px!important;line-height:1.25!important;color:#fff!important;text-align:center;margin:0!important}
+.as2 p,.inv>p,.rt-lbl,.cd p{font-size:14px!important;line-height:1.5!important;color:var(--m-muted)!important;text-align:center}
+.rt-lbl.on{color:#F6C26B!important}
+/* inner surfaces */
+.sh2-card,.rf-amt,.rt-ev,.cs-pin,.inv .inv-mic,.inv-note,.co-fail .co-fail-card,.ac .ac-row-sw,.rf-list label,.rf-opt{background:var(--m-surface)!important;box-shadow:var(--m-line)!important;border:0!important;border-radius:var(--m-r)!important}
+/* inputs inside modals */
+.sheet .lg-box,.sheet .f4-field,.sheet .ac-in,.sheet input:not([type=checkbox]):not([type=radio]):not([type=search]),.sheet textarea{border-radius:14px!important}
+.sheet .lg-box,.sheet .ac-in{background:rgba(255,255,255,.06)!important;box-shadow:var(--m-line)!important;border:0!important}
+/* buttons — primary amber pill, secondary soft pill, tertiary text */
+.sheet .f4-btn-primary,.cd .cd-ok,.cd .co-fail-pri,.cd-btn.cd-ok{height:52px!important;min-height:52px!important;border-radius:999px!important;background:linear-gradient(180deg,#F7B33F,#F09A1A)!important;color:#1b1306!important;font-size:16px!important;font-weight:700!important;border:0!important;box-shadow:0 8px 22px rgba(244,164,37,.28)!important}
+.sheet .f4-btn-secondary,.cd .cd-cancel,.cd-btn.cd-cancel{height:52px!important;min-height:52px!important;border-radius:999px!important;background:rgba(255,255,255,.08)!important;color:#fff!important;font-size:16px!important;font-weight:700!important;border:0!important;box-shadow:none!important}
+.cd .cd-btn{height:48px!important;min-height:48px!important;font-size:15px!important}
+.rt-later,.inv .inv-later,.sheet .f4-btn-ghost{color:var(--m-muted)!important;font-weight:600!important;background:none!important}
+.sheet .is-off,.rt-dis{opacity:.4!important;box-shadow:none!important;pointer-events:none}
+/* star pickers (rate + write review) share one look */
+.rate-stars{display:flex;justify-content:center;gap:8px}
+.rate-stars button{width:52px;height:52px;border:0;padding:0;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.06);color:rgba(255,255,255,.28);cursor:pointer;transition:background .2s,color .2s}
+.rate-stars button.on{color:#F4A425;background:rgba(244,164,37,.14)}
+/* dialogs */
+.cd{padding:26px 22px 20px!important;gap:10px!important;width:min(340px,calc(100% - 40px))!important}
+.cd .cd-acts{gap:10px!important;margin-top:8px!important}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
