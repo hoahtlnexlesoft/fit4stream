@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105070658"</script>
+<script>window.__BUILD__="20261105070946"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3896,7 +3896,7 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
 .rc-halo{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:radial-gradient(closest-side,rgba(var(--c),.32),rgba(var(--c),.08) 60%,transparent);animation:rcHalo 3.2s ease-in-out infinite}
 .rc-ring{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 0 0 1.5px rgba(var(--c),.45);animation:rcRing 2.6s cubic-bezier(.2,.7,.3,1) infinite}
 .rc-emb .f4-emblem{position:relative;z-index:1;animation:rcIn .7s cubic-bezier(.2,.9,.3,1.2) both,rcFloat 4s ease-in-out .7s infinite}
-.rc-emb .f4-emblem>g:last-of-type>*{transform-box:view-box;transform-origin:124px 92px;animation:rcPop .55s cubic-bezier(.2,1.4,.4,1) .45s both}
+.rc-emb .f4-emblem>g:last-of-type>*{transform-box:view-box;transform-origin:122px 90px;animation:rcPop .55s cubic-bezier(.2,1.4,.4,1) .45s both}
 .rc-emb .f4-emblem>circle{transform-box:fill-box;transform-origin:center;animation:rcTw 2.4s ease-in-out infinite}
 .rc-emb .f4-emblem>circle:nth-of-type(2){animation-delay:.6s}.rc-emb .f4-emblem>circle:nth-of-type(3){animation-delay:1.2s}.rc-emb .f4-emblem>circle:nth-of-type(4){animation-delay:1.8s}
 @keyframes rcHalo{50%{transform:scale(1.08);opacity:.75}}
@@ -4708,7 +4708,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   };
 
   /* ---- Emblem: illustrated icon in the success-ticket style (plum card, brand-gradient edge, corner badge, confetti) ---- */
-  var EMB_BADGE = { amber: ['#ffe29a', '#f4a425', '#2a1803', '#f4a425'], red: ['#ff9a93', '#e5484d', '#fff', '#e5484d'], green: ['#9be8bd', '#39c87c', '#0c1a12', '#39c87c'], purple: ['#e2d0fb', '#a57ad8', '#1b1030', '#a57ad8'] };
+  var EMB_BADGE = { amber: ['#FFD36B', '#E8890C', '#fff', '#f4a425'], red: ['#FF7B73', '#C9262C', '#fff', '#e5484d'], green: ['#5EE29A', '#169C57', '#fff', '#39c87c'], purple: ['#C9A6F5', '#7B45C2', '#fff', '#a57ad8'] };
+  function embSeal(r, n, d) { var pts = [], N = n * 2; for (var i = 0; i < N; i++) { var a = i / N * Math.PI * 2 - Math.PI / 2, rr = i % 2 ? r - d : r; pts.push([Math.cos(a) * rr, Math.sin(a) * rr]); } var p = 'M' + pts[0][0].toFixed(2) + ' ' + pts[0][1].toFixed(2); for (var j = 1; j <= N; j++) { var a0 = pts[j - 1], a1 = pts[j % N], mx = (a0[0] + a1[0]) / 2, my = (a0[1] + a1[1]) / 2; p += ' Q' + a0[0].toFixed(2) + ' ' + a0[1].toFixed(2) + ' ' + mx.toFixed(2) + ' ' + my.toFixed(2); } return p + 'Z'; }
+  var EMB_SEAL = embSeal(21, 12, 2.4);
   var EMB_GLYPH = {
     check: 'M-7.5 0.5l5 5 10-11', plus: 'M0-7v14M-7 0h14', x: 'M-5.5-5.5l11 11M5.5-5.5l-11 11',
     clock: 'M0-7.5a7.5 7.5 0 1 1 0 15a7.5 7.5 0 1 1 0-15M0-4v4l2.8 2',
@@ -4783,14 +4785,18 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('linearGradient', { id: id + 'e', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39cae0' }), h('stop', { offset: .35, stopColor: '#a57ad8' }), h('stop', { offset: .7, stopColor: '#e74645' }), h('stop', { offset: 1, stopColor: '#facd60' })),
         h('linearGradient', { id: id + 's', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .1 }), h('stop', { offset: 1, stopColor: '#fff', stopOpacity: 0 })),
         h('linearGradient', { id: id + 'b', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: bc[0] }), h('stop', { offset: 1, stopColor: bc[1] })),
+        h('linearGradient', { id: id + 'h', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .45 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: 0 })),
         h('filter', { id: id + 'd', x: '-30%', y: '-30%', width: '160%', height: '160%' }, h('feDropShadow', { dx: 0, dy: 8, stdDeviation: 8, floodColor: '#000', floodOpacity: .45 })),
         h('filter', { id: id + 'l', x: '-60%', y: '-60%', width: '220%', height: '220%' }, h('feDropShadow', { dx: 0, dy: 0, stdDeviation: 6, floodColor: bc[3], floodOpacity: .5 }))),
       h('ellipse', { cx: 80, cy: 60, rx: 74, ry: 56, fill: 'url(#' + id + 'g)' }),
       h('circle', { cx: 22, cy: 22, r: 2.4, fill: '#facd60', opacity: .8 }), h('circle', { cx: 140, cy: 20, r: 1.8, fill: '#39cae0', opacity: .8 }), h('circle', { cx: 18, cy: 96, r: 1.6, fill: '#a57ad8', opacity: .8 }), h('circle', { cx: 146, cy: 62, r: 1.4, fill: '#e74645', opacity: .7 }),
       h('g', { transform: 'rotate(-7 80 57)', filter: 'url(#' + id + 'd)' }, embBody(k, id)),
-      h('g', { transform: 'translate(124 92)', filter: 'url(#' + id + 'l)' },
-        h('circle', { r: 18, fill: 'url(#' + id + 'b)' }), h('circle', { r: 18, fill: 'none', stroke: 'rgba(255,255,255,.5)', strokeWidth: 1 }),
-        h('path', { d: EMB_GLYPH[cfg.badge[1]], transform: 'scale(1.25)', fill: 'none', stroke: bc[2], strokeWidth: 2.9, strokeLinecap: 'round', strokeLinejoin: 'round' })));
+      h('g', { transform: 'translate(122 90)', filter: 'url(#' + id + 'l)' },
+        h('path', { d: EMB_SEAL, fill: 'url(#' + id + 'b)', stroke: '#17141f', strokeWidth: 3, paintOrder: 'stroke' }),
+        h('path', { d: EMB_SEAL, fill: 'url(#' + id + 'h)' }),
+        h('circle', { r: 13.5, fill: 'none', stroke: 'rgba(255,255,255,.55)', strokeWidth: 1, strokeDasharray: '1.5 2.5' }),
+        h('path', { d: EMB_GLYPH[cfg.badge[1]], transform: 'scale(1.3)', fill: 'none', stroke: 'rgba(0,0,0,.25)', strokeWidth: 3.4, strokeLinecap: 'round', strokeLinejoin: 'round', style: { transform: 'translateY(1px) scale(1.3)' } }),
+        h('path', { d: EMB_GLYPH[cfg.badge[1]], transform: 'scale(1.3)', fill: 'none', stroke: bc[2], strokeWidth: 3.1, strokeLinecap: 'round', strokeLinejoin: 'round' })));
   }
   function EmptyArt(p) {
     if (p.name !== 'success') return h('span', { className: 'f4-ea3' }, h(Emblem, { name: p.name, width: (p.width || 220) * .82, label: p.label || 'Illustration' }));
