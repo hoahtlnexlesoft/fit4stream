@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105081549"</script>
+<script>window.__BUILD__="20261105082816"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4034,6 +4034,18 @@ body[data-phone=fold] .homebar,body[data-phone=foldopen] .homebar{display:block!
   body.rv-open .stagewrap{right:370px!important;width:auto!important;max-width:none!important;margin-right:370px!important}
   body.rv-open .stagewrap{gap:28px!important}
 }
+
+/* Z Flip: horizontal crease across the middle */
+body[data-phone=fold] .screenhost::after{content:'';position:absolute;z-index:70;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(255,255,255,.05),rgba(0,0,0,.2));pointer-events:none}
+/* Surface Duo: two screens with a physical hinge */
+body[data-phone=foldopen] .device{border-radius:22px!important;padding:12px!important}
+body[data-phone=foldopen] .device::before{border-radius:16px!important}
+body[data-phone=foldopen] .screenhost::after{width:28px!important;margin-left:-14px!important;background:linear-gradient(90deg,#1d1e21,#3a3b40 45%,#2b2c30 55%,#1d1e21)!important;box-shadow:0 0 0 1px #0a0a0c}
+body[data-phone=foldopen] .device:not(.land) .island{right:auto;left:calc(50% + 30px);top:14px;width:10px;height:10px}
+
+/* Surface Duo: the app runs on the left screen; the right screen shows the home wallpaper */
+body[data-phone=foldopen] .screenhost .app{right:calc(50% + 14px)!important;width:auto!important}
+body[data-phone=foldopen] .screenhost::before{content:'';position:absolute;z-index:0;top:0;bottom:0;left:calc(50% + 14px);right:0;background:radial-gradient(70% 60% at 60% 40%,rgba(165,122,216,.35),transparent 70%),radial-gradient(60% 50% at 30% 80%,rgba(57,202,224,.22),transparent 70%),linear-gradient(160deg,#1b1530,#0e0d14)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4042,8 +4054,8 @@ body[data-phone=fold] .homebar,body[data-phone=foldopen] .homebar{display:block!
       <button type="button" data-phone="max" class="on">iPhone 16 Pro Max</button>
             <button type="button" data-phone="se">iPhone SE</button>
       <button type="button" data-phone="android">Android · Pixel 8</button>
-      <button type="button" data-phone="fold">Galaxy Z Fold · folded</button>
-      <button type="button" data-phone="foldopen">Galaxy Z Fold · unfolded</button>
+      <button type="button" data-phone="fold">Galaxy Z Flip</button>
+      <button type="button" data-phone="foldopen">Surface Duo</button>
     </div>
     <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
@@ -7221,7 +7233,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
-  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 344, h: 882, st: 36, sb: 20, name: 'Galaxy Z Fold \u00b7 folded' }, foldopen: { w: 884, h: 1104, st: 36, sb: 20, name: 'Galaxy Z Fold \u00b7 unfolded' } };
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, foldopen: { w: 1114, h: 720, st: 28, sb: 16, name: 'Surface Duo' } };
   var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur] || cur === 'mini') cur = 'max';
   function applyDev(k){
     cur = k; var d = DEVS[k]; var r = document.documentElement;
