@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105091656"</script>
+<script>window.__BUILD__="20261105092053"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4062,6 +4062,19 @@ body[data-phone=foldopen] .screenhost::after{width:10px!important;margin-left:-5
 body[data-phone=foldopen] .screenhost .app{right:calc(50% + 5px)!important}
 body[data-phone=foldopen] #duo-pane{left:calc(50% + 5px);width:calc(var(--dw) / 2 - 5px);border-radius:0 16px 16px 0}
 body[data-phone=foldopen] .device:not(.land) .island{left:calc(50% + 22px)!important}
+
+/* iPhone Duo (open): one continuous inner display, no hinge; two panes split by a hairline */
+body[data-phone=foldopen] .device{border-radius:46px!important;padding:12px!important;background:linear-gradient(145deg,#3a3b3f 0%,#8e8f93 16%,#55565b 34%,#2c2d31 58%,#76777c 82%,#3a3b3f 100%)!important}
+body[data-phone=foldopen] .device::before{inset:5px!important;border-radius:41px!important}
+body[data-phone=foldopen] .device::after{border-radius:44px!important}
+body[data-phone=foldopen] .screenhost{border-radius:34px!important}
+body[data-phone=foldopen] .screenhost::after{width:1px!important;margin-left:0!important;background:rgba(255,255,255,.08)!important;box-shadow:none!important}
+body[data-phone=foldopen] .screenhost .app{right:calc(50% + 1px)!important}
+body[data-phone=foldopen] #duo-pane{left:calc(50% + 1px);width:calc(var(--dw) / 2 - 1px);border-radius:0 34px 34px 0}
+body[data-phone=foldopen] .device:not(.land) .island{left:calc(75% - 5px)!important;right:auto!important;top:20px!important;width:10px!important;height:10px!important;margin:0!important;border-radius:50%!important;background:#050506!important}
+
+body[data-phone=foldopen] .device .island{z-index:80!important}
+@media (max-height:680px){ body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail .fs-rb:nth-child(2){display:none!important} }
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4071,7 +4084,7 @@ body[data-phone=foldopen] .device:not(.land) .island{left:calc(50% + 22px)!impor
             <button type="button" data-phone="se">iPhone SE</button>
       <button type="button" data-phone="android">Android · Pixel 8</button>
       <button type="button" data-phone="fold">Galaxy Z Flip</button>
-      <button type="button" data-phone="foldopen">Surface Duo</button>
+      <button type="button" data-phone="foldopen">iPhone Duo</button>
     </div>
     <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
@@ -7242,7 +7255,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 (function(){
   var coarse = window.matchMedia && matchMedia('(pointer:coarse)').matches; var dev = (coarse || ('ontouchstart' in window)) && Math.min(screen.width, screen.height) < 600;
-  var pane2 = /[?&]pane2\b/.test(location.search); window.__PANE2__ = pane2; if (pane2) { dev = true; document.body.classList.add('pane2'); document.documentElement.style.setProperty('--st', '28px'); document.documentElement.style.setProperty('--sb', '16px'); }
+  var pane2 = /[?&]pane2\b/.test(location.search); window.__PANE2__ = pane2; if (pane2) { dev = true; document.body.classList.add('pane2'); document.documentElement.style.setProperty('--st', '30px'); document.documentElement.style.setProperty('--sb', '14px'); }
   window.__FRAME__ = !dev;
   if (dev) document.body.classList.add('devmode');
   if (dev && (navigator.standalone || matchMedia('(display-mode: standalone)').matches)) {
@@ -7250,7 +7263,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
-  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, foldopen: { w: 1114, h: 720, st: 28, sb: 16, name: 'Surface Duo' } };
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, foldopen: { w: 890, h: 626, st: 30, sb: 14, name: 'iPhone Duo' } };
   var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur] || cur === 'mini') cur = 'max';
   function applyDev(k){
     cur = k; var d = DEVS[k]; var r = document.documentElement;
@@ -7258,7 +7271,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (!dev) { r.style.setProperty('--st', d.st + 'px'); r.style.setProperty('--sb', d.sb + 'px'); }
     if (!pane2) document.body.dataset.phone = k;
     var n = document.getElementById('devname'); if (n) n.textContent = d.name;
-    var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (/android|fold/.test(k) ? ' dp' : ' pt');
+    var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (/^(android|fold)$/.test(k) ? ' dp' : ' pt');
     Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.classList.toggle('on', b.dataset.phone === k); });
     if (!pane2) try { localStorage.setItem('f4-dev', k); } catch (e) {}
     fit(); window.dispatchEvent(new Event('resize'));
