@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105023301"</script>
+<script>window.__BUILD__="20261105023522"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3710,6 +3710,16 @@ input,textarea{caret-color:#F4A425}
 .cs-av .f4-avatar,.cs-av>span{display:grid!important;place-items:center;text-align:center;line-height:1!important}
 .cs-meta{align-items:center}
 .cs-role{display:inline-flex!important;align-items:center;justify-content:center;height:17px;line-height:1!important;padding:0 7px!important;box-sizing:border-box}
+
+/* optical centering for Plus Jakarta Sans (tall ascender sits text low) */
+.f4-avatar.is-initials{display:inline-grid!important;place-items:center;line-height:1!important}
+@supports (text-box: trim-both cap alphabetic){
+  .f4-avatar.is-initials,.cs-role{text-box:trim-both cap alphabetic}
+}
+@supports not (text-box: trim-both cap alphabetic){
+  .f4-avatar.is-initials{padding-bottom:.12em;box-sizing:border-box}
+  .cs-role{padding-bottom:1.5px!important}
+}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
