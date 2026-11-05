@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105024126"</script>
+<script>window.__BUILD__="20261105024431"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3754,6 +3754,11 @@ input,textarea{caret-color:#F4A425}
 /* dialogs */
 .cd{padding:26px 22px 20px!important;gap:10px!important;width:min(340px,calc(100% - 40px))!important}
 .cd .cd-acts{gap:10px!important;margin-top:8px!important}
+
+.stage .rv-bottom{position:fixed!important;left:0!important;right:0!important;bottom:0!important;margin:0!important;z-index:20}
+
+.stage .sheet-wrap,.stage .cd-wrap{position:fixed!important;inset:0!important;z-index:60!important}
+.stage:has(.rv-sheet) .rv-bottom{visibility:hidden}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
