@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105095522"</script>
+<script>window.__BUILD__="20261105100008"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4196,6 +4196,23 @@ body .fs-rot svg{width:17px!important;height:17px!important}
 /* quality chips match the buttons: same fill, no outline */
 body .fl2 .q{height:34px!important;padding:0 14px!important;border:0!important;border-radius:999px!important;background:var(--pc-bg)!important;color:#fff!important;font-weight:600!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 body .fl2 .q.on{background:#F4A425!important;color:#1b1306!important}
+
+/* fullscreen top: same three controls as portrait (sound, speakers view, raise hand) */
+.fl2 .full-top{display:flex;align-items:center;gap:8px}
+.fl2-tgap{width:6px;flex:none}
+.fl2 .full-top .ctl.on{background:rgba(255,255,255,.22)!important}
+/* speakers view: screen + host camera side by side */
+.fl2.is-grid{background:#0d0c12}
+.fl2.is-grid .fl2-shade{opacity:.35}
+.fl2.is-grid .fl2-video{position:absolute!important;left:52px!important;right:calc(50% + 4px)!important;top:50%!important;bottom:auto!important;height:auto!important;aspect-ratio:16/9;transform:translateY(-46%);border-radius:14px;background-size:cover;background-position:center}
+.fl2.is-grid .fl2-cam{left:calc(50% + 4px)!important;right:28px!important;top:50%!important;bottom:auto!important;width:auto!important;height:auto!important;aspect-ratio:16/9;transform:translateY(-46%);border-radius:14px!important}
+.fl2.is-grid .fl2-cam .fl2-cam-img{position:absolute;inset:0;width:100%!important;height:100%!important;border-radius:14px}
+.fl2.is-grid .fl2-cam-swap{display:none!important}
+
+.fl2.is-grid{--tw:calc((var(--dh) - 92px) / 2);--th:calc(var(--tw) * .5625);--tt:calc((var(--dw) - var(--th)) / 2 + 6px)}
+.fl2.is-grid .fl2-video{left:52px!important;right:auto!important;width:var(--tw)!important;top:var(--tt)!important;height:var(--th)!important;bottom:auto!important;transform:none!important;animation:none!important;aspect-ratio:auto!important;border-radius:14px!important;overflow:hidden}
+.fl2.is-grid .fl2-cam{left:calc(52px + var(--tw) + 12px)!important;right:auto!important;width:var(--tw)!important;top:var(--tt)!important;height:var(--th)!important;bottom:auto!important;transform:none!important;aspect-ratio:auto!important}
+.fl2.is-grid .fl3-chat,.fl2.is-grid .full-chat{display:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7211,6 +7228,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var ft = useRef(0), hid = useRef(0);
     function say(m) { setFlash({ m: m, k: Date.now() }); clearTimeout(ft.current); ft.current = setTimeout(function () { setFlash(null); }, 1400); }
     var ts = useState(false), tray = ts[0], setTray = ts[1];
+    var gs = useState(false), grid = gs[0], setGrid = gs[1];
+    var hs2 = useState(false), hand = hs2[0], setHand = hs2[1];
     function heart(ch) {
       tap(15); if (!ch) setLiked(true);
       var batch = [0, 1, 2, 3, 4].map(function (i) { hid.current += 1; return { id: hid.current, ch: typeof ch === 'string' ? ch : null, x: (Math.random() * 40 - 20) | 0, d: i * 90, s: .8 + Math.random() * .5 }; });
@@ -7218,12 +7237,16 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       setTimeout(function () { setHearts(function (hh) { return hh.filter(function (x) { return batch.indexOf(x) < 0; }); }); }, 1900);
     }
     var vol = h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M11 5L6 9H3v6h3l5 4z' }), muted ? h('path', { d: 'M22 9l-6 6M16 9l6 6' }) : h('path', { d: 'M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13' }));
-    return h('div', { className: cx('screen noscroll full fl2', !ui && 'ui-off') },
+    return h('div', { className: cx('screen noscroll full fl2', !ui && 'ui-off', grid && 'is-grid') },
       h('div', { key: swap ? 'h' : 'e', className: cx('fl2-video', swap && 'is-cam'), style: { backgroundImage: 'url(' + (swap ? av('thao15 nguyen15') : EV.xmas.img) + ')' }, onClick: function () { setUi(!ui); } }),
       h('div', { className: 'fl2-shade', 'aria-hidden': true }),
       h('div', { className: 'full-top fl2-ui' }, h(Tap, { className: 'ctl', label: 'Exit full screen', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft' })),
         h('div', { style: { flex: 1, minWidth: 0 } }, h('b', { style: { display: 'block', fontSize: 15 } }, 'Danang Christmas Market 2026'), h('span', { style: { fontSize: 12, opacity: .75 } }, 'thao15 nguyen15 · Nov 03, 2026 at 9:43 AM')),
-        h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, fmtT(Math.max(0, 8220 - (EV.xmas.left - ftk))))), h('span', { className: 'lv-view' }, h(F.Icon, { name: 'eye', size: 14 }), '2.4K')),
+        h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, fmtT(Math.max(0, 8220 - (EV.xmas.left - ftk))))), h('span', { className: 'lv-view' }, h(F.Icon, { name: 'eye', size: 14 }), '2.4K'),
+        h('span', { className: 'fl2-tgap' }),
+        h(Tap, { className: cx('ctl', muted && 'on'), label: muted ? 'Unmute' : 'Mute', onClick: function () { tap(5); setMuted(!muted); say(muted ? 'Sound on' : 'Muted'); } }, vol),
+        h(Tap, { className: cx('ctl', grid && 'on'), label: grid ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); setGrid(!grid); say(grid ? 'Focus view' : 'Speakers view'); } }, h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinejoin: 'round', 'aria-hidden': true }, grid ? h('rect', { x: 3.5, y: 4.5, width: 17, height: 15, rx: 2.5 }) : [h('rect', { key: 1, x: 3.5, y: 3.5, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 2, x: 13, y: 3.5, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 3, x: 3.5, y: 13, width: 7.5, height: 7.5, rx: 2 }), h('rect', { key: 4, x: 13, y: 13, width: 7.5, height: 7.5, rx: 2 })])),
+        h(Tap, { className: cx('ctl', hand && 'on'), label: hand ? 'Lower hand' : 'Raise hand', onClick: function () { tap(8); setHand(!hand); say(hand ? 'Hand lowered' : 'Hand raised \u00b7 host notified'); } }, h(F.Icon, { name: 'hand', size: 18 }))),
       chat && !panel ? h('div', { className: 'full-chat fl2-ui fl3-chat' }, msgs.concat(feedF.map(function (f) { return [f.n, f.t, false, f.id]; })).slice(-4).map(function (m, i) { return h('div', { key: m[3] || ('f' + m[1]), className: cx('im-msg', (m[0] === 'You' || m[3]) && 'chat-in') }, h(F.Avatar, { src: m[0] === 'You' ? AV.me : av(m[0]), name: m[0], initials: ini(m[0]), size: 26 }), h('p', null, h('b', null, m[0], m[2] ? h('i', { className: 'r-host' }, 'Host') : null), ' ', m[1])); })) : null,
       h('button', { type: 'button', className: 'fl2-cam fl2-ui', 'aria-label': swap ? 'Show screen share large' : 'Show host camera large', onClick: function () { tap(8); setSwap(!swap); } },
         h('div', { key: swap ? 'e' : 'h', className: 'fl2-cam-img', style: { backgroundImage: 'url(' + (swap ? EV.xmas.img : av('thao15 nguyen15')) + ')' } }),
@@ -7239,7 +7262,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('form', { className: 'fl2-input', onSubmit: send }, h('input', { value: draft, placeholder: 'Say something\u2026', onChange: function (e) { setDraft(e.target.value); } }), h('button', { type: 'submit', className: 'fl2-send', 'aria-label': 'Send', disabled: !draft.trim() }, h(F.Icon, { name: 'send', size: 16 })))) : null,
       tray ? h('div', { className: 'fl2-tray fl2-ui' }, ['\ud83d\udc4f', '\u2764\ufe0f', '\ud83d\ude02', '\ud83d\udd25', '\ud83c\udf84', '\ud83d\udc4d'].map(function (c) { return h('button', { key: c, type: 'button', onClick: function () { heart(c); } }, c); })) : null,
       h('div', { className: 'full-bar fl2-ui' },
-        h(Tap, { className: cx('ctl', muted && 'on'), label: muted ? 'Unmute' : 'Mute', onClick: function () { tap(5); setMuted(!muted); say(muted ? 'Sound on' : 'Muted'); } }, vol),
         h('span', { style: { flex: 1 } }),
         h('span', { style: { fontSize: 12, opacity: .75 } }, 'Quality'),
         ['Auto', '1080p', '720p', '480p'].map(function (t, i) { return h('button', { key: t, type: 'button', className: cx('q', i === q && 'on'), onClick: function () { tap(5); setQ(i); say('Quality: ' + t); } }, t); }),
