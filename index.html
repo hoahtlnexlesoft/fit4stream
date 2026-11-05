@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105063522"</script>
+<script>window.__BUILD__="20261105063601"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3832,18 +3832,27 @@ body.devmode .cf2{height:calc(min(346px,calc(100vw - 84px)) * 1.283 + 16px)!impo
 .cf2 .cf-foot .mini-cta{flex:none}
 body[data-phone=mini] .cf2 .cf-foot .live-since,body[data-phone=mini] .cf2 .cf-foot .soon{font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis}
 body[data-phone=mini] .cf2 .cf-foot .mini-cta{padding:0 12px;font-size:13px}
+
+.devcol{width:150px!important;align-self:center}
+.devcol .devsw{margin:6px 0 0}
+.devcol small{margin-top:12px}
+@media (max-width:1180px){.devcol{display:none!important}}
 </style>
 <div class="stagewrap">
-  <aside class="side" id="side" aria-label="Screens">
-    <h1>Fit4Stream · <span id="devname">iPhone 16 Pro Max</span></h1>
+  <aside class="side devcol" aria-label="Device">
+    <h1>Device</h1>
     <div class="devsw" role="radiogroup" aria-label="Device">
       <button type="button" data-phone="max" class="on">iPhone 16 Pro Max</button>
       <button type="button" data-phone="mini">iPhone 13 mini</button>
       <button type="button" data-phone="android">Android · Pixel 8</button>
     </div>
+    <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
+  </aside>
+  <aside class="side" id="side" aria-label="Screens">
+    <h1>Fit4Stream · <span id="devname">iPhone 16 Pro Max</span></h1>
+
     <p>Tap inside the phone like the real app. Swipe right on any screen with a back button to go back. Jump to any screen:</p>
     <div id="jump" style="display:flex;flex-direction:column;gap:2px"></div>
-    <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
   <div class="scaler" id="scaler">
     <div class="device" id="device">
@@ -6989,7 +6998,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (dev) return;
     var d = DEVS[cur], W = d.w + 28, H = d.h + 28;
     var w = land ? H : W, hgt = land ? W : H;
-    var side = window.innerWidth > 900 ? 268 : 0;
+    var side = window.innerWidth > 900 ? (window.innerWidth > 1180 ? 268 + 188 : 268) : 0;
     var k = Math.min((window.innerHeight - 32) / hgt, (window.innerWidth - 32 - side) / w, 1);
     scaler.style.width = w * k + 'px'; scaler.style.height = hgt * k + 'px';
     device.style.transform = 'scale(' + k + ')'; device.style.transformOrigin = 'top left';
