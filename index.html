@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105071305"</script>
+<script>window.__BUILD__="20261105071654"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3914,6 +3914,16 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
 @keyframes rcDraw{to{stroke-dashoffset:0}}
 .rc-ring{width:130px!important;height:130px!important;margin:-65px 0 0 -65px!important}
 @media (prefers-reduced-motion:reduce){.rc-badge-body,.rc-badge-glyph{animation:none!important;stroke-dashoffset:0}}
+
+/* feedback layer on phones: two compact floating pills, fully on-screen */
+@media (max-width:640px){
+  .rv .rv-pill{left:auto!important;right:12px!important;bottom:calc(var(--sb,10px) + 190px)!important;transform:none!important;align-items:flex-end!important}
+  .rv .rv-pill .rv-seg{flex-direction:column!important;gap:2px!important;padding:4px!important;border-radius:16px!important;background:rgba(28,26,36,.88)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);outline:1px solid rgba(255,255,255,.1)!important}
+  .rv .rv-pill .rv-seg button{width:36px!important;height:36px!important;padding:0!important;justify-content:center!important;border-radius:12px!important}
+  .rv .rv-rail{top:auto!important;right:12px!important;bottom:calc(var(--sb,10px) + 96px)!important;width:auto!important;height:auto!important;flex-direction:column!important;gap:2px;padding:4px!important;border:0!important;border-radius:16px!important;background:rgba(28,26,36,.88)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 24px rgba(0,0,0,.4)!important;outline:1px solid rgba(255,255,255,.1)}
+  .rv .rv-rail .rv-side{width:36px!important;height:36px!important;border-radius:12px!important;color:#e2e8f0!important;margin:0!important}
+}
+@media (max-width:640px){.rv .rv-rail,.rv .rv-pill .rv-seg{width:44px!important;box-sizing:border-box!important;align-items:center!important}}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
