@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105065839"</script>
+<script>window.__BUILD__="20261105070241"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3889,6 +3889,23 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
 .rc-amt sup{font-size:22px!important;top:-.9em!important;margin-right:2px;color:rgba(255,255,255,.75)}
 .rc-amt small{font-size:24px!important;color:rgba(255,255,255,.55)!important}
 .rc-when{font-size:13px!important;color:rgba(255,255,255,.5)!important;margin:6px 0 12px!important}
+
+/* receipt emblem: bigger, alive */
+.rc-emb{position:relative;display:flex;justify-content:center;margin:-6px 0 2px;--c:57,200,124}
+.rc-emb.st-pending{--c:244,164,37}.rc-emb.st-refunded{--c:57,202,224}.rc-emb.st-failed{--c:229,72,77}
+.rc-halo{position:absolute;left:50%;top:50%;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;background:radial-gradient(closest-side,rgba(var(--c),.32),rgba(var(--c),.08) 60%,transparent);animation:rcHalo 3.2s ease-in-out infinite}
+.rc-ring{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;box-shadow:0 0 0 1.5px rgba(var(--c),.45);animation:rcRing 2.6s cubic-bezier(.2,.7,.3,1) infinite}
+.rc-emb .f4-emblem{position:relative;z-index:1;animation:rcIn .7s cubic-bezier(.2,.9,.3,1.2) both,rcFloat 4s ease-in-out .7s infinite}
+.rc-emb .f4-emblem>g:last-of-type>*{transform-box:view-box;transform-origin:124px 92px;animation:rcPop .55s cubic-bezier(.2,1.4,.4,1) .45s both}
+.rc-emb .f4-emblem>circle{transform-box:fill-box;transform-origin:center;animation:rcTw 2.4s ease-in-out infinite}
+.rc-emb .f4-emblem>circle:nth-of-type(2){animation-delay:.6s}.rc-emb .f4-emblem>circle:nth-of-type(3){animation-delay:1.2s}.rc-emb .f4-emblem>circle:nth-of-type(4){animation-delay:1.8s}
+@keyframes rcHalo{50%{transform:scale(1.08);opacity:.75}}
+@keyframes rcRing{0%{transform:scale(.7);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+@keyframes rcIn{from{opacity:0;transform:translateY(10px) scale(.85)}to{opacity:1;transform:none}}
+@keyframes rcFloat{50%{transform:translateY(-4px)}}
+@keyframes rcPop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes rcTw{50%{transform:scale(1.8);opacity:.4}}
+@media (prefers-reduced-motion:reduce){.rc-halo,.rc-ring,.rc-emb .f4-emblem,.rc-emb .f4-emblem>*{animation:none!important}}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6469,7 +6486,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
         h('div', { className: 'rc-paper st-' + st.st },
           h('div', { className: 'rc-top' },
-            h('span', { className: 'rc-emb' }, h(F.Emblem, { name: st.st, width: 150, uid: 'rc' })),
+            h('span', { key: 'emb' + st.st, className: 'rc-emb st-' + st.st }, h('i', { className: 'rc-halo' }), h('i', { className: 'rc-ring' }), h(F.Emblem, { name: st.st, width: 200, uid: 'rc' })),
             h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
             h('b', { className: 'rc-amt' }, h('sup', null, '$'), money(o.total).slice(1).split('.')[0], h('small', null, '.' + money(o.total).split('.')[1])),
             h('span', { className: 'rc-when' }, o.when),
