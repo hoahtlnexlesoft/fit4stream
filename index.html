@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105082816"</script>
+<script>window.__BUILD__="20261105083833"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4006,7 +4006,6 @@ body[data-phone=fold] .homebar,body[data-phone=foldopen] .homebar{display:block!
   body:has(.rv-panel) .rv .rv-pill .rv-seg button{width:40px!important;height:40px!important;padding:0!important;justify-content:center!important;font-size:0!important;gap:0!important;border-radius:12px!important}
   body:has(.rv-panel) .rv .rv-pill .rv-seg button svg{width:18px;height:18px}
 }
-}
 
 /* player portrait: event info under the frame, chat fills the rest */
 .fs-info{position:absolute;left:0;right:0;z-index:5;top:calc(var(--st) + 56px + min(var(--dw,100vw),100vw) * .5625);padding:12px 14px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
@@ -4046,6 +4045,16 @@ body[data-phone=foldopen] .device:not(.land) .island{right:auto;left:calc(50% + 
 /* Surface Duo: the app runs on the left screen; the right screen shows the home wallpaper */
 body[data-phone=foldopen] .screenhost .app{right:calc(50% + 14px)!important;width:auto!important}
 body[data-phone=foldopen] .screenhost::before{content:'';position:absolute;z-index:0;top:0;bottom:0;left:calc(50% + 14px);right:0;background:radial-gradient(70% 60% at 60% 40%,rgba(165,122,216,.35),transparent 70%),radial-gradient(60% 50% at 30% 80%,rgba(57,202,224,.22),transparent 70%),linear-gradient(160deg,#1b1530,#0e0d14)}
+
+/* Surface Duo: second screen runs its own app instance (dual-screen: browse left, watch right) */
+#duo-pane{display:none}
+body[data-phone=foldopen] #duo-pane{display:block;position:absolute;z-index:65;top:12px;bottom:12px;right:12px;left:calc(50% + 14px);width:calc(var(--dw) / 2 - 14px);height:var(--dh);border:0;background:#0e0d14;border-radius:0 16px 16px 0}
+body.pane2 #pg-fab,body.pane2 #pg-sheet,body.pane2 .rv-pill,body.pane2 #upd-bar{display:none!important}
+
+@media (max-height:780px){
+  body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail .fs-rb-t{display:none!important}
+  body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail{gap:8px!important}
+}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7226,6 +7235,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 <script>
 (function(){
   var coarse = window.matchMedia && matchMedia('(pointer:coarse)').matches; var dev = (coarse || ('ontouchstart' in window)) && Math.min(screen.width, screen.height) < 600;
+  var pane2 = /[?&]pane2\b/.test(location.search); window.__PANE2__ = pane2; if (pane2) { dev = true; document.body.classList.add('pane2'); document.documentElement.style.setProperty('--st', '28px'); document.documentElement.style.setProperty('--sb', '16px'); }
   window.__FRAME__ = !dev;
   if (dev) document.body.classList.add('devmode');
   if (dev && (navigator.standalone || matchMedia('(display-mode: standalone)').matches)) {
@@ -7239,12 +7249,21 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     cur = k; var d = DEVS[k]; var r = document.documentElement;
     r.style.setProperty('--dw', d.w + 'px'); r.style.setProperty('--dh', d.h + 'px');
     if (!dev) { r.style.setProperty('--st', d.st + 'px'); r.style.setProperty('--sb', d.sb + 'px'); }
-    document.body.dataset.phone = k;
+    if (!pane2) document.body.dataset.phone = k;
     var n = document.getElementById('devname'); if (n) n.textContent = d.name;
     var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (/android|fold/.test(k) ? ' dp' : ' pt');
     Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.classList.toggle('on', b.dataset.phone === k); });
-    try { localStorage.setItem('f4-dev', k); } catch (e) {}
+    if (!pane2) try { localStorage.setItem('f4-dev', k); } catch (e) {}
     fit(); window.dispatchEvent(new Event('resize'));
+    duo(k === 'foldopen');
+  }
+  function duo(on){
+    if (dev) return; var host = document.querySelector('.device'); var f = document.getElementById('duo-pane');
+    if (!on) { if (f) f.remove(); return; }
+    if (f) return;
+    f = document.createElement('iframe'); f.id = 'duo-pane'; f.title = 'Second screen';
+    var u = location.href.split('#')[0]; f.src = u + (u.indexOf('?') < 0 ? '?' : '&') + 'pane2=1#player';
+    host.appendChild(f);
   }
   Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.onclick = function () { applyDev(b.dataset.phone); }; });
   function fit(){
@@ -7274,7 +7293,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var sel=null;
   function mark(){ var h=location.hash, k; if(sel&&(sel.h===null||sel.h===h)) k=sel.k; else { sel=null; k=(h||'#welcome').slice(1); } Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
   setInterval(mark, 400); mark();
-  if (dev) {
+  if (dev && !pane2) {
     var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'pg-fab'; fab.setAttribute('aria-label', 'Jump to a screen');
     fab.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>';
     var pg = document.createElement('div'); pg.id = 'pg-sheet'; pg.innerHTML = '<div class="pg-scrim"></div><div class="pg-panel" role="dialog" aria-label="Screens"><div class="pg-grab"></div><div class="pg-head"><b>Screens</b><button type="button" class="pg-x" aria-label="Close">\u2715</button></div><div class="pg-list"></div></div>';
@@ -7312,7 +7331,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 </script>
 <script>
 /* Feedback layer: only on the shared Vercel site (and local file tests), never inside the Claude preview */
-(function(){ var h=location.hostname; if(!(/vercel\.app$/.test(h) || location.protocol==='file:')) return;
+(function(){ var h=location.hostname; if(/[?&]pane2\b/.test(location.search)) return; if(!(/vercel\.app$/.test(h) || location.protocol==='file:')) return;
   function add(src,d){ var s=document.createElement('script'); s.src=src; if(d) s.defer=true; s.async=false; document.body.appendChild(s); }
   add('./review/config.js?v=2'); add('./review/review.js?v=2', true); })();
 </script>
