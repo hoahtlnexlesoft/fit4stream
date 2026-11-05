@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105094337"</script>
+<script>window.__BUILD__="20261105094440"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4017,7 +4017,7 @@ body[data-phone=fold] .homebar,body[data-phone=foldopen] .homebar{display:block!
 .fs-info-host small{font-size:11.5px;color:rgba(255,255,255,.5)}
 .fs-info-fol{flex:none;height:32px;padding:0 14px;border:0;border-radius:999px;display:inline-flex;align-items:center;gap:5px;font:inherit;font-size:13px;font-weight:700;background:#F4A425;color:#1b1306;cursor:pointer}
 .fs-info-fol.on{background:rgba(255,255,255,.1);color:#fff}
-.player.fs:not(.is-grid):not(.is-state) .fs-bottom{top:calc(var(--st) + 56px + min(var(--dw,100vw),100vw) * .5625 + 86px);display:flex;flex-direction:column}
+.player.fs:not(.is-grid):not(.is-state) .fs-bottom{top:calc(var(--st) + 56px + min(var(--dw,100vw),100vw) * .5625 + 66px);display:flex;flex-direction:column}
 .player.fs:not(.is-grid):not(.is-state) .fs-chat{flex:1;min-height:0;height:auto!important;max-height:none!important;padding-top:10px}
 .player.fs:not(.is-grid):not(.is-state) .fs-rail{bottom:calc(var(--sb) + 76px)!important}
 .player.fs.ui-off .fs-info{opacity:1}
@@ -4096,7 +4096,7 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:96px!important;width:aut
 body[data-phone=foldopen] .app:has(.tabbar) .stage .top-blur{left:0!important;right:0!important;width:auto!important}
 
 /* --- live player: video + info on the left, chat column on the right --- */
-body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state){--cw:320px;--vw:calc(var(--dw) - var(--cw));--vh:calc(var(--vw) * .5625);--vt:calc(var(--st) + 44px + (var(--dh) - var(--st) - 44px - var(--sb) - var(--vh) - 87px) / 2)}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state){--cw:320px;--vw:calc(var(--dw) - var(--cw));--vh:calc(var(--vw) * .5625);--vt:calc(var(--st) + 44px + (var(--dh) - var(--st) - 44px - var(--sb) - var(--vh) - 66px) / 2)}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-media{right:var(--cw)!important;width:auto!important}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-frame{left:0!important;right:0!important;width:auto!important;top:var(--vt)!important;height:var(--vh)!important;bottom:auto!important}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-info{top:calc(var(--vt) + var(--vh))!important;right:var(--cw)!important;border-bottom:0!important}
@@ -4159,6 +4159,17 @@ body[data-phone=foldopen] .screen:not(.player){padding-left:max(0px,calc((100% -
 .ev16:not(.wide) .cf3-time{right:7px;bottom:7px;height:18px;font-size:10px;padding:0 6px}
 .ev16:not(.wide) .cf3-play{width:34px;height:34px;margin:-17px 0 0 -17px}
 .ev16:not(.wide) .cf3-play svg{width:14px;height:14px}
+
+/* player info strip: one tidy row - avatar | title + host · followers | Follow */
+.fs-info.fs-info2{display:flex!important;align-items:center;gap:11px;padding:12px 14px!important;border-bottom:1px solid rgba(255,255,255,.06)}
+.fs-info2 .fs-info-av{flex:none;border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
+.fs-info2 .fs-info-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.fs-info2 .fs-info-txt>b{font-size:15.5px!important;line-height:20px!important;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:0!important}
+.fs-info2 .fs-info-host{display:flex!important;align-items:center;gap:6px;min-width:0;font-size:12.5px;flex-direction:row!important}
+.fs-info2 .fs-info-host em{font-style:normal;font-weight:600;color:#F6C26B!important;font-size:12.5px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-info2 .fs-info-host i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.35);flex:none}
+.fs-info2 .fs-info-host small{font-size:12.5px!important;color:rgba(255,255,255,.55);white-space:nowrap}
+.fs-info2 .fs-info-fol{height:32px!important;padding:0 15px!important;font-size:13px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7048,11 +7059,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         live ? h(Tap, { className: 'fs-tb', label: st.muted ? 'Unmute' : 'Mute', onClick: function () { tap(6); set({ muted: !st.muted }); } }, muteIc) : null,
         live ? h(Tap, { className: 'fs-tb', label: st.layout === 'grid' ? 'Focus view' : 'Speakers view', onClick: function () { tap(6); set({ layout: st.layout === 'grid' ? 'focus' : 'grid' }); } }, gridIc) : null,
         live && !st.onstage ? h(Tap, { className: cx('fs-tb', st.hand && 'on'), label: st.hand ? 'Lower hand' : 'Raise hand', onClick: raiseHand }, h(F.Icon, { name: 'hand', size: 19 })) : null),
-      live && st.layout !== 'grid' ? h('div', { className: 'fs-info' },
-        h('b', null, 'Danang Christmas Market 2026'),
-        h('div', { className: 'fs-info-r' },
-          h(Tap, { className: 'fs-info-host', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } }, h(F.Avatar, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', size: 28 }), h('span', null, h('em', null, 'thao15 nguyen15'), h('small', null, 'Concerts \u00b7 12.4K followers'))),
-          h(Tap, { className: cx('fs-info-fol', st.follow && 'on'), onClick: function () { tap(10); set({ follow: !st.follow }); p.nav.toast(st.follow ? 'Unfollowed thao15 nguyen15' : 'Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : null, st.follow ? 'Following' : 'Follow'))) : null,
+      live && st.layout !== 'grid' ? h('div', { className: 'fs-info fs-info2' },
+        h(Tap, { className: 'fs-info-av', label: 'thao15 nguyen15', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } }, h(F.Avatar, { src: av('thao15 nguyen15'), name: 'thao15 nguyen15', initials: 'TH', size: 40 })),
+        h('div', { className: 'fs-info-txt' },
+          h('b', null, 'Danang Christmas Market 2026'),
+          h(Tap, { className: 'fs-info-host', go: function () { p.nav.push('organizer:' + encodeURIComponent('thao15 nguyen15')); } }, h('em', null, 'thao15 nguyen15'), h('i'), h('small', null, '12.4K followers'))),
+        h(Tap, { className: cx('fs-info-fol', st.follow && 'on'), onClick: function () { tap(10); set({ follow: !st.follow }); p.nav.toast(st.follow ? 'Unfollowed thao15 nguyen15' : 'Following thao15 nguyen15'); } }, st.follow ? h(F.Icon, { name: 'check', size: 14 }) : null, st.follow ? 'Following' : 'Follow')) : null,
       live && st.layout !== 'grid' ? h('div', { className: 'fs-sub' },
         h('div', { className: 'fs-pipwrap' },
           h('button', { type: 'button', className: 'fs-pip fs-pip-v', 'aria-label': bigIsScreen ? 'Show host camera large' : 'Show event large', onClick: function () { tap(8); set({ swap: !st.swap }); } },
