@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105070946"</script>
+<script>window.__BUILD__="20261105071305"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3906,6 +3906,14 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
 @keyframes rcPop{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes rcTw{50%{transform:scale(1.8);opacity:.4}}
 @media (prefers-reduced-motion:reduce){.rc-halo,.rc-ring,.rc-emb .f4-emblem,.rc-emb .f4-emblem>*{animation:none!important}}
+
+.rc-emb .rc-badge{width:132px!important;height:132px!important;max-width:none!important;position:relative;z-index:1;animation:rcIn .7s cubic-bezier(.2,.9,.3,1.2) both,rcFloat 4s ease-in-out .7s infinite;margin:6px 0 8px}
+.rc-badge-body{transform-origin:60px 60px;animation:rcSpin 24s linear infinite}
+.rc-badge-glyph{stroke-dasharray:100;stroke-dashoffset:100;animation:rcDraw .6s cubic-bezier(.3,.7,.3,1) .45s forwards}
+@keyframes rcSpin{to{transform:rotate(360deg)}}
+@keyframes rcDraw{to{stroke-dashoffset:0}}
+.rc-ring{width:130px!important;height:130px!important;margin:-65px 0 0 -65px!important}
+@media (prefers-reduced-motion:reduce){.rc-badge-body,.rc-badge-glyph{animation:none!important;stroke-dashoffset:0}}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6482,6 +6490,27 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('path', { d: sealPath(40, 40, 34, 14, 2.6), fill: 'url(#' + id + 'h)' }),
         h('path', { d: c[2], fill: 'none', stroke: '#fff', strokeWidth: 4.5, strokeLinecap: 'round', strokeLinejoin: 'round' })));
   }
+  function RcBadge(p) {
+    var G = { paid: ['M38 61l14 14 30-32', '#7FF0B2', '#1FB866'], pending: ['M60 38v24l14 9', '#FFE08A', '#F09A1A'], refunded: ['M38 61l14 14 30-32', '#8BEAF7', '#1FA9C4'], failed: ['M44 44l32 32M76 44L44 76', '#FF9C95', '#E03A41'] }[p.st] || ['M38 61l14 14 30-32', '#7FF0B2', '#1FB866'];
+    var id = 'rcb' + p.st, N = 24, R = 52, d = 4.2, pts = [], i;
+    for (i = 0; i < N; i++) { var a = i / N * Math.PI * 2 - Math.PI / 2, rr = i % 2 ? R - d : R; pts.push([60 + Math.cos(a) * rr, 60 + Math.sin(a) * rr]); }
+    var path = 'M' + ((pts[0][0] + pts[N - 1][0]) / 2).toFixed(2) + ' ' + ((pts[0][1] + pts[N - 1][1]) / 2).toFixed(2);
+    for (i = 0; i < N; i++) { var a0 = pts[i], a1 = pts[(i + 1) % N]; path += ' Q' + a0[0].toFixed(2) + ' ' + a0[1].toFixed(2) + ' ' + ((a0[0] + a1[0]) / 2).toFixed(2) + ' ' + ((a0[1] + a1[1]) / 2).toFixed(2); }
+    path += 'Z';
+    return h('svg', { className: 'rc-badge', viewBox: '0 0 120 120', style: { overflow: 'visible' }, width: 132, height: 132, 'aria-hidden': true },
+      h('defs', null,
+        h('linearGradient', { id: id + 'f', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#3d2c5a' }), h('stop', { offset: .55, stopColor: '#2a2140' }), h('stop', { offset: 1, stopColor: '#1c1928' })),
+        h('linearGradient', { id: id + 'e', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: '#39CAE0' }), h('stop', { offset: .35, stopColor: '#A57AD8' }), h('stop', { offset: .7, stopColor: '#E74645' }), h('stop', { offset: 1, stopColor: '#FACD60' })),
+        h('linearGradient', { id: id + 'g', x1: 0, y1: 0, x2: 1, y2: 1 }, h('stop', { offset: 0, stopColor: G[1] }), h('stop', { offset: 1, stopColor: G[2] })),
+        h('linearGradient', { id: id + 's', x1: 0, y1: 0, x2: 0, y2: 1 }, h('stop', { offset: 0, stopColor: '#fff', stopOpacity: .14 }), h('stop', { offset: .5, stopColor: '#fff', stopOpacity: 0 })),
+        h('filter', { id: id + 'd', x: '-60%', y: '-60%', width: '220%', height: '220%' }, h('feDropShadow', { dx: 0, dy: 8, stdDeviation: 7, floodColor: '#000', floodOpacity: .5 })),
+        h('filter', { id: id + 'l', x: '-50%', y: '-50%', width: '200%', height: '200%' }, h('feDropShadow', { dx: 0, dy: 0, stdDeviation: 4, floodColor: G[2], floodOpacity: .7 }))),
+      h('g', { filter: 'url(#' + id + 'd)', className: 'rc-badge-body' },
+        h('path', { d: path, fill: 'url(#' + id + 'f)', stroke: 'url(#' + id + 'e)', strokeWidth: 2.4 }),
+        h('path', { d: path, fill: 'url(#' + id + 's)' }),
+        h('circle', { cx: 60, cy: 60, r: 38, fill: 'none', stroke: 'rgba(255,255,255,.16)', strokeWidth: 1.2, strokeDasharray: '2 4' })),
+      h('path', { className: 'rc-badge-glyph', d: G[0], fill: 'none', stroke: 'url(#' + id + 'g)', strokeWidth: 9, strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'url(#' + id + 'l)', pathLength: 100 }));
+  }
   function Receipt(p) {
     var parts = (p.param || '').split('|'), id = ORDERS[parts[0]] ? parts[0] : 'F4S-261103-0412', o = ORDERS[id], flag = parts[1] || '';
     var s = useState({ ref: flag === 'refund', st: flag === 'pending' ? 'pending' : o.st }), st = s[0], set = function (x) { s[1](function (y) { return Object.assign({}, y, x); }); };
@@ -6492,7 +6521,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
         h('div', { className: 'rc-paper st-' + st.st },
           h('div', { className: 'rc-top' },
-            h('span', { key: 'emb' + st.st, className: 'rc-emb st-' + st.st }, h('i', { className: 'rc-halo' }), h('i', { className: 'rc-ring' }), h(F.Emblem, { name: st.st, width: 200, uid: 'rc' })),
+            h('span', { key: 'emb' + st.st, className: 'rc-emb st-' + st.st }, h('i', { className: 'rc-halo' }), h('i', { className: 'rc-ring' }), h(RcBadge, { st: st.st })),
             h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
             h('b', { className: 'rc-amt' }, h('sup', null, '$'), money(o.total).slice(1).split('.')[0], h('small', null, '.' + money(o.total).split('.')[1])),
             h('span', { className: 'rc-when' }, o.when),
