@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261104151131"</script>
+<script>window.__BUILD__="20261105015719"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3614,6 +3614,58 @@ input,textarea{caret-color:#F4A425}
 .cs-comp{padding:8px 14px max(12px,calc(var(--sb) - 6px));border-top:0}
 .cs-in{height:46px;padding:0 5px 0 16px}
 .cs-send.heart{background:transparent;color:#E5484D}
+
+.story-fol{position:absolute;right:-1px;bottom:-1px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#F4A425;color:#1b1306;box-shadow:0 0 0 3px #0f0e14;cursor:pointer;transition:background .2s,transform .15s}
+.story-fol:active{transform:scale(.88)}
+.story-fol.on{background:#39C87C;color:#0c1a12}
+
+/* ===== Search (discover + results) ===== */
+.sx-bar{padding:4px 16px 6px}
+.sx-in{display:flex;align-items:center;gap:10px;height:50px;padding:0 8px 0 16px;border-radius:16px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);color:rgba(255,255,255,.55);transition:box-shadow .2s}
+.sx-in:focus-within{box-shadow:inset 0 0 0 1.5px #F4A425}
+.sx-in input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:16px;color:#fff;-webkit-appearance:none;appearance:none}
+.sx-in input::-webkit-search-cancel-button{display:none}
+.sx-in input::placeholder{color:rgba(255,255,255,.4)}
+.sx-x{flex:none;width:26px;height:26px;border:0;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}
+.sx-sec{padding:18px 16px 0}
+.sx-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sx-h h3{margin:0;font-size:15px;font-weight:800;color:#fff;letter-spacing:-.1px}
+.sx-clear{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:#F6C26B;padding:4px 0;cursor:pointer}
+.sx-recent{display:flex;flex-wrap:wrap;gap:8px}
+.sx-rc{display:inline-flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.sx-rc-b{display:inline-flex;align-items:center;gap:7px;border:0;background:none;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);padding:8px 4px 8px 12px;cursor:pointer}
+.sx-rc-b svg{color:rgba(255,255,255,.4)}
+.sx-rc-x{border:0;background:none;color:rgba(255,255,255,.4);width:28px;height:30px;display:grid;place-items:center;cursor:pointer}
+.sx-trend{list-style:none;margin:0;padding:0;border-radius:16px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);overflow:hidden}
+.sx-trend li+li{border-top:1px solid rgba(255,255,255,.05)}
+.sx-tr{width:100%;display:flex;align-items:center;gap:14px;border:0;background:none;font:inherit;text-align:left;padding:13px 14px;color:#fff;cursor:pointer}
+.sx-tr em{font-style:normal;width:18px;font-size:14px;font-weight:800;color:rgba(255,255,255,.35)}
+.sx-tr li:first-child em{color:#F6C26B}
+.sx-trend li:nth-child(-n+3) .sx-tr em{color:#F6C26B}
+.sx-tr span{flex:1;font-size:14.5px;font-weight:600}
+.sx-up{font-style:normal;font-size:14px;font-weight:800;color:#7FE0A8}
+.sx-new{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.05em;padding:2px 6px;border-radius:5px;background:rgba(57,202,224,.16);color:#7AD9EA}
+.sx-cats{display:flex;flex-wrap:wrap;gap:8px}
+.sx-cat{position:relative;display:inline-flex;align-items:center;gap:7px;border:0;font:inherit;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.85);padding:9px 13px;border-radius:12px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);cursor:pointer}
+.sx-cat svg{color:#D6BCFB}
+.sx-dot{width:6px;height:6px;border-radius:50%;background:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.2)}
+.sx-tabs{display:flex;gap:8px;padding:10px 16px 0;overflow-x:auto;scrollbar-width:none}
+.sx-tabs::-webkit-scrollbar{display:none}
+.sx-tab{flex:none;display:inline-flex;align-items:center;gap:6px;border:0;font:inherit;font-size:13.5px;font-weight:700;padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);cursor:pointer}
+.sx-tab em{font-style:normal;font-size:11px;font-weight:700;color:rgba(255,255,255,.45)}
+.sx-tab.on{background:#F4A425;color:#1b1306}.sx-tab.on em{color:rgba(27,19,6,.6)}
+.sx-list{display:flex;flex-direction:column;border-radius:16px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);overflow:hidden}
+.sx-row{display:flex;align-items:center;gap:12px;border:0;background:none;font:inherit;text-align:left;padding:10px 12px;color:rgba(255,255,255,.35);cursor:pointer;width:100%}
+.sx-row+.sx-row{border-top:1px solid rgba(255,255,255,.05)}
+.sx-th{flex:none;width:56px;height:56px;border-radius:12px;background-size:cover;background-position:center}
+.sx-cic{flex:none;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(165,122,216,.16);color:#D6BCFB}
+.sx-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.sx-t b{font-size:14.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sx-t span{font-size:12.5px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sx-t mark{background:none;color:#F6C26B}
+.sx-live{display:inline-flex;align-items:center;gap:5px;color:#FF7B7A!important;font-weight:700}
+.sx-live i{width:6px;height:6px;border-radius:50%;background:#E5484D}
+.sx-none{padding-top:30px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5064,12 +5116,19 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     };
   }
 
+  function FollowStories(p) {
+    var a = useState({}), f = a[0], setF = a[1];
+    return h('div', { className: 'stories' }, p.names.map(function (n, i) {
+      return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), following: !!f[n], onFollow: function () { tap(8); var o = Object.assign({}, f); o[n] = !o[n]; setF(o); p.nav.toast && p.nav.toast(o[n] ? 'Following ' + n : 'Unfollowed ' + n); }, go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } });
+    }));
+  }
   function Story(p) {
     return h(Tap, { className: 'story', go: p.go, label: p.name },
       h('span', { className: cx('story-ring', p.live && 'live', p.me && 'me') },
         h(F.Avatar, { src: p.src, name: p.name, initials: p.initials, size: 64, seed: p.seed }),
         p.me ? h('span', { className: 'story-plus' }, h(F.Icon, { name: 'plus', size: 12, stroke: 3 })) : null,
-        p.live ? h('span', { className: 'story-live' }, 'LIVE') : null),
+        p.live ? h('span', { className: 'story-live' }, 'LIVE') : null,
+        p.onFollow ? h('span', { className: cx('story-fol', p.following && 'on'), role: 'button', 'aria-label': (p.following ? 'Unfollow ' : 'Follow ') + p.name, 'aria-pressed': !!p.following, onClick: function (e) { e.stopPropagation(); e.preventDefault(); p.onFollow(); } }, h(F.Icon, { name: p.following ? 'check' : 'plus', size: 12, stroke: 3 })) : null),
       h('span', { className: 'story-name' }, p.name));
   }
 
@@ -5607,8 +5666,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h('div', { className: 'fade-in he' },
       h('div', { className: 'pad' }, h('div', { className: 'he-card' },
         h(F.EmptyState, { art: 'calendar', title: 'No events yet', body: 'There’s nothing scheduled right now. Follow channels and we’ll let you know when something goes live.', action: 'Browse categories', onAction: function () { p.nav.push('categories'); } }))),
-      h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Channels to follow', action: 'View all' })),
-        h('div', { className: 'stories' }, CHANNELS.slice(0, 6).map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }); }))),
+      h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Channels to follow', action: 'View all', to: 'channels' })),
+        h(FollowStories, { names: CHANNELS.slice(0, 6), nav: p.nav })),
       h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Trending' })),
         h(SecEmpty, { art: 'live', title: 'Nothing trending yet', body: 'Popular events will show up here.', action: 'See upcoming', onAction: function () { p.nav.tab('upcoming'); } })),
       h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Concerts and Performances' })),
@@ -5702,32 +5761,44 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function Search(p) {
     var q = useState(''), query = q[0], setQ = q[1];
     var t = useState({ events: 1, channels: 2, categories: 3 }[p.param] || 0), tab = t[0], setTab = t[1];
-    var evs = [EV.xmas], chs = CHANNELS.concat(['Hoang Minh', 'Linh Vo', 'Quang Le', 'Mai Pham', 'Duc Tran', 'Bao Ngoc', 'Khoa Dang', 'Vy Nguyen', 'Tuan Ho', 'Phuong Do', 'Long Bui', 'Ha Trinh', 'Nam Vu']);
-    function m(s) { return !query || s.toLowerCase().indexOf(query.toLowerCase()) >= 0; }
-    var fe = evs.filter(function (e) { return m(e.title) || m(e.org); }), fc = chs.filter(m), fk = CATS.filter(function (c) { return m(c[0]); });
-    var tabs = [{ label: 'All', count: fe.length + fc.length + fk.length }, { label: 'Events', count: fe.length, icon: 'radio' }, { label: 'Channels', count: fc.length, icon: 'monitor' }, { label: 'Categories', count: fk.length, icon: 'grid' }];
-    return h('div', { className: 'screen tabscreen' },
+    var rc = useState(function () { try { var v = JSON.parse(localStorage.getItem('f4-recent') || 'null'); if (v) return v; } catch (e) {} return ['christmas market', 'Marc John', 'acoustic']; }), recent = rc[0], setRecent = rc[1];
+    var inRef = useRef(null);
+    function saveRecent(list) { setRecent(list); try { localStorage.setItem('f4-recent', JSON.stringify(list)); } catch (e) {} }
+    function commit(v) { v = (v || query).trim(); if (!v) return; saveRecent([v].concat(recent.filter(function (x) { return x.toLowerCase() !== v.toLowerCase(); })).slice(0, 6)); }
+    function run(v) { tap(5); setQ(v); setTab(0); commit(v); }
+    var evs = [EV.xmas, EV.gig, EV.seo, EV.payout], chs = CHANNELS.concat(['Hoang Minh', 'Linh Vo', 'Quang Le', 'Mai Pham', 'Duc Tran', 'Bao Ngoc', 'Khoa Dang', 'Vy Nguyen', 'Tuan Ho', 'Phuong Do', 'Long Bui', 'Ha Trinh', 'Nam Vu']);
+    var ql = query.trim().toLowerCase();
+    function m(s) { return s.toLowerCase().indexOf(ql) >= 0; }
+    function hl(s) { if (!ql) return s; var i = s.toLowerCase().indexOf(ql); if (i < 0) return s; return [s.slice(0, i), h('mark', { key: 'm' }, s.slice(i, i + ql.length)), s.slice(i + ql.length)]; }
+    var fe = ql ? evs.filter(function (e) { return m(e.title) || m(e.org) || m(e.cat); }) : [], fc = ql ? chs.filter(m) : [], fk = ql ? CATS.filter(function (c) { return m(c[0]); }) : [];
+    function openEv(e) { commit(); if (e.status === 'live' && p.nav.authed && p.nav.registered !== false) return p.nav.push('player'); p.nav.push('detail:' + e.id); }
+    function evMeta(e) { return e.status === 'live' ? h('span', { className: 'sx-live' }, h('i'), 'LIVE · 2.4K watching') : h('span', null, (e.status === 'ended' ? 'Ended' : 'Upcoming') + ' · ' + e.price); }
+    function EvRow(e) { return h(Tap, { key: e.id, className: 'sx-row', go: function () { openEv(e); } }, h('span', { className: 'sx-th', style: { backgroundImage: 'url(' + e.img + ')' } }), h('div', { className: 'sx-t' }, h('b', null, hl(e.title)), h('span', null, 'by ', hl(e.org)), evMeta(e)), h(F.Icon, { name: 'chevronRight', size: 18 })); }
+    function ChRow(n, i) { return h(Tap, { key: n, className: 'sx-row', go: function () { commit(); p.nav.push('organizer:' + encodeURIComponent(n)); } }, h(F.Avatar, { src: av(n), name: n, initials: ini(n), size: 48, seed: i }), h('div', { className: 'sx-t' }, h('b', null, hl(n)), h('span', null, 'Channel · ' + (i < 3 ? ['12.4K', '8.1K', '5.6K'][i] : (i + 1) * 37) + ' followers')), h(F.Icon, { name: 'chevronRight', size: 18 })); }
+    function CatRow(c) { return h(Tap, { key: c[0], className: 'sx-row', go: function () { commit(); p.nav.push('list:' + c[0]); } }, h('span', { className: 'sx-cic' }, h(F.Icon, { name: c[2], size: 20 })), h('div', { className: 'sx-t' }, h('b', null, hl(c[0])), h('span', null, 'Category · ' + (c[1] ? c[1] + ' live now' : 'Coming soon'))), h(F.Icon, { name: 'chevronRight', size: 18 })); }
+    var total = fe.length + fc.length + fk.length;
+    var tabs = [['All', total], ['Events', fe.length], ['Channels', fc.length], ['Categories', fk.length]];
+    var TREND = [['Danang Christmas Market', 'up'], ['SEO marketing', 'up'], ['Acoustic night', 'new'], ['Talk shows', ''], ['thao15 nguyen15', '']];
+    var discover = h('div', { className: 'sx-disc' },
+      recent.length ? h('section', { className: 'sx-sec' }, h('div', { className: 'sx-h' }, h('h3', null, 'Recent'), h(Tap, { className: 'sx-clear', go: function () { saveRecent([]); } }, 'Clear')),
+        h('div', { className: 'sx-recent' }, recent.map(function (r) { return h('div', { key: r, className: 'sx-rc' }, h(Tap, { className: 'sx-rc-b', go: function () { run(r); } }, h(F.Icon, { name: 'clock', size: 15 }), r), h('button', { type: 'button', className: 'sx-rc-x', 'aria-label': 'Remove ' + r, onClick: function () { saveRecent(recent.filter(function (x) { return x !== r; })); } }, h(F.Icon, { name: 'x', size: 13 }))); }))) : null,
+      h('section', { className: 'sx-sec' }, h('div', { className: 'sx-h' }, h('h3', null, 'Trending searches')),
+        h('ol', { className: 'sx-trend' }, TREND.map(function (x, i) { return h('li', { key: x[0] }, h(Tap, { className: 'sx-tr', go: function () { run(x[0]); } }, h('em', null, i + 1), h('span', null, x[0]), x[1] === 'up' ? h('i', { className: 'sx-up' }, '↗') : x[1] === 'new' ? h('i', { className: 'sx-new' }, 'NEW') : null)); }))),
+      h('section', { className: 'sx-sec' }, h('div', { className: 'sx-h' }, h('h3', null, 'Browse categories')),
+        h('div', { className: 'sx-cats' }, CATS.map(function (c) { return h(Tap, { key: c[0], className: 'sx-cat', go: function () { p.nav.push('list:' + c[0]); } }, h(F.Icon, { name: c[2], size: 16 }), SHORT[c[0]] || c[0], c[1] ? h('i', { className: 'sx-dot' }) : null); }))));
+    var results = !total ? h('div', { className: 'sx-none' }, h(F.EmptyState, { art: 'search', title: 'No results for “' + query.trim() + '”', body: 'Check the spelling or try a channel name, event or category.' }))
+      : h('div', { className: 'sx-res' },
+        h('div', { className: 'sx-tabs', role: 'tablist' }, tabs.map(function (x, i) { return x[1] || i === 0 ? h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': tab === i, className: cx('sx-tab', tab === i && 'on'), onClick: function () { tap(5); setTab(i); } }, x[0], h('em', null, x[1])) : null; })),
+        (tab === 0 || tab === 1) && fe.length ? h('section', { className: 'sx-sec' }, tab === 0 ? h('div', { className: 'sx-h' }, h('h3', null, 'Events')) : null, h('div', { className: 'sx-list' }, (tab === 0 ? fe.slice(0, 3) : fe).map(EvRow))) : null,
+        (tab === 0 || tab === 2) && fc.length ? h('section', { className: 'sx-sec' }, tab === 0 ? h('div', { className: 'sx-h' }, h('h3', null, 'Channels'), fc.length > 3 ? h(Tap, { className: 'sx-clear', go: function () { setTab(2); } }, 'See all ' + fc.length) : null) : null, h('div', { className: 'sx-list' }, (tab === 0 ? fc.slice(0, 3) : fc).map(ChRow))) : null,
+        (tab === 0 || tab === 3) && fk.length ? h('section', { className: 'sx-sec' }, tab === 0 ? h('div', { className: 'sx-h' }, h('h3', null, 'Categories')) : null, h('div', { className: 'sx-list' }, (tab === 0 ? fk.slice(0, 3) : fk).map(CatRow))) : null);
+    return h('div', { className: 'screen tabscreen sx' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Search' }),
-      h('div', { className: 'pad col gap12' },
-        h('label', { className: 'f4-search big' }, h(F.Icon, { name: 'search', size: 20 }), h('input', { id: 'search-q', type: 'search', autoFocus: true, placeholder: 'Search events, channels, categories...', value: query, onChange: function (e) { setQ(e.target.value); } }), query ? h('button', { type: 'button', className: 'clear-x', 'aria-label': 'Clear', onClick: function () { setQ(''); } }, h(F.Icon, { name: 'x', size: 16 })) : null),
-        h('p', { className: 'muted small', style: { margin: 0 } }, (query ? 'Results for “' + query + '”' : 'Showing all content') + ' — ' + fe.length + ' event, ' + fc.length + ' channels, ' + fk.length + ' categories'),
-        h('div', { onClick: function (e) { var b = e.target.closest('.f4-seg-item'); if (b) { tap(5); setTab(Array.prototype.indexOf.call(b.parentNode.children, b)); } } }, h(F.SegmentedTabs, { items: tabs, value: tab, scroll: true }))),
-      (tab === 0 || tab === 1) && fe.length ? h('section', { className: 'sec pad' }, h('p', { className: 'overline' }, 'Events'), h('div', { className: 'col gap12', style: { marginTop: 10 } }, fe.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav, wide: true }); }))) : null,
-      (tab === 0 || tab === 2) && fc.length ? h('section', { className: 'sec sr-sec' },
-        h('div', { className: 'pad sr-h' }, h('p', { className: 'overline' }, 'Channels'), tab === 0 && fc.length > 6 ? h(Tap, { className: 'f4-link', onClick: function () { setTab(2); } }, 'See all ' + fc.length) : null),
-        tab === 0 ? h('div', { className: 'stories' }, fc.slice(0, 10).map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }); }))
-          : h('div', { className: 'pad sr-list' }, fc.map(function (n, i) {
-            return h(Tap, { key: n, className: 'sr-row', go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }, h(F.Avatar, { src: av(n), name: n, initials: ini(n), size: 44, seed: i }), h('div', { className: 'sr-t' }, h('b', null, n), h('span', null, '0 followers · 0 events')), h('span', { className: 'sr-go' }, h(F.Icon, { name: 'chevronRight', size: 16 })));
-          }))) : null,
-      (tab === 0 || tab === 3) && fk.length ? h('section', { className: 'sec pad sr-sec' }, h('div', { className: 'sr-h' }, h('p', { className: 'overline' }, 'Categories')),
-        h('div', { className: 'ct ct-grid' }, fk.map(function (c) {
-          var i = CATS.indexOf(c), look = CAT_LOOK[c[0]] || ['concert', '#a57ad8'];
-          return h(Tap, { key: c[0], className: 'ct-it', onClick: function () { p.nav.push('list:' + c[0]); } },
-            c[1] > 0 ? h('span', { className: 'ct-live' }, h('i', null), 'LIVE') : null,
-            h('span', { className: 'ct-ic' }, h(F.Icon, { name: c[2], size: 22 })), h('b', null, SHORT[c[0]] || c[0]), h('span', { className: 'ct-sub' }, c[1] ? c[1] + (c[1] === 1 ? ' event' : ' events') : 'Coming soon'));
-        }))) : null,
-      !fe.length && !fc.length && !fk.length ? h(F.EmptyState, { art: 'search', title: 'No results found', body: 'Try another name, channel or category, or check the spelling.' }) : null,
+      h('form', { className: 'sx-bar', onSubmit: function (e) { e.preventDefault(); commit(); if (inRef.current) inRef.current.blur(); } },
+        h('label', { className: 'sx-in' }, h(F.Icon, { name: 'search', size: 19 }), h('input', { id: 'search-q', ref: inRef, type: 'search', autoFocus: true, enterKeyHint: 'search', placeholder: 'Events, channels or categories', value: query, onChange: function (e) { setQ(e.target.value); setTab(0); } }),
+          query ? h('button', { type: 'button', className: 'sx-x', 'aria-label': 'Clear search', onClick: function () { setQ(''); if (inRef.current) inRef.current.focus(); } }, h(F.Icon, { name: 'x', size: 14 })) : null)),
+      ql ? results : discover,
       h('div', { style: { height: 60 } }));
   }
 
@@ -6651,7 +6722,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
-    window.__jump = function (n) { if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { nav.empty = n === 'home-empty'; if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
 
     // interactive swipe-back (iOS style): drag right from anywhere (or the left edge) to reveal the previous screen
