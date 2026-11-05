@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105064028"</script>
+<script>window.__BUILD__="20261105064157"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3843,6 +3843,13 @@ body[data-phone=mini] .device::before{border-radius:53px!important}
 body[data-phone=mini] .device::after{border-radius:58px!important}
 body[data-phone=android] .device::before{inset:6px!important;border-radius:38px!important}
 body[data-phone=android] .device::after{border-radius:42px!important}
+
+/* slim dark scrollbar for the screen list */
+.side{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.14) transparent;padding-right:6px}
+.side::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-track{background:transparent}
+.side::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:6px}
+.side::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.26)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
