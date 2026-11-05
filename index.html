@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105101503"</script>
+<script>window.__BUILD__="20261105101742"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4239,7 +4239,7 @@ body .fl2-input input,body .lv-in input,body .cs-in input{-webkit-text-decoratio
 
 /* no focus ring on tap for player controls (keyboard users still get :focus-visible) */
 body .fl2 .ctl:focus:not(:focus-visible),body .player .fs-tb:focus:not(:focus-visible),body .fs-rot:focus:not(:focus-visible){outline:none!important;box-shadow:none!important}
-body .fl2 .ctl:focus-visible,body .player .fs-tb:focus-visible{outline:2px solid rgba(244,164,37,.7)!important;outline-offset:2px}
+body .fl2 .ctl:focus,body .fl2 .ctl:focus-visible,body .player .fs-tb:focus,body .player .fs-tb:focus-visible,body .fs-rot:focus-visible{outline:none!important;box-shadow:none!important}
 /* speakers view v2: screen share large, host camera tile beside it, controls readable on dark */
 .fl2.is-grid{background:radial-gradient(80% 90% at 50% 45%,#1d1a28 0%,#0d0c12 70%)!important;--top:78px;--bot:70px;--avh:calc(var(--dw) - var(--top) - var(--bot));--mw:calc(var(--avh) * 16 / 9);--cw2:calc(var(--dh) - 52px - 28px - var(--mw) - 12px)}
 .fl2.is-grid .fl2-video{left:52px!important;top:var(--top)!important;width:var(--mw)!important;height:var(--avh)!important;border-radius:16px!important;box-shadow:0 10px 30px rgba(0,0,0,.45)}
@@ -4251,6 +4251,23 @@ body .fl2 .ctl:focus-visible,body .player .fs-tb:focus-visible{outline:2px solid
 /* speakers view: live chat fills the space under the host camera */
 .fl2.is-grid .fl3-chat,.fl2.is-grid .full-chat{display:flex!important;position:absolute!important;left:calc(52px + var(--mw) + 12px)!important;right:auto!important;width:var(--cw2)!important;top:calc(var(--top) + var(--cw2) * 9 / 16 + 10px)!important;bottom:calc(var(--bot) + 4px)!important;max-height:none!important;flex-direction:column;justify-content:flex-end;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 28%);mask-image:linear-gradient(transparent,#000 28%)}
 .fl2.is-grid .fl3-chat .im-msg,.fl2.is-grid .full-chat .im-msg{max-width:100%!important;font-size:12.5px}
+
+/* speakers view v3 */
+.fl2.is-grid .lv-live>span,.fl2.is-grid .lv-view{background:rgba(255,255,255,.09)!important}
+.fl2.is-grid .lv-live{background:none!important}
+.fl2.is-grid .lv-live>span{height:28px;display:inline-flex;align-items:center;border-radius:0 9px 9px 0}
+.fl2.is-grid .lv-live{overflow:hidden;border-radius:9px}
+.fl2.is-grid .full-top>.ctl:first-child{background:rgba(255,255,255,.09)!important}
+/* right column = host tile + chat card with header, both aligned to the main tile */
+.fl2.is-grid .fl3-chat,.fl2.is-grid .full-chat{top:calc(var(--top) + var(--cw2) * 9 / 16 + 10px)!important;bottom:var(--bot)!important;padding:34px 10px 8px!important;box-sizing:border-box;border-radius:16px;background:rgba(255,255,255,.045);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);-webkit-mask-image:none!important;mask-image:none!important;gap:6px}
+.fl2.is-grid .fl3-chat::before,.fl2.is-grid .full-chat::before{content:'Live chat';position:absolute;left:12px;top:10px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.fl2.is-grid .fl3-chat .im-msg,.fl2.is-grid .full-chat .im-msg{background:none!important;padding:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.fl2.is-grid .fl3-chat .im-msg>*,.fl2.is-grid .full-chat .im-msg>*{background:none!important;box-shadow:none!important;padding-top:0!important;padding-bottom:0!important}
+
+/* speakers view v4: two tiles, same height, aligned edges; chat stays in the chat panel */
+.fl2.is-grid .fl3-chat,.fl2.is-grid .full-chat{display:none!important}
+.fl2.is-grid .fl2-cam{height:var(--avh)!important}
+.fl2.is-grid .fl2-cam .fl2-cam-img{background-size:cover!important;background-position:center 30%!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
