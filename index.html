@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105032220"</script>
+<script>window.__BUILD__="20261105061944"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3802,13 +3802,48 @@ input,textarea{caret-color:#F4A425}
 .app{--glass-bg:rgba(37,35,44,.78);--glass-hi:0 0 0 0 transparent;--glass-sh:0 0 0 0 transparent}
 .stage .top .f4-iconbtn,.brand-head .mbtn:not(.me-av):not(.signin-pill),.rbtn,.up-bell,.og-ic,.dt-glass,.dt-arw,.og-back,.ch2-back,.dt-close,.stage.scrolled .og-back,.stage.scrolled .ch2-back,.stage.scrolled .dt-close,.fs-tb:not(.on),.sh2-x,.as2-x,.cs-x,.ac-head .f4-iconbtn{background:rgba(37,35,44,.78)!important;-webkit-backdrop-filter:blur(16px) saturate(150%)!important;backdrop-filter:blur(16px) saturate(150%)!important;box-shadow:none!important;border:0!important;outline:0!important}
 .og-follow,.og-fol,.dt-follow{box-shadow:none!important;border:0!important}
+
+/* ===== device switcher ===== */
+.devsw{display:flex;flex-direction:column;gap:4px;margin:10px 0 14px}
+.devsw button{text-align:left;border:0;font:inherit;font-size:12.5px;font-weight:600;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);cursor:pointer}
+.devsw button.on{background:#F4A425;color:#1b1306}
+.device{width:calc(var(--dw,440px) + 28px)!important;height:calc(var(--dh,956px) + 28px)!important}
+.device.land{width:calc(var(--dh,956px) + 28px)!important;height:calc(var(--dw,440px) + 28px)!important}
+/* small iPhone: notch instead of Dynamic Island */
+body[data-phone=mini] .device{border-radius:60px}
+body[data-phone=mini] .device:not(.land) .island{top:14px;width:162px;height:32px;margin-left:-81px;border-radius:0 0 20px 20px}
+body[data-phone=mini] .statusbar{padding:2px 26px 0 34px;font-size:15px;height:44px}
+/* Android: punch-hole camera, flat frame, Material status bar + gesture pill */
+body[data-phone=android] .device{border-radius:44px;padding:12px;background:linear-gradient(145deg,#2b2c30,#45464b 30%,#1d1e21 70%,#36373b)!important}
+body[data-phone=android] .device:not(.land) .island{top:22px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#050506}
+body[data-phone=android] .device.land .island{left:22px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%}
+body[data-phone=android] .btn-side.b1,body[data-phone=android] .btn-side.b4{display:none}
+body[data-phone=android] .statusbar{height:36px;padding:2px 22px 0 26px;font-size:14px;font-weight:500;letter-spacing:0}
+body[data-phone=android] .statusbar .batt{transform:rotate(-90deg) scale(.8)}
+body[data-phone=android] .homebar{display:block!important;bottom:7px;width:110px;margin-left:-55px;height:4px;background:rgba(255,255,255,.7)}
+
+.cf2 .cf2-card{--cw:min(346px,calc(var(--dw,440px) - 84px));width:var(--cw)!important;margin-left:calc(var(--cw) / -2)!important;height:calc(var(--cw) * 1.283)!important}
+.cf2{height:calc(min(346px,calc(var(--dw,440px) - 84px)) * 1.283 + 16px)!important}
+body.devmode .cf2 .cf2-card{--cw:min(346px,calc(100vw - 84px))}
+body.devmode .cf2{height:calc(min(346px,calc(100vw - 84px)) * 1.283 + 16px)!important}
+
+.cf2 .cf-foot{gap:8px;flex-wrap:nowrap}
+.cf2 .cf-foot>*{white-space:nowrap}
+.cf2 .cf-foot .mini-cta{flex:none}
+body[data-phone=mini] .cf2 .cf-foot .live-since,body[data-phone=mini] .cf2 .cf-foot .soon{font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=mini] .cf2 .cf-foot .mini-cta{padding:0 12px;font-size:13px}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
-    <h1>Fit4Stream · iPhone 16 Pro Max</h1>
+    <h1>Fit4Stream · <span id="devname">iPhone 16 Pro Max</span></h1>
+    <div class="devsw" role="radiogroup" aria-label="Device">
+      <button type="button" data-phone="max" class="on">iPhone 16 Pro Max</button>
+      <button type="button" data-phone="mini">iPhone 13 mini</button>
+      <button type="button" data-phone="android">Android · Pixel 8</button>
+    </div>
     <p>Tap inside the phone like the real app. Swipe right on any screen with a back button to go back. Jump to any screen:</p>
     <div id="jump" style="display:flex;flex-direction:column;gap:2px"></div>
-    <small>Viewer app prototype · 440 × 956 pt</small>
+    <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
   <div class="scaler" id="scaler">
     <div class="device" id="device">
@@ -5296,7 +5331,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     xmas: { id: 'xmas', trailer: 48, title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
       about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
-    seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: '[Sample upcoming event]' },
+    seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
     gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
   };
   function evFrom(param) { return EV[param] || EV.xmas; }
@@ -5662,7 +5697,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       for (var v = 0; v < list.length; v++) {
         var c = list[v]; if (!c) continue;
         var d = wrap(v - s.pos), ad = Math.min(1, Math.abs(d)), far = Math.abs(d) > 2.2;
-        var sc = 1 - 0.3 * ad, x = d * (SP - 18 * Math.min(1, ad));
+        var cw = c.offsetWidth || 346, sp = SP * cw / 346, sc = 1 - 0.3 * ad, x = d * (sp - 18 * Math.min(1, ad) * cw / 346);
         c.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0) scale(' + sc.toFixed(4) + ')';
         c.style.opacity = far ? 0 : '1';
         c.style.setProperty('--ui', Math.max(0, 1 - ad * 2.2).toFixed(3));
@@ -6936,16 +6971,31 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone 13 mini' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' } };
+  var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur]) cur = 'max';
+  function applyDev(k){
+    cur = k; var d = DEVS[k]; var r = document.documentElement;
+    r.style.setProperty('--dw', d.w + 'px'); r.style.setProperty('--dh', d.h + 'px');
+    if (!dev) { r.style.setProperty('--st', d.st + 'px'); r.style.setProperty('--sb', d.sb + 'px'); }
+    document.body.dataset.phone = k;
+    var n = document.getElementById('devname'); if (n) n.textContent = d.name;
+    var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (k === 'android' ? ' dp' : ' pt');
+    Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.classList.toggle('on', b.dataset.phone === k); });
+    try { localStorage.setItem('f4-dev', k); } catch (e) {}
+    fit(); window.dispatchEvent(new Event('resize'));
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.onclick = function () { applyDev(b.dataset.phone); }; });
   function fit(){
     if (dev) return;
-    var w = land ? 984 : 468, hgt = land ? 468 : 984;
+    var d = DEVS[cur], W = d.w + 28, H = d.h + 28;
+    var w = land ? H : W, hgt = land ? W : H;
     var side = window.innerWidth > 900 ? 268 : 0;
     var k = Math.min((window.innerHeight - 32) / hgt, (window.innerWidth - 32 - side) / w, 1);
     scaler.style.width = w * k + 'px'; scaler.style.height = hgt * k + 'px';
     device.style.transform = 'scale(' + k + ')'; device.style.transformOrigin = 'top left';
   }
   window.__setLand = function(v){ land = v; device.classList.toggle('land', v); fit(); };
-  window.addEventListener('resize', fit); fit();
+  window.addEventListener('resize', fit); applyDev(cur);
   var root = ReactDOM.createRoot(document.getElementById('root'));
   class F4Boundary extends React.Component {
     constructor(p) { super(p); this.state = { k: 0 }; }
