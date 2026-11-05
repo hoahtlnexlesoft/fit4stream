@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105065401"</script>
+<script>window.__BUILD__="20261105065839"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3874,6 +3874,21 @@ body[data-phone=se] .statusbar .sb-icons{margin-left:auto;transform:scale(.85);t
 body[data-phone=se] .device::before{border-radius:52px!important}
 body[data-phone=se] .screenhost,body[data-phone=se] .app,body[data-phone=se] #root>*{border-radius:0!important}
 body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
+
+/* receipt hero: illustrated emblem, calm hierarchy */
+.rc-top{padding:18px 20px 22px!important;gap:0!important;background:none!important}
+.rc-paper{background:linear-gradient(180deg,#221e2b 0%,#1a1821 46%,#18161e 100%)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 40px rgba(0,0,0,.35)!important}
+.rc-paper.st-paid{background:radial-gradient(90% 55% at 50% 0%,rgba(57,200,124,.12),transparent 70%),linear-gradient(180deg,#221e2b,#18161e 60%)!important}
+.rc-paper.st-pending{background:radial-gradient(90% 55% at 50% 0%,rgba(244,164,37,.12),transparent 70%),linear-gradient(180deg,#221e2b,#18161e 60%)!important}
+.rc-paper.st-refunded{background:radial-gradient(90% 55% at 50% 0%,rgba(57,202,224,.12),transparent 70%),linear-gradient(180deg,#221e2b,#18161e 60%)!important}
+.rc-paper.st-failed{background:radial-gradient(90% 55% at 50% 0%,rgba(229,72,77,.14),transparent 70%),linear-gradient(180deg,#221e2b,#18161e 60%)!important}
+.rc-emb{display:flex;justify-content:center;margin:0 0 6px}
+.rc-wm,.rs{display:none!important}
+.rc-k{font-size:14px!important;font-weight:600!important;color:rgba(255,255,255,.7)!important;margin:0!important}
+.rc-amt{margin:4px 0 2px!important;font-size:46px!important;line-height:1!important;letter-spacing:-1.5px!important}
+.rc-amt sup{font-size:22px!important;top:-.9em!important;margin-right:2px;color:rgba(255,255,255,.75)}
+.rc-amt small{font-size:24px!important;color:rgba(255,255,255,.55)!important}
+.rc-when{font-size:13px!important;color:rgba(255,255,255,.5)!important;margin:6px 0 12px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4688,7 +4703,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     calendar: { badge: ['amber', 'clock'] }, search: { badge: ['purple', 'x'] }, ticket: { badge: ['amber', 'plus'] }, live: { badge: ['purple', 'pause'] },
     reviews: { badge: ['amber', 'plus'] }, inbox: { badge: ['purple', 'check'] }, users: { badge: ['amber', 'plus'] }, bell: { badge: ['green', 'check'] },
     logout: { badge: ['amber', 'out'] }, del: { badge: ['red', 'trash'] }, card: { badge: ['red', 'x'] }, lock: { badge: ['amber', 'lock'] },
-    ended: { badge: ['amber', 'flag'] }, shield: { badge: ['green', 'check'] }, stage: { badge: ['amber', 'mic'] }, refund: { badge: ['amber', 'refund'] }, success: { badge: ['amber', 'check'] }
+    ended: { badge: ['amber', 'flag'] }, shield: { badge: ['green', 'check'] }, stage: { badge: ['amber', 'mic'] }, refund: { badge: ['amber', 'refund'] }, success: { badge: ['amber', 'check'] }, paid: { badge: ['green', 'check'] }, pending: { badge: ['amber', 'clock'] }, refunded: { badge: ['green', 'check'] }, failed: { badge: ['red', 'x'] }
   };
   function embLogo(x, y, sc) { return h('g', { key: 'logo', transform: 'translate(' + x + ' ' + y + ') scale(' + sc + ')' },
           h('path', { d: 'M245.823 30.0916L30.7393 244.929C-4.1252 279.753 -4.12519 336.215 30.7393 371.04L245.823 585.877C280.687 620.702 337.214 620.702 372.078 585.877L587.162 371.04C622.026 336.215 622.026 279.753 587.162 244.929L372.078 30.0916C337.214 -4.73292 280.687 -4.73292 245.823 30.0916Z', fill: '#fff' }),
@@ -4700,6 +4715,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var E = 'url(#' + id + 'e)', F = 'url(#' + id + 't)', SH = 'url(#' + id + 's)';
     var W = 'rgba(255,255,255,', card = function (x, y, w, hh, r) { return [h('rect', { key: 'c', x: x, y: y, width: w, height: hh, rx: r, fill: F, stroke: E, strokeWidth: 1.8 }), h('rect', { key: 'sh', x: x + 1, y: y + 1, width: w - 2, height: hh / 2, rx: r - 1, fill: SH })]; };
     var bar = function (key, x, y, w, o, hh) { return h('rect', { key: key, x: x, y: y, width: w, height: hh || 5, rx: (hh || 5) / 2, fill: W + o + ')' }); };
+    if (k === 'paid') return embBody('success', id);
+    if (k === 'pending' || k === 'refunded') return embBody('refund', id);
+    if (k === 'failed') return embBody('card', id);
     if (k === 'ticket' || k === 'success') return [
       h('path', { key: 'c', d: 'M44 26h72a10 10 0 0 1 10 10v11a10 10 0 0 0 0 20v11a10 10 0 0 1-10 10H44a10 10 0 0 1-10-10V67a10 10 0 0 0 0-20V36a10 10 0 0 1 10-10z', fill: F, stroke: E, strokeWidth: 1.8 }),
       h('path', { key: 'd', d: 'M104 32v50', stroke: W + '.22)', strokeWidth: 1.3, strokeDasharray: '3 4', strokeLinecap: 'round' }),
@@ -6451,8 +6469,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
         h('div', { className: 'rc-paper st-' + st.st },
           h('div', { className: 'rc-top' },
-            h('span', { className: 'rc-wm', 'aria-hidden': true }, h(F.Logo, { size: 190, markOnly: true })),
-            h(ReceiptSeal, { st: st.st }),
+            h('span', { className: 'rc-emb' }, h(F.Emblem, { name: st.st, width: 150, uid: 'rc' })),
             h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
             h('b', { className: 'rc-amt' }, h('sup', null, '$'), money(o.total).slice(1).split('.')[0], h('small', null, '.' + money(o.total).split('.')[1])),
             h('span', { className: 'rc-when' }, o.when),
