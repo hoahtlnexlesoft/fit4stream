@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105031019"</script>
+<script>window.__BUILD__="20261105031216"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3778,6 +3778,21 @@ input,textarea{caret-color:#F4A425}
 .cf2 .cf2-card{margin-left:-173px!important;width:346px!important;height:444px!important}
 .cf2 .cf2-card .cf-top,.cf2 .cf2-card .cf-cap{opacity:var(--ui,1);transition:none}
 .cf2 .cf2-card::after{content:'';position:absolute;inset:0;border-radius:inherit;background:#0b0a10;opacity:var(--dim,0);pointer-events:none;z-index:3}
+
+/* category bento: calm layout — status chip top, title bottom */
+.cbe{gap:10px!important}
+.cbe-col{gap:10px!important}
+.cbi{border-radius:20px!important}
+.cb-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,0) 30%,rgba(8,7,12,.15) 50%,rgba(8,7,12,.88) 100%)}
+.cb-chip{position:absolute;left:10px;top:10px;z-index:2;height:24px;display:inline-flex;align-items:center;gap:5px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.02em;color:#fff;background:rgba(10,9,14,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.cb-chip.live{background:#E5484D}
+.cb-chip.live i{width:6px;height:6px;border-radius:50%;background:#fff;animation:f4-pulse 1.4s infinite}
+.cb-cap{position:absolute;left:12px;right:12px;bottom:12px;z-index:2}
+.cb-cap b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:18px;font-weight:700;color:#fff;letter-spacing:-.1px;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.cbi.big .cb-cap{left:14px;right:14px;bottom:14px}
+.cbi.big .cb-cap b{font-size:18px;line-height:22px;-webkit-line-clamp:3}
+.cb-meta{display:block;margin-top:6px;font-size:12px;font-weight:500;color:rgba(255,255,255,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb-meta.live{color:#FF9A93;font-variant-numeric:tabular-nums}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5298,12 +5313,17 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   }
   function CatBentoEv(p) {
     var t = useTick(), a = p.list[0], rest = p.list.slice(1, 3);
-    function st(e) { return e.status === 'live' ? h('span', { className: 'et3-live' }, h('i', null), 'Live · ' + fmtT(e.left - t).slice(0, 5)) : h('span', { className: 'et3-when' }, h(F.Icon, { name: 'clock', size: 12 }), e.status === 'ended' ? 'Ended · ' + e.price : e.date.replace(', 2026', '') + ' · ' + e.price); }
+    function chip(e) {
+      if (e.status === 'live') return h('span', { className: 'cb-chip live' }, h('i'), 'LIVE');
+      if (e.status === 'ended') return h('span', { className: 'cb-chip' }, 'Ended');
+      return h('span', { className: 'cb-chip' }, e.date.replace(', 2026', '').replace(/^\w+ /, function (m) { return m.slice(0, 3) + ' '; }));
+    }
+    function meta(e) { return h('span', { className: 'cb-meta' }, 'by ' + e.org + (e.status === 'live' ? ' \u00b7 2.4K watching' : ' \u00b7 ' + e.price)); }
     function card(e, big) {
       return h('div', { key: e.id, className: cx('cbi', big ? 'big' : 'sm'), role: 'link', tabIndex: 0, style: { backgroundImage: 'url(' + e.img + ')' }, onClick: function () { tap(); p.nav.push('detail:' + e.id); } },
-        h('span', { className: 'et3-shade' }),
-        big ? h('span', { className: 'et3-cat' }, e.cat) : null,
-        h('div', { className: 'et3-cap' }, h('b', null, e.title), h('span', { className: 'et3-by' }, 'by ' + e.org), h('div', { className: 'et3-foot' }, st(e))));
+        h('span', { className: 'cb-shade' }),
+        chip(e),
+        h('div', { className: 'cb-cap' }, h('b', null, e.title), big ? meta(e) : null));
     }
     return h('div', { className: cx('cbe', !rest.length && 'one') }, card(a, true), rest.length ? h('div', { className: 'cbe-col' }, rest.map(function (e) { return card(e, false); })) : null);
   }
