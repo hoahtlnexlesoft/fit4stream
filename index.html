@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105025328"</script>
+<script>window.__BUILD__="20261105025657"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3770,8 +3770,10 @@ input,textarea{caret-color:#F4A425}
 
 .sh2-it .sh2-brand{overflow:hidden}
 .sh2-logo{display:block;object-fit:contain}
-.sh2-logo.fb{width:72%;height:72%}
-.sh2-logo.za{width:84%;height:84%}
+.sh2-logo{width:100%;height:100%}
+.sh2-logo.fb{transform:scale(1.32) translateY(12%)}
+.sh2-logo.za{transform:scale(1.02)}
+.sh2-it .sh2-brand{position:relative}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -5514,7 +5516,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function ShareSheet(p) {
     var cs = useState(false), copied = cs[0], setCopied = cs[1];
     var url = 'fit4stream.com/e/' + (p.slug || 'danang-christmas-market-2026');
-    var opts = [['Messages', 'message', 'linear-gradient(180deg,#5CF57A,#14C23A)'], ['Facebook', 'img:fb', '#fff'], ['Instagram', 'camera', 'radial-gradient(circle at 30% 107%,#FDF497 0%,#FD5949 45%,#D6249F 60%,#285AEB 90%)'], ['Zalo', 'img:za', '#fff'], ['Email', 'mail', 'linear-gradient(180deg,#1E9BFF,#0A60F5)'], ['More', 'more', 'rgba(255,255,255,.1)']];
+    var opts = [['Messages', 'message', 'linear-gradient(180deg,#5CF57A,#14C23A)'], ['Facebook', 'img:fb', '#2C64F6'], ['Instagram', 'camera', 'radial-gradient(circle at 30% 107%,#FDF497 0%,#FD5949 45%,#D6249F 60%,#285AEB 90%)'], ['Zalo', 'img:za', '#fff'], ['Email', 'mail', 'linear-gradient(180deg,#1E9BFF,#0A60F5)'], ['More', 'more', 'rgba(255,255,255,.1)']];
     function copy() { tap(8); setCopied(true); try { navigator.clipboard && navigator.clipboard.writeText('https://' + url); } catch (_) {} setTimeout(function () { p.close(); p.toast('Link copied'); }, 650); }
     return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
       h('div', { className: 'sheet sh2', role: 'dialog', 'aria-label': 'Share' },
