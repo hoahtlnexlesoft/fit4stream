@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105103122"</script>
+<script>window.__BUILD__="20261105103328"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4302,8 +4302,10 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 @keyframes f4spin{to{transform:rotate(360deg)}}
 
 /* reconnecting uses the app's own logo loader (scaled for the video frame) */
-.pv-rc-ldr{width:64px;height:64px;margin-bottom:10px;display:grid;place-items:center}
-.pv-rc-ldr .ldr-logo{transform:scale(.667);transform-origin:center}
+.pv-rc-ldr{width:64px;height:64px;margin-bottom:12px;flex:none;display:grid;place-items:center}
+.pv-rc-ldr .ldr-logo{width:64px!important;height:64px!important;transform:none!important}
+.pv-rc-ldr .ldr-logo svg{width:32px!important;height:32px!important}
+.pv-rc-ldr .ldr-ring{inset:0!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
