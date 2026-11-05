@@ -49,6 +49,10 @@
   var mine = function (a) { return !!S.name && authorKey(a) === authorKey(S.name); }; // only the author may edit their own comment/reply
   var COLORS = ['#7EE0C3', '#C6EF7C', '#A9AAF7', '#F2EC86', '#EFA6F2', '#8FD3F7', '#9BE6A6', '#F7C59A', '#7FDCE3', '#D6BCFB', '#B8F0D6', '#F5A9B8', '#B5E48C', '#99B8FF', '#FFD98A', '#88E5D0'];
   var AUTHORS = [];
+  /* darker partner of each avatar colour, readable as name text on the light panel */
+  var NAME_COLORS = ['#0E8F6E', '#5E8A12', '#4F46E5', '#A16207', '#A21CAF', '#0369A1', '#15803D', '#C2410C', '#0E7490', '#7C3AED', '#047857', '#BE123C', '#4D7C0F', '#1D4ED8', '#B45309', '#0F766E'];
+  function nameColor(name) { var c = colorFor(name), i = COLORS.indexOf(c); return i >= 0 ? NAME_COLORS[i] : '#111827'; }
+  function nameTag(name) { return '<b class="rv-name" style="color:' + nameColor(name) + '">' + esc(name) + '</b>'; }
   function colorFor(name) {
     var i = AUTHORS.indexOf(authorKey(name)); if (i >= 0) return COLORS[i % COLORS.length];
     var h = 0, s = authorKey(name); for (var k = 0; k < s.length; k++) h = (h * 31 + s.charCodeAt(k)) >>> 0; return COLORS[h % COLORS.length];
@@ -554,7 +558,7 @@
           var on = S.active === t.id, col = colorFor(t.author), nr = (t.replies || []).length, long = (t.text || '').length > 40, ex = S.expanded && S.expanded[t.id];
           h += '<div class="rv-row2' + (on ? ' on' : '') + (t.resolved ? ' done' : '') + (S.menu === t.id ? ' menu' : '') + '">' +
             '<button class="rv-row2-main" data-goto="' + t.id + '"><span class="rv-av" style="background:' + col + '">' + esc((t.author.trim()[0] || '?')) + '</span>' +
-            '<span class="rv-row2-b"><span class="rv-row2-m"><span class="rv-no">#' + NUM[t.id] + '</span><b>' + esc(t.author) + '</b><span class="rv-ago">· ' + ago(t.at) + '</span>' + (t.resolved ? '' : '<i class="rv-unread" title="Open"></i>') + '</span>' +
+            '<span class="rv-row2-b"><span class="rv-row2-m"><span class="rv-no">#' + NUM[t.id] + '</span>' + nameTag(t.author) + '<span class="rv-ago">· ' + ago(t.at) + '</span>' + (t.resolved ? '' : '<i class="rv-unread" title="Open"></i>') + '</span>' +
             '<span class="rv-row2-t' + (ex ? ' ex' : '') + '">' + esc(t.text || (t.images && t.images.length ? '[image]' : '')) + '</span></span></button>' +
             (long ? '<button class="rv-sm" data-expand="' + t.id + '">' + (ex ? 'Show less' : 'Show more') + '</button>' : '') +
             (nr ? '<button class="rv-nr" data-goto="' + t.id + '">' + nr + ' ' + (nr > 1 ? 'replies' : 'reply') + '</button>' : '') +
@@ -844,7 +848,7 @@
       var mine = !!S.name && who.some(function (n) { return authorKey(n) === authorKey(S.name); });
       return '<button class="rv-react' + (mine ? ' on' : '') + '" data-react="' + t.id + '|' + r[0] + '" title="' + esc(r[1] + ': ' + who.join(', ')) + '">' + ICON[r[0]] + '<span>' + who.length + '</span></button>'; }).join('');
     var editing = S.editing === t.id && S.editWhere === 'pop';
-    var row = function (name, at, text, extra, ed, tool) { return '<div class="rv-pop-c">' + avatar(name, 26) + '<div class="rv-pop-cb"><div class="rv-pop-meta"><b>' + esc(name) + '</b><span>' + ago(at) + (ed ? ' · đã sửa' : '') + '</span>' + (tool || '') + '</div>' + (text != null ? '<p>' + esc(text) + '</p>' : '') + (extra || '') + '</div></div>'; };
+    var row = function (name, at, text, extra, ed, tool) { return '<div class="rv-pop-c">' + avatar(name, 26) + '<div class="rv-pop-cb"><div class="rv-pop-meta">' + nameTag(name) + '<span>' + ago(at) + (ed ? ' · đã sửa' : '') + '</span>' + (tool || '') + '</div>' + (text != null ? '<p>' + esc(text) + '</p>' : '') + (extra || '') + '</div></div>'; };
     var h = '<div class="rv-pop" role="dialog" aria-label="Comment">' +
       '<div class="rv-pop-h"><span class="rv-pop-ttl"><b>Comment #' + NUM[t.id] + '</b><span class="rv-pop-pg" title="' + esc(labelFor(t.page)) + '"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>' + esc(labelFor(t.page)) + '</span></span><span class="rv-pop-tools">' +
         (t.kind !== 'edit' && mine(t.author) ? '<button data-popedit="' + t.id + '" aria-label="Edit" title="Edit">' + ICON.pencil + '</button>' : '') +
@@ -1069,7 +1073,7 @@
       (list.length ? list.map(function (x) {
         var col = colorFor(x.r.author), seen = !!SEEN[x.r.id];
         return '<button class="rv-ni' + (seen ? ' seen' : '') + '" data-inbox="' + x.t.id + '"><span class="rv-av" style="background:' + col + '">' + esc((String(x.r.author).trim()[0] || '?')) + '</span>' +
-          '<span class="rv-ni-b"><b>' + esc(x.r.author) + '</b> ' + (x.mention ? 'mentioned you' : 'replied') + '<span class="rv-ni-t">' + esc(x.r.text) + '</span><small>' + esc(labelFor(x.t.page)) + ' · ' + ago(x.r.at || x.t.at) + '</small></span>' + (seen ? '' : '<i></i>') + '</button>';
+          '<span class="rv-ni-b">' + nameTag(x.r.author) + ' ' + (x.mention ? 'mentioned you' : 'replied') + '<span class="rv-ni-t">' + esc(x.r.text) + '</span><small>' + esc(labelFor(x.t.page)) + ' · ' + ago(x.r.at || x.t.at) + '</small></span>' + (seen ? '' : '<i></i>') + '</button>';
       }).join('') : '<p>No replies to your comments yet.</p>') + '</div>';
   }
 
