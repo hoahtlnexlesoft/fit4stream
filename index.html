@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105072214"</script>
+<script>window.__BUILD__="20261105072614"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3931,6 +3931,25 @@ body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
   .rv .rv-panel .rv-head{padding-top:max(14px,calc(env(safe-area-inset-top,0px) * 0 + 14px))!important}
   .rv .rv-panel .rv-head button,.rv .rv-panel .rv-head [role=button]{min-width:44px;min-height:44px}
 }
+
+/* phone-only screen jumper */
+#pg-fab{position:fixed;z-index:2147482500;left:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);width:44px;height:44px;border:0;border-radius:16px;display:grid;place-items:center;color:#fff;background:rgba(28,26,36,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 24px rgba(0,0,0,.4);outline:1px solid rgba(255,255,255,.1);cursor:pointer}
+#pg-fab:active{transform:scale(.94)}
+#pg-sheet{position:fixed;inset:0;z-index:2147482700;pointer-events:none}
+#pg-sheet .pg-scrim{position:absolute;inset:0;background:rgba(6,5,10,.55);opacity:0;transition:opacity .25s}
+#pg-sheet .pg-panel{position:absolute;left:0;right:0;bottom:0;max-height:78%;display:flex;flex-direction:column;border-radius:24px 24px 0 0;background:#1a1821;box-shadow:0 -14px 40px rgba(0,0,0,.5);transform:translateY(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px)}
+#pg-sheet.open{pointer-events:auto}
+#pg-sheet.open .pg-scrim{opacity:1}
+#pg-sheet.open .pg-panel{transform:none}
+.pg-grab{width:38px;height:4px;border-radius:4px;background:rgba(255,255,255,.22);margin:8px auto 4px}
+.pg-head{display:flex;align-items:center;justify-content:space-between;padding:6px 14px 10px 20px}
+.pg-head b{font-size:18px;font-weight:800;color:#fff}
+.pg-x{width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:#fff;font-size:14px}
+.pg-list{overflow:auto;padding:0 12px 14px;display:flex;flex-direction:column;gap:2px;-webkit-overflow-scrolling:touch}
+.pg-list button{display:flex;align-items:center;gap:12px;text-align:left;border:0;background:none;padding:11px 10px;border-radius:12px;color:rgba(255,255,255,.85);font:inherit;font-size:14.5px}
+.pg-list button em{flex:none;width:34px;font-style:normal;font-size:12px;font-weight:700;color:rgba(255,255,255,.4);font-variant-numeric:tabular-nums}
+.pg-list button.on{background:rgba(244,164,37,.14);color:#F6C26B}
+.pg-list button.on em{color:#F6C26B}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7143,6 +7162,17 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var sel=null;
   function mark(){ var h=location.hash, k; if(sel&&(sel.h===null||sel.h===h)) k=sel.k; else { sel=null; k=(h||'#welcome').slice(1); } Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
   setInterval(mark, 400); mark();
+  if (dev) {
+    var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'pg-fab'; fab.setAttribute('aria-label', 'Jump to a screen');
+    fab.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>';
+    var pg = document.createElement('div'); pg.id = 'pg-sheet'; pg.innerHTML = '<div class="pg-scrim"></div><div class="pg-panel" role="dialog" aria-label="Screens"><div class="pg-grab"></div><div class="pg-head"><b>Screens</b><button type="button" class="pg-x" aria-label="Close">\u2715</button></div><div class="pg-list"></div></div>';
+    var pl = pg.querySelector('.pg-list');
+    list.forEach(function (it) { var b = document.createElement('button'); b.type = 'button'; b.dataset.k = it[0]; var m = it[1].match(/^(\S+)\s+(.*)$/); b.innerHTML = '<em>' + m[1] + '</em><span>' + m[2] + '</span>'; b.onclick = function () { window.__jump && window.__jump(it[0]); sel = { k: it[0], h: null }; setTimeout(function () { if (sel && sel.k === it[0]) sel.h = location.hash; mark(); }, 120); close(); }; pl.appendChild(b); });
+    function open() { var k = (sel && sel.k) || (location.hash || '#welcome').slice(1); Array.prototype.forEach.call(pl.children, function (b) { b.classList.toggle('on', b.dataset.k === k); }); pg.classList.add('open'); var on = pl.querySelector('.on'); if (on) on.scrollIntoView({ block: 'center' }); }
+    function close() { pg.classList.remove('open'); }
+    fab.onclick = open; pg.querySelector('.pg-scrim').onclick = close; pg.querySelector('.pg-x').onclick = close;
+    document.body.appendChild(fab); document.body.appendChild(pg);
+  }
 })();
 </script>
 <script>
