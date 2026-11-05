@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105102143"</script>
+<script>window.__BUILD__="20261105102403"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4279,6 +4279,14 @@ body .fl2 .ctl:focus,body .fl2 .ctl:focus-visible,body .player .fs-tb:focus,body
 .player.fs.is-grid:not(.is-state) .fs-rb-t{display:block!important}
 .player.fs.is-grid:not(.is-state) .fs-rail .fs-rb-ic{width:40px!important;height:40px!important}
 .player.fs.is-grid:not(.is-state) .fs-rail .fs-rb-t{font-size:11px!important}
+
+/* role badges (Host / Organizer / Guest / Speaker): optically centred text */
+i.r-host,i.r-organizer,i.r-guest,i.r-speaker,i.r-cohost,i.r-mod{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;height:16px!important;line-height:1!important;padding:0 6px 1px!important;font-style:normal;font-size:9.5px!important;font-weight:700!important;letter-spacing:.2px;vertical-align:middle;border-radius:5px!important;white-space:nowrap}
+i.r-host>*,i.r-organizer>*,i.r-guest>*{line-height:1!important}
+
+@supports (text-box: trim-both cap alphabetic){
+  i.r-host,i.r-organizer,i.r-guest,i.r-speaker,i.r-cohost,i.r-mod,i.r-you{height:auto!important;padding:4.5px 6px!important;text-box:trim-both cap alphabetic}
+}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
