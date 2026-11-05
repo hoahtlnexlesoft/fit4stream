@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105064854"</script>
+<script>window.__BUILD__="20261105065401"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3830,8 +3830,8 @@ body.devmode .cf2{height:calc(min(346px,calc(100vw - 84px)) * 1.283 + 16px)!impo
 .cf2 .cf-foot{gap:8px;flex-wrap:nowrap}
 .cf2 .cf-foot>*{white-space:nowrap}
 .cf2 .cf-foot .mini-cta{flex:none}
-body[data-phone=mini] .cf2 .cf-foot .live-since,body[data-phone=mini] .cf2 .cf-foot .soon{font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis}
-body[data-phone=mini] .cf2 .cf-foot .mini-cta{padding:0 12px;font-size:13px}
+body[data-phone=se] .cf2 .cf-foot .live-since,body[data-phone=se] .cf2 .cf-foot .soon,body[data-phone=mini] .cf2 .cf-foot .live-since,body[data-phone=mini] .cf2 .cf-foot .soon{font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=se] .cf2 .cf-foot .mini-cta,body[data-phone=mini] .cf2 .cf-foot .mini-cta{padding:0 12px;font-size:13px}
 
 .devcol{width:150px!important;align-self:center}
 .devcol .devsw{margin:6px 0 0}
@@ -3855,6 +3855,25 @@ body[data-phone=android] .device::after{border-radius:42px!important}
 .f4-tab.is-on:not(.is-center)::before{inset:6px 4px!important;border-radius:18px!important;background:rgba(244,164,37,.13)!important;box-shadow:none!important}
 .f4-tab.is-on:not(.is-center) .f4-tab-l{color:#F6C26B!important;font-weight:700}
 .f4-tab.is-on .f4-tab-ic{filter:none!important}
+
+/* iPhone SE: thick bezels, earpiece, Touch ID home button, flat 20pt status bar */
+.homebtn{display:none}
+body[data-phone=se] .device{width:403px!important;height:863px!important;padding:98px 14px!important;border-radius:58px!important}
+body[data-phone=se] .device.land{width:863px!important;height:403px!important;padding:14px 98px!important}
+body[data-phone=se] .device::before{inset:6px!important;border-radius:52px!important}
+body[data-phone=se] .device::after{border-radius:56px!important}
+body[data-phone=se] .screenhost{position:relative!important;inset:auto!important}
+body[data-phone=se] .device:not(.land) .island{top:46px;width:60px;height:6px;margin-left:-30px;border-radius:4px;background:#1c1d21}
+body[data-phone=se] .device:not(.land) .island::before{content:'';position:absolute;left:-28px;top:-3px;width:11px;height:11px;border-radius:50%;background:#16171a}
+body[data-phone=se] .homebtn{display:block;position:absolute;z-index:5;left:50%;bottom:20px;width:58px;height:58px;margin-left:-29px;border-radius:50%;background:#0d0d10;box-shadow:inset 0 0 0 2px #3c3d42}
+body[data-phone=se] .device.land .homebtn{left:auto;right:20px;bottom:50%;margin:0 0 -29px}
+body[data-phone=se] .statusbar{height:20px;padding:0 8px;font-size:12px;font-weight:600}
+body[data-phone=se] .statusbar .sb-time{position:absolute;left:50%;transform:translateX(-50%)}
+body[data-phone=se] .homebar{display:none!important}
+body[data-phone=se] .statusbar .sb-icons{margin-left:auto;transform:scale(.85);transform-origin:right center}
+body[data-phone=se] .device::before{border-radius:52px!important}
+body[data-phone=se] .screenhost,body[data-phone=se] .app,body[data-phone=se] #root>*{border-radius:0!important}
+body[data-phone=se] .cf2 .cf-foot .live-since{display:none}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -3862,6 +3881,7 @@ body[data-phone=android] .device::after{border-radius:42px!important}
     <div class="devsw" role="radiogroup" aria-label="Device">
       <button type="button" data-phone="max" class="on">iPhone 16 Pro Max</button>
       <button type="button" data-phone="mini">iPhone X</button>
+      <button type="button" data-phone="se">iPhone SE</button>
       <button type="button" data-phone="android">Android · Pixel 8</button>
     </div>
     <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
@@ -3876,7 +3896,7 @@ body[data-phone=android] .device::after{border-radius:42px!important}
     <div class="device" id="device">
       <span class="btn-side b1"></span><span class="btn-side b2"></span><span class="btn-side b3"></span><span class="btn-side b4"></span>
       <div class="screenhost" id="root"></div>
-      <span class="island"></span>
+      <span class="island"></span><span class="homebtn" aria-hidden="true"></span>
     </div>
   </div>
 </div>
@@ -6998,7 +7018,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
-  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' } };
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 } };
   var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur]) cur = 'max';
   function applyDev(k){
     cur = k; var d = DEVS[k]; var r = document.documentElement;
@@ -7014,7 +7034,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.onclick = function () { applyDev(b.dataset.phone); }; });
   function fit(){
     if (dev) return;
-    var d = DEVS[cur], W = d.w + 28, H = d.h + 28;
+    var d = DEVS[cur], W = d.w + (d.px || 28), H = d.h + (d.py || 28);
     var w = land ? H : W, hgt = land ? W : H;
     var side = window.innerWidth > 900 ? 268 + 198 : 0;
     var k = Math.min((window.innerHeight - 32) / hgt, (window.innerWidth - 32 - side) / w, 1);
