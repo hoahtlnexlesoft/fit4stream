@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105083833"</script>
+<script>window.__BUILD__="20261105091656"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4055,6 +4055,13 @@ body.pane2 #pg-fab,body.pane2 #pg-sheet,body.pane2 .rv-pill,body.pane2 #upd-bar{
   body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail .fs-rb-t{display:none!important}
   body.pane2 .player.fs:not(.is-grid):not(.is-state) .fs-rail{gap:8px!important}
 }
+
+/* Hinge: slim seam in the bezel colour (no metallic bar); Z Flip crease hidden */
+body[data-phone=fold] .screenhost::after{display:none!important}
+body[data-phone=foldopen] .screenhost::after{width:10px!important;margin-left:-5px!important;background:#0c0c0e!important;box-shadow:inset 1px 0 0 rgba(255,255,255,.05),inset -1px 0 0 rgba(255,255,255,.05)!important}
+body[data-phone=foldopen] .screenhost .app{right:calc(50% + 5px)!important}
+body[data-phone=foldopen] #duo-pane{left:calc(50% + 5px);width:calc(var(--dw) / 2 - 5px);border-radius:0 16px 16px 0}
+body[data-phone=foldopen] .device:not(.land) .island{left:calc(50% + 22px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
