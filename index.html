@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105081029"</script>
+<script>window.__BUILD__="20261105081134"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4001,9 +4001,11 @@ body[data-phone=fold] .statusbar,body[data-phone=foldopen] .statusbar{height:32p
 body[data-phone=fold] .homebar,body[data-phone=foldopen] .homebar{display:block!important;bottom:6px;width:100px;margin-left:-50px;height:4px;background:rgba(255,255,255,.7)}
 /* desktop: when the comments panel is open, stack the Browse/Comment pill vertically along its left edge */
 @media (min-width:641px){
-  body:has(.rv-panel) .rv .rv-pill{left:auto!important;right:384px!important;bottom:auto!important;top:50%!important;transform:translateY(-50%)!important;align-items:flex-end!important}
-  body:has(.rv-panel) .rv .rv-pill .rv-seg{flex-direction:column!important;border-radius:20px!important}
-  body:has(.rv-panel) .rv .rv-pill .rv-seg button{justify-content:flex-start}
+  body:has(.rv-panel) .rv .rv-pill{left:auto!important;right:378px!important;bottom:auto!important;top:96px!important;transform:none!important;align-items:flex-end!important}
+  body:has(.rv-panel) .rv .rv-pill .rv-seg{flex-direction:column!important;gap:4px!important;padding:5px!important;border-radius:16px 0 0 16px!important;box-shadow:-8px 10px 24px -8px rgba(0,0,0,.5)!important}
+  body:has(.rv-panel) .rv .rv-pill .rv-seg button{width:40px!important;height:40px!important;padding:0!important;justify-content:center!important;font-size:0!important;gap:0!important;border-radius:12px!important}
+  body:has(.rv-panel) .rv .rv-pill .rv-seg button svg{width:18px;height:18px}
+}
 }
 
 /* player portrait: event info under the frame, chat fills the rest */
