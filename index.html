@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105022927"</script>
+<script>window.__BUILD__="20261105023301"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -3681,7 +3681,6 @@ input,textarea{caret-color:#F4A425}
 .cs-row{gap:12px;align-items:flex-start}
 .cs-av{flex:none;width:32px;height:32px;border-radius:50%;overflow:hidden;display:block}
 .cs-av *{box-shadow:none!important;border:0!important;outline:0!important}
-.cs-av>*{width:32px!important;height:32px!important}
 .cs-meta{min-height:16px;margin-bottom:3px}
 .cs-meta b{font-size:12.5px;line-height:16px;color:rgba(255,255,255,.5)}
 .cs-body p{font-size:14.5px;line-height:20px}
@@ -3706,6 +3705,11 @@ input,textarea{caret-color:#F4A425}
 .fs-pip-v .fs-pip-tag{height:20px!important;padding:0 7px 0 6px!important;gap:5px!important;bottom:18px!important;font-size:10.5px!important}
 .fs-pip-v .fs-pip-tag i{flex:none;width:6px;height:6px}
 .fs-pip-v .fs-pip-tag em{font-style:normal;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.cs-av{display:grid!important;place-items:center}
+.cs-av .f4-avatar,.cs-av>span{display:grid!important;place-items:center;text-align:center;line-height:1!important}
+.cs-meta{align-items:center}
+.cs-role{display:inline-flex!important;align-items:center;justify-content:center;height:17px;line-height:1!important;padding:0 7px!important;box-sizing:border-box}
 </style>
 <div class="stagewrap">
   <aside class="side" id="side" aria-label="Screens">
@@ -6514,7 +6518,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           if (m.sys) return h('div', { key: 's' + i, className: 'cs-sys' }, h('i'), m.sys);
           var role = m.role ? m.role.toLowerCase() : '';
           return h('div', { key: m.id || ('m' + i + m.t), className: cx('cs-row', m.me && 'me', (m.me || m.fresh) && 'chat-in') },
-            h('span', { className: 'cs-av' }, h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 32, seed: i })),
+            h('span', { className: 'cs-av' }, h(F.Avatar, { src: m.me ? AV.me : av(m.n), name: m.n, initials: ini(m.n), size: 32, seed: m.n.split('').reduce(function (a, c) { return a + c.charCodeAt(0); }, 0) })),
             h('div', { className: 'cs-body' },
               h('div', { className: 'cs-meta' }, h('b', { className: role ? 'n-' + role : '' }, m.me ? 'You' : m.n), m.role ? h('i', { className: 'cs-role r-' + role }, m.role) : null),
               h('p', null, m.t)));
