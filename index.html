@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105102923"</script>
+<script>window.__BUILD__="20261105103122"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4300,6 +4300,10 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .player.fs .pv-rc b{margin:0!important;line-height:20px}
 .player.fs .pv-rc span:last-child{margin-top:4px;line-height:16px}
 @keyframes f4spin{to{transform:rotate(360deg)}}
+
+/* reconnecting uses the app's own logo loader (scaled for the video frame) */
+.pv-rc-ldr{width:64px;height:64px;margin-bottom:10px;display:grid;place-items:center}
+.pv-rc-ldr .ldr-logo{transform:scale(.667);transform-origin:center}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7181,7 +7185,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       media,
       h('div', { className: 'fs-scrim-t', 'aria-hidden': true }), h('div', { className: 'fs-scrim-b', 'aria-hidden': true }),
       live && st.layout === 'grid' ? h('div', { className: 'fs-grid' }, h(Stage)) : null,
-      st.rc ? h('div', { className: 'pv-rc', role: 'status' }, h('span', { className: 'spinner' }), h('b', null, 'Reconnecting…'), h('span', null, 'Your connection is weak')) : null,
+      st.rc ? h('div', { className: 'pv-rc', role: 'status' }, h('div', { className: 'pv-rc-ldr' }, h(LogoLoader)), h('b', null, 'Reconnecting…'), h('span', null, 'Your connection is weak')) : null,
       h('header', { className: 'fs-top' },
         h(Tap, { className: 'fs-tb plain', label: 'Minimize', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 24 })),
         live ? h('span', { className: 'lv-live' }, h('b', null, h('i', null), 'LIVE'), h('span', null, elapsed)) : h('span', { className: 'lv-live off' }, h('b', null, mode === 'ended' ? 'ENDED' : 'SOON')),
