@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105102734"</script>
+<script>window.__BUILD__="20261105102923"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4293,6 +4293,13 @@ i.r-host>*,i.r-organizer>*,i.r-guest>*{line-height:1!important}
 .player.fs .pv-rc .spinner{width:30px;height:30px}
 .player.fs .pv-rc b{font-size:16px;font-weight:800;margin-top:8px}
 body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(--vh)!important;right:var(--cw)!important}
+
+/* reconnecting: visible spinner + tightly grouped text, centred as one block */
+.player.fs .pv-rc{gap:0!important}
+.player.fs .pv-rc .spinner{width:32px!important;height:32px!important;border-radius:50%!important;border:3px solid rgba(255,255,255,.22)!important;border-top-color:#fff!important;background:none!important;animation:f4spin .8s linear infinite!important;margin:0 0 12px!important;box-sizing:border-box}
+.player.fs .pv-rc b{margin:0!important;line-height:20px}
+.player.fs .pv-rc span:last-child{margin-top:4px;line-height:16px}
+@keyframes f4spin{to{transform:rotate(360deg)}}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -5830,7 +5837,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'cf3-tl' }, live ? [h('span', { key: 'l', className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { key: 'v', className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))] :
           h('span', { className: 'cf3-chip' }, ended ? 'Ended' : e.date.replace(', 2026', ''))),
         live ? h('span', { className: 'cf3-time' }, fmtT(e.left - t)) : h('span', { className: 'cf3-time' }, ended ? 'Replay' : e.range.split('\u2013')[0].trim()),
-        live ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 18 })) : null),
+        live && p.nav.authed && p.nav.registered !== false ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 18 })) : null),
       h('div', { className: 'cf3-body' },
         h('b', null, e.title),
         h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, cat)),
@@ -6231,7 +6238,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 h('span', { className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))) :
                 h('div', { className: 'cf3-tl' }, h('span', { className: 'cf3-chip' }, soon ? 'Starts in 5 min' : e.date.replace(', 2026', ''))),
               live ? h('span', { className: 'cf3-time' }, fmtT(Math.max(0, 8220 - e.left)).slice(0, 5)) : null,
-              live ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 20 })) : null),
+              live && reg && p.nav.authed ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 20 })) : null),
             h('div', { className: 'cf3-body' },
               h('b', null, e.title),
               h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, e.cat.replace(' and Performances', '').replace('Virtual ', '').replace(' and Training', ''))),
