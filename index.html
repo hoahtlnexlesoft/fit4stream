@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105100929"</script>
+<script>window.__BUILD__="20261105101503"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4236,6 +4236,21 @@ body .fl2-input input,body .lv-in input,body .cs-in input{-webkit-text-decoratio
 /* fullscreen title: one line each, never wraps when the chat panel is open */
 .fl2 .full-top>div{min-width:0}
 .fl2 .full-top>div>b,.fl2 .full-top>div>span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* no focus ring on tap for player controls (keyboard users still get :focus-visible) */
+body .fl2 .ctl:focus:not(:focus-visible),body .player .fs-tb:focus:not(:focus-visible),body .fs-rot:focus:not(:focus-visible){outline:none!important;box-shadow:none!important}
+body .fl2 .ctl:focus-visible,body .player .fs-tb:focus-visible{outline:2px solid rgba(244,164,37,.7)!important;outline-offset:2px}
+/* speakers view v2: screen share large, host camera tile beside it, controls readable on dark */
+.fl2.is-grid{background:radial-gradient(80% 90% at 50% 45%,#1d1a28 0%,#0d0c12 70%)!important;--top:78px;--bot:70px;--avh:calc(var(--dw) - var(--top) - var(--bot));--mw:calc(var(--avh) * 16 / 9);--cw2:calc(var(--dh) - 52px - 28px - var(--mw) - 12px)}
+.fl2.is-grid .fl2-video{left:52px!important;top:var(--top)!important;width:var(--mw)!important;height:var(--avh)!important;border-radius:16px!important;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.fl2.is-grid .fl2-cam{left:calc(52px + var(--mw) + 12px)!important;top:var(--top)!important;width:var(--cw2)!important;height:calc(var(--cw2) * 9 / 16)!important;border-radius:16px!important;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.fl2.is-grid .fl2-cam .fl2-cam-img{border-radius:16px}
+.fl2.is-grid .ctl{background:rgba(255,255,255,.08)!important}
+.fl2.is-grid .ctl.on{background:rgba(255,255,255,.2)!important}
+
+/* speakers view: live chat fills the space under the host camera */
+.fl2.is-grid .fl3-chat,.fl2.is-grid .full-chat{display:flex!important;position:absolute!important;left:calc(52px + var(--mw) + 12px)!important;right:auto!important;width:var(--cw2)!important;top:calc(var(--top) + var(--cw2) * 9 / 16 + 10px)!important;bottom:calc(var(--bot) + 4px)!important;max-height:none!important;flex-direction:column;justify-content:flex-end;overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 28%);mask-image:linear-gradient(transparent,#000 28%)}
+.fl2.is-grid .fl3-chat .im-msg,.fl2.is-grid .full-chat .im-msg{max-width:100%!important;font-size:12.5px}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
