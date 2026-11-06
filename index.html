@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106065800"</script>
+<script>window.__BUILD__="20261106070941"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5127,6 +5127,14 @@ body .rc-paper,body .rc-paper.st-paid,body .rc-paper.st-pending,body .rc-paper.s
 .rc-why>div{display:flex;flex-direction:column;gap:2px}
 .rc-why b{font-size:13.5px;font-weight:700;color:#fff}
 .rc-why>div>span{font-size:12.5px;line-height:17px;color:rgba(255,255,255,.6)}
+
+/* incoming refund amount: emphasised in status colour */
+.rc-big>b.in{color:var(--sc)!important;-webkit-text-fill-color:var(--sc)!important;font-size:52px!important;line-height:56px!important;text-shadow:0 0 28px color-mix(in srgb,var(--sc) 35%,transparent)}
+.rc-big>b.in sup,.rc-big>b.in small,.rc-big>b.in i{-webkit-text-fill-color:var(--sc)!important;color:var(--sc)!important}
+.rc-big>b.in small{font-size:30px!important;opacity:.9}
+.rc-big>b.in sup{font-size:26px!important;top:8px}
+.rc-big>b.in i{font-style:normal;font-size:30px;font-weight:700;margin-right:2px;position:relative;top:-6px}
+.rc-top2.st-pending .rc-big>span,.rc-top2.st-refunded .rc-big>span{color:#fff;font-weight:650;font-size:13px}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -8013,8 +8021,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
               h('div', { className: 'rc-chiprow' }, h('span', { className: 'rc-chip' }, h(F.Icon, { name: IC, size: 14, stroke: 2.6 }), TT), h('span', { className: 'rc-date' }, isRf ? SUB.replace('Requested ', '').replace(/^Refunded (Nov \d+).*/, '$1') : o.when)),
               h('div', { className: 'rc-evh' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
               h('div', { className: 'rc-big' },
-                h('span', null, isRf ? 'Refund amount' : st.st === 'failed' ? 'Not charged' : 'Amount paid'),
-                h('b', null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
+                h('span', null, isRf ? (st.st === 'refunded' ? 'Refunded to you' : 'You\u2019ll get back') : st.st === 'failed' ? 'Not charged' : 'Amount paid'),
+                h('b', { className: isRf ? 'in' : '' }, isRf ? h('i', null, '+') : null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
                 isRf ? h('em', null, 'of ' + money(o.total) + ' paid \u00b7 ' + money(FEE) + ' service fee is non-refundable') : null),
               st.st === 'failed' ? h('div', { className: 'rc-why' }, h('span', null, h(F.Icon, { name: 'lock', size: 17 })), h('div', null, h('b', null, 'Declined by your bank'), h('span', null, 'Insufficient funds on ' + o.pmT + '. Try another card or top up and retry.'))) : null,
               isRf ? h('div', { className: 'rc-prog' },
