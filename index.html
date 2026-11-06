@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106064613"</script>
+<script>window.__BUILD__="20261106064912"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5063,6 +5063,35 @@ body .co-tk.on,body .co-pmr.on,body .ac-f input:focus{box-shadow:inset 0 0 0 1px
 body .co-cp:focus-within,body .ch2-in:focus-within,body .sc-in:focus-within,body .fl2-input:focus-within,body .ac-f input:focus,body .tarea:focus,body .ch2-ta:focus,body .player textarea:focus{box-shadow:inset 0 0 0 1px rgba(244,164,37,.6)!important}
 body .co-cp.err,body .co-cp.err:focus-within{box-shadow:inset 0 0 0 1px rgba(231,70,69,.65)!important}
 body .co-cp-ok{box-shadow:inset 0 0 0 1px rgba(57,200,124,.45)!important}
+
+/* receipt top v2 */
+.rc-top2{padding:20px 20px 18px;display:flex;flex-direction:column;gap:18px;--sc:#f4b740;--sb:rgba(244,183,64,.14)}
+.rc-top2.st-paid{--sc:#5fe09a;--sb:rgba(57,200,124,.14)}
+.rc-top2.st-refunded{--sc:#6fd8ea;--sb:rgba(57,202,224,.14)}
+.rc-top2.st-failed{--sc:#ff7a7a;--sb:rgba(231,70,69,.14)}
+.rc-h{display:flex;align-items:center;gap:12px}
+.rc-ic{flex:none;width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:var(--sc);background:var(--sb)}
+.rc-h>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.rc-h b{font-size:16px;font-weight:700;color:#fff}
+.rc-h>div>span{font-size:12.5px;color:rgba(255,255,255,.5)}
+.rc-big{display:flex;flex-direction:column;gap:2px}
+.rc-big>span{font-size:12.5px;color:rgba(255,255,255,.5)}
+.rc-big>b{font-size:44px;line-height:50px;font-weight:800;letter-spacing:-1px;color:#fff}
+.rc-big>b sup{font-size:22px;font-weight:700;vertical-align:top;position:relative;top:6px;margin-right:2px;color:rgba(255,255,255,.7)}
+.rc-big>b small{font-size:24px;font-weight:700;color:rgba(255,255,255,.55)}
+.rc-big em{font-style:normal;font-size:12px;color:rgba(255,255,255,.45)}
+.rc-prog{display:flex;flex-direction:column;gap:10px}
+.rc-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.rc-bar i{display:block;height:100%;border-radius:3px;background:var(--sc)}
+.rc-steps{display:grid;grid-template-columns:repeat(3,1fr)}
+.rc-sx{display:flex;flex-direction:column;gap:1px}
+.rc-sx:nth-child(2){align-items:center;text-align:center}
+.rc-sx:nth-child(3){align-items:flex-end;text-align:right}
+.rc-sx b{font-size:12.5px;font-weight:650;color:rgba(255,255,255,.45)}
+.rc-sx span{font-size:11.5px;color:rgba(255,255,255,.35)}
+.rc-sx.done b{color:var(--sc)}
+.rc-sx.cur b{color:#fff}
+.rc-sx.cur span{color:rgba(255,255,255,.55)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7616,6 +7645,13 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         open || extra <= 0 ? fm.map(function (x) { return h('b', { key: x }, x); }) : fm.slice(0, 2).map(function (x) { return h('b', { key: x }, x); }),
         extra > 0 ? h(Tap, { className: 'dt-ivm', onClick: function () { setOpen(!open); } }, open ? 'Show less' : '+' + (fm.length - 2) + ' more') : null));
   }
+  function ClampText(p) {
+    var r = useRef(null), m = useState(false), more = m[0], setMore = m[1], o = useState(false), over = o[0], setOver = o[1];
+    useEffect(function () { var el = r.current; if (el && !more) setOver(el.scrollHeight > el.clientHeight + 2); }, [p.text]);
+    return h(React.Fragment, null,
+      h('p', { ref: r, className: cx(p.className, !more && 'clamp') }, p.text),
+      over ? h(Tap, { className: 'dt-more', onClick: function () { setMore(!more); } }, more ? 'Less' : 'More', h(F.Icon, { name: 'chevronDown', size: 16, className: more ? 'flip' : '' })) : null);
+  }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
     var reg = e.id === 'xmas' && p.nav.registered;
@@ -7931,21 +7967,29 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
         h('div', { className: 'rc-paper st-' + st.st },
-          h('div', { className: 'rc-top' },
-            h('span', { key: 'emb' + st.st, className: 'rc-emb st-' + st.st }, h('i', { className: 'rc-halo' }), h('i', { className: 'rc-ring' }), h(RcBadge, { st: st.st })),
-            h('span', { className: 'rc-k' }, ({ paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refunded to your card', failed: 'Payment failed' })[st.st]),
-            h('b', { className: 'rc-amt' }, h('sup', null, '$'), money(o.total).slice(1).split('.')[0], h('small', null, '.' + money(o.total).split('.')[1])),
-            h('span', { className: 'rc-when' }, o.when),
-            h('span', { className: 'rc-st ' + stt[1] }, h('i'), stt[0])),
+          (function () {
+            var isRf = st.st === 'pending' || st.st === 'refunded', amt = isRf ? o.total - FEE : o.total;
+            var IC = { paid: 'check', pending: 'clock', refunded: 'refresh', failed: 'x' }[st.st];
+            var TT = { paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refund complete', failed: 'Payment failed' }[st.st];
+            var SUB = { paid: o.when, pending: 'Requested Nov 04, 10:12 AM', refunded: 'Refunded Nov 06 to ' + o.pmT.replace('Apple Pay \u00b7 ', ''), failed: o.when }[st.st];
+            var step = st.st === 'refunded' ? 3 : 1;
+            return h('div', { className: 'rc-top2 st-' + st.st },
+              h('div', { className: 'rc-h' }, h('span', { className: 'rc-ic' }, h(F.Icon, { name: IC, size: 20, stroke: 2.4 })), h('div', null, h('b', null, TT), h('span', null, SUB))),
+              h('div', { className: 'rc-big' },
+                h('span', null, isRf ? 'Refund amount' : st.st === 'failed' ? 'Amount attempted' : 'Amount paid'),
+                h('b', null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
+                isRf ? h('em', null, 'of ' + money(o.total) + ' paid \u00b7 ' + money(FEE) + ' service fee is non-refundable') : null),
+              isRf ? h('div', { className: 'rc-prog' },
+                h('div', { className: 'rc-bar' }, h('i', { style: { width: (step === 3 ? 100 : 18) + '%' } })),
+                h('div', { className: 'rc-steps' }, [['Requested', 'Nov 04'], ['Approved', st.st === 'refunded' ? 'Nov 04' : '~24h'], ['Refunded', st.st === 'refunded' ? 'Nov 06' : '5\u201310 days']].map(function (r, k) {
+                  return h('div', { key: k, className: cx('rc-sx', k < step && 'done', k === step && 'cur') }, h('b', null, r[0]), h('span', null, r[1]));
+                }))) : null);
+          })(),
           h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
           h('div', { className: 'rc-bot' },
           h('div', { className: 'rc-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
           h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
             h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total)))))),
-        st.st === 'pending' || st.st === 'refunded' ? h('div', { className: 'rc-tl' },
-          [['Refund requested', 'Nov 04, 10:12 AM', true], ['Approved by organizer', st.st === 'refunded' ? 'Nov 04, 2:30 PM' : 'Usually within 24h', st.st === 'refunded'], ['Back on ' + o.pmT.replace('Apple Pay · ', ''), st.st === 'refunded' ? 'Nov 06 · ' + money(o.total - FEE) : '5–10 business days', st.st === 'refunded']].map(function (r, i) {
-            return h('div', { key: i, className: cx('rc-step', r[2] && 'done') }, h('span', { className: 'rc-dot' }, r[2] ? h(F.Icon, { name: 'check', size: 12, stroke: 3 }) : null), h('div', null, h('b', null, r[0]), h('span', null, r[1])));
-          })) : null,
         st.st === 'failed' ? h('div', { className: 'rc-failbox' }, h(F.Icon, { name: 'x', size: 16 }), h('span', null, 'Declined by bank · Insufficient funds. You were not charged.')) : null,
         h('div', { className: 'rc-card rc-meta' },
           h('div', null, h('span', null, 'Payment method'), h('b', { className: 'rc-pm' }, h(CardLogo, { k: o.pm }), o.pmT)),
@@ -8022,7 +8066,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h('svg', { width: 19, height: 19, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.75, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: P }));
   }
   var ORGS = {
-    'Marc John': { cover: 'conference', badge: 'Top speaker', ev: '2.4k', fol: 1280, rate: '4.96', rv: 379, exp: ['Time management', 'Communication', 'Adaptability', 'Problem-solving', 'Teamwork', 'Leadership'], bio: 'Marc John is an entrepreneur and speaker who has founded several technology companies. He hosts live sessions on product, growth and leadership for founders and teams.' },
+    'Marc John': { cover: 'conference', badge: 'Top speaker', ev: '2.4k', fol: 1280, rate: '4.96', rv: 379, exp: ['Time management', 'Communication', 'Adaptability', 'Problem-solving', 'Teamwork', 'Leadership'], bio: 'Marc John is an entrepreneur and speaker who has founded several technology companies. He hosts live sessions on product, growth and leadership for founders and teams. Before Fit4Stream, he led product at two SaaS startups and has mentored 200+ early-stage founders. Expect practical frameworks, real case studies and plenty of time for live Q&A in every session.' },
     'thao15 nguyen15': { cover: 'xmas', badge: 'Event organizer', ev: '2', fol: 0, rate: '4.80', rv: 12, exp: ['Live music', 'Festivals', 'Travel', 'Food tours'], bio: 'thao15 nguyen15 hosts live concerts and festival tours across Vietnam — from Danang’s Christmas market to riverside music nights.' },
     'Sandra Smith': { cover: 'concert', badge: 'Performer', ev: '18', fol: 342, rate: '4.90', rv: 57, exp: ['Singing', 'Live gigs', 'Songwriting'], bio: 'Sandra Smith is a singer-songwriter who streams intimate live gigs and behind-the-scenes sessions.' }
   };
@@ -8053,8 +8097,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h(Tap, { className: cx('og-follow', following && 'on'), onClick: function () { p.nav.requireAuth('Sign in to follow organizers', function () { tap(12); setF(!following); }); } }, h(F.Icon, { name: following ? 'check' : 'plus', size: 18 }), following ? 'Following' : 'Follow'),
           h(Tap, { className: 'og-ic', label: 'Notifications', onClick: function () { p.nav.toast('You’ll be notified when ' + NAME.split(' ')[0] + ' goes live'); } }, h(F.Icon, { name: 'bell', size: 19 })))),
       h('section', { className: 'pad og-sec' },
-        h('p', { className: cx('og-bio', !more && 'clamp') }, bio),
-        h(Tap, { className: 'dt-more', onClick: function () { setMore(!more); } }, more ? 'Less' : 'More', h(F.Icon, { name: 'chevronDown', size: 16, className: more ? 'flip' : '' })),
+        h(ClampText, { className: 'og-bio', text: bio }),
         h('div', { className: 'og-chips' }, exp.map(function (e) { return h('span', { key: e }, e); })),
         h('div', { className: 'og-soc' }, [['in', 'LinkedIn'], ['x', 'X'], ['yt', 'YouTube'], ['ig', 'Instagram'], ['fb', 'Facebook']].map(function (s) { return h('a', { key: s[0], href: 'https://fit4stream.com', target: '_blank', rel: 'noopener', 'aria-label': s[1] }, h(SocIc, { n: s[0] })); }))),
       ONAIR ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'On air' })),
