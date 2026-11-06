@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106024948"</script>
+<script>window.__BUILD__="20261106025243"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4363,6 +4363,12 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .wr-acts .wr-b{flex:none!important}
 .wr-auto{justify-content:center}
 .wr-auto{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.6)}
+
+/* Upcoming: Register replaces reminders (registrants get auto-reminders) */
+.up-btn.pri.on{background:rgba(57,200,124,.16)!important;color:#7fe0a8!important;box-shadow:none!important}
+.up-btn.pri.on *{color:#7fe0a8!important}
+.up-reg{flex:none;align-self:center;height:32px;padding:0 14px;border-radius:16px;display:inline-flex!important;align-items:center;gap:5px;background:#F4A425;color:#1b1306;font-size:13px;font-weight:700;white-space:nowrap}
+.up-reg.on{background:rgba(57,200,124,.16);color:#7fe0a8}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6452,7 +6458,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad', style: { marginTop: 40 } }, h(F.EmptyState, { art: 'calendar', title: 'No upcoming events', body: 'When organizers schedule new events, they’ll appear here.', action: 'Browse categories', onAction: function () { p.nav.push('categories'); } })));
     var t = useTick(), rm = useState({}), rem = rm[0], setRem = rm[1];
     var f = EV.seo, left = Math.max(0, f.startsIn - t);
-    function toggle(id) { p.nav.requireAuth('Sign in to get reminders', function () { var o = Object.assign({}, rem); o[id] = !o[id]; setRem(o); tap(10); p.nav.toast(o[id] ? 'We’ll remind you before it starts' : 'Reminder off'); }); }
+    // registering = reminder: registrants are reminded automatically, so there is no separate bell
+    function register(e) { if (rem[e.id]) return p.nav.push('detail:' + e.id); p.nav.requireAuth('Sign in to register', function () {
+      if (e.price !== 'Free') return p.nav.push('checkout');
+      var o = Object.assign({}, rem); o[e.id] = true; setRem(o); tap(10); p.nav.toast('Registered \u00b7 we\u2019ll remind you before it starts'); }); }
+    function regBtn(e, cls) { var on = rem[e.id]; return h(Tap, { className: cx(cls, on && 'on'), label: on ? 'Registered' : 'Register', onClick: function (ev) { ev.stopPropagation && ev.stopPropagation(); register(e); } }, on ? h(F.Icon, { name: 'check', size: 14 }) : null, on ? 'Registered' : 'Register'); }
     var groups = [['Today', 'Tue, Nov 03', [EV.seo]], ['This week', 'Thu, Nov 05', [EV.gig]]];
     function unit(v, l) { return h('div', { className: 'up-u' }, h('b', null, (v < 10 ? '0' : '') + v), h('span', null, l)); }
     return h('div', { className: 'screen tabscreen' },
@@ -6469,8 +6479,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             h('span', { className: 'up-org' }, 'by ' + f.org + ' · ' + f.price),
             h('div', { className: 'up-count' }, unit(Math.floor(left / 3600), 'hrs'), h('em', null, ':'), unit(Math.floor(left / 60) % 60, 'min'), h('em', null, ':'), unit(left % 60, 'sec')),
             h('div', { className: 'up-acts' },
-              h(Tap, { className: cx('up-btn', rem[f.id] && 'on'), onClick: function (e) { e.stopPropagation && e.stopPropagation(); toggle(f.id); } }, h(F.Icon, { name: rem[f.id] ? 'check' : 'bell', size: 16 }), rem[f.id] ? 'Reminder set' : 'Remind me'),
-              h(Tap, { className: 'up-btn pri', onClick: function (e) { e.stopPropagation && e.stopPropagation(); p.nav.push('detail:' + f.id); } }, 'View details')))),
+              h(Tap, { className: 'up-btn', onClick: function (e) { e.stopPropagation && e.stopPropagation(); p.nav.push('detail:' + f.id); } }, 'View details'),
+              regBtn(f, 'up-btn pri')))),
         groups.map(function (g) {
           return h('section', { key: g[0], className: 'up-sec' },
             h('div', { className: 'up-sh' }, h('h3', null, g[0]), h('span', null, g[1])),
@@ -6480,7 +6490,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 h('div', { className: 'up-txt' }, h('b', null, e.title),
                   h('span', { className: 'up-meta' }, h(F.Icon, { name: 'clock', size: 13 }), e.time.split('–')[1].trim(), h('i', null), e.price),
                   h('span', { className: 'up-by' }, 'by ' + e.org)),
-                h(Tap, { className: cx('up-bell', rem[e.id] && 'on'), label: 'Remind me', onClick: function (ev) { ev.stopPropagation && ev.stopPropagation(); toggle(e.id); } }, h(F.Icon, { name: rem[e.id] ? 'check' : 'bell', size: 17 })));
+                regBtn(e, 'up-reg'));
             }));
         })),
       h('div', { style: { height: 140 } }));
