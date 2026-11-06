@@ -90,7 +90,7 @@
 
   /* ---------- where are we? (top page or the embedded careers/services page) ---------- */
   var CAREER_ROUTE = { 'index.html': '/tuyen-dung', 'jobs.html': '/tuyen-dung/vi-tri', 'services.html': '/dich-vu' };
-  function topRoute() { var h = (location.hash || '').replace(/^#/, '').split('?')[0].replace(/\/+$/, ''); return h || '/'; }
+  function topRoute() { var h = (location.hash || '').replace(/^#/, ''); try { h = decodeURIComponent(h); } catch (e) {} h = h.split('?')[0].replace(/\/+$/, ''); return h || '/'; }
   function frameEl() { var f = document.querySelector('iframe.ree-careers-frame'); try { return f && f.contentDocument && f.contentDocument.body ? f : null; } catch (e) { return null; } }
   function ctx() {
     var f = frameEl();
@@ -111,6 +111,7 @@
       return f;
     }
     var r = key.slice(5).split('?')[0].replace(/\/+$/, '') || '/';
+    try { if (window.__screenLabel) { var SL = window.__screenLabel(r); if (SL) return SL; } } catch (e) {}
     if (PAGE_NAMES[r]) return PAGE_NAMES[r];
     var cp = r.split(':'); if (PAGE_NAMES[cp[0]]) return PAGE_NAMES[cp[0]] + (cp[1] ? ' › ' + humanSlug(cp[1]) : '');
     var seg = r.split('/').filter(Boolean), base = '/' + seg[0];

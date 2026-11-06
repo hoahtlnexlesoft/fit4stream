@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261105104531"</script>
+<script>window.__BUILD__="20261106023114"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7387,7 +7387,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   /* ---------- app shell with navigation stack ---------- */
   var MODALS = /^(nomodal)$/;
   function App() {
-    var startHash = (location.hash || '').replace('#', '');
+    var startHash = decodeURIComponent((location.hash || '').replace('#', ''));
     var init = (SCREENS[startHash.split(':')[0]] || startHash === 'payout') ? stackFor(startHash) : ['welcome'];
     var startLaunch = /^(welcome|splash)$/.test(init[0]);
     if (startLaunch) { init = ['home']; window.__fromLaunch = true; }
@@ -7417,9 +7417,22 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     nav.root = function (n) { setDir('fade'); setStack([n]); };
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
-    if (startHash === 'success' || startHash === 'player' || startHash === 'full') nav.registered = true;
+    if (/^(success|player|full)(:|$)/.test(startHash)) nav.registered = true;
     window.__jump = function (n) { nav.empty = n === 'home-empty'; if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
-    useEffect(function () { try { history.replaceState(null, '', '#' + top.split(':')[0]); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
+    // the URL hash names the exact screen *and* its variant (e.g. #player:waiting, #checkout:coupon, #detail:seo),
+    // so feedback comments are filed against the screen that was really on show
+    useEffect(function () { try { history.replaceState(null, '', '#' + top); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
+    var topRef = useRef(top); topRef.current = top;
+    useEffect(function () {
+      function onHash() {
+        var hh = decodeURIComponent((location.hash || '').replace('#', '')); if (!hh || hh === topRef.current) return;
+        var b = hh.split(':')[0]; if (!SCREENS[b]) return;
+        setLaunch(false); if (AUTHED.test(b)) setAuthed(true); if (/^(player|full|success)$/.test(b)) nav.registered = true;
+        var st = stackFor(hh); if (st.length === 1 && TABS.indexOf(b) < 0) st = ['home', hh];
+        setPip(false); setDir('fade'); setStack(st);
+      }
+      window.addEventListener('hashchange', onHash); return function () { window.removeEventListener('hashchange', onHash); };
+    }, []);
 
     // interactive swipe-back (iOS style): drag right from anywhere (or the left edge) to reveal the previous screen
     var sw = useRef(null), dx = useState(0), drag = dx[0], setDrag = dx[1], sa = useState(0), swAnim = sa[0], setSwAnim = sa[1], appEl = useRef(null), swClick = useRef(false);
@@ -7537,10 +7550,23 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   }
   root.render(React.createElement(F4Boundary, null, React.createElement(window.__F4S_APP__)));
   var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout — choose method & tickets'],['checkout-coupon','11b Checkout — promo applied, 2 tickets'],['checkout-coupon-bad','11c Checkout — invalid promo'],['checkout-addcard','11d Checkout — add new card'],['checkout-processing','11e Payment processing'],['checkout-declined','11f Payment declined'],['success','12 Registered'],['payments','12b Payment history'],['receipt-paid','12c Receipt — paid'],['receipt-refund','12d Receipt — request refund'],['receipt-pending','12e Receipt — refund pending'],['receipt-refunded','12f Receipt — refunded'],['receipt-failed','12g Receipt — failed payment'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['player-stage','15b Live — multi-speaker stage'],['player-invite','15c Live — invited to speak'],['player-onstage','15d Live — you are on stage'],['player-waiting','15e Live — waiting room'],['player-ended','15f Live — ended'],['player-reconnect','15g Live — reconnecting'],['full','16 Fullscreen']];
+  // map an app hash (#player:waiting, #receipt:F4S-…|refund, #detail:payout…) to its entry in the screen list
+  var RCPT = { 'F4S-261103-0412': 'receipt-paid', 'F4S-261103-0412|refund': 'receipt-refund', 'F4S-261103-0412|pending': 'receipt-pending', 'F4S-261030-0977': 'receipt-refunded', 'F4S-261022-0315': 'receipt-failed' };
+  function hk(h) {
+    h = decodeURIComponent(String(h || '').replace(/^#/, '')) || 'welcome';
+    var has = function (k) { return list.some(function (it) { return it[0] === k; }); };
+    if (has(h)) return h;
+    var b = h.split(':')[0], a = h.slice(b.length + 1);
+    if (b === 'receipt' && RCPT[a]) return RCPT[a];
+    if (b === 'detail' && a === 'payout') return 'payout';
+    if ((b === 'player' || b === 'checkout') && has(b + '-' + a)) return b + '-' + a;
+    return b;
+  }
+  window.__screenLabel = function (h) { h = decodeURIComponent(String(h || '').replace(/^#/, '')); var k = hk(h); if (k === h.split(':')[0] && h.indexOf(':') > 0 && !(h === 'detail:seo')) return null; var it = list.filter(function (x) { return x[0] === k; })[0]; return it ? it[1] : null; };
   var jump = document.getElementById('jump');
   list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); sel={k:it[0],h:null}; setTimeout(function(){ if(sel&&sel.k===it[0]) sel.h=location.hash; mark(); },120); mark(); }; jump.appendChild(b); });
   var sel=null;
-  function mark(){ var h=location.hash, k; if(sel&&(sel.h===null||sel.h===h)) k=sel.k; else { sel=null; k=(h||'#welcome').slice(1); } Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
+  function mark(){ var h=location.hash, k; if(sel&&(sel.h===null||sel.h===h)) k=sel.k; else { sel=null; k=hk(h); } Array.prototype.forEach.call(jump.children,function(b){ b.classList.toggle('on', b.dataset.k===k); }); }
   setInterval(mark, 400); mark();
   if (dev && !pane2) {
     var fab = document.createElement('button'); fab.type = 'button'; fab.id = 'pg-fab'; fab.setAttribute('aria-label', 'Jump to a screen');
@@ -7548,7 +7574,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var pg = document.createElement('div'); pg.id = 'pg-sheet'; pg.innerHTML = '<div class="pg-scrim"></div><div class="pg-panel" role="dialog" aria-label="Screens"><div class="pg-grab"></div><div class="pg-head"><b>Screens</b><button type="button" class="pg-x" aria-label="Close">\u2715</button></div><div class="pg-list"></div></div>';
     var pl = pg.querySelector('.pg-list');
     list.forEach(function (it) { var b = document.createElement('button'); b.type = 'button'; b.dataset.k = it[0]; var m = it[1].match(/^(\S+)\s+(.*)$/); b.innerHTML = '<em>' + m[1] + '</em><span>' + m[2] + '</span>'; b.onclick = function () { window.__jump && window.__jump(it[0]); sel = { k: it[0], h: null }; setTimeout(function () { if (sel && sel.k === it[0]) sel.h = location.hash; mark(); }, 120); close(); }; pl.appendChild(b); });
-    function open() { var k = (sel && sel.k) || (location.hash || '#welcome').slice(1); Array.prototype.forEach.call(pl.children, function (b) { b.classList.toggle('on', b.dataset.k === k); }); pg.classList.add('open'); var on = pl.querySelector('.on'); if (on) on.scrollIntoView({ block: 'center' }); }
+    function open() { var k = (sel && sel.k) || hk(location.hash); Array.prototype.forEach.call(pl.children, function (b) { b.classList.toggle('on', b.dataset.k === k); }); pg.classList.add('open'); var on = pl.querySelector('.on'); if (on) on.scrollIntoView({ block: 'center' }); }
     function close() { pg.classList.remove('open'); }
     fab.onclick = open; pg.querySelector('.pg-scrim').onclick = close; pg.querySelector('.pg-x').onclick = close;
     document.body.appendChild(fab); document.body.appendChild(pg);
@@ -7582,5 +7608,5 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 /* Feedback layer: only on the shared Vercel site (and local file tests), never inside the Claude preview */
 (function(){ var h=location.hostname; if(/[?&]pane2\b/.test(location.search)) return; if(!(/vercel\.app$/.test(h) || location.protocol==='file:')) return;
   function add(src,d){ var s=document.createElement('script'); s.src=src; if(d) s.defer=true; s.async=false; document.body.appendChild(s); }
-  add('./review/config.js?v=3'); add('./review/review.js?v=4', true); })();
+  add('./review/config.js?v=3'); add('./review/review.js?v=5', true); })();
 </script>
