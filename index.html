@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106093153"</script>
+<script>window.__BUILD__="20261106093914"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5380,6 +5380,22 @@ body .rc3-help .q{flex:0 0 18px!important;max-width:18px!important;min-width:18p
 .rc3-sb{height:46px;border-radius:23px;display:flex!important;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:650;color:rgba(255,255,255,.88);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
 .rc3-sb svg{stroke:currentColor;opacity:.75}
 .rc3-sb.rf{color:#ff9b8f}
+
+/* gender sheet v2 */
+.pf-sub{margin:-4px 0 14px;font-size:13.5px;color:rgba(255,255,255,.55)}
+.pf-gg{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-bottom:10px}
+.pf-gt{position:relative;height:104px;border-radius:20px;display:flex!important;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:14px;text-align:left;background:rgba(255,255,255,.045);transition:background .15s,box-shadow .15s}
+.pf-gt b{font-size:15px;font-weight:650;color:#fff}
+.pf-gi{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.pf-gt.on{background:color-mix(in srgb,var(--c) 12%,rgba(255,255,255,.03));box-shadow:inset 0 0 0 1.5px var(--c)}
+.pf-gt .pf-gck{position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--c)!important;color:#fff;box-shadow:none!important}
+/* birthday sheet v2 */
+.bd-prev{display:flex;align-items:baseline;justify-content:space-between;padding:14px 16px;margin:0 0 6px;border-radius:16px;background:rgba(255,255,255,.045)}
+.bd-prev b{font-size:20px;font-weight:750;color:#fff;font-variant-numeric:tabular-nums}
+.bd-prev span{font-size:13px;font-weight:600;color:#f4b740;background:rgba(244,164,37,.13);padding:4px 10px;border-radius:12px}
+.wh-band{background:rgba(244,164,37,.1)!important;box-shadow:inset 0 0 0 1px rgba(244,164,37,.35)}
+.wh-it.on{color:#f4b740!important;font-size:18px}
+.wh{grid-template-columns:1.4fr .7fr 1fr!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7136,12 +7152,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function Row(icon, label, field, input) { return h('label', { className: 'pf-row' }, ic(icon), h('span', { className: 'pf-l' }, label), field || input); }
     function Txt(k, ph, type, ac) { return h('input', { className: cx('pf-v', !v[k] && 'empty'), type: type || 'text', value: v[k], placeholder: ph || 'Add', autoComplete: ac || 'off', onChange: function (e) { set(k, e.target.value); } }); }
     var bday = v.birthday ? new Date(v.birthday + 'T00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-    var GOPT = [['Female', 'user'], ['Male', 'user'], ['Non-binary', 'users'], ['Prefer not to say', 'eyeOff']];
+    var GOPT = [['Female', 'gender', '#f472b6'], ['Male', 'user', '#5b8cf0'], ['Non-binary', 'users', '#a57ad8'], ['Prefer not to say', 'eyeOff', '#8a9ab0']];
     var gSheet = gs ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) setGs(false); } },
       h('div', { className: 'sheet pf-gsheet', role: 'dialog', 'aria-label': 'Gender' }, h('span', { className: 'grab' }),
         h('div', { className: 'ac-head' }, h('h2', null, 'Gender'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: function () { setGs(false); } }, h(F.Icon, { name: 'x', size: 18 }))),
-        h('div', { className: 'pf-gl2' }, GOPT.map(function (g) { var on = v.gender === g[0];
-          return h(Tap, { key: g[0], className: cx('pf-go', on && 'on'), go: function () { tap(6); set('gender', g[0]); setTimeout(function () { setGs(false); }, 160); } }, h('span', null, g[0]), h('i', { className: 'pf-gck' }, on ? h(F.Icon, { name: 'check', size: 14, stroke: 3 }) : null)); }))))) : null;
+        h('p', { className: 'pf-sub' }, 'How would you like to be identified?'),
+        h('div', { className: 'pf-gg' }, GOPT.map(function (g) { var on = v.gender === g[0];
+          return h(Tap, { key: g[0], className: cx('pf-gt', on && 'on'), style: { '--c': g[2] }, go: function () { tap(6); set('gender', g[0]); setTimeout(function () { setGs(false); }, 220); } },
+            h('span', { className: 'pf-gi' }, h(F.Icon, { name: g[1], size: 22 })), h('b', null, g[0]), on ? h('i', { className: 'pf-gck' }, h(F.Icon, { name: 'check', size: 12, stroke: 3.2 })) : null); }))))) : null;
     var bSheet = bs ? toApp(h(BdaySheet, { value: v.birthday, close: function () { setBs(false); }, save: function (d) { set('birthday', d); setBs(false); p.nav.toast('Birthday saved'); } })) : null;
     return h('div', { className: 'screen tabscreen pf' }, gSheet, bSheet,
       h('div', { className: 'pf-hero' },
@@ -8349,10 +8367,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('path', { className: 'rc-badge-glyph', d: G[0], transform: 'translate(60 60) scale(.66) translate(-60 -60)', fill: 'none', stroke: 'url(#' + id + 'g)', strokeWidth: 6.5, strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'url(#' + id + 'l)', pathLength: 100 }));
   }
   function Wheel(p) {
-    var ref = useRef(null), H = 40;
-    useEffect(function () { if (ref.current) ref.current.scrollTop = p.index * H; }, []);
-    return h('div', { className: 'wh-col', ref: ref, onScroll: function (e) { var el = e.currentTarget; clearTimeout(el.__t); el.__t = setTimeout(function () { var k = Math.max(0, Math.min(p.items.length - 1, Math.round(el.scrollTop / H))); if (k !== p.index) { tap(4); p.onChange(k); } }, 90); } },
-      h('div', { className: 'wh-pad' }), p.items.map(function (x, k) { return h('div', { key: k, className: cx('wh-it', k === p.index && 'on'), onClick: function (e) { e.currentTarget.parentNode.scrollTo({ top: k * H, behavior: 'smooth' }); } }, x); }), h('div', { className: 'wh-pad' }));
+    var ref = useRef(null), H = 40, L = p.items.length, R = p.loop ? 5 : 1, MID = p.loop ? 2 * L : 0;
+    var list = []; for (var r = 0; r < R; r++) list = list.concat(p.items);
+    useEffect(function () { if (ref.current) ref.current.scrollTop = (MID + p.index) * H; }, []);
+    return h('div', { className: 'wh-col', ref: ref, onScroll: function (e) { var el = e.currentTarget; clearTimeout(el.__t); el.__t = setTimeout(function () {
+        var raw = Math.max(0, Math.min(list.length - 1, Math.round(el.scrollTop / H))), k = raw % L;
+        if (p.loop && Math.abs(raw - (MID + k)) >= L) { el.style.scrollSnapType = 'none'; el.scrollTop = (MID + k) * H; requestAnimationFrame(function () { el.style.scrollSnapType = ''; }); }
+        if (k !== p.index) { tap(4); p.onChange(k); } }, 110); } },
+      h('div', { className: 'wh-pad' }), list.map(function (x, k) { return h('div', { key: k, className: cx('wh-it', k % L === p.index && 'on'), onClick: function (e) { e.currentTarget.parentNode.scrollTo({ top: k * H, behavior: 'smooth' }); } }, x); }), h('div', { className: 'wh-pad' }));
   }
   function BdaySheet(p) {
     var init = p.value ? new Date(p.value + 'T00:00') : new Date(1995, 0, 1);
@@ -8365,9 +8387,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
       h('div', { className: 'sheet pf-bsheet', role: 'dialog', 'aria-label': 'Birthday' }, h('span', { className: 'grab' }),
         h('div', { className: 'ac-head' }, h('h2', null, 'Birthday'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 }))),
+        h('div', { className: 'bd-prev' }, h('b', null, MONTHS_EN[v.m].slice(0, 3) + ' ' + (dd + 1) + ', ' + yrs[v.y]), h('span', null, (function () { var t = new Date(), a = t.getFullYear() - yrs[v.y]; if (t.getMonth() < v.m || (t.getMonth() === v.m && t.getDate() < dd + 1)) a--; return a + ' years old'; })())),
         h('div', { className: 'wh' }, h('i', { className: 'wh-band' }),
-          h(Wheel, { items: MONTHS_EN, index: v.m, onChange: function (k) { up('m', k); } }),
-          h(Wheel, { key: 'd' + dim, items: days, index: dd, onChange: function (k) { up('d', k); } }),
+          h(Wheel, { loop: true, items: MONTHS_EN, index: v.m, onChange: function (k) { up('m', k); } }),
+          h(Wheel, { loop: true, key: 'd' + dim, items: days, index: dd, onChange: function (k) { up('d', k); } }),
           h(Wheel, { items: yrs, index: v.y, onChange: function (k) { up('y', k); } })),
         h('p', { className: 'pf-bnote' }, 'Only used to personalise your experience. Not shown publicly.'),
         h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { p.save(iso); } }, 'Save birthday')));
