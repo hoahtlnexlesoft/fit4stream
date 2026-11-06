@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106031422"</script>
+<script>window.__BUILD__="20261106031612"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4520,6 +4520,9 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .eg-cr b{font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .eg-cr span{font-size:12px;color:rgba(255,255,255,.5)}
 .tl-t2 span{display:block;font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+
+.dt-card.dt-multi{min-width:168px}
+.dt-card.dt-multi .dt-chips{justify-content:center}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6042,7 +6045,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     xmas: { id: 'xmas', trailer: 48, title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: ['Live Performance', 'Market Tour', 'Q&A'], type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
       about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
-    seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
+    seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: ['Training Session', 'Workshop', 'Live Q&A'], type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
     gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
   };
   // extra demo events so the Home hero shows its full set (client rule: max 10 there)
@@ -6055,7 +6058,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
    ['arena', 'Arena Tour: Encore Night', 'Khoa Dang', 'hero', 'Concerts and Performances', 'November 15, 2026', '20:00 – 120 mins', '$14.99'],
    ['yoga', 'Sunrise Yoga Flow (Live Class)', 'Vy Nguyen', 'festival', 'Virtual Workshops and Training', 'November 16, 2026', '06:00 – 60 mins', 'Free']
   ].forEach(function (x) { if (EV[x[0]]) return; var t = x[6].split(' – ')[0], hh = +t.split(':')[0], mm = t.split(':')[1], d = +x[6].split(' – ')[1].split(' ')[0];
-    var end = new Date(0, 0, 0, hh, +mm + d); EV[x[0]] = Object.assign({}, EV.seo, { id: x[0], title: x[1], org: x[2], img: PH[x[3]] || PH.concert, cat: x[4], date: x[5], time: x[6], range: t + ' – ' + ('0' + end.getHours()).slice(-2) + ':' + ('0' + end.getMinutes()).slice(-2), price: x[7], status: 'upcoming', trailer: 0, registers: 20 + x[1].length, startsIn: 86400 }); });
+    var end = new Date(0, 0, 0, hh, +mm + d); EV[x[0]] = Object.assign({}, EV.seo, { format: 'Live Session', id: x[0], title: x[1], org: x[2], img: PH[x[3]] || PH.concert, cat: x[4], date: x[5], time: x[6], range: t + ' – ' + ('0' + end.getHours()).slice(-2) + ':' + ('0' + end.getMinutes()).slice(-2), price: x[7], status: 'upcoming', trailer: 0, registers: 20 + x[1].length, startsIn: 86400 }); });
   function evFrom(param) { return EV[param] || EV.xmas; }
   function fmtT(s) { s = Math.max(0, s); function z(n) { return (n < 10 ? '0' : '') + n; } return z(Math.floor(s / 3600)) + ':' + z(Math.floor(s / 60) % 60) + ':' + z(s % 60); }
   /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
