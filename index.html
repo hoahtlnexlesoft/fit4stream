@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106075022"</script>
+<script>window.__BUILD__="20261106075152"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6887,7 +6887,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, zh = (zb - stage.getBoundingClientRect().top) / k, key;
         key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - zh) + '|' + Math.round(b + FF / 3);
         if (n.__m === key) continue; n.__m = key;
-        var m = key ? 'linear-gradient(180deg,rgba(0,0,0,.04) ' + Math.round(b - zh) + 'px,rgba(0,0,0,.1) ' + Math.round(b - 10) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
+        if (n.__media === undefined) n.__media = n.offsetHeight > 150 && /dt-hero|dt-himg|dt-hshade|og-hero|og-cover|ch2-hero|hero-media|cf3-media|thumb|img/.test(n.className + ' ' + (n.firstElementChild ? n.firstElementChild.className : ''));
+        var a0 = n.__media ? '.55' : '.04', a1 = n.__media ? '.7' : '.1';
+        var m = key ? 'linear-gradient(180deg,rgba(0,0,0,' + a0 + ') ' + Math.round(b - zh) + 'px,rgba(0,0,0,' + a1 + ') ' + Math.round(b - 10) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
         n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
     }
