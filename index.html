@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106061452"</script>
+<script>window.__BUILD__="20261106061605"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5028,6 +5028,12 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-stats>div+div{border-left:1px solid rgba(255,255,255,.08)}
 .dt-stats b{font-size:18px;font-weight:700;color:#fff;line-height:22px}
 .dt-stats span{font-size:11.5px;color:rgba(255,255,255,.5)}
+
+/* CTA row: primary + icon actions */
+.dt-ctarow{align-self:stretch;display:flex;align-items:center;gap:10px;margin-top:18px}
+.dt-ctarow .dt-cta{flex:1;min-width:0;margin-top:0!important;font-size:15px!important;white-space:nowrap}
+.dt-ib{flex:none;width:56px;height:56px;border-radius:50%;display:grid!important;place-items:center;color:#fff;background:rgba(255,255,255,.07)}
+.dt-ib.on{color:#f4b740;background:rgba(244,183,64,.14)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7607,12 +7613,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           [[e.registers, 'Registered'], [e.views, e.views === 1 ? 'View' : 'Views'], [e.likes, e.likes === 1 ? 'Like' : 'Likes']].map(function (x) {
             return h('div', { key: x[1] }, h('b', null, x[0]), h('span', null, x[1]));
           })),
-        ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
-          : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room \u00b7 starts in 5 min')
-          : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
-        h('div', { className: 'dt-acts' },
-          h(Tap, { className: cx('dt-act', saved && 'on'), onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h('span', null, h(F.Icon, { name: saved ? 'check' : 'plus', size: 22 })), saved ? 'Saved' : 'Save'),
-          h(Tap, { className: 'dt-act', onClick: function () { p.nav.share({ title: e.title, img: e.img }); } }, h('span', null, h(F.Icon, { name: 'share', size: 20 })), 'Share')),
+        h('div', { className: 'dt-ctarow' },
+          ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
+            : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
+            : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
+          h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: saved ? 'check' : 'plus', size: 22 })),
+          h(Tap, { className: 'dt-ib', label: 'Share', onClick: function () { p.nav.share({ title: e.title, img: e.img }); } }, h(F.Icon, { name: 'share', size: 20 }))),
         h('p', { className: cx('dt-about', !e.about && 'muted') }, more || about.length < 150 ? about : about.slice(0, 150) + '…'),
         about.length >= 150 ? h(Tap, { className: 'dt-more', onClick: function () { setMore(!more); } }, more ? 'Less' : 'More', h(F.Icon, { name: 'chevronDown', size: 16, className: more ? 'flip' : '' })) : null),
       h('section', { className: 'dt-sec' },
