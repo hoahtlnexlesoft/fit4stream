@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106034635"</script>
+<script>window.__BUILD__="20261106035140"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6364,6 +6364,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
    ['yoga', 'Sunrise Yoga Flow (Live Class)', 'Vy Nguyen', 'festival', 'Virtual Workshops and Training', 'November 16, 2026', '06:00 – 60 mins', 'Free']
   ].forEach(function (x) { if (EV[x[0]]) return; var t = x[6].split(' – ')[0], hh = +t.split(':')[0], mm = t.split(':')[1], d = +x[6].split(' – ')[1].split(' ')[0];
     var end = new Date(0, 0, 0, hh, +mm + d); EV[x[0]] = Object.assign({}, EV.seo, { format: 'Live Session', id: x[0], title: x[1], org: x[2], img: PH[x[3]] || PH.concert, cat: x[4], date: x[5], time: x[6], range: t + ' – ' + ('0' + end.getHours()).slice(-2) + ':' + ('0' + end.getMinutes()).slice(-2), price: x[7], status: 'upcoming', trailer: 0, registers: 20 + x[1].length, startsIn: 86400 }); });
+  // demo data is authored around Nov 3, 2026 ("today"); shift every event so that day is the real current date
+  var REAL = new Date(); REAL.setHours(0, 0, 0, 0);
+  var MONTHS_EN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var DAY_SHIFT = Math.round((REAL - new Date(2026, 10, 3)) / 864e5);
+  function shiftDate(str) { var x = String(str).match(/^(\w+) (\d+), (\d+)$/); if (!x || MONTHS_EN.indexOf(x[1]) < 0) return str; var d = new Date(+x[3], MONTHS_EN.indexOf(x[1]), +x[2] + DAY_SHIFT); return MONTHS_EN[d.getMonth()] + ' ' + ('0' + d.getDate()).slice(-2) + ', ' + d.getFullYear(); }
+  function fmtDay(off, opt) { var d = new Date(REAL); d.setDate(d.getDate() + off); return d.toLocaleDateString('en-US', opt || { weekday: 'short', month: 'short', day: '2-digit' }); }
+  Object.keys(EV).forEach(function (k) { if (!EV[k].__shifted) { EV[k].date = shiftDate(EV[k].date); EV[k].__shifted = 1; } });
+  // how long a live event has been on air, e.g. "Live 1h 01m" (unambiguous, unlike a bare 01:01)
+  function liveFor(e, t) { var sec = Math.max(0, 8220 - (e.left - (t || 0))), hh = Math.floor(sec / 3600), mm = Math.floor(sec / 60) % 60; return 'Live ' + (hh ? hh + 'h ' + ('0' + mm).slice(-2) + 'm' : mm + 'm'); }
   function evFrom(param) { return EV[param] || EV.xmas; }
   function fmtT(s) { s = Math.max(0, s); function z(n) { return (n < 10 ? '0' : '') + n; } return z(Math.floor(s / 3600)) + ':' + z(Math.floor(s / 60) % 60) + ':' + z(s % 60); }
   /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
@@ -6381,7 +6390,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('i', { className: 'cf3-shade' }),
         h('div', { className: 'cf3-tl' }, live ? [h('span', { key: 'l', className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { key: 'v', className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))] :
           h('span', { className: 'cf3-chip' }, ended ? 'Ended' : e.date.replace(', 2026', ''))),
-        live ? h('span', { className: 'cf3-time' }, fmtT(e.left - t)) : h('span', { className: 'cf3-time' }, ended ? 'Replay' : e.range.split('\u2013')[0].trim()),
+        live ? h('span', { className: 'cf3-time' }, liveFor(e, t)) : h('span', { className: 'cf3-time' }, ended ? 'Replay' : e.range.split('\u2013')[0].trim()),
         live && p.nav.authed && p.nav.registered !== false ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 18 })) : null),
       h('div', { className: 'cf3-body' },
         h('b', null, e.title),
@@ -6832,13 +6841,13 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'),
                 h('span', { className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))) :
                 h('div', { className: 'cf3-tl' }, h('span', { className: 'cf3-chip' }, soon ? 'Starts in 5 min' : e.date.replace(', 2026', ''))),
-              live ? h('span', { className: 'cf3-time' }, fmtT(Math.max(0, 8220 - e.left)).slice(0, 5)) : null,
+              live ? h('span', { className: 'cf3-time' }, liveFor(e)) : null,
               live && reg && p.nav.authed ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 20 })) : null),
             h('div', { className: 'cf3-body' },
               h('b', null, e.title),
               h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, e.cat.replace(' and Performances', '').replace('Virtual ', '').replace(' and Training', ''))),
               h('div', { className: 'cf-foot' },
-                live ? h('span', { className: 'live-since' }, h('i'), 'Started 12 min ago') : soon ? h('span', { className: 'soon soon5' }, h(F.Icon, { name: 'clock', size: 14 }), 'Doors open now') : h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
+                live ? h('span', { className: 'live-since' }, h('i'), 'Started at ' + e.range.split('\u2013')[0].trim()) : soon ? h('span', { className: 'soon soon5' }, h(F.Icon, { name: 'clock', size: 14 }), 'Doors open now') : h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
                 soon ? h(Tap, { className: 'mini-cta live', go: function () { p.nav.push('player:waiting'); } }, h('span', { className: 'row gap6' }, h(F.Icon, { name: 'clock', size: 14, className: 'nofill', stroke: 2.2 }), 'Enter')) :
                 h(Tap, { className: live && reg ? 'mini-cta live' : 'mini-cta', go: function () { if (live && !p.nav.authed) return p.nav.requireAuth('Sign in to register for this event'); p.nav.push(live && reg ? 'player' : (live ? 'checkout' : 'detail:' + e.id)); } }, live && reg ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Join live') : 'Register'))));
         })),
@@ -6975,7 +6984,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       if (e.price !== 'Free') return p.nav.push('checkout');
       var o = Object.assign({}, rem); o[e.id] = true; setRem(o); tap(10); p.nav.toast('Registered \u00b7 we\u2019ll remind you before it starts'); }); }
     function regBtn(e, cls) { var on = rem[e.id]; return h(Tap, { className: cx(cls, on && 'on'), label: on ? 'Registered' : 'Register', onClick: function (ev) { ev.stopPropagation && ev.stopPropagation(); register(e); } }, on ? h(F.Icon, { name: 'check', size: 14 }) : null, on ? 'Registered' : 'Register'); }
-    var groups = [['Today', 'Tue, Nov 03', [EV.seo]], ['This week', 'Thu, Nov 05', [EV.gig]]];
+    var groups = [['Today', fmtDay(0), [EV.seo]], ['This week', fmtDay(2), [EV.gig]]];
     function unit(v, l) { return h('div', { className: 'up-u' }, h('b', null, (v < 10 ? '0' : '') + v), h('span', null, l)); }
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
@@ -7013,9 +7022,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     // Event Guide per client spec (Redmine #94632): month nav + Today, Timeline / List / Calendar views, search, day strip with arrows,
     // List view adds status filter, sort and a "live now" summary bar.
     var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var TODAY = { y: 2026, m: 10, d: 3 };
-    var ms = useState({ y: 2026, m: 10 }), ym = ms[0], setYm = ms[1];
-    var sd = useState(3), selDay = sd[0], setSelDay = sd[1];
+    var TODAY = { y: REAL.getFullYear(), m: REAL.getMonth(), d: REAL.getDate() };
+    var ms = useState({ y: TODAY.y, m: TODAY.m }), ym = ms[0], setYm = ms[1];
+    var sd = useState(TODAY.d), selDay = sd[0], setSelDay = sd[1];
     var ws = useState(0), wk = ws[0], setWk = ws[1];
     var vs = useState('timeline'), view = vs[0], setView = vs[1];
     var q = useState(''), query = q[0], setQ = q[1];
