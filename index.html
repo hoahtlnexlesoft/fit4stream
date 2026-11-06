@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106073752"</script>
+<script>window.__BUILD__="20261106074038"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6854,9 +6854,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function run(el) {
       var stage = el.closest('.stage'); if (!stage) return;
       var y = el.scrollTop, base = 0;
-      var hd = stage.querySelector('.top, .brand-head, .d-top');
-      if (hd && hd.offsetHeight) base = hd.getBoundingClientRect().bottom;
-      else { var tb = stage.querySelector('.top-blur'); base = tb ? tb.getBoundingClientRect().bottom - 16 : el.getBoundingClientRect().top + 40; }
+      var hd = stage.querySelector('.top, .brand-head, .d-top'), ttl = hd && hd.querySelector('h1, .top-title, .brand, b');
+      var stH = parseFloat(getComputedStyle(stage).getPropertyValue('--st')) || 54;
+      if (hd && hd.offsetHeight && ttl && ttl.textContent.trim()) base = hd.getBoundingClientRect().bottom;
+      else base = stage.getBoundingClientRect().top + stH + 6;
       var list = el.__fadeList; if (!list || y <= 2) { list = []; pick(el, list, 0); el.__fadeList = list; }
       for (var i = 0; i < list.length; i++) {
         var n = list[i], r = n.getBoundingClientRect(), f;
