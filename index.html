@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106081540"</script>
+<script>window.__BUILD__="20261106081919"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5345,6 +5345,13 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 .wh-it{height:40px;line-height:40px;text-align:center;scroll-snap-align:center;font-size:17px;color:rgba(255,255,255,.45);cursor:pointer;font-variant-numeric:tabular-nums;transition:color .15s}
 .wh-it.on{color:#fff;font-weight:700}
 .pf-bnote{margin:0 0 14px;text-align:center;font-size:12.5px;color:rgba(255,255,255,.45)}
+
+/* status line: same treatment for every state (dot + halo + text in one colour) */
+.dt-status{--c:#f4b740}
+.dt-status.live{--c:#ff5a5a}
+.dt-status.off{--c:#9a9ca6}
+.dt-status>i{background:var(--c)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 20%,transparent)!important}
+.dt-status>b{color:var(--c)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
