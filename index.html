@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106043803"</script>
+<script>window.__BUILD__="20261106044049"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4954,6 +4954,20 @@ body[data-phone=foldopen] .dh-price.free{color:#7fe0a8;background:rgba(57,200,12
 .dt-fmt .dt-fs em{font-style:normal;font-size:11px;font-weight:700;color:#f4b740;background:rgba(244,164,37,.14);padding:1px 7px;border-radius:999px;line-height:17px}
 .dt-fl{display:flex;flex-direction:column;gap:3px}
 .dt-fl b{font-size:13px!important;line-height:17px!important;white-space:nowrap}
+
+/* event card typography: lighter, calmer */
+body .cf3 .cf3-body{gap:6px!important;padding:10px 12px 12px!important}
+body .cf3 .cf3-body>b{font-size:13.5px!important;font-weight:600!important;line-height:18px!important;letter-spacing:0!important;color:rgba(255,255,255,.92)!important}
+body .cf3 .cf3-by{gap:6px!important}
+body .cf3 .cf3-by span{font-size:11.5px!important;font-weight:500!important;color:rgba(255,255,255,.55)!important}
+body .cf3 .cf3-by .f4-av,body .cf3 .cf3-by>*:first-child{width:18px!important;height:18px!important;min-width:18px!important;font-size:8px!important}
+body .cf3 .soon{font-size:12px!important;font-weight:600!important;color:rgba(255,255,255,.8)!important}
+body .cf3 .soon svg{width:13px;height:13px;opacity:.6}
+body .cf3 .mini-cta{height:26px!important;padding:0 11px!important;font-size:11.5px!important;font-weight:600!important}
+body .cf3 .mini-cta svg{width:10px!important;height:10px!important}
+body .cf3 .cf3-chip,body .cf3 .live-pill{font-size:10.5px!important;font-weight:600!important}
+body .cf3 .cf3-time{font-size:10.5px!important;font-weight:600!important}
+body[data-phone=foldopen] .duo-feat .cf3 .cf3-body>b,body .cf3.wide .cf3-body>b{font-size:16px!important;line-height:21px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6523,7 +6537,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('b', null, e.title),
         h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, cat)),
         h('div', { className: 'cf-foot' },
-          live ? h('span', { className: 'live-since' }, h('i'), 'Live now') : h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
+          h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
           h('span', { className: cx('mini-cta', live && 'live') }, live ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Watch') : ended ? 'Replay' : 'Details'))));
   }
   function CatBentoEv(p) {
