@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106060931"</script>
+<script>window.__BUILD__="20261106061234"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5004,6 +5004,14 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-st>span{display:inline-flex;align-items:center;gap:5px}
 .dt-st svg{opacity:.7}
 .dt-st b{color:#fff;font-weight:650}
+
+/* event details: info list */
+.dt-info{margin:0 16px;padding:4px 16px;border-radius:20px;background:rgba(255,255,255,.045)}
+.dt-ir{display:grid;grid-template-columns:18px 92px 1fr;align-items:start;gap:10px;padding:13px 0;font-size:13.5px;line-height:19px}
+.dt-ir+.dt-ir{border-top:1px solid rgba(255,255,255,.06)}
+.dt-ir svg{color:rgba(255,255,255,.4);margin-top:1px}
+.dt-ir span{color:rgba(255,255,255,.5)}
+.dt-ir b{font-weight:600;color:#fff;text-align:right}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7595,15 +7603,19 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             h('div', { style: { minWidth: 0 } }, h('b', null, e.org), h('span', null, 'Organizer · 0 follower'))),
           h(Tap, { className: cx('dt-follow', following && 'on'), onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to follow organizers'); tap(10); setF(!following); } }, following ? 'Following' : 'Follow'))),
       h('section', { className: 'dt-sec' },
-        h(RailHead, { title: 'Event details', rail: r1 }),
-        h('div', { className: 'dt-rail', ref: r1 },
-          info('calendar', e.date.replace(', 2026', ''), 'Date'),
-          info('clock', start + ' · ' + dur, 'Starts'),
-          info('globe', e.lang, 'Language'),
-          info('mapPin', 'Asia/Saigon', 'Time zone'),
-          [].concat(e.format).map(function (x, i) { return React.cloneElement(info('ticket', x, 'Format'), { key: 'fm' + i }); }),
-          info('refresh', e.type, e.type === 'One-time' ? 'Doesn\u2019t repeat' : 'Recurring'),
-          info('grid', e.cat.split(' ')[0], 'Category'))),
+        h('div', { className: 'dt-rh' }, h('h2', null, 'Event details')),
+        (function () {
+          function row(ic, l, v) { return h('div', { className: 'dt-ir', key: l }, h(F.Icon, { name: ic, size: 17 }), h('span', null, l), h('b', null, v)); }
+          var fm = [].concat(e.format);
+          return h('div', { className: 'dt-info' },
+            row('calendar', 'Date', e.date.replace(', 2026', ', 2026')),
+            row('clock', 'Time', e.range.replace(' \u2013 ', '\u2013') + ' \u00b7 ' + dur),
+            row('mapPin', 'Time zone', e.tz || 'Asia/Saigon'),
+            row('globe', 'Language', e.lang),
+            row('ticket', fm.length > 1 ? 'Formats' : 'Format', fm.join(', ')),
+            row('refresh', 'Repeats', e.type === 'One-time' ? 'No \u00b7 one-time event' : e.type),
+            row('grid', 'Category', e.cat));
+        })()),
       h('section', { className: 'dt-sec' },
         h(RailHead, { title: 'More like this', rail: r2 }),
         h('div', { className: 'dt-rail', ref: r2 }, others.map(function (o) {
