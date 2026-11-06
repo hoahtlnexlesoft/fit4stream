@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106060837"</script>
+<script>window.__BUILD__="20261106060931"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4998,6 +4998,12 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-fmts-b>span{font-size:12.5px;color:rgba(248,250,252,.5)}
 .dt-fmts-l{display:flex;flex-wrap:wrap;gap:6px}
 .dt-fmts-l i{font-style:normal;font-size:13px;font-weight:600;line-height:30px;height:30px;padding:0 12px;border-radius:10px;background:rgba(255,255,255,.07);color:#fff;white-space:nowrap}
+
+.dt-badges{flex-direction:column!important;align-items:center!important;gap:10px!important}
+.dt-st{display:flex;align-items:center;justify-content:center;gap:16px;font-size:13px;color:rgba(255,255,255,.55);white-space:nowrap}
+.dt-st>span{display:inline-flex;align-items:center;gap:5px}
+.dt-st svg{opacity:.7}
+.dt-st b{color:#fff;font-weight:650}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7571,7 +7577,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('h1', { className: 'dt-title' }, e.title),
         h('div', { className: 'dt-badges' },
           h('span', { className: cx('dt-b grad', ended && 'off', live && 'live') }, live ? 'LIVE NOW' : ended ? 'ENDED' : 'UPCOMING'),
-          h('span', { className: 'dt-b soft' }, h(F.Icon, { name: 'users', size: 13 }), e.registers + ' registered')),
+          h('span', { className: 'dt-st' }, h('span', null, h(F.Icon, { name: 'users', size: 14 }), h('b', null, e.registers), ' registered'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), h('b', null, e.views), e.views === 1 ? ' view' : ' views'), h('span', null, h(F.Icon, { name: 'heart', size: 14 }), h('b', null, e.likes), e.likes === 1 ? ' like' : ' likes'))),
         h('div', { className: 'dt-meta' }, h('span', null, e.date.replace(', 2026', '')), h('i', null), h('span', null, start + ' · ' + dur), h('i', null), h('span', null, e.cat)),
         ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
           : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room \u00b7 starts in 5 min')
@@ -7597,9 +7603,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           info('mapPin', 'Asia/Saigon', 'Time zone'),
           [].concat(e.format).map(function (x, i) { return React.cloneElement(info('ticket', x, 'Format'), { key: 'fm' + i }); }),
           info('refresh', e.type, e.type === 'One-time' ? 'Doesn\u2019t repeat' : 'Recurring'),
-          info('grid', e.cat.split(' ')[0], 'Category'),
-          info('eye', String(e.views), e.views === 1 ? 'View' : 'Views'),
-          info('heart', String(e.likes), e.likes === 1 ? 'Like' : 'Likes'))),
+          info('grid', e.cat.split(' ')[0], 'Category'))),
       h('section', { className: 'dt-sec' },
         h(RailHead, { title: 'More like this', rail: r2 }),
         h('div', { className: 'dt-rail', ref: r2 }, others.map(function (o) {
