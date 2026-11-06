@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106064912"</script>
+<script>window.__BUILD__="20261106065110"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5092,6 +5092,26 @@ body .co-cp-ok{box-shadow:inset 0 0 0 1px rgba(57,200,124,.45)!important}
 .rc-sx.done b{color:var(--sc)}
 .rc-sx.cur b{color:#fff}
 .rc-sx.cur span{color:rgba(255,255,255,.55)}
+
+/* receipt premium */
+.rc-paper{position:relative}
+.rc-top2{position:relative;overflow:hidden;border-radius:24px 24px 0 0;padding:16px 18px 20px!important;gap:16px!important}
+.rc-bgimg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(28px) saturate(1.35);opacity:.5;transform:scale(1.15);pointer-events:none}
+.rc-bgfx{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--sc) 22%,transparent),transparent 60%),linear-gradient(180deg,rgba(18,16,24,.35) 0%,rgba(22,20,28,.85) 70%,#1d1c23 100%)}
+.rc-top2>*:not(i){position:relative}
+.rc-h{display:none!important}
+.rc-chiprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rc-chip{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px 0 9px;border-radius:14px;font-size:12.5px;font-weight:700;color:var(--sc);background:color-mix(in srgb,var(--sc) 16%,rgba(10,10,14,.55));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.rc-date{font-size:12px;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
+.rc-evh{display:flex;align-items:center;gap:12px}
+.rc-evh .thumb{flex:none;width:48px;height:48px;border-radius:14px;background-size:cover;background-position:center;box-shadow:0 8px 20px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.12)}
+.rc-evh>div{min-width:0;display:flex;flex-direction:column;gap:2px}
+.rc-evh b{font-size:16px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-evh span{font-size:12px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums;letter-spacing:.2px}
+.rc-big{padding-top:4px}
+.rc-big>b{font-size:48px!important;line-height:52px!important;letter-spacing:-1.5px!important;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.72));-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.rc-big>b sup,.rc-big>b small{-webkit-text-fill-color:rgba(255,255,255,.6)}
+.rc-bot .rc-lines{padding-top:4px}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7974,7 +7994,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             var SUB = { paid: o.when, pending: 'Requested Nov 04, 10:12 AM', refunded: 'Refunded Nov 06 to ' + o.pmT.replace('Apple Pay \u00b7 ', ''), failed: o.when }[st.st];
             var step = st.st === 'refunded' ? 3 : 1;
             return h('div', { className: 'rc-top2 st-' + st.st },
-              h('div', { className: 'rc-h' }, h('span', { className: 'rc-ic' }, h(F.Icon, { name: IC, size: 20, stroke: 2.4 })), h('div', null, h('b', null, TT), h('span', null, SUB))),
+              h('i', { className: 'rc-bgimg', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('i', { className: 'rc-bgfx' }),
+              h('div', { className: 'rc-chiprow' }, h('span', { className: 'rc-chip' }, h(F.Icon, { name: IC, size: 14, stroke: 2.6 }), TT), h('span', { className: 'rc-date' }, isRf ? SUB.replace('Requested ', '').replace(/^Refunded (Nov \d+).*/, '$1') : o.when)),
+              h('div', { className: 'rc-evh' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
               h('div', { className: 'rc-big' },
                 h('span', null, isRf ? 'Refund amount' : st.st === 'failed' ? 'Amount attempted' : 'Amount paid'),
                 h('b', null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
@@ -7987,7 +8009,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           })(),
           h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
           h('div', { className: 'rc-bot' },
-          h('div', { className: 'rc-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
           h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
             h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total)))))),
         st.st === 'failed' ? h('div', { className: 'rc-failbox' }, h(F.Icon, { name: 'x', size: 16 }), h('span', null, 'Declined by bank · Insufficient funds. You were not charged.')) : null,
