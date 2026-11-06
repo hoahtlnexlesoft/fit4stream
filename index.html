@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106042445"</script>
+<script>window.__BUILD__="20261106043219"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4910,6 +4910,11 @@ body .eg-es .f4-ea3 svg{width:112px!important;height:84px!important}
 
 body .eg-es .f4-ea3{width:150px!important;height:112px!important;margin:0 auto 12px!important}
 body .eg-es .f4-ea3 svg{width:150px!important;height:112px!important}
+
+/* Duo open: rails show 4 cards across; "View all" only when there is more to see */
+body[data-phone=foldopen] .sec>.rail{scroll-snap-type:x mandatory}
+body[data-phone=foldopen] .sec>.rail>.ev16{width:calc((100% - 32px - 36px) / 4)!important;min-width:0}
+body[data-phone=foldopen] .sec:not(:has(.rail>:nth-child(5))) .f4-section-h .f4-link{display:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6452,6 +6457,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var DAY_SHIFT = Math.round((REAL - new Date(2026, 10, 3)) / 864e5);
   function shiftDate(str) { var x = String(str).match(/^(\w+) (\d+), (\d+)$/); if (!x || MONTHS_EN.indexOf(x[1]) < 0) return str; var d = new Date(+x[3], MONTHS_EN.indexOf(x[1]), +x[2] + DAY_SHIFT); return MONTHS_EN[d.getMonth()] + ' ' + ('0' + d.getDate()).slice(-2) + ', ' + d.getFullYear(); }
   function fmtDay(off, opt) { var d = new Date(REAL); d.setDate(d.getDate() + off); return d.toLocaleDateString('en-US', opt || { weekday: 'short', month: 'short', day: '2-digit' }); }
+  CATS.forEach(function (c) { c[1] = Object.keys(EV).filter(function (k) { return EV[k].cat === c[0] && EV[k].status !== 'ended'; }).length; });
   Object.keys(EV).forEach(function (k) { if (!EV[k].__shifted) { EV[k].date = shiftDate(EV[k].date); EV[k].__shifted = 1; } });
   // how long a live event has been on air, e.g. "Live 1h 01m" (unambiguous, unlike a bare 01:01)
   function liveFor(e, t) { var sec = Math.max(0, 8220 - (e.left - (t || 0))), hh = Math.floor(sec / 3600), mm = Math.floor(sec / 60) % 60; return 'Live ' + (hh ? hh + 'h ' + ('0' + mm).slice(-2) + 'm' : mm + 'm'); }
@@ -7010,11 +7016,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 h('span', { className: 'yt-go yt-go2' }, h(F.Icon, { name: 'clock', size: 14 }), 'Enter')))) : null,
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
             h('div', { className: 'stories' }, CHANNELS.map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), live: i === 0, go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }); }))),
-          h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, [EV.xmas, EV.gig, EV.seo].map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
+          h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.status !== 'ended'; }).slice(0, 8).map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
           h('section', { className: 'sec pad' }, h(SH, { title: 'Browse by Category', action: 'View all' }),
             h(CatTiles, { onPick: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })),
           (cat === 0 ? CATS.filter(function (c) { return c[1] > 0; }) : [CATS[cat - 1]]).map(function (c) {
-            var list = [EV.xmas, EV.payout, EV.gig, EV.seo].filter(function (e) { return e.cat === c[0]; });
+            var list = Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.cat === c[0]; }).slice(0, 8);
             return h(Sec, { key: c[0], title: c[0], action: list.length ? 'View all' : null },
               list.length ? h(CatBentoEv, { list: list, nav: p.nav }) : h(SecEmpty, { art: 'ticket', title: 'No events in ' + (SHORT[c[0]] || c[0]) + ' yet', action: 'Browse categories', onAction: function () { p.nav.push('categories'); }, body: 'Follow channels to get notified when they go live.' }));
           }),
