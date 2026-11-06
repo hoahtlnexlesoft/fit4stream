@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106030920"</script>
+<script>window.__BUILD__="20261106031128"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4451,6 +4451,75 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .cf2 + .dots{gap:5px!important}
 .cf2 + .dots span{width:6px!important;height:6px!important}
 .cf2 + .dots span.on{width:18px!important}
+
+/* ===== Event Guide v2 (client spec) ===== */
+.eg-tools{display:flex;flex-direction:column;gap:10px;margin:2px 0 14px}
+.eg-r1{display:flex;align-items:center;gap:10px}
+.eg-month{flex:1;display:flex;align-items:center;justify-content:space-between;height:44px;padding:0 4px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.eg-month b{font-size:16px;font-weight:800;color:#fff}
+.eg-ar{width:34px;height:34px;flex:none;border-radius:10px;display:grid!important;place-items:center;color:rgba(255,255,255,.8)}
+.eg-ar.dis{opacity:.25;pointer-events:none}
+.eg-today{height:44px;padding:0 14px;border-radius:14px;display:inline-flex!important;align-items:center;gap:6px;background:rgba(244,164,37,.14);color:#f4b740;font-size:12.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase}
+.eg-seg{display:flex;padding:4px;border-radius:14px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.eg-segi{flex:1;height:36px;border:0;border-radius:10px;background:none;color:rgba(255,255,255,.6);font:inherit;font-size:13px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.eg-segi.on{background:rgba(255,255,255,.12);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.eg-q{height:44px!important}
+.eg-days{display:flex;align-items:center;gap:4px}
+.eg-dl{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.eg-d{height:58px;border:0;border-radius:12px;background:rgba(255,255,255,.05);color:#fff;font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;position:relative;cursor:pointer;padding:0}
+.eg-d span{font-size:9.5px;font-weight:700;letter-spacing:.4px;color:rgba(255,255,255,.5)}
+.eg-d b{font-size:16px;font-weight:800}
+.eg-d i{position:absolute;bottom:6px;width:4px;height:4px;border-radius:50%;background:#F4A425}
+.eg-d.today span{color:#f4b740}
+.eg-d.on{background:#F4A425;color:#1b1306}
+.eg-d.on span{color:rgba(27,19,6,.7)}
+.eg-d.on i{background:#1b1306}
+.eg-fil{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 10px;padding:0 16px}
+.eg-fc{flex:none;height:32px;padding:0 12px;border-radius:16px;border:0;background:rgba(255,255,255,.06);color:rgba(255,255,255,.75);font:inherit;font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap}
+.eg-fc em{font-style:normal;font-size:11px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.1)}
+.eg-fc.lv i{width:6px;height:6px;border-radius:50%;background:#ff5d4f}
+.eg-fc.on{background:#fff;color:#111}
+.eg-fc.on em{background:rgba(0,0,0,.1)}
+.eg-sort{margin-left:auto}
+.eg-sum{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;margin-bottom:12px;border-radius:14px;background:linear-gradient(90deg,rgba(231,70,69,.16),rgba(255,255,255,.04));font-size:12.5px;color:rgba(255,255,255,.7)}
+.eg-sum span{display:inline-flex;align-items:center;gap:6px}
+.eg-sl{color:#fff;font-weight:700}
+.eg-sl i{width:8px;height:8px;border-radius:50%;background:#ff5d4f;box-shadow:0 0 0 3px rgba(255,93,79,.25)}
+.eg-li{display:flex;gap:12px;padding:10px;border-radius:18px;background:rgba(255,255,255,.05);cursor:pointer;position:relative;overflow:hidden}
+.eg-li.live{box-shadow:inset 3px 0 0 #ff5d4f}
+.eg-li.ended{opacity:.7}
+.eg-th{flex:none;position:relative;width:112px;height:63px;border-radius:12px;background-size:cover;background-position:center;align-self:flex-start}
+.eg-th .yt-live{position:absolute;left:6px;bottom:6px}
+.eg-lb{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.eg-lt{display:flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(255,255,255,.55);font-variant-numeric:tabular-nums}
+.eg-lb>b{font-size:14.5px;line-height:19px;font-weight:700;color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.eg-lh{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#F6C26B;font-weight:600}
+.eg-lv,.eg-lc{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:rgba(255,255,255,.5)}
+.eg-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:10px;border-radius:18px;background:rgba(255,255,255,.05)}
+.eg-ch{text-align:center;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);padding:4px 0}
+.eg-cd{aspect-ratio:1;border:0;border-radius:10px;background:none;color:rgba(255,255,255,.85);font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;position:relative;cursor:pointer;padding:0}
+.eg-cd b{font-size:14px;font-weight:600}
+.eg-cd.has{background:rgba(255,255,255,.04)}
+.eg-cd.today b{color:#f4b740}
+.eg-cd.on{background:#F4A425;color:#1b1306}
+.eg-cd.on b{color:#1b1306}
+.eg-dots{display:flex;gap:2px}
+.eg-dots i{width:4px;height:4px;border-radius:50%;background:#F4A425}
+.eg-dots i.live{background:#ff5d4f}
+.eg-dots i.ended{background:rgba(255,255,255,.35)}
+.eg-cd.on .eg-dots i{background:#1b1306}
+.eg-cd em{position:absolute;top:5px;right:6px;width:5px;height:5px;border-radius:50%;background:#ff5d4f}
+.eg-calh{display:flex;align-items:baseline;justify-content:space-between;margin:16px 2px 8px}
+.eg-calh b{font-size:16px;color:#fff}
+.eg-calh span{font-size:12.5px;color:rgba(255,255,255,.5)}
+.eg-cr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);cursor:pointer;color:rgba(255,255,255,.4)}
+.eg-crt{flex:none;width:42px;font-size:13px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.eg-crb{flex:none;width:3px;height:30px;border-radius:2px;background:#F4A425}
+.eg-crb.live{background:#ff5d4f}.eg-crb.ended{background:rgba(255,255,255,.3)}
+.eg-cr>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.eg-cr b{font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eg-cr span{font-size:12px;color:rgba(255,255,255,.5)}
+.tl-t2 span{display:block;font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6618,41 +6687,107 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   /* ---------- Event Guide: day strip + channels with time slots ---------- */
   function Guide(p) {
-    var d = useState(1), day = d[0], setDay = d[1];
-    var q = useState(''), query = q[0], setQ = q[1], so = useState(false), showQ = so[0], setShowQ = so[1];
-    // month filter (client request): switch month, the day strip follows; events exist in Nov 2026 in the demo
-    var MONTHS = [['Oct', 'October', 31], ['Nov', 'November', 30], ['Dec', 'December', 31], ['Jan', 'January', 31]];
-    var ms = useState(1), mon = ms[0], setMon = ms[1];
-    var M = MONTHS[mon], isNov = mon === 1;
-    function setMonth(i) { tap(5); setMon(i); setDay(i === 1 ? 1 : 0); }
-    var start = isNov ? 2 : 1, days = [];
-    for (var k = 0; k < 7; k++) { var dd = start + k; days.push({ dow: isNov && dd === 3 ? 'Today' : M[0], day: (dd < 10 ? '0' : '') + dd, dot: isNov && (dd === 3 || dd === 5) }); }
-    var rows = !isNov ? [] : day === 1 ? [{ ch: 'thao15 nguyen15', ev: [EV.xmas, EV.payout] }, { ch: 'Marc John', ev: [EV.seo] }] : day === 3 ? [{ ch: 'Sandra Smith', ev: [EV.gig] }] : [];
-    var monthCount = isNov ? 4 : 0;
-    rows = rows.filter(function (r) { return !query || r.ch.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+    // Event Guide per client spec (Redmine #94632): month nav + Today, Timeline / List / Calendar views, search, day strip with arrows,
+    // List view adds status filter, sort and a "live now" summary bar.
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var TODAY = { y: 2026, m: 10, d: 3 };
+    var ms = useState({ y: 2026, m: 10 }), ym = ms[0], setYm = ms[1];
+    var sd = useState(3), selDay = sd[0], setSelDay = sd[1];
+    var ws = useState(0), wk = ws[0], setWk = ws[1];
+    var vs = useState('timeline'), view = vs[0], setView = vs[1];
+    var q = useState(''), query = q[0], setQ = q[1];
+    var fs = useState('all'), stF = fs[0], setStF = fs[1];
+    var so = useState(1), sortDir = so[0], setSort = so[1];
+    var dim = new Date(ym.y, ym.m + 1, 0).getDate();
+    var DOW = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    var all = Object.keys(EV).map(function (k) { return EV[k]; });
+    function evDate(e) { var x = e.date.match(/^(\w+) (\d+), (\d+)/); return x ? { y: +x[3], m: MONTHS.indexOf(x[1]), d: +x[2] } : null; }
+    var inMonth = all.filter(function (e) { var d = evDate(e); return d && d.y === ym.y && d.m === ym.m; });
+    function onDay(d) { return inMonth.filter(function (e) { return evDate(e).d === d; }); }
+    var ql = query.trim().toLowerCase();
+    function matchQ(e) { return !ql || (e.title + ' ' + e.org + ' ' + e.cat).toLowerCase().indexOf(ql) >= 0; }
+    var isToday = function (d) { return ym.y === TODAY.y && ym.m === TODAY.m && d === TODAY.d; };
+    function goMonth(dir) { tap(5); var m = ym.m + dir, y = ym.y; if (m < 0) { m = 11; y--; } if (m > 11) { m = 0; y++; } setYm({ y: y, m: m }); setSelDay(1); setWk(0); }
+    function goToday() { tap(5); setYm({ y: TODAY.y, m: TODAY.m }); setSelDay(TODAY.d); setWk(Math.max(0, Math.min(dim - 7, TODAY.d - 2)) ); }
+    var start = Math.max(1, Math.min(dim - 6, (wk || Math.max(1, selDay - 1)))), days = [];
+    for (var k = 0; k < 7; k++) days.push(start + k);
+    function shiftWeek(dir) { tap(4); setWk(Math.max(1, Math.min(dim - 6, start + dir * 7))); }
+    var dayEvents = onDay(selDay).filter(matchQ);
+    function t0(e) { return e.range.split('\u2013')[0].trim(); }
+    var STL = { live: 'Live', upcoming: 'Upcoming', ended: 'Ended' };
+    function pill(st) { return st === 'live' ? h('span', { className: 'tl-pill live' }, h('i', null), 'Live') : st === 'ended' ? h('span', { className: 'tl-pill' }, 'Ended') : h('span', { className: 'tl-pill up' }, 'Upcoming'); }
+    var toolbar = h('div', { className: 'pad eg-tools' },
+      h('div', { className: 'eg-r1' },
+        h('div', { className: 'eg-month' },
+          h(Tap, { className: 'eg-ar', label: 'Previous month', onClick: function () { goMonth(-1); } }, h(F.Icon, { name: 'chevronLeft', size: 17 })),
+          h('b', null, MONTHS[ym.m] + ' ' + ym.y),
+          h(Tap, { className: 'eg-ar', label: 'Next month', onClick: function () { goMonth(1); } }, h(F.Icon, { name: 'chevronRight', size: 17 }))),
+        h(Tap, { className: 'eg-today', onClick: goToday }, h(F.Icon, { name: 'calendar', size: 14 }), 'Today')),
+      h('div', { className: 'eg-seg', role: 'tablist' }, [['timeline', 'Timeline', 'list'], ['list', 'List', 'list'], ['calendar', 'Calendar', 'calendar']].map(function (x) {
+        return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': view === x[0], className: cx('eg-segi', view === x[0] && 'on'), onClick: function () { tap(5); setView(x[0]); } }, x[0] === 'timeline' ? h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' }, h('path', { d: 'M4 6h10M4 12h16M4 18h7' })) : h(F.Icon, { name: x[2], size: 15 }), x[1]);
+      })),
+      h('label', { className: 'f4-search eg-q' }, h(F.Icon, { name: 'search', size: 17 }), h('input', { type: 'search', placeholder: 'Search channels, live events, hosts\u2026', value: query, onChange: function (e) { setQ(e.target.value); } })),
+      view !== 'calendar' ? h('div', { className: 'eg-days' },
+        h(Tap, { className: cx('eg-ar', start <= 1 && 'dis'), label: 'Previous days', onClick: function () { shiftWeek(-1); } }, h(F.Icon, { name: 'chevronLeft', size: 16 })),
+        h('div', { className: 'eg-dl' }, days.map(function (d) {
+          var wd = DOW[new Date(ym.y, ym.m, d).getDay()], n = onDay(d).length;
+          return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); setWk(start); } }, h('span', null, isToday(d) ? 'TODAY' : wd), h('b', null, d), n ? h('i', null) : null);
+        })),
+        h(Tap, { className: cx('eg-ar', start >= dim - 6 && 'dis'), label: 'Next days', onClick: function () { shiftWeek(1); } }, h(F.Icon, { name: 'chevronRight', size: 16 }))) : null);
+    var empty = function (t, b) { return h('div', { style: { marginTop: 18 } }, h(F.EmptyState, { art: 'calendar', title: t, body: b, action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } })); };
+    var body;
+    if (view === 'timeline') {
+      var by = {}; dayEvents.forEach(function (e) { (by[e.org] = by[e.org] || []).push(e); });
+      var rows = Object.keys(by).map(function (ch) { return { ch: ch, ev: by[ch].sort(function (a, b) { return t0(a) < t0(b) ? -1 : 1; }) }; });
+      body = rows.length ? h('div', { className: 'pad col gap12 fade-in', key: 'tl' + selDay + ym.m, style: { marginTop: 4 } }, rows.map(function (r) {
+        return h('div', { key: r.ch, className: 'gch gch2' },
+          h(Tap, { className: 'gch-h', go: function () { p.nav.push('organizer:' + encodeURIComponent(r.ch)); } }, h(F.Avatar, { src: av(r.ch) || av('Thao'), name: r.ch, initials: ini(r.ch), size: 36 }), h('b', null, r.ch), h('span', null, r.ev.length + (r.ev.length === 1 ? ' event' : ' events')), h(F.Icon, { name: 'chevronRight', size: 16 })),
+          h('div', { className: 'tl' }, r.ev.map(function (e) {
+            return h('div', { key: e.id, className: cx('tl-it', e.status), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push('detail:' + e.id); } },
+              h('div', { className: 'tl-time tl-t2' }, h('b', null, t0(e)), h('span', null, e.range.split('\u2013')[1].trim())),
+              h('span', { className: 'tl-dot' }),
+              h('div', { className: 'tl-body' }, h('b', null, e.title), h('div', { className: 'tl-meta' }, pill(e.status), h('span', null, e.cat))));
+          })));
+      })) : empty(ql ? 'No matches' : 'No events scheduled', ql ? 'Try another channel, event or host name.' : 'Nothing is scheduled on this day. Pick another day or month.');
+    } else if (view === 'list') {
+      var src = (stF === 'all' ? dayEvents : dayEvents.filter(function (e) { return e.status === stF; })).slice().sort(function (a, b) { return (t0(a) < t0(b) ? -1 : 1) * sortDir; });
+      var liveN = dayEvents.filter(function (e) { return e.status === 'live'; }).length;
+      var cnt = function (k) { return k === 'all' ? dayEvents.length : dayEvents.filter(function (e) { return e.status === k; }).length; };
+      body = h('div', { className: 'pad fade-in', key: 'ls' + selDay + ym.m },
+        h('div', { className: 'eg-fil' },
+          ['all', 'live', 'upcoming', 'ended'].map(function (k) { return h('button', { key: k, type: 'button', className: cx('eg-fc', stF === k && 'on', k === 'live' && 'lv'), onClick: function () { tap(4); setStF(k); } }, k === 'live' ? h('i', null) : null, k === 'all' ? 'All statuses' : STL[k], h('em', null, cnt(k))); }),
+          h('button', { type: 'button', className: 'eg-fc eg-sort', onClick: function () { tap(4); setSort(-sortDir); } }, h('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }, h('path', { d: sortDir > 0 ? 'M7 4v16M3 16l4 4 4-4M14 6h7M14 12h5M14 18h3' : 'M7 20V4M3 8l4-4 4 4M14 6h3M14 12h5M14 18h7' })), 'Time ' + (sortDir > 0 ? '\u2191' : '\u2193'))),
+        liveN ? h('div', { className: 'eg-sum' }, h('span', { className: 'eg-sl' }, h('i', null), liveN + ' live now'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), '2.4K watching')) : null,
+        src.length ? h('div', { className: 'col gap12' }, src.map(function (e) {
+          return h('div', { key: e.id, className: cx('eg-li', e.status), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(e.status === 'live' && p.nav.authed ? 'player' : 'detail:' + e.id); } },
+            h('span', { className: 'eg-th', style: { backgroundImage: 'url(' + e.img + ')' } }, e.status === 'live' ? h('i', { className: 'yt-live' }, h('em', null), 'LIVE') : null),
+            h('div', { className: 'eg-lb' },
+              h('div', { className: 'eg-lt' }, pill(e.status), h('span', null, e.range)),
+              h('b', null, e.title),
+              h('span', { className: 'eg-lh' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 18 }), e.org),
+              e.status === 'live' ? h('span', { className: 'eg-lv' }, h(F.Icon, { name: 'eye', size: 12 }), (e.viewers || '2.4K') + ' watching') : h('span', { className: 'eg-lc' }, e.cat)));
+        })) : empty('No events match', 'Try another status or day.'));
+    } else {
+      var first = new Date(ym.y, ym.m, 1).getDay(), cells = [];
+      for (var c = 0; c < first; c++) cells.push(null);
+      for (var dd = 1; dd <= dim; dd++) cells.push(dd);
+      body = h('div', { className: 'pad fade-in', key: 'cal' + ym.m },
+        h('div', { className: 'eg-cal' },
+          ['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(function (x, i) { return h('span', { key: 'h' + i, className: 'eg-ch' }, x); }),
+          cells.map(function (d, i) {
+            if (!d) return h('span', { key: 'e' + i });
+            var evs = onDay(d).filter(matchQ), live = evs.some(function (e) { return e.status === 'live'; });
+            return h('button', { key: d, type: 'button', className: cx('eg-cd', d === selDay && 'on', isToday(d) && 'today', evs.length && 'has'), onClick: function () { tap(4); setSelDay(d); setWk(0); } }, h('b', null, d), evs.length ? h('span', { className: 'eg-dots' }, evs.slice(0, 3).map(function (e) { return h('i', { key: e.id, className: e.status }); })) : null, live ? h('em', null) : null);
+          })),
+        h('div', { className: 'eg-calh' }, h('b', null, MONTHS[ym.m].slice(0, 3) + ' ' + selDay), h('span', null, dayEvents.length ? dayEvents.length + (dayEvents.length === 1 ? ' event' : ' events') : 'No events')),
+        dayEvents.length ? h('div', { className: 'col gap8' }, dayEvents.map(function (e) {
+          return h('div', { key: e.id, className: 'eg-cr', role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push('detail:' + e.id); } }, h('span', { className: 'eg-crt' }, t0(e)), h('span', { className: cx('eg-crb', e.status) }), h('div', null, h('b', null, e.title), h('span', null, e.org + ' \u00b7 ' + STL[e.status])), h(F.Icon, { name: 'chevronRight', size: 16 }));
+        })) : null);
+    }
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
-      h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide'), h(Tap, { className: cx('rbtn', showQ && 'on'), label: showQ ? 'Close search' : 'Search channels', onClick: function () { tap(5); if (showQ) setQ(''); setShowQ(!showQ); setTimeout(function () { var i = document.getElementById('guide-q'); i && i.focus(); }, 60); } }, h(F.Icon, { name: showQ ? 'x' : 'search', size: 20 }))),
-      h('div', { className: 'pad gd-mon' },
-        h(Tap, { className: cx('gd-ma', mon === 0 && 'dis'), label: 'Previous month', onClick: function () { if (mon > 0) setMonth(mon - 1); } }, h(F.Icon, { name: 'chevronLeft', size: 18 })),
-        h('div', { className: 'gd-mt' }, h('b', null, M[1] + ' ' + (mon === 3 ? 2027 : 2026)), h('span', null, monthCount ? monthCount + ' events this month' : 'No events yet')),
-        h(Tap, { className: cx('gd-ma', mon === MONTHS.length - 1 && 'dis'), label: 'Next month', onClick: function () { if (mon < MONTHS.length - 1) setMonth(mon + 1); } }, h(F.Icon, { name: 'chevronRight', size: 18 }))),
-      h('div', { className: 'pad gd-mchips', role: 'tablist' }, MONTHS.map(function (x, i) { return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': i === mon, className: cx('gd-mc', i === mon && 'on'), onClick: function () { setMonth(i); } }, x[0], i === 1 ? h('em', null, '4') : null); })),
-      h('div', { className: 'pad', onClick: function (e) { var b = e.target.closest('.f4-date'); if (b) { tap(5); setDay(Array.prototype.indexOf.call(b.parentNode.children, b)); } } }, h(F.DateStrip, { days: days, value: day })),
-      showQ ?       h('div', { className: 'pad', style: { marginTop: 14 } }, h('label', { className: 'f4-search' }, h(F.Icon, { name: 'search', size: 18 }), h('input', { id: 'guide-q', type: 'search', placeholder: 'Search channels...', value: query, onChange: function (e) { setQ(e.target.value); } }))) : null,
-      rows.length ? h('div', { className: 'pad col gap12 fade-in', style: { marginTop: 16 } }, rows.map(function (r) {
-        return h('div', { key: r.ch, className: 'gch gch2' },
-          h(Tap, { className: 'gch-h', go: function () { p.nav.push('organizer:' + encodeURIComponent(r.ch)); } }, h(F.Avatar, { src: av(r.ch) || av('Thao'), name: r.ch, initials: ini(r.ch), size: 36 }), h('b', null, r.ch), h('span', null, r.ev.length + (r.ev.length === 1 ? ' event' : ' events')), h(F.Icon, { name: 'chevronRight', size: 16, className: 'gch-go' })),
-          h('div', { className: 'tl' }, r.ev.map(function (e) {
-            var st = e.status;
-            return h('div', { key: e.id, className: cx('tl-it', st), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push('detail:' + e.id); } },
-              h('div', { className: 'tl-time tl-t2', 'aria-label': 'From ' + e.range.split('–')[0].trim() + ' to ' + e.range.split('–')[1].trim() }, h('b', null, e.range.split('–')[0].trim()), h('svg', { className: 'tl-arr', width: 10, height: 16, viewBox: '0 0 10 16', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: 'M5 1.5v12M1.8 10.5L5 13.7l3.2-3.2' })), h('b', { className: 'tl-end' }, e.range.split('–')[1].trim())),
-              h('span', { className: 'tl-dot' }),
-              h('div', { className: 'tl-body' },
-                h('b', null, e.title),
-                h('div', { className: 'tl-meta' }, st === 'live' ? h('span', { className: 'tl-pill live' }, h('i', null), 'Live') : st === 'ended' ? h('span', { className: 'tl-pill' }, 'Ended') : h('span', { className: 'tl-pill up' }, 'Upcoming'), h('span', null, e.cat))));
-          })));
-      })) : h(F.EmptyState, { art: 'calendar', title: isNov ? 'No events scheduled' : 'No events in ' + M[1], body: isNov ? 'There are no live or upcoming events scheduled. Please check back again soon.' : 'Nothing is scheduled for this month yet. Check another month or browse upcoming events.', action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } }),
+      h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide')),
+      toolbar, body,
       h('div', { style: { height: 140 } }));
   }
 
