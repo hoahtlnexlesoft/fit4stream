@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106062725"</script>
+<script>window.__BUILD__="20261106062948"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5051,6 +5051,10 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-endf.on{color:#f4b740;background:rgba(244,183,64,.14)}
 
 .dt-endf{display:inline-flex!important;align-items:center;gap:2px;height:36px;padding:0 6px 0 10px!important;background:none!important;color:#f4b740!important;font-weight:650!important}
+
+/* ended CTA: distinct, striped, coral */
+body .dt-cta.dt-ended{color:#ff8f8f!important;font-weight:700!important;background:repeating-linear-gradient(135deg,rgba(231,70,69,.16) 0 10px,rgba(231,70,69,.08) 10px 20px)!important;box-shadow:inset 0 0 0 1.5px rgba(255,110,110,.35)!important;cursor:default}
+body .dt-cta.dt-ended svg,body .dt-cta.dt-ended svg *{stroke:#ff8f8f!important;fill:none!important;color:#ff8f8f!important;opacity:1!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7639,9 +7643,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             return h('div', { key: x[1] }, h('b', null, x[0]), h('span', null, x[1]));
           })),
         h('div', { className: 'dt-ctarow' },
-          ended ? h('div', { className: 'dt-endn' }, h('span', { className: 'dt-endi' }, h(F.Icon, { name: 'clock', size: 18 })),
-              h('div', null, h('b', null, 'This event has ended'), h('span', null, 'Ended ' + e.date.replace(', 2026', '').replace(/^(\w{3})\w*/, '$1') + ', ' + e.range.split('\u2013')[1].trim())),
-              h(Tap, { className: 'dt-endf', onClick: function (ev) { var el = document.querySelector('.dt-similar'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }, 'See similar', h(F.Icon, { name: 'chevronRight', size: 15 })))
+          ended ? h('span', { className: 'dt-cta dt-ended' }, h(F.Icon, { name: 'clock', size: 18 }), 'Event ended')
             : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
           ended ? null : h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
