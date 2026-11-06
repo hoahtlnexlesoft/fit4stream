@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106092424"</script>
+<script>window.__BUILD__="20261106093153"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5373,6 +5373,13 @@ body .rc3-help .q{flex:0 0 18px!important;max-width:18px!important;min-width:18p
 .rc3-acts1 .rc3-btn.full{margin-top:0}
 .rc3-resend{display:inline-flex!important;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:20px;font-size:14px;font-weight:650;color:var(--sl)}
 .rc3-resend svg{stroke:currentColor}
+
+.rc3-acts1{align-items:stretch!important;gap:10px!important}
+.rc3-sec{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rc3-sec.one{grid-template-columns:1fr}
+.rc3-sb{height:46px;border-radius:23px;display:flex!important;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:650;color:rgba(255,255,255,.88);background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.rc3-sb svg{stroke:currentColor;opacity:.75}
+.rc3-sb.rf{color:#ff9b8f}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -8414,8 +8421,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         k === 'failed' ? h(Tap, { className: 'rc3-btn full', go: function () { p.nav.push('checkout'); } }, h(F.Icon, { name: 'refresh', size: 18 }), 'Try payment again')
           : h('div', { className: 'rc3-acts1' },
             h(Tap, { className: 'rc3-btn full', go: function () { p.nav.toast('Receipt PDF saved'); } }, h(F.Icon, { name: 'download', size: 18 }), 'Download PDF'),
-            h(Tap, { className: 'rc3-resend', go: function () { p.nav.toast('Sent to thaonguyentest123+13@gmail.com'); } }, h(F.Icon, { name: 'mail', size: 15 }), 'Resend to email')),
-        k === 'paid' ? h(Tap, { className: 'rc-refund', go: function () { set({ ref: true }); } }, 'Request a refund') : null,
+            h('div', { className: cx('rc3-sec', k !== 'paid' && 'one') },
+              h(Tap, { className: 'rc3-sb', go: function () { p.nav.toast('Sent to thaonguyentest123+13@gmail.com'); } }, h(F.Icon, { name: 'mail', size: 16 }), 'Resend email'),
+              k === 'paid' ? h(Tap, { className: 'rc3-sb rf', go: function () { set({ ref: true }); } }, h(F.Icon, { name: 'refresh', size: 16 }), 'Request refund') : null)),
         h('p', { className: 'rc3-help' }, h('span', { className: 'q' }, '?'), 'Questions about this charge? ', h('u', null, 'Contact support'))),
       h('div', { style: { height: 40 } }),
       st.ref ? toApp(h(RefundSheet, { o: o, close: function () { set({ ref: false }); }, done: function () { set({ ref: false, st: 'pending' }); p.nav.toast('Refund requested'); } })) : null);
