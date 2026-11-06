@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106045351"</script>
+<script>window.__BUILD__="20261106060422"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4990,6 +4990,14 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 
 .dt-fmt .dt-ic{position:relative;overflow:visible!important}
 .dt-badge{position:absolute;top:-6px;right:-10px;min-width:22px;height:20px;padding:0 6px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#1b1306;background:#f4b740;box-shadow:0 0 0 3px #17141f}
+
+/* formats: own row, wraps any number of formats */
+.dt-fmts{display:flex;align-items:flex-start;gap:14px;margin:12px 18px 0;padding:14px 16px;border-radius:20px;background:rgba(255,255,255,.045)}
+.dt-fmts .dt-ic{flex:none;width:44px!important;height:44px!important;margin:0!important}
+.dt-fmts-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;padding-top:2px}
+.dt-fmts-b>span{font-size:12.5px;color:rgba(248,250,252,.5)}
+.dt-fmts-l{display:flex;flex-wrap:wrap;gap:6px}
+.dt-fmts-l i{font-style:normal;font-size:13px;font-weight:600;line-height:30px;height:30px;padding:0 12px;border-radius:10px;background:rgba(255,255,255,.07);color:#fff;white-space:nowrap}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7587,10 +7595,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           info('clock', start + ' · ' + dur, 'Starts'),
           info('globe', e.lang, 'Language'),
           info('mapPin', 'Asia/Saigon', 'Time zone'),
-          h(FmtCard, { fm: [].concat(e.format) }),
           info('refresh', e.type, 'Event type'),
           info('users', e.cat.split(' ')[0], 'Category'),
-          info('eye', e.views + ' views', e.likes + ' likes'))),
+          info('eye', e.views + ' views', e.likes + ' likes')),
+        (function () { var fm = [].concat(e.format); return h('div', { className: 'dt-fmts' },
+          h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 20 })),
+          h('div', { className: 'dt-fmts-b' },
+            h('span', null, fm.length > 1 ? fm.length + ' formats' : 'Format'),
+            h('div', { className: 'dt-fmts-l' }, fm.map(function (x) { return h('i', { key: x }, x); })))); })()),
       h('section', { className: 'dt-sec' },
         h(RailHead, { title: 'More like this', rail: r2 }),
         h('div', { className: 'dt-rail', ref: r2 }, others.map(function (o) {
