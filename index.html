@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106043428"</script>
+<script>window.__BUILD__="20261106043803"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4915,6 +4915,45 @@ body .eg-es .f4-ea3 svg{width:150px!important;height:112px!important}
 body[data-phone=foldopen] .sec>.rail{scroll-snap-type:x mandatory}
 body[data-phone=foldopen] .sec>.rail>.ev16{width:calc((100% - 32px - 36px) / 4)!important;min-width:0}
 body[data-phone=foldopen] .sec:not(:has(.rail>:nth-child(5))) .f4-section-h .f4-link{display:none!important}
+
+/* ===== Duo open: Home hero v2 ===== */
+.duo-hero2{display:none}
+body[data-phone=foldopen] .duo-hero{display:none!important}
+body[data-phone=foldopen] .duo-hero2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:14px;padding:0 16px;margin:6px 0 6px;height:300px}
+body[data-phone=foldopen] .dh-feat{position:relative;display:block!important;border-radius:22px;overflow:hidden;background-size:cover;background-position:center;text-align:left;box-shadow:0 18px 40px rgba(0,0,0,.45)}
+body[data-phone=foldopen] .dh-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,transparent 30%,rgba(10,8,16,.55) 58%,rgba(10,8,16,.95) 100%)}
+body[data-phone=foldopen] .dh-top{position:absolute;left:14px;top:14px;right:14px;display:flex;align-items:center;gap:6px}
+body[data-phone=foldopen] .dh-top .live-pill{height:24px!important;font-size:11px!important}
+body[data-phone=foldopen] .dh-dur{margin-left:auto;height:24px;padding:0 9px;border-radius:7px;display:inline-flex;align-items:center;font-size:11.5px;font-weight:700;color:#fff;background:rgba(10,9,14,.6)}
+body[data-phone=foldopen] .dh-b{position:absolute;left:18px;right:18px;bottom:16px;display:flex;flex-direction:column;gap:8px}
+body[data-phone=foldopen] .dh-b>b{font-size:24px;line-height:28px;font-weight:800;letter-spacing:-.4px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+body[data-phone=foldopen] .dh-by{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.7)}
+body[data-phone=foldopen] .dh-by span{color:#F6C26B;font-weight:600}
+body[data-phone=foldopen] .dh-by i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4)}
+body[data-phone=foldopen] .dh-by em{font-style:normal}
+body[data-phone=foldopen] .dh-cta{align-self:flex-start;margin-top:4px;height:40px;padding:0 18px;border-radius:20px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#f7b445,#f09a1a);color:#1b1306;font-size:14px;font-weight:800;box-shadow:0 8px 20px rgba(244,164,37,.3)}
+body[data-phone=foldopen] .dh-next{display:flex;flex-direction:column;padding:14px 14px 10px;border-radius:22px;background:rgba(255,255,255,.04)}
+body[data-phone=foldopen] .dh-nh{display:flex;align-items:center;justify-content:space-between;padding:0 4px 8px}
+body[data-phone=foldopen] .dh-nh b{font-size:16px;font-weight:800;color:#fff}
+body[data-phone=foldopen] .dh-ni{flex:1;display:flex!important;align-items:center;gap:12px;padding:6px 6px;border-radius:14px;text-align:left;min-height:0}
+body[data-phone=foldopen] .dh-ni:hover{background:rgba(255,255,255,.05)}
+body[data-phone=foldopen] .dh-ni+.dh-ni{border-top:1px solid rgba(255,255,255,.05);border-radius:0}
+body[data-phone=foldopen] .dh-date{flex:none;width:44px;height:46px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(244,164,37,.12)}
+body[data-phone=foldopen] .dh-date small{font-size:10px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#f4b740}
+body[data-phone=foldopen] .dh-date b{font-size:17px;line-height:19px;font-weight:800;color:#fff}
+body[data-phone=foldopen] .dh-nb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+body[data-phone=foldopen] .dh-nb b{font-size:13.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=foldopen] .dh-nb small{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=foldopen] .dh-price{flex:none;font-size:12px;font-weight:700;color:#fff;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.07)}
+body[data-phone=foldopen] .dh-price.free{color:#7fe0a8;background:rgba(57,200,124,.12)}
+
+/* format card: clear value + label, expandable */
+.dt-card.dt-fmt{min-width:128px;cursor:pointer}
+.dt-card.dt-fmt.open{min-width:150px}
+.dt-fmt .dt-fs{display:inline-flex;align-items:center;gap:6px}
+.dt-fmt .dt-fs em{font-style:normal;font-size:11px;font-weight:700;color:#f4b740;background:rgba(244,164,37,.14);padding:1px 7px;border-radius:999px;line-height:17px}
+.dt-fl{display:flex;flex-direction:column;gap:3px}
+.dt-fl b{font-size:13px!important;line-height:17px!important;white-space:nowrap}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6943,16 +6982,29 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   }
   /* Wide layout (iPhone Duo open): featured live card + "Up next" list instead of the phone coverflow */
   function DuoHero(p) {
-    var f = p.heroes[0] && p.heroes.filter(function (e) { return e.status === 'live'; })[0] || p.heroes[0], rest = p.heroes.filter(function (e) { return e !== f; }).slice(0, 4);
+    var t = useTick();
+    var all = Object.keys(EV).map(function (k) { return EV[k]; });
+    var f = all.filter(function (e) { return e.status === 'live'; })[0] || p.heroes[0];
     if (!f) return null;
-    return h('div', { className: 'duo-hero' },
-      h('div', { className: 'duo-feat' }, h(EventTile, { e: f, nav: p.nav, wide: true })),
-      h('div', { className: 'duo-next' },
-        h('div', { className: 'duo-nh' }, h('b', null, 'Up next'), h(Tap, { className: 'f4-link', go: function () { p.nav.tab('upcoming'); } }, 'See all')),
+    function dt(e) { var x = e.date.match(/^(\w+) (\d+), (\d+)/); return x ? new Date(+x[3], MONTHS_EN.indexOf(x[1]), +x[2]) : new Date(0); }
+    var rest = all.filter(function (e) { return e.status === 'upcoming'; }).sort(function (a, b) { return (dt(a) - dt(b)) || (a.range < b.range ? -1 : 1); }).slice(0, 4);
+    var go = function () { if (p.reg && p.nav.authed) { window.__focusChat = false; p.nav.push('player'); } else p.nav.push('detail:' + f.id); };
+    return h('div', { className: 'duo-hero2' },
+      h(Tap, { className: 'dh-feat', label: f.title, go: go, style: { backgroundImage: 'url(' + f.img + ')' } },
+        h('i', { className: 'dh-shade' }),
+        h('div', { className: 'dh-top' }, h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), f.viewers || '2.4K'), h('span', { className: 'dh-dur' }, liveFor(f, t))),
+        h('div', { className: 'dh-b' },
+          h('b', null, f.title),
+          h('div', { className: 'dh-by' }, h(F.Avatar, { src: av(f.org), name: f.org, initials: ini(f.org), size: 24 }), h('span', null, f.org), h('i'), h('em', null, f.cat.replace(' and Performances', ''))),
+          h('span', { className: 'dh-cta' }, h(F.Icon, { name: 'play', size: 14 }), p.reg && p.nav.authed ? 'Watch now' : 'Get ticket'))),
+      h('div', { className: 'dh-next' },
+        h('div', { className: 'dh-nh' }, h('b', null, 'Up next'), h(Tap, { className: 'f4-link', go: function () { p.nav.tab('upcoming'); } }, 'See all', h(F.Icon, { name: 'chevronRight', size: 15 }))),
         rest.map(function (e) {
-          return h(Tap, { key: e.id, className: 'duo-ni', go: function () { p.nav.push('detail:' + e.id); } },
-            h('span', { className: 'duo-th', style: { backgroundImage: 'url(' + e.img + ')' } }),
-            h('span', { className: 'duo-nb' }, h('b', null, e.title), h('small', null, e.date.replace(', 2026', '') + ' \u00b7 ' + e.range.split('\u2013')[0].trim() + ' \u00b7 ' + e.price)));
+          var d = dt(e);
+          return h(Tap, { key: e.id, className: 'dh-ni', go: function () { p.nav.push('detail:' + e.id); } },
+            h('span', { className: 'dh-date' }, h('small', null, MONTHS_EN[d.getMonth()].slice(0, 3)), h('b', null, d.getDate())),
+            h('span', { className: 'dh-nb' }, h('b', null, e.title), h('small', null, e.range.split('\u2013')[0].trim() + ' \u00b7 ' + e.org)),
+            h('span', { className: cx('dh-price', e.price === 'Free' && 'free') }, e.price));
         })));
   }
   function Home(p) {
@@ -7443,6 +7495,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h(Tap, { className: 'cd-btn cd-ok', go: p.ok }, del ? 'Delete' : 'Log out'))));
     return host ? ReactDOM.createPortal(node, host) : node;
   }
+  function FmtCard(p) {
+    var o = useState(false), open = o[0], setOpen = o[1]; var fm = p.fm, n = fm.length - 1;
+    return h(Tap, { className: cx('dt-card dt-fmt', open && 'open'), onClick: function () { if (n > 0) setOpen(!open); } },
+      h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 22 })),
+      open ? h('div', { className: 'dt-fl' }, fm.map(function (x) { return h('b', { key: x }, x); }))
+        : h('b', null, fm[0]),
+      h('span', { className: 'dt-fs' }, open ? 'Formats' : 'Format', !open && n > 0 ? h('em', null, '+' + n + ' more') : null));
+  }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
     var reg = e.id === 'xmas' && p.nav.registered;
@@ -7495,9 +7555,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           info('clock', start + ' · ' + dur, 'Starts'),
           info('globe', e.lang, 'Language'),
           info('mapPin', 'Asia/Saigon', 'Time zone'),
-          (function () { var fm = [].concat(e.format); return h('div', { className: cx('dt-card', fm.length > 1 && 'dt-multi') }, h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 22 })),
-            fm.length > 1 ? h('div', { className: 'dt-chips' }, fm.slice(0, 2).map(function (x) { return h('i', { key: x }, x); }), fm.length > 2 ? h('i', { className: 'more' }, '+' + (fm.length - 2)) : null) : h('b', null, fm[0]),
-            h('span', null, e.type)); })(),
+          h(FmtCard, { fm: [].concat(e.format) }),
+          info('refresh', e.type, 'Event type'),
           info('users', e.cat.split(' ')[0], 'Category'),
           info('eye', e.views + ' views', e.likes + ' likes'))),
       h('section', { className: 'dt-sec' },
