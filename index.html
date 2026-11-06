@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106085533"</script>
+<script>window.__BUILD__="20261106085914"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5356,6 +5356,13 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 .dt-status>i{position:relative;flex:none;width:8px!important;height:8px!important;border-radius:50%;animation:none!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 22%,transparent)!important}
 .dt-status.live>i::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:var(--c);opacity:.35;animation:dtRing 1.6s ease-out infinite}
 @keyframes dtRing{0%{transform:scale(1);opacity:.35}100%{transform:scale(1.9);opacity:0}}
+
+/* waiting-room CTA: moving stripes */
+.dt-cta.dt-wait{position:relative;overflow:hidden}
+.dt-cta.dt-wait::before{content:'';position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(135deg,rgba(255,255,255,.16) 0 12px,rgba(255,255,255,0) 12px 24px);background-size:34px 34px;animation:dtWait 1.4s linear infinite;pointer-events:none}
+.dt-cta.dt-wait>*{position:relative}
+.dt-cta.dt-wait svg,.dt-cta.dt-wait svg *{fill:none!important;stroke:currentColor!important}
+@keyframes dtWait{to{background-position:34px 0}}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -8053,7 +8060,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           })),
         h('div', { className: 'dt-ctarow' },
           ended ? h(Tap, { className: 'dt-cta dt-ended', onClick: function () { tap(8); p.nav.toast('This event has ended \u2014 check out similar events'); var el = document.querySelector('.dt-similar'); if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 250); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Event ended')
-            : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
+            : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta dt-wait', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18, className: 'nofill', stroke: 2.2 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
           ended ? null : h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
           h(Tap, { className: 'dt-ib', label: 'Share', onClick: function () { p.nav.share({ title: e.title, img: e.img }); } }, h(F.Icon, { name: 'share', size: 20 }))),
