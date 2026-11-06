@@ -157,6 +157,7 @@
 
   /* ---------- styles ---------- */
   var css = '' +
+  '.rv .rv-kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:6px;padding:0 4px;border-radius:5px;font:700 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.14);color:inherit;opacity:.75}.rv button.on .rv-kbd{background:rgba(255,255,255,.25);opacity:1}@media (pointer:coarse){.rv .rv-kbd{display:none}}' +
   '.rv-seg button{white-space:nowrap}@media (max-width:440px){.rv .rv-seg button{padding:0 9px;gap:5px;font-size:12px}.rv .rv-seg button.rv-bell{padding:0 8px}.rv .rv-pill{left:calc(50% - 36px)}}' +
   '.rv-seg button.rv-bell{position:relative;padding:0 12px}.rv-bell b{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#e5484d;color:#fff;font-size:10.5px;font-weight:700;line-height:17px;text-align:center;box-shadow:0 0 0 2px #223246}' +
   '.rv-inbox{position:fixed;left:50%;bottom:74px;transform:translateX(-50%);z-index:2147482700;width:min(360px,calc(100vw - 24px));max-height:min(420px,60vh);overflow:auto;padding:6px;border-radius:14px;background:#fff;box-shadow:0 18px 40px -10px rgba(15,23,42,.35),0 0 0 1px rgba(15,23,42,.06)}' +
@@ -526,7 +527,7 @@
     var open = S.threads.filter(function (t) { return !t.resolved; }).length;
     var shown = S.threads.filter(function (t) { return S.filter === 'all' ? true : S.filter === 'open' ? !t.resolved : t.resolved; });
     var h = '<div class="rv-pill">' + (S.mode === 'edit' ? '<span class="rv-hint">Click any text and type · Enter to save · Esc to cancel</span>' : S.mode ? '<span class="rv-hint">Click anything to comment · Esc to cancel</span>' : '') +
-      '<div class="rv-seg"><button id="rvBrowse" class="' + (!S.mode ? 'on' : '') + '">' + ICON.pointer + 'Browse</button><button id="rvComment" class="' + (S.mode === true ? 'on' : '') + '">' + ICON.chat + 'Comment</button><button id="rvEditMode" class="' + (S.mode === 'edit' ? 'on' : '') + '">' + ICON.pencil + 'Edit text</button>' + bellBtn() + '</div></div>' + inboxHtml();
+      '<div class="rv-seg"><button id="rvBrowse" class="' + (!S.mode ? 'on' : '') + '">' + ICON.pointer + 'Browse<kbd class="rv-kbd">B</kbd></button><button id="rvComment" class="' + (S.mode === true ? 'on' : '') + '">' + ICON.chat + 'Comment<kbd class="rv-kbd">C</kbd></button><button id="rvEditMode" class="' + (S.mode === 'edit' ? 'on' : '') + '">' + ICON.pencil + 'Edit text</button>' + bellBtn() + '</div></div>' + inboxHtml();
     if (!S.open) {
       h += '<aside class="rv-rail"><button class="rv-side" id="rvTab" title="Open comments" aria-label="Open comments">' + ICON.side + '</button><button class="rv-side" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><div class="rv-rail-list">' +
         S.threads.slice().sort(function (a, b) { return (b.at || 0) - (a.at || 0); }).map(function (t, i) { var col = t.resolved ? '#9CA3AF' : colorFor(t.author); return '<button class="rv-dot' + (S.active === t.id ? ' on' : '') + (t.resolved ? ' done' : '') + '" data-rail="' + t.id + '" style="background:' + col + ';color:' + col + '" title="#' + NUM[t.id] + ' · ' + esc(labelFor(t.page)) + ' · ' + esc(t.author) + ': ' + esc(t.text.slice(0, 80)) + '"><span style="color:#fff">' + esc((t.author.trim()[0] || '?')) + '</span></button>'; }).join('') +
@@ -620,6 +621,14 @@
     bound = [];
   }
   function setMode(m) { S.mode = m; if (m) S.draft = null; bindDocs(); renderAll(); }
+  /* keyboard shortcuts: C = Comment, B or V = Browse (ignored while typing) */
+  function typing(t) { return t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)); }
+  document.addEventListener('keydown', function (e) {
+    if (S.hidden || e.metaKey || e.ctrlKey || e.altKey || e.repeat || typing(e.target)) return;
+    var k = (e.key || '').toLowerCase();
+    if (k === 'c') { e.preventDefault(); S.draft = null; if (S.tedit) endTextEdit(true); setMode(S.mode === true ? false : true); toast(S.mode ? 'Comment mode \u00b7 press B to browse' : 'Browse mode'); }
+    else if (k === 'b' || k === 'v') { if (!S.mode) return; e.preventDefault(); S.draft = null; if (S.tedit) endTextEdit(true); setMode(false); }
+  });
 
   /* ---------- actions ---------- */
   function submitDraft() {
