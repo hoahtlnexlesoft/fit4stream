@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106075719"</script>
+<script>window.__BUILD__="20261106080209"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6903,8 +6903,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }
     var raf = 0, tgt = null;
     document.addEventListener('scroll', function (e) {
-      var el = e.target; if (!el || !el.classList || !el.classList.contains('screen')) return;
-      if (/(^|\s)(player|fl2|full)(\s|$)/.test(el.className)) return;
+      var el = e.target; if (!el || !el.classList || !el.closest || !el.closest('.stage')) return;
+      if (el.closest('.player, .fl2, .full, .sheet-wrap, [class*=chat], .cf2')) return;
+      if (el.scrollHeight <= el.clientHeight + 4 || !/(auto|scroll)/.test(getComputedStyle(el).overflowY)) return;
       tgt = el; if (!raf) raf = requestAnimationFrame(function () { raf = 0; tgt && run(tgt); });
     }, true);
   })();
