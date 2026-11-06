@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106031612"</script>
+<script>window.__BUILD__="20261106031844"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7771,7 +7771,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   /* ---------- app shell with navigation stack ---------- */
   var MODALS = /^(nomodal)$/;
   function App() {
-    var startHash = decodeURIComponent((location.hash || '').replace('#', ''));
+    var startHash = decodeURIComponent((location.hash || '').replace('#', '')); if (startHash === 'detail') startHash = 'detail:xmas';
     var init = (SCREENS[startHash.split(':')[0]] || startHash === 'payout') ? stackFor(startHash) : ['welcome'];
     var startLaunch = /^(welcome|splash)$/.test(init[0]);
     if (startLaunch) { init = ['home']; window.__fromLaunch = true; }
@@ -7809,7 +7809,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var topRef = useRef(top); topRef.current = top;
     useEffect(function () {
       function onHash() {
-        var hh = decodeURIComponent((location.hash || '').replace('#', '')); if (!hh || hh === topRef.current) return;
+        var hh = decodeURIComponent((location.hash || '').replace('#', '')); if (hh === 'detail') hh = 'detail:xmas'; if (!hh || hh === topRef.current) return;
         var b = hh.split(':')[0]; if (!SCREENS[b]) return;
         setLaunch(false); if (AUTHED.test(b)) setAuthed(true); if (/^(player|full|success)$/.test(b)) nav.registered = true;
         var st = stackFor(hh); if (st.length === 1 && TABS.indexOf(b) < 0) st = ['home', hh];
@@ -7946,7 +7946,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if ((b === 'player' || b === 'checkout') && has(b + '-' + a)) return b + '-' + a;
     return b;
   }
-  window.__screenLabel = function (h) { h = decodeURIComponent(String(h || '').replace(/^#/, '')); var k = hk(h); if (k === h.split(':')[0] && h.indexOf(':') > 0 && !(h === 'detail:seo')) return null; var it = list.filter(function (x) { return x[0] === k; })[0]; return it ? it[1] : null; };
+  window.__screenLabel = function (h) { h = decodeURIComponent(String(h || '').replace(/^#/, '')); if (h === 'detail' || h === 'detail:xmas') return '09 Event detail \u2014 Christmas Market'; var k = hk(h); if (k === h.split(':')[0] && h.indexOf(':') > 0 && !(h === 'detail:seo')) return null; var it = list.filter(function (x) { return x[0] === k; })[0]; return it ? it[1] : null; };
   var jump = document.getElementById('jump');
   list.forEach(function(it){ var b=document.createElement('button'); b.type='button'; b.textContent=it[1]; b.dataset.k=it[0]; b.onclick=function(){ window.__jump && window.__jump(it[0]); sel={k:it[0],h:null}; setTimeout(function(){ if(sel&&sel.k===it[0]) sel.h=location.hash; mark(); },120); mark(); }; jump.appendChild(b); });
   var sel=null;
@@ -7992,5 +7992,5 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 /* Feedback layer: only on the shared Vercel site (and local file tests), never inside the Claude preview */
 (function(){ var h=location.hostname; if(/[?&]pane2\b/.test(location.search)) return; if(!(/vercel\.app$/.test(h) || location.protocol==='file:')) return;
   function add(src,d){ var s=document.createElement('script'); s.src=src; if(d) s.defer=true; s.async=false; document.body.appendChild(s); }
-  add('./review/config.js?v=3'); add('./review/review.js?v=6', true); })();
+  add('./review/config.js?v=3'); add('./review/review.js?v=8', true); })();
 </script>

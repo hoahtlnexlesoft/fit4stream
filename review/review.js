@@ -529,7 +529,7 @@
     var h = '<div class="rv-pill">' + (S.mode === 'edit' ? '<span class="rv-hint">Click any text and type · Enter to save · Esc to cancel</span>' : S.mode ? '<span class="rv-hint">Click anything to comment · Esc to cancel</span>' : '') +
       '<div class="rv-seg"><button id="rvBrowse" class="' + (!S.mode ? 'on' : '') + '">' + ICON.pointer + 'Browse<kbd class="rv-kbd">B</kbd></button><button id="rvComment" class="' + (S.mode === true ? 'on' : '') + '">' + ICON.chat + 'Comment<kbd class="rv-kbd">C</kbd></button><button id="rvEditMode" class="' + (S.mode === 'edit' ? 'on' : '') + '">' + ICON.pencil + 'Edit text</button>' + bellBtn() + '</div></div>' + inboxHtml();
     if (!S.open) {
-      h += '<aside class="rv-rail"><button class="rv-side" id="rvTab" title="Open comments" aria-label="Open comments">' + ICON.side + '</button><button class="rv-side" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><div class="rv-rail-list">' +
+      h += '<aside class="rv-rail"><button class="rv-side" id="rvTab" title="Open comments (O)" aria-label="Open comments">' + ICON.side + '</button><button class="rv-side" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><div class="rv-rail-list">' +
         S.threads.slice().sort(function (a, b) { return (b.at || 0) - (a.at || 0); }).map(function (t, i) { var col = t.resolved ? '#9CA3AF' : colorFor(t.author); return '<button class="rv-dot' + (S.active === t.id ? ' on' : '') + (t.resolved ? ' done' : '') + '" data-rail="' + t.id + '" style="background:' + col + ';color:' + col + '" title="#' + NUM[t.id] + ' · ' + esc(labelFor(t.page)) + ' · ' + esc(t.author) + ': ' + esc(t.text.slice(0, 80)) + '"><span style="color:#fff">' + esc((t.author.trim()[0] || '?')) + '</span></button>'; }).join('') +
         '</div></aside>';
     }
@@ -540,7 +540,7 @@
         .slice().sort(function (a, b) { return b.at - a.at; });
       var groups = [], gi = {};
       list.forEach(function (t) { var g = labelFor(t.page); if (gi[g] == null) { gi[g] = groups.length; groups.push({ name: g, items: [] }); } groups[gi[g]].items.push(t); });
-      h += '<aside class="rv-panel"><header class="rv-head"><h2>Comments</h2><div><button class="rv-ib" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><button class="rv-ib" id="rvClose" title="Close panel" aria-label="Close panel">' + ICON.x + '</button></div></header>' +
+      h += '<aside class="rv-panel"><header class="rv-head"><h2>Comments</h2><div><button class="rv-ib" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><button class="rv-ib" id="rvClose" title="Close panel (O)" aria-label="Close panel">' + ICON.x + '</button></div></header>' +
         '<div class="rv-fseg" role="tablist" aria-label="Lọc comment">' + [['all', 'Tất cả', S.threads.length], ['open', 'Đang mở', S.threads.filter(function (t) { return !t.resolved; }).length], ['resolved', 'Đã xử lý', S.threads.filter(function (t) { return t.resolved; }).length]].map(function (f) { return '<button type="button" role="tab" aria-selected="' + (S.filter === f[0]) + '" class="rv-fseg-b' + (S.filter === f[0] ? ' on' : '') + (f[0] === 'open' && f[2] ? ' hot' : '') + '" data-filter="' + f[0] + '"><span>' + f[1] + '</span><b>' + f[2] + '</b></button>'; }).join('') + '</div>' +
         
         '<div class="rv-tools"><label class="rv-search">' + ICON.search + '<input id="rvSearch" placeholder="Search" value="' + esc(S.q || '') + '"></label>' +
@@ -621,12 +621,13 @@
     bound = [];
   }
   function setMode(m) { S.mode = m; if (m) S.draft = null; bindDocs(); renderAll(); }
-  /* keyboard shortcuts: C = Comment, B or V = Browse (ignored while typing) */
+  /* keyboard shortcuts: C = Comment, B or V = Browse, O = open/close the comments panel (ignored while typing) */
   function typing(t) { return t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)); }
   document.addEventListener('keydown', function (e) {
     if (S.hidden || e.metaKey || e.ctrlKey || e.altKey || e.repeat || typing(e.target)) return;
     var k = (e.key || '').toLowerCase();
     if (k === 'c') { e.preventDefault(); S.draft = null; if (S.tedit) endTextEdit(true); setMode(S.mode === true ? false : true); toast(S.mode ? 'Comment mode \u00b7 press B to browse' : 'Browse mode'); }
+    else if (k === 'o') { e.preventDefault(); S.open = !S.open; S.menu = null; S.pmenu = null; renderUi(); shiftFloaters(); }
     else if (k === 'b' || k === 'v') { if (!S.mode) return; e.preventDefault(); S.draft = null; if (S.tedit) endTextEdit(true); setMode(false); }
   });
 
@@ -661,6 +662,8 @@
     renderAll();
     setTimeout(function () { if (el) { el.style.outline = el.__rvF || ''; el.style.outlineOffset = ''; } if (S.flash === id) { S.flash = null; renderPins(); } }, 2600);
   }
+  // a comment filed on a bare screen key (e.g. "site:detail", before variants were recorded) matches that screen's variant
+  function samePage(want, cur) { return want === cur || (want.split(':').length === 2 && cur.indexOf(want + ':') === 0); }
   function goTo(id) {
     var t = S.threads.filter(function (x) { return x.id === id; })[0]; if (!t) return;
     S.active = id; S.reveal = id; markSeen(id); S.expanded = {}; S.expanded[id] = true; S.menu = null;
@@ -674,7 +677,7 @@
       else location.hash = '#' + route;
     }
     var tries = 0, iv = setInterval(function () {
-      tries++; var c = ctx(), ready = c.key === t.page && c.doc.readyState === 'complete';
+      tries++; var c = ctx(), ready = samePage(t.page, c.key) && c.doc.readyState === 'complete';
       if (ready || tries > 40) { clearInterval(iv); if (ready) setTimeout(function () { focusThread(id); }, 500); }
     }, 200);
     renderAll();
