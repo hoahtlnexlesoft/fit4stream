@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106062105"</script>
+<script>window.__BUILD__="20261106062239"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5038,6 +5038,8 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-iv{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
 .dt-iv b{font-weight:600;color:#fff}
 .dt-ivm{font-size:13px;font-weight:600;color:#f4b740;padding:2px 0}
+
+.dt-ib.on svg path{fill:currentColor}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -5429,6 +5431,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     gender: ['M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10z', 'M12 15v7', 'M9 19h6'],
     cake: ['M4 21h16', 'M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7', 'M5 16c2 1 3 1 4.7 0s3-1 4.6 0 3 1 4.7 0', 'M12 12V8', 'M12 5.5a1 1 0 0 0 0-2'],
     smartphone: ['M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z', 'M11 18h2'],
+    bookmark: ['M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4.2L5.5 21V4.5a1 1 0 0 1 1-1z'],
     refresh: ['M3 12a9 9 0 1 0 3-6.7', 'M3 4v5h5'],
     minimize: ['M8 3v3a2 2 0 0 1-2 2H3', 'M21 8h-3a2 2 0 0 1-2-2V3', 'M3 16h3a2 2 0 0 1 2 2v3', 'M16 21v-3a2 2 0 0 1 2-2h3'],
     rotateCcw: ['M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8', 'M3 3v5h5'],
@@ -7628,7 +7631,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
             : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
-          h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: saved ? 'check' : 'plus', size: 22 })),
+          h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
           h(Tap, { className: 'dt-ib', label: 'Share', onClick: function () { p.nav.share({ title: e.title, img: e.img }); } }, h(F.Icon, { name: 'share', size: 20 }))),
         h('p', { className: cx('dt-about', !e.about && 'muted') }, more || about.length < 150 ? about : about.slice(0, 150) + '…'),
         about.length >= 150 ? h(Tap, { className: 'dt-more', onClick: function () { setMore(!more); } }, more ? 'Less' : 'More', h(F.Icon, { name: 'chevronDown', size: 16, className: more ? 'flip' : '' })) : null),
