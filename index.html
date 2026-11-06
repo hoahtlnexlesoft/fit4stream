@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106062530"</script>
+<script>window.__BUILD__="20261106062725"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5049,6 +5049,8 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-endn>div>span{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dt-endf{flex:none;height:36px;padding:0 14px;border-radius:18px;display:grid!important;place-items:center;font-size:13px;font-weight:700;color:#1b1306;background:#f4b740}
 .dt-endf.on{color:#f4b740;background:rgba(244,183,64,.14)}
+
+.dt-endf{display:inline-flex!important;align-items:center;gap:2px;height:36px;padding:0 6px 0 10px!important;background:none!important;color:#f4b740!important;font-weight:650!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7638,8 +7640,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           })),
         h('div', { className: 'dt-ctarow' },
           ended ? h('div', { className: 'dt-endn' }, h('span', { className: 'dt-endi' }, h(F.Icon, { name: 'clock', size: 18 })),
-              h('div', null, h('b', null, 'This event has ended'), h('span', null, 'Follow the host for the next one')),
-              h(Tap, { className: cx('dt-endf', following && 'on'), onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to follow organizers'); tap(10); setF(!following); } }, following ? 'Following' : 'Follow'))
+              h('div', null, h('b', null, 'This event has ended'), h('span', null, 'Ended ' + e.date.replace(', 2026', '').replace(/^(\w{3})\w*/, '$1') + ', ' + e.range.split('\u2013')[1].trim())),
+              h(Tap, { className: 'dt-endf', onClick: function (ev) { var el = document.querySelector('.dt-similar'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }, 'See similar', h(F.Icon, { name: 'chevronRight', size: 15 })))
             : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
           ended ? null : h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
@@ -7667,7 +7669,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             row('refresh', 'Repeats', e.type === 'One-time' ? 'No \u00b7 one-time event' : e.type),
             row('grid', 'Category', e.cat));
         })()),
-      h('section', { className: 'dt-sec' },
+      h('section', { className: 'dt-sec dt-similar' },
         h(RailHead, { title: 'More like this', rail: r2 }),
         h('div', { className: 'dt-rail', ref: r2 }, others.map(function (o) {
           return h(EventTile, { key: o.id, e: o, nav: p.nav });
