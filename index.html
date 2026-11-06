@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106073409"</script>
+<script>window.__BUILD__="20261106073752"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6838,6 +6838,40 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function fmtT(s) { s = Math.max(0, s); function z(n) { return (n < 10 ? '0' : '') + n; } return z(Math.floor(s / 3600)) + ':' + z(Math.floor(s / 60) % 60) + ':' + z(s % 60); }
   /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
   function wrLeft() { if (!window.__WR_T0) window.__WR_T0 = Date.now(); var el = Math.floor((Date.now() - window.__WR_T0) / 1000); return 299 - (el % 300); }
+
+  // global: content fades + blurs as it scrolls up under the (kept) header
+  (function () {
+    var SKIP = /(^|\s)(top|top-sp|top-blur|brand-head|tabbar|tab-amb|rc3-amb|home-amb|ptr|sheet-wrap|dt-sbar)(\s|$)/;
+    function pick(node, out, depth) {
+      for (var c = node.firstElementChild; c; c = c.nextElementSibling) {
+        if (SKIP.test(c.className && c.className.baseVal === undefined ? c.className : '')) continue;
+        var cs = getComputedStyle(c); if (cs.position === 'fixed' || cs.position === 'sticky' || cs.display === 'none') continue;
+        var hgt = c.offsetHeight; if (!hgt) continue;
+        var rail = c.scrollWidth > c.clientWidth + 4 && /(auto|scroll)/.test(cs.overflowX);
+        if (hgt > 240 && !rail && depth < 6 && c.firstElementChild) pick(c, out, depth + 1); else out.push(c);
+      }
+    }
+    function run(el) {
+      var stage = el.closest('.stage'); if (!stage) return;
+      var y = el.scrollTop, base = 0;
+      var hd = stage.querySelector('.top, .brand-head, .d-top');
+      if (hd && hd.offsetHeight) base = hd.getBoundingClientRect().bottom;
+      else { var tb = stage.querySelector('.top-blur'); base = tb ? tb.getBoundingClientRect().bottom - 16 : el.getBoundingClientRect().top + 40; }
+      var list = el.__fadeList; if (!list || y <= 2) { list = []; pick(el, list, 0); el.__fadeList = list; }
+      for (var i = 0; i < list.length; i++) {
+        var n = list[i], r = n.getBoundingClientRect(), f;
+        if (y <= 2 || r.top > base + 4) f = 1; else f = Math.max(0, Math.min(1, (r.top + r.height / 2 - base) / (r.height / 2 + 30)));
+        var key = f.toFixed(2); if (n.__f === key) continue; n.__f = key;
+        if (f >= 1) { n.style.opacity = ''; n.style.filter = ''; } else { n.style.opacity = key; n.style.filter = 'blur(' + ((1 - f) * 6).toFixed(1) + 'px)'; }
+      }
+    }
+    var raf = 0, tgt = null;
+    document.addEventListener('scroll', function (e) {
+      var el = e.target; if (!el || !el.classList || !el.classList.contains('screen')) return;
+      if (/(^|\s)(player|fl2|full)(\s|$)/.test(el.className)) return;
+      tgt = el; if (!raf) raf = requestAnimationFrame(function () { raf = 0; tgt && run(tgt); });
+    }, true);
+  })();
   function useTick() { var t = useState(0); useEffect(function () { var i = setInterval(function () { t[1](function (x) { return x + 1; }); }, 1000); return function () { clearInterval(i); }; }, []); return t[0]; }
 
   /* Unified event card: 16:9 media (streams come from a desktop, landscape) + info body - same look as the Home hero */
@@ -8208,7 +8242,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var steps = k === 'refunded' ? [['Requested', 'Nov 04', 2], ['Approved', 'Nov 04', 2], ['Refunded', 'Nov 06', 2]] : [['Requested', 'Nov 04', 2], ['Approved', '~24h', 1], ['Refunded', '5–10 days', 0]];
     var cents = money(amt).split('.');
     var sv = useState(false), solid = sv[0], setSolid = sv[1];
-    return h('div', { className: cx('screen tabscreen rc3 st-' + k, solid && 'solid'), onScroll: function (e) { var el = e.currentTarget, y = el.scrollTop, v = y > 40; if (v !== solid) setSolid(v); var hs = el.querySelectorAll('.rc3-hero h2, .rc3-hero p, .rc3-orbwrap'); for (var q = 0; q < hs.length; q++) { var hd = el.querySelector('.top'), base = (hd ? hd.getBoundingClientRect().bottom : el.getBoundingClientRect().top + 100), r = hs[q].getBoundingClientRect(), mid = r.top + r.height / 2 - base, f = y <= 2 ? 1 : Math.max(0, Math.min(1, mid / (r.height / 2 + 30))); hs[q].style.opacity = f.toFixed(3); hs[q].style.filter = 'blur(' + ((1 - f) * 6).toFixed(1) + 'px)'; } } },
+    return h('div', { className: cx('screen tabscreen rc3 st-' + k, solid && 'solid'), onScroll: function (e) { var el = e.currentTarget, y = el.scrollTop, v = y > 40; if (v !== solid) setSolid(v);  } },
       h('div', { className: 'rc3-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
       h('div', { className: 'pad col', style: { paddingTop: 4 } },
