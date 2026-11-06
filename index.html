@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106072003"</script>
+<script>window.__BUILD__="20261106072316"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5207,6 +5207,76 @@ body.devmode .cf2{height:calc(min(346px,calc(100vw - 84px)) * .825 + 14px)!impor
 body .cf2 + .dots{margin-top:8px!important;margin-bottom:0!important}
 
 body .duo-hero2 + .sec{margin-top:12px!important}
+
+/* ===== Receipt v4 (reference style) ===== */
+.rc3{--sc:#4f8dff;--sc2:#2a5bd7;--sl:#9cc2ff;position:relative}
+.rc3.st-paid{--sc:#2fd17f;--sc2:#14935a;--sl:#9df0c4}
+.rc3.st-pending{--sc:#f4a425;--sc2:#c46f0a;--sl:#ffd795}
+.rc3.st-failed{--sc:#ff5d5d;--sc2:#c22d34;--sl:#ffb0b0}
+.rc3-amb{position:absolute;left:0;right:0;top:0;height:520px;pointer-events:none;background:radial-gradient(70% 45% at 50% 18%,color-mix(in srgb,var(--sc) 30%,transparent),transparent 70%),radial-gradient(60% 40% at 100% 0%,color-mix(in srgb,var(--sc) 18%,transparent),transparent 70%)}
+.rc3 .pad{position:relative}
+.rc3-hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:6px 0 18px}
+.rc3-orbwrap{position:relative;width:200px;height:132px;display:grid;place-items:center;animation:rc3In .6s cubic-bezier(.2,1.4,.4,1) both}
+.rc3-orb{position:relative;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.75) 0%,rgba(255,255,255,0) 30%),radial-gradient(circle at 50% 60%,var(--sc) 0%,var(--sc2) 75%);box-shadow:0 0 0 6px color-mix(in srgb,var(--sc) 18%,transparent),0 16px 40px color-mix(in srgb,var(--sc) 55%,transparent),inset 0 -10px 20px rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.4)}
+.rc3-orb svg{filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.rc3-ring{position:absolute;left:50%;top:50%;width:200px;height:62px;border-radius:50%;transform:translate(-50%,-50%) rotate(-14deg);border:1.5px solid color-mix(in srgb,var(--sl) 70%,transparent);box-shadow:0 0 12px color-mix(in srgb,var(--sc) 50%,transparent);mask:linear-gradient(180deg,#000 0 42%,transparent 42% 58%,#000 58%);-webkit-mask:linear-gradient(180deg,#000 0 42%,transparent 42% 58%,#000 58%)}
+.rc3-sp{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--sl);box-shadow:0 0 8px var(--sl)}
+.rc3-sp.s1{left:18px;top:28px}.rc3-sp.s2{right:30px;top:96px;width:3px;height:3px}.rc3-sp.s3{right:14px;top:18px;width:3px;height:3px}
+@keyframes rc3In{from{transform:scale(.6);opacity:0}}
+.rc3-hero h2{margin:8px 0 4px;font-size:26px;line-height:32px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.rc3-hero p{margin:0;font-size:14px;color:rgba(255,255,255,.6)}
+.rc3-amt{position:relative;display:flex;align-items:center;gap:8px;padding:18px 18px 18px 20px;border-radius:24px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--sc) 22%,rgba(255,255,255,.04)) 0%,rgba(255,255,255,.04) 70%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--sl) 22%,transparent),0 18px 40px rgba(0,0,0,.35)}
+.rc3-amt-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
+.rc3-amt-l>span{font-size:14px;font-weight:650;color:#fff}
+.rc3-amt-l>b{font-size:46px;line-height:54px;font-weight:800;letter-spacing:-1.2px;color:var(--sl);font-variant-numeric:tabular-nums;text-shadow:0 0 24px color-mix(in srgb,var(--sc) 45%,transparent)}
+.rc3-amt-l>b small{font-size:inherit;font-weight:inherit}
+.rc3.st-failed .rc3-amt-l>b{color:rgba(255,255,255,.55);text-shadow:none}
+.rc3-amt-l>em{font-style:normal;font-size:12px;line-height:16px;color:rgba(255,255,255,.55)}
+.rc3-card{position:relative;flex:none;width:96px;height:72px;margin-right:6px}
+.rc3-card-b{position:absolute;inset:6px 4px 10px 0;border-radius:10px;transform:rotate(-12deg);background:linear-gradient(135deg,color-mix(in srgb,var(--sl) 60%,#fff) 0%,var(--sc) 55%,var(--sc2) 100%);box-shadow:0 12px 24px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.5);opacity:.92}
+.rc3-card-b em{position:absolute;left:10px;height:4px;border-radius:2px;background:rgba(255,255,255,.55)}
+.rc3-card-b em:nth-child(1){top:12px;width:26px;height:8px;border-radius:3px;background:rgba(255,255,255,.35)}
+.rc3-card-b em:nth-child(2){top:30px;width:44px}
+.rc3-card-b em:nth-child(3){top:38px;width:28px;opacity:.7}
+.rc3-card-badge{position:absolute;right:-4px;bottom:0;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),transparent 40%),var(--sc);box-shadow:0 0 0 3px #15141c,0 6px 16px color-mix(in srgb,var(--sc) 60%,transparent)}
+.rc3-steps{display:grid;grid-template-columns:repeat(3,1fr);margin:22px 0 4px}
+.rc3-st{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.rc3-ln{position:absolute;top:13px;right:calc(50% + 18px);width:calc(100% - 36px);height:2px;border-radius:1px;background:rgba(255,255,255,.12)}
+.rc3-ln.on{background:linear-gradient(90deg,var(--sc),var(--sl))}
+.rc3-dot{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;margin-bottom:6px;color:#fff;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.18)}
+.rc3-st.done .rc3-dot{background:var(--sc);box-shadow:0 0 0 4px color-mix(in srgb,var(--sc) 20%,transparent)}
+.rc3-st.cur .rc3-dot{background:color-mix(in srgb,var(--sc) 25%,transparent);box-shadow:inset 0 0 0 2px var(--sc)}
+.rc3-st.cur .rc3-dot i{width:8px;height:8px;border-radius:50%;background:var(--sc);animation:rc3P 1.4s ease-in-out infinite}
+@keyframes rc3P{50%{transform:scale(.6);opacity:.6}}
+.rc3-st b{font-size:13.5px;font-weight:700;color:#fff}
+.rc3-st>span:last-child{font-size:12.5px;color:rgba(255,255,255,.5)}
+.rc3-st:not(.done):not(.cur) b{color:rgba(255,255,255,.5)}
+.rc3-box{margin-top:16px;padding:14px 18px;border-radius:22px;background:rgba(255,255,255,.045);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.rc3-row{display:flex;align-items:center;gap:12px;padding:6px 0;font-size:14px}
+.rc3-row>span{color:rgba(255,255,255,.55)}
+.rc3-row>b{margin-left:auto;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:8px;text-align:right}
+.rc3-row.neg>span,.rc3-row.neg>b{color:#7fe0a8}
+.rc3-ic{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:var(--sl);background:color-mix(in srgb,var(--sc) 18%,transparent)}
+.rc3-pm{padding-bottom:10px}
+.rc3-hr{display:block;height:1px;margin:6px 0;background:rgba(255,255,255,.07)}
+.rc3-sh{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.rc3-sh b{font-size:15px;font-weight:700;color:#fff}
+.rc3-ev{display:flex;align-items:center;gap:12px;padding:8px 0 10px;margin-bottom:4px;border-bottom:1px solid rgba(255,255,255,.07)}
+.rc3-ev .thumb{flex:none;width:44px;height:44px;border-radius:12px;background-size:cover;background-position:center}
+.rc3-ev>div{min-width:0;display:flex;flex-direction:column;gap:2px}
+.rc3-ev b{font-size:14.5px;font-weight:650;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc3-ev span{font-size:12px;color:rgba(255,255,255,.5)}
+.rc3-tot>span{color:#fff;font-weight:650;font-size:15px}
+.rc3-tot>b{font-size:20px;font-weight:800}
+.rc3-acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.rc3-btn{height:54px;border-radius:27px;display:flex!important;align-items:center;justify-content:center;gap:9px;font-size:15px;font-weight:700;color:#fff;background:linear-gradient(180deg,color-mix(in srgb,var(--sl) 35%,var(--sc)) 0%,var(--sc2) 100%);box-shadow:0 12px 28px color-mix(in srgb,var(--sc) 40%,transparent),inset 0 1px 0 rgba(255,255,255,.35)}
+.rc3-btn.ghost{background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.rc3-btn.full{margin-top:18px;width:100%}
+.rc3-btn svg{stroke:currentColor}
+.rc3 .rc-refund{margin-top:14px}
+.rc3-help{display:flex;align-items:center;justify-content:center;gap:6px;margin:18px 0 0;font-size:13px;color:rgba(255,255,255,.5)}
+.rc3-help .q{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;box-shadow:inset 0 0 0 1.3px rgba(255,255,255,.4)}
+.rc3-help u{color:var(--sl);text-decoration-color:color-mix(in srgb,var(--sl) 50%,transparent)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -8118,47 +8188,54 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function Receipt(p) {
     var parts = (p.param || '').split('|'), id = ORDERS[parts[0]] ? parts[0] : 'F4S-261103-0412', o = ORDERS[id], flag = parts[1] || '';
     var s = useState({ ref: flag === 'refund', st: flag === 'pending' ? 'pending' : o.st }), st = s[0], set = function (x) { s[1](function (y) { return Object.assign({}, y, x); }); };
-    var stt = STAT[st.st];
-    return h('div', { className: 'screen tabscreen rc2' },
-      h('div', { className: 'tab-amb', 'aria-hidden': true }),
+    var k = st.st, isRf = k === 'pending' || k === 'refunded', amt = isRf ? o.total - FEE : o.total;
+    var C = {
+      paid: { ic: 'check', t: 'Payment Successful', sub: 'Your tickets are confirmed and ready', lab: 'Amount paid' },
+      pending: { ic: 'clock', t: 'Refund in Progress', sub: 'We’ll notify you when it’s on its way', lab: 'You’ll get back' },
+      refunded: { ic: 'check', t: 'Refund Complete', sub: 'Your refund has been processed successfully', lab: 'Refunded to you' },
+      failed: { ic: 'x', t: 'Payment Failed', sub: 'Your bank declined this payment', lab: 'Not charged' }
+    }[k];
+    var steps = k === 'refunded' ? [['Requested', 'Nov 04', 2], ['Approved', 'Nov 04', 2], ['Refunded', 'Nov 06', 2]] : [['Requested', 'Nov 04', 2], ['Approved', '~24h', 1], ['Refunded', '5–10 days', 0]];
+    var cents = money(amt).split('.');
+    return h('div', { className: 'screen tabscreen rc3 st-' + k },
+      h('div', { className: 'rc3-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
-      h('div', { className: 'pad col gap16', style: { paddingTop: 6 } },
-        h('div', { className: 'rc-paper st-' + st.st },
-          (function () {
-            var isRf = st.st === 'pending' || st.st === 'refunded', amt = isRf ? o.total - FEE : o.total;
-            var IC = { paid: 'check', pending: 'clock', refunded: 'refresh', failed: 'x' }[st.st];
-            var TT = { paid: 'Payment successful', pending: 'Refund in progress', refunded: 'Refund complete', failed: 'Payment failed' }[st.st];
-            var SUB = { paid: o.when, pending: 'Requested Nov 04, 10:12 AM', refunded: 'Refunded Nov 06 to ' + o.pmT.replace('Apple Pay \u00b7 ', ''), failed: o.when }[st.st];
-            var step = st.st === 'refunded' ? 3 : 1;
-            return h('div', { className: 'rc-top2 st-' + st.st },
-              h('i', { className: 'rc-bgimg', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('i', { className: 'rc-bgfx' }),
-              h('div', { className: 'rc-chiprow' }, h('span', { className: 'rc-chip' }, h(F.Icon, { name: IC, size: 14, stroke: 2.6 }), TT), h('span', { className: 'rc-date' }, isRf ? SUB.replace('Requested ', '').replace(/^Refunded (Nov \d+).*/, '$1') : o.when)),
-              h('div', { className: 'rc-evh' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
-              h('div', { className: 'rc-big' },
-                h('span', null, isRf ? (st.st === 'refunded' ? 'Refunded to you' : 'You\u2019ll get back') : st.st === 'failed' ? 'Not charged' : 'Amount paid'),
-                h('b', { className: isRf ? 'in' : '' }, isRf ? h('i', null, '+') : null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
-                isRf ? h('em', null, 'of ' + money(o.total) + ' paid \u00b7 ' + money(FEE) + ' service fee is non-refundable') : null),
-              st.st === 'failed' ? h('div', { className: 'rc-why' }, h('span', null, h(F.Icon, { name: 'lock', size: 17 })), h('div', null, h('b', null, 'Declined by your bank'), h('span', null, 'Insufficient funds on ' + o.pmT + '. Try another card or top up and retry.'))) : null,
-              isRf ? h('div', { className: 'rc-prog' },
-                h('div', { className: 'rc-bar' }, h('i', { style: { width: (step === 3 ? 100 : 18) + '%' } })),
-                h('div', { className: 'rc-steps' }, [['Requested', 'Nov 04'], ['Approved', st.st === 'refunded' ? 'Nov 04' : '~24h'], ['Refunded', st.st === 'refunded' ? 'Nov 06' : '5\u201310 days']].map(function (r, k) {
-                  return h('div', { key: k, className: cx('rc-sx', k < step && 'done', k === step && 'cur') }, h('b', null, r[0]), h('span', null, r[1]));
-                }))) : null);
-          })(),
-          h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
-          h('div', { className: 'rc-bot' },
-          h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
-            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Total' : 'Total paid'), h('b', null, money(o.total)))))),
-        h('div', { className: 'rc-card rc-meta' },
-          h('div', null, h('span', null, 'Payment method'), h('b', { className: 'rc-pm' }, h(CardLogo, { k: o.pm }), o.pmT)),
-          h('div', null, h('span', null, 'Transaction ID'), h('b', null, 'ch_3Q' + id.slice(-4) + 'Xa9LkT')),
-          h('div', null, h('span', null, 'Billed to'), h('b', null, 'Tran Nguyen'))),
-        st.st === 'failed' ? null : h('div', { className: 'rc-acts' },
-          h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt PDF saved'); } }, h(F.Icon, { name: 'inbox', size: 18 }), 'Download PDF'),
-          h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt sent to your email'); } }, h(F.Icon, { name: 'mail', size: 18 }), 'Email receipt')),
-        st.st === 'paid' ? h(Tap, { className: 'rc-refund', go: function () { set({ ref: true }); } }, 'Request a refund') : null,
-        st.st === 'failed' ? h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { p.nav.push('checkout'); } }, 'Try payment again') : null,
-        h('p', { className: 'rc-help' }, 'Questions about this charge? ', h('u', null, 'Contact support'))),
+      h('div', { className: 'pad col', style: { paddingTop: 4 } },
+        h('div', { className: 'rc3-hero' },
+          h('div', { className: 'rc3-orbwrap', key: 'o' + k },
+            h('i', { className: 'rc3-ring' }), h('i', { className: 'rc3-sp s1' }), h('i', { className: 'rc3-sp s2' }), h('i', { className: 'rc3-sp s3' }),
+            h('span', { className: 'rc3-orb' }, h(F.Icon, { name: C.ic, size: 40, stroke: 3.2 }))),
+          h('h2', null, C.t), h('p', null, C.sub)),
+        h('div', { className: 'rc3-amt' },
+          h('div', { className: 'rc3-amt-l' },
+            h('span', null, C.lab),
+            h('b', null, isRf ? '+' : '', cents[0], h('small', null, '.' + cents[1])),
+            h('em', null, isRf ? 'of ' + money(o.total) + ' paid · ' + money(FEE) + ' service fee is non-refundable' : k === 'failed' ? 'Insufficient funds on ' + o.pmT : o.when)),
+          h('div', { className: 'rc3-card', 'aria-hidden': true }, h('i', { className: 'rc3-card-b' }, h('em'), h('em'), h('em')), h('span', { className: 'rc3-card-badge' }, h(F.Icon, { name: C.ic, size: 16, stroke: 3 })))),
+        isRf ? h('div', { className: 'rc3-steps' }, steps.map(function (x, n) {
+          return h('div', { key: n, className: cx('rc3-st', x[2] === 2 && 'done', x[2] === 1 && 'cur') },
+            n ? h('i', { className: cx('rc3-ln', x[2] >= 1 && 'on') }) : null,
+            h('span', { className: 'rc3-dot' }, x[2] === 2 ? h(F.Icon, { name: 'check', size: 13, stroke: 3 }) : x[2] === 1 ? h('i') : null),
+            h('b', null, x[0]), h('span', null, x[1]));
+        })) : null,
+        h('div', { className: 'rc3-box' },
+          h('div', { className: 'rc3-row rc3-pm' }, h('span', { className: 'rc3-ic' }, h(F.Icon, { name: 'dollar', size: 17 })), h('span', null, 'Payment method'), h('b', null, h(CardLogo, { k: o.pm }), o.pmT.replace('Apple Pay · ', ''))),
+          h('i', { className: 'rc3-hr' }),
+          h('div', { className: 'rc3-row' }, h('span', null, 'Transaction ID'), h('b', null, 'ch_3Q' + id.slice(-4) + 'Xa9LkT')),
+          h('div', { className: 'rc3-row' }, h('span', null, 'Billed to'), h('b', null, 'Tran Nguyen')),
+          h('div', { className: 'rc3-row' }, h('span', null, k === 'failed' ? 'Attempted' : 'Paid on'), h('b', null, o.when))),
+        h('div', { className: 'rc3-box' },
+          h('div', { className: 'rc3-sh' }, h('span', { className: 'rc3-ic' }, h(F.Icon, { name: 'list', size: 17 })), h('b', null, 'Summary')),
+          h('div', { className: 'rc3-ev' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
+          o.lines.map(function (l, n) { return h('div', { key: n, className: cx('rc3-row', l[1] < 0 && 'neg') }, h('span', null, l[0]), h('b', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
+          h('i', { className: 'rc3-hr' }),
+          h('div', { className: 'rc3-row rc3-tot' }, h('span', null, k === 'failed' ? 'Total' : 'Total paid'), h('b', null, money(o.total)))),
+        k === 'failed' ? h(Tap, { className: 'rc3-btn full', go: function () { p.nav.push('checkout'); } }, h(F.Icon, { name: 'refresh', size: 18 }), 'Try payment again')
+          : h('div', { className: 'rc3-acts' },
+            h(Tap, { className: 'rc3-btn ghost', go: function () { p.nav.toast('Receipt PDF saved'); } }, h(F.Icon, { name: 'inbox', size: 18 }), 'Download PDF'),
+            h(Tap, { className: 'rc3-btn', go: function () { p.nav.toast('Receipt sent to your email'); } }, h(F.Icon, { name: 'mail', size: 18 }), 'Email receipt')),
+        k === 'paid' ? h(Tap, { className: 'rc-refund', go: function () { set({ ref: true }); } }, 'Request a refund') : null,
+        h('p', { className: 'rc3-help' }, h('span', { className: 'q' }, '?'), 'Questions about this charge? ', h('u', null, 'Contact support'))),
       h('div', { style: { height: 40 } }),
       st.ref ? toApp(h(RefundSheet, { o: o, close: function () { set({ ref: false }); }, done: function () { set({ ref: false, st: 'pending' }); p.nav.toast('Refund requested'); } })) : null);
   }
