@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106063504"</script>
+<script>window.__BUILD__="20261106063720"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5053,7 +5053,7 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-endf{display:inline-flex!important;align-items:center;gap:2px;height:36px;padding:0 6px 0 10px!important;background:none!important;color:#f4b740!important;font-weight:650!important}
 
 /* ended CTA: distinct, striped, coral */
-body .dt-cta.dt-ended{color:rgba(255,255,255,.82)!important;font-weight:700!important;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 10px,rgba(255,255,255,0) 10px 20px),linear-gradient(180deg,#3a3b43 0%,#26272d 100%)!important;box-shadow:0 10px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 0 rgba(0,0,0,.25)!important;border:0!important;cursor:default}
+body .dt-cta.dt-ended{color:rgba(255,255,255,.82)!important;font-weight:700!important;background:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 10px,rgba(255,255,255,0) 10px 20px),linear-gradient(180deg,#3a3b43 0%,#26272d 100%)!important;box-shadow:0 10px 22px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 0 rgba(0,0,0,.25)!important;border:0!important;cursor:pointer}
 body .dt-cta.dt-ended svg,body .dt-cta.dt-ended svg *{stroke:#ff8f8f!important;fill:none!important;color:#ff8f8f!important;opacity:1!important}
 </style>
 <div class="stagewrap">
@@ -7643,7 +7643,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             return h('div', { key: x[1] }, h('b', null, x[0]), h('span', null, x[1]));
           })),
         h('div', { className: 'dt-ctarow' },
-          ended ? h('span', { className: 'dt-cta dt-ended' }, h(F.Icon, { name: 'clock', size: 18 }), 'Event ended')
+          ended ? h(Tap, { className: 'dt-cta dt-ended', onClick: function () { tap(8); p.nav.toast('This event has ended \u2014 check out similar events'); var el = document.querySelector('.dt-similar'); if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 250); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Event ended')
             : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
           ended ? null : h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
