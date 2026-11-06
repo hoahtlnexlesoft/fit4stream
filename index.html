@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106080307"</script>
+<script>window.__BUILD__="20261106080508"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5317,6 +5317,10 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 .og-shade{background:linear-gradient(180deg,rgba(10,10,16,.12),rgba(10,10,16,.1) 40%,rgba(10,10,16,.85))!important}
 
 .dt-himg{-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%)!important;mask-image:linear-gradient(180deg,#000 82%,transparent 100%)!important}
+
+/* tab pages: header (title + icons) stays put while content scrolls */
+.screen>.tab-head{position:sticky!important;top:0!important;z-index:20!important}
+.screen>.tab-head h1{text-shadow:0 1px 2px rgba(0,0,0,.8),0 2px 12px rgba(0,0,0,.6)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6851,7 +6855,16 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
    ['hamlet', 'Hamlet — Opening Night Stream', 'Duc Tran', 'theater', 'Concerts and Performances', 'November 12, 2026', '19:30 – 150 mins', '$12.99'],
    ['launch', 'Product Launch: Fit4Stream Studio', 'Bao Ngoc', 'conference', 'Product Launches and Demonstrations', 'November 14, 2026', '10:00 – 45 mins', 'Free'],
    ['arena', 'Arena Tour: Encore Night', 'Khoa Dang', 'hero', 'Concerts and Performances', 'November 15, 2026', '20:00 – 120 mins', '$14.99'],
-   ['yoga', 'Sunrise Yoga Flow (Live Class)', 'Vy Nguyen', 'festival', 'Virtual Workshops and Training', 'November 16, 2026', '06:00 – 60 mins', 'Free']
+   ['yoga', 'Sunrise Yoga Flow (Live Class)', 'Vy Nguyen', 'festival', 'Virtual Workshops and Training', 'November 16, 2026', '06:00 – 60 mins', 'Free'],
+   ['coffee', 'Morning Coffee Chat with Creators', 'An Tran', 'conference', 'Social and Community', 'November 03, 2026', '13:00 – 45 mins', 'Free'],
+   ['guitar', 'Fingerstyle Guitar Masterclass', 'Hieu LK', 'concert', 'Virtual Workshops and Training', 'November 03, 2026', '15:30 – 60 mins', '$5.99'],
+   ['market', 'Night Market Food Tour Live', 'Thao NGUYEN2', 'festival', 'Social and Community', 'November 03, 2026', '18:00 – 90 mins', 'Free'],
+   ['jazz', 'Jazz Night Saigon', 'Kee Desmond', 'concert', 'Concerts and Performances', 'November 03, 2026', '21:00 – 120 mins', '$7.99'],
+   ['podcast', 'Startup Stories Podcast — Live Taping', 'Business Demo', 'conference', 'Talk Shows', 'November 04, 2026', '10:00 – 60 mins', 'Free'],
+   ['dance', 'K-pop Dance Cover Workshop', 'Nhan Doan', 'hero', 'Virtual Workshops and Training', 'November 04, 2026', '17:00 – 75 mins', '$3.99'],
+   ['esports', 'Esports Finals — Watch Party', 'Mai Pham', 'sports', 'Broadcast Events', 'November 04, 2026', '19:30 – 150 mins', 'Free'],
+   ['cooking', 'Pho from Scratch: Live Cooking', 'Linh Vo', 'festival', 'Virtual Workshops and Training', 'November 05, 2026', '11:30 – 60 mins', '$2.99'],
+   ['poetry', 'Open Mic Poetry Night', 'Sandra Smith', 'theater', 'Talk Shows', 'November 05, 2026', '20:00 – 90 mins', 'Free']
   ].forEach(function (x) { if (EV[x[0]]) return; var t = x[6].split(' – ')[0], hh = +t.split(':')[0], mm = t.split(':')[1], d = +x[6].split(' – ')[1].split(' ')[0];
     var end = new Date(0, 0, 0, hh, +mm + d); EV[x[0]] = Object.assign({}, EV.seo, { format: 'Live Session', id: x[0], title: x[1], org: x[2], img: PH[x[3]] || PH.concert, cat: x[4], date: x[5], time: x[6], range: t + ' – ' + ('0' + end.getHours()).slice(-2) + ':' + ('0' + end.getMinutes()).slice(-2), price: x[7], status: 'upcoming', trailer: 0, registers: 20 + x[1].length, startsIn: 86400 }); });
   // demo data is authored around Nov 3, 2026 ("today"); shift every event so that day is the real current date
@@ -6871,8 +6884,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   // global: content fades out only inside the header zone (status bar + header row) as it scrolls under it
   (function () {
-    var HDR = '.top, .brand-head, .d-top, .dt-close, .og-back, .ch2-back';
-    var SKIP = /(^|\s)(top|top-sp|top-blur|brand-head|tabbar|tab-amb|rc3-amb|home-amb|ptr|sheet-wrap|dt-sbar|dt-close|og-back|ch2-back|d-top)(\s|$)/;
+    var HDR = '.top, .brand-head, .d-top, .dt-close, .og-back, .ch2-back, .screen > .tab-head';
+    var SKIP = /(^|\s)(top|top-sp|top-blur|brand-head|tabbar|tab-amb|rc3-amb|home-amb|ptr|sheet-wrap|dt-sbar|dt-close|og-back|ch2-back|d-top|tab-head)(\s|$)/;
     function pick(node, out) {
       for (var c = node.firstElementChild; c; c = c.nextElementSibling) {
         var cn = typeof c.className === 'string' ? c.className : '';
@@ -6896,7 +6909,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - zh) + '|' + Math.round(b + FF / 3);
         if (n.__m === key) continue; n.__m = key;
         if (n.__media === undefined) { n.__media = false; var A = n.offsetWidth * n.offsetHeight, im = n.querySelectorAll('[style*="background-image"], img'); for (var u = 0; u < im.length && !n.__media; u++) if (im[u].offsetWidth * im[u].offsetHeight > A * .3) n.__media = true; if (!n.__media && /(^|\s)(dt-himg|dt-hero|og-cover)/.test(n.className)) n.__media = true; }
-        var a0 = n.__media ? '.4' : '.04', a1 = n.__media ? '.6' : '.1';
+        var a0 = n.__media ? '.35' : '.04', a1 = n.__media ? '.16' : '.1';
         var m = key ? 'linear-gradient(180deg,rgba(0,0,0,' + a0 + ') ' + Math.round(b - zh) + 'px,rgba(0,0,0,' + a1 + ') ' + Math.round(b - 10) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
         n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
