@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106081219"</script>
+<script>window.__BUILD__="20261106081457"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6920,7 +6920,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }
     function zone(stage) {
       var hs = stage.querySelectorAll(HDR), z = 0;
-      for (var i = 0; i < hs.length; i++) { if (!hs[i].offsetHeight) continue; var r = hs[i].getBoundingClientRect(); if (r.top >= stage.getBoundingClientRect().top + 160) continue; var inner = hs[i].querySelectorAll('h1, .top-title, .brand, button, .tap, .mbtn'), zb2 = 0; for (var q = 0; q < inner.length; q++) { var ir = inner[q].getBoundingClientRect(); if (ir.height && ir.top < r.bottom) zb2 = Math.max(zb2, ir.bottom); } z = Math.max(z, zb2 || r.bottom); }
+      for (var i = 0; i < hs.length; i++) { if (!hs[i].offsetHeight) continue; var r = hs[i].getBoundingClientRect(); if (r.top >= stage.getBoundingClientRect().top + 160) continue; var tx = hs[i].querySelectorAll('h1, .top-title, .brand'), hasT = false; for (var q = 0; q < tx.length; q++) if (tx[q].textContent.trim() && tx[q].offsetHeight) hasT = true; if (!hasT) continue; var inner = hs[i].querySelectorAll('h1, .top-title, .brand, button, .tap, .mbtn'), zb2 = 0; for (q = 0; q < inner.length; q++) { var ir = inner[q].getBoundingClientRect(); if (ir.height && ir.top < r.bottom) zb2 = Math.max(zb2, ir.bottom); } z = Math.max(z, zb2 || r.bottom); }
       if (!z) z = stage.getBoundingClientRect().top + (parseFloat(getComputedStyle(stage).getPropertyValue('--st')) || 54) + 10;
       return z + 2;
     }
