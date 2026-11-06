@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106034158"</script>
+<script>window.__BUILD__="20261106034356"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4808,6 +4808,13 @@ body .mcard{border:0!important;box-shadow:0 16px 36px rgba(0,0,0,.35)!important}
 .eg-hot-b b{display:block;font-size:17px;line-height:22px;font-weight:800;color:#fff;margin-bottom:6px}
 .eg-hot-b small{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap}
 .eg-hot-cta{flex:none;height:36px;padding:0 16px;border-radius:18px;display:inline-flex;align-items:center;gap:6px;background:#e74645;color:#fff;font-size:13.5px;font-weight:800}
+
+/* live row: same shape as the others, red treatment */
+.eg-li2.live{background:linear-gradient(100deg,rgba(231,70,69,.32),rgba(231,70,69,.12) 60%,rgba(231,70,69,.06))!important}
+.eg-li2.live .eg-th2{box-shadow:0 0 0 2px #e74645}
+.eg-li2.live .eg-sub{color:#ffb4ad;font-weight:600}
+
+.eg-li2.live .eg-lb2>b::before{content:none;display:inline-block;vertical-align:2px;margin-right:6px;height:16px;line-height:16px;padding:0 5px;border-radius:4px;font-size:9.5px;font-weight:800;letter-spacing:.4px;background:#e74645;color:#fff}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7062,14 +7069,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         liveN ? h('div', { className: 'eg-sum' }, h('span', { className: 'eg-sl' }, h('i', null), liveN + ' live now'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), '2.4K watching')) : null,
         src.length ? h('div', { className: 'col gap12' }, src.map(function (e) {
           var live = e.status === 'live', ended = e.status === 'ended';
-          if (live) return h('div', { key: e.id, className: 'eg-hot', role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(p.nav.authed ? 'player' : 'detail:' + e.id); } },
-            h('div', { className: 'eg-hot-img', style: { backgroundImage: 'url(' + e.img + ')' } },
-              h('span', { className: 'eg-hot-top' }, h('i', { className: 'eg-tl live' }, h('em', null), 'LIVE NOW'), h('i', { className: 'eg-hot-v' }, h(F.Icon, { name: 'eye', size: 12 }), (e.viewers || '2.4K'))),
-              h('span', { className: 'eg-hot-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 20 }))),
-            h('div', { className: 'eg-hot-b' },
-              h('div', { style: { minWidth: 0, flex: 1 } }, h('b', null, e.title),
-                h('span', { className: 'eg-host' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 20 }), h('em', null, e.org), h('small', null, '\u00b7 started ' + t0(e)))),
-              h('span', { className: 'eg-hot-cta' }, h(F.Icon, { name: 'play', size: 13 }), 'Watch')));
           return h('div', { key: e.id, className: cx('eg-li2', e.status), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(live && p.nav.authed ? 'player' : 'detail:' + e.id); } },
             h('span', { className: 'eg-th2', style: { backgroundImage: 'url(' + e.img + ')' } },
               live ? h('i', { className: 'eg-tl live' }, h('em', null), 'LIVE') : h('i', { className: cx('eg-tl', ended && 'end') }, ended ? 'Ended' : 'Soon'),
