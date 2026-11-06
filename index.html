@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106044628"</script>
+<script>window.__BUILD__="20261106044846"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4972,6 +4972,14 @@ body[data-phone=foldopen] .duo-feat .cf3 .cf3-body>b,body .cf3.wide .cf3-body>b{
 /* title: single line with ellipsis */
 body .cf3 .cf3-body>b{display:block!important;-webkit-line-clamp:unset!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 body .cf3 .cf3-body{gap:5px!important}
+
+/* card v4: minimal */
+body .cf4 .cf3-body{padding:10px 12px 12px!important;gap:3px!important}
+.cf4-meta{display:flex;align-items:center;gap:6px;min-width:0;font-size:11.5px;color:rgba(255,255,255,.5)}
+.cf4-meta span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cf4-meta i{flex:none;width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+.cf4-meta em{flex:none;font-style:normal;font-weight:600;color:rgba(255,255,255,.8)}
+.cf4-meta em.free{color:#7fe0a8}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6530,19 +6538,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var live = e.status === 'live', ended = e.status === 'ended';
     var open = function () { if (live && p.nav.authed && p.nav.registered !== false) { window.__focusChat = false; return p.nav.push('player'); } p.nav.push('detail:' + e.id); };
     var cat = e.cat.replace(' and Performances', '').replace('Virtual ', '').replace(' and Training', '');
-    return h(Tap, { className: cx('ev16 cf3', p.wide && 'wide'), label: e.title, go: open },
+    var when = ended ? 'Replay' : e.date.replace(', 2026', '').replace(/^(\w{3})\w*/, '$1') + ' \u00b7 ' + e.range.split('\u2013')[0].trim();
+    return h(Tap, { className: cx('ev16 cf3 cf4', p.wide && 'wide'), label: e.title, go: open },
       h('div', { className: 'cf3-media', style: { backgroundImage: 'url(' + e.img + ')' } },
         h('i', { className: 'cf3-shade' }),
-        h('div', { className: 'cf3-tl' }, live ? [h('span', { key: 'l', className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE'), h('span', { key: 'v', className: 'cf3-chip' }, h(F.Icon, { name: 'eye', size: 13 }), (e.viewers || '2.4K'))] :
-          h('span', { className: 'cf3-chip' }, ended ? 'Ended' : e.date.replace(', 2026', ''))),
-        live ? h('span', { className: 'cf3-time' }, liveFor(e, t)) : h('span', { className: 'cf3-time' }, ended ? 'Replay' : e.range.split('\u2013')[0].trim()),
+        h('div', { className: 'cf3-tl' }, live ? h('span', { className: 'live-pill' }, h('span', { className: 'eq' }, h('i'), h('i'), h('i')), 'LIVE') : h('span', { className: 'cf3-chip' }, when)),
         live && p.nav.authed && p.nav.registered !== false ? h('span', { className: 'cf3-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 18 })) : null),
       h('div', { className: 'cf3-body' },
         h('b', null, e.title),
-        h('div', { className: 'cf3-by' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 22 }), h('span', null, e.org), h('i'), h('em', null, cat)),
-        h('div', { className: 'cf-foot' },
-          h('span', { className: 'soon' }, h(F.Icon, { name: 'ticket', size: 14 }), e.price),
-          h('span', { className: cx('mini-cta', live && 'live') }, live ? h('span', { className: 'row gap6' }, h(F.Icon, { name: 'play', size: 13 }), 'Watch') : ended ? 'Replay' : 'Details'))));
+        h('div', { className: 'cf4-meta' }, h('span', null, e.org), h('i'), h('em', { className: e.price === 'Free' ? 'free' : '' }, e.price))));
   }
   function CatBentoEv(p) {
     return h(Rail, null, p.list.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }));
