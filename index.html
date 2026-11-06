@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106035943"</script>
+<script>window.__BUILD__="20261106040216"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4864,6 +4864,25 @@ body .eg-strip .eg-d:focus-visible,body .eg-cd:focus-visible{outline:none!import
 body .eg-strip .eg-d.today:not(.on):not(.is-on):not(:focus-within),body .eg-cal .eg-cd.today:not(.on){box-shadow:inset 0 0 0 1px rgba(244,164,37,.7)!important;background:rgba(244,164,37,.08)!important}
 .eg-strip .eg-d.today:not(.on) span{font-size:8.5px!important;letter-spacing:.2px!important}
 .eg-tdl{font-size:7.5px!important;letter-spacing:.2px!important;top:5px!important}
+
+/* toolbar never overflows: icon-only filter with a status dot; month label can shrink */
+.eg-bar{min-width:0}
+.eg-mon2{min-width:0;flex:0 1 auto}
+.eg-mbtn{min-width:0;max-width:100%}
+.eg-mbtn b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.eg-mbtn svg{flex:none}
+.eg-today2{flex:none}
+.eg-fb{width:36px!important;padding:0!important;position:relative}
+.eg-fbd{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:#F4A425;box-shadow:0 0 0 2px #17151d}
+.eg-fbd.live{background:#e74645}.eg-fbd.ended{background:#9ca3af}
+
+.eg-bar{gap:6px!important}
+.eg-mbtn{padding:0 10px 0 12px!important}
+
+.eg-vwi{width:30px!important}
+.eg-today2{padding:0 9px!important}
+.eg-mbtn b{overflow:visible!important;text-overflow:clip!important}
+.eg-mbtn{gap:4px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7096,10 +7115,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var toolbar = h('div', { className: 'eg-tools2' },
       h('div', { className: 'pad eg-bar' },
         h('div', { className: 'eg-mon2' },
-          h(Tap, { className: 'eg-mbtn', label: 'Choose month and year', onClick: function () { tap(5); setPick(ym.y); } }, h('b', null, MONTHS[ym.m], h('span', null, ' ' + ym.y)), h(F.Icon, { name: 'chevronDown', size: 16 }))),
+          h(Tap, { className: 'eg-mbtn', label: 'Choose month and year', onClick: function () { tap(5); setPick(ym.y); } }, h('b', null, MONTHS[ym.m].slice(0, 3), h('span', null, ' ' + ym.y)), h(F.Icon, { name: 'chevronDown', size: 16 }))),
         !(ym.y === TODAY.y && ym.m === TODAY.m && selDay === TODAY.d) ? h(Tap, { className: 'eg-today2', onClick: goToday }, 'Today') : null,
         h('div', { className: 'eg-fw' },
-          h(Tap, { className: cx('eg-fb', stF !== 'all' && 'on'), label: 'Filter by status', onClick: function () { tap(4); setFiltOpen(!filtOpen); } }, h(F.Icon, { name: 'filter', size: 16 }), stF !== 'all' ? h('span', null, STL[stF]) : null),
+          h(Tap, { className: cx('eg-fb', stF !== 'all' && 'on'), label: 'Filter by status', onClick: function () { tap(4); setFiltOpen(!filtOpen); } }, h(F.Icon, { name: 'filter', size: 16 }), stF !== 'all' ? h('i', { className: 'eg-fbd ' + stF }) : null),
           filtOpen ? h('div', { className: 'eg-fm', role: 'menu' }, ['all', 'live', 'upcoming', 'ended'].map(function (k) {
             var n = k === 'all' ? inMonth.length : inMonth.filter(function (e) { return e.status === k; }).length;
             return h('button', { key: k, type: 'button', role: 'menuitemradio', 'aria-checked': stF === k, className: cx('eg-fmi', stF === k && 'on'), onClick: function () { tap(4); setStF(k); setFiltOpen(false); } }, h('i', { className: 'dot ' + k }), k === 'all' ? 'All statuses' : STL[k], h('em', null, n), stF === k ? h(F.Icon, { name: 'check', size: 14 }) : null);
