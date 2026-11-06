@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106073121"</script>
+<script>window.__BUILD__="20261106073258"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8208,7 +8208,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var steps = k === 'refunded' ? [['Requested', 'Nov 04', 2], ['Approved', 'Nov 04', 2], ['Refunded', 'Nov 06', 2]] : [['Requested', 'Nov 04', 2], ['Approved', '~24h', 1], ['Refunded', '5–10 days', 0]];
     var cents = money(amt).split('.');
     var sv = useState(false), solid = sv[0], setSolid = sv[1];
-    return h('div', { className: cx('screen tabscreen rc3 st-' + k, solid && 'solid'), onScroll: function (e) { var v = e.currentTarget.scrollTop > 40; if (v !== solid) setSolid(v); } },
+    return h('div', { className: cx('screen tabscreen rc3 st-' + k, solid && 'solid'), onScroll: function (e) { var el = e.currentTarget, y = el.scrollTop, v = y > 40; if (v !== solid) setSolid(v); var hs = el.querySelectorAll('.rc3-hero h2, .rc3-hero p, .rc3-orbwrap'); for (var q = 0; q < hs.length; q++) { var hd = el.querySelector('.top'), base = (hd ? hd.getBoundingClientRect().bottom : el.getBoundingClientRect().top + 100), top = hs[q].getBoundingClientRect().top - base, f = Math.max(0, Math.min(1, (top + 10) / 70)); hs[q].style.opacity = f.toFixed(3); hs[q].style.filter = 'blur(' + ((1 - f) * 6).toFixed(1) + 'px)'; } } },
       h('div', { className: 'rc3-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
       h('div', { className: 'pad col', style: { paddingTop: 4 } },
