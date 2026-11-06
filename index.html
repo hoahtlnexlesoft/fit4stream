@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106035140"</script>
+<script>window.__BUILD__="20261106035659"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4828,6 +4828,21 @@ body .mcard{border:0!important;box-shadow:0 16px 36px rgba(0,0,0,.35)!important}
 
 .eg-cr.live .eg-crw{opacity:1!important;color:#fff!important}
 .eg-cr.live>div>span{white-space:nowrap}
+
+/* "today" when another day is selected: outlined amber with a label */
+.eg-cd:focus,.eg-cd:focus-visible,.eg-d:focus,.eg-d:focus-visible{outline:none!important}
+.eg-cd.today:not(.on){background:rgba(244,164,37,.12)!important;box-shadow:inset 0 0 0 2px #F4A425!important}
+.eg-cd.today:not(.on) b{color:#F6C26B!important;font-weight:800}
+.eg-tdl{position:absolute;top:4px;left:0;right:0;text-align:center;font-size:8.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#F4A425}
+.eg-cd.today:not(.on) b{margin-top:8px}
+.eg-cd.today:not(.on) em{display:none}
+.eg-strip .eg-d.today:not(.on){background:rgba(244,164,37,.12)!important;box-shadow:inset 0 0 0 2px #F4A425!important}
+.eg-strip .eg-d.today:not(.on) b{color:#F6C26B!important}
+.eg-strip .eg-d.today:not(.on) span{color:#F4A425!important;font-weight:800!important}
+
+body .eg-strip .eg-d.today:not(.on):not(.is-on):not(:focus-within),body .eg-cal .eg-cd.today:not(.on){background:rgba(244,164,37,.12)!important;box-shadow:inset 0 0 0 2px #F4A425!important}
+body .eg-strip .eg-d.on,body .eg-cal .eg-cd.on{outline:none!important}
+body .eg-strip .eg-d:focus-visible,body .eg-cd:focus-visible{outline:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7063,7 +7078,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       showQ || query ? h('div', { className: 'pad', style: { marginTop: 10 } }, h('label', { className: 'f4-search eg-q' }, h(F.Icon, { name: 'search', size: 17 }), h('input', { id: 'eg-q', type: 'search', placeholder: 'Search channels, events, hosts\u2026', value: query, onChange: function (e) { setQ(e.target.value); } }))) : null,
       view !== 'calendar' ? h('div', { className: 'eg-strip', ref: stripRef }, allDays.map(function (d) {
           var wd = DOW[new Date(ym.y, ym.m, d).getDay()], n = onDay(d).length;
-          return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); } }, h('span', null, wd.slice(0, 3)), h('b', null, d), n ? h('i', null) : h('i', { className: 'none' }));
+          return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); } }, h('span', null, isToday(d) && d !== selDay ? 'Today' : wd.slice(0, 3)), h('b', null, d), n ? h('i', null) : h('i', { className: 'none' }));
         })) : null);
     var empty = function (t, b) { return h('div', { style: { marginTop: 18 } }, h(F.EmptyState, { art: 'calendar', title: t, body: b, action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } })); };
     var body;
@@ -7110,7 +7125,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           cells.map(function (d, i) {
             if (!d) return h('span', { key: 'e' + i });
             var evs = onDay(d).filter(matchQ), live = evs.some(function (e) { return e.status === 'live'; });
-            return h('button', { key: d, type: 'button', className: cx('eg-cd', d === selDay && 'on', isToday(d) && 'today', evs.length && 'has'), onClick: function () { tap(4); setSelDay(d); setWk(0); } }, h('b', null, d), evs.length ? h('span', { className: 'eg-dots' }, evs.slice(0, 3).map(function (e) { return h('i', { key: e.id, className: e.status }); })) : null, live ? h('em', null) : null);
+            return h('button', { key: d, type: 'button', className: cx('eg-cd', d === selDay && 'on', isToday(d) && 'today', evs.length && 'has'), onClick: function () { tap(4); setSelDay(d); setWk(0); } }, isToday(d) && d !== selDay ? h('small', { className: 'eg-tdl' }, 'Today') : null, h('b', null, d), evs.length ? h('span', { className: 'eg-dots' }, evs.slice(0, 3).map(function (e) { return h('i', { key: e.id, className: e.status }); })) : null, live ? h('em', null) : null);
           })),
         h('div', { className: 'eg-calh' }, h('b', null, MONTHS[ym.m].slice(0, 3) + ' ' + selDay), h('span', null, dayEvents.length ? dayEvents.length + (dayEvents.length === 1 ? ' event' : ' events') : 'No events')),
         dayEvents.length ? h('div', { className: 'col gap8' }, dayEvents.map(function (e) {
