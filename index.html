@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106065110"</script>
+<script>window.__BUILD__="20261106065800"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5112,6 +5112,21 @@ body .co-cp-ok{box-shadow:inset 0 0 0 1px rgba(57,200,124,.45)!important}
 .rc-big>b{font-size:48px!important;line-height:52px!important;letter-spacing:-1.5px!important;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.72));-webkit-background-clip:text;background-clip:text;color:transparent!important}
 .rc-big>b sup,.rc-big>b small{-webkit-text-fill-color:rgba(255,255,255,.6)}
 .rc-bot .rc-lines{padding-top:4px}
+
+/* receipt v3: seamless paper, cleaner amount, failed reason inside */
+body .rc-paper,body .rc-paper.st-paid,body .rc-paper.st-pending,body .rc-paper.st-refunded,body .rc-paper.st-failed{background:#1b1a21!important;box-shadow:0 18px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06)!important}
+.rc-bgfx{background:radial-gradient(120% 80% at 100% 0%,color-mix(in srgb,var(--sc) 20%,transparent),transparent 60%),linear-gradient(180deg,rgba(27,26,33,.25) 0%,rgba(27,26,33,.85) 50%,#1b1a21 82%)!important}
+.rc-bgimg{opacity:.45!important;bottom:35%!important}
+.rc-cut i{background:#0f0e14!important}
+.rc-big>b{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.rc-big>b sup,.rc-big>b small{-webkit-text-fill-color:rgba(255,255,255,.55)!important}
+.rc-top2.st-failed .rc-big>b{color:rgba(255,255,255,.6)!important;-webkit-text-fill-color:rgba(255,255,255,.6)!important}
+.rc-top2.st-failed .rc-big>span{color:#ff8a8a;font-weight:650}
+.rc-why{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:rgba(231,70,69,.1)}
+.rc-why>span{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#ff8a8a;background:rgba(231,70,69,.16)}
+.rc-why>div{display:flex;flex-direction:column;gap:2px}
+.rc-why b{font-size:13.5px;font-weight:700;color:#fff}
+.rc-why>div>span{font-size:12.5px;line-height:17px;color:rgba(255,255,255,.6)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7998,9 +8013,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
               h('div', { className: 'rc-chiprow' }, h('span', { className: 'rc-chip' }, h(F.Icon, { name: IC, size: 14, stroke: 2.6 }), TT), h('span', { className: 'rc-date' }, isRf ? SUB.replace('Requested ', '').replace(/^Refunded (Nov \d+).*/, '$1') : o.when)),
               h('div', { className: 'rc-evh' }, h('span', { className: 'thumb', style: { backgroundImage: 'url(' + photoFor(o.ev) + ')' } }), h('div', null, h('b', null, o.ev), h('span', null, 'Order ' + id))),
               h('div', { className: 'rc-big' },
-                h('span', null, isRf ? 'Refund amount' : st.st === 'failed' ? 'Amount attempted' : 'Amount paid'),
+                h('span', null, isRf ? 'Refund amount' : st.st === 'failed' ? 'Not charged' : 'Amount paid'),
                 h('b', null, h('sup', null, '$'), money(amt).slice(1).split('.')[0], h('small', null, '.' + money(amt).split('.')[1])),
                 isRf ? h('em', null, 'of ' + money(o.total) + ' paid \u00b7 ' + money(FEE) + ' service fee is non-refundable') : null),
+              st.st === 'failed' ? h('div', { className: 'rc-why' }, h('span', null, h(F.Icon, { name: 'lock', size: 17 })), h('div', null, h('b', null, 'Declined by your bank'), h('span', null, 'Insufficient funds on ' + o.pmT + '. Try another card or top up and retry.'))) : null,
               isRf ? h('div', { className: 'rc-prog' },
                 h('div', { className: 'rc-bar' }, h('i', { style: { width: (step === 3 ? 100 : 18) + '%' } })),
                 h('div', { className: 'rc-steps' }, [['Requested', 'Nov 04'], ['Approved', st.st === 'refunded' ? 'Nov 04' : '~24h'], ['Refunded', st.st === 'refunded' ? 'Nov 06' : '5\u201310 days']].map(function (r, k) {
@@ -8010,13 +8026,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h('div', { className: 'rc-cut', 'aria-hidden': true }, h('i'), h('span'), h('i')),
           h('div', { className: 'rc-bot' },
           h('div', { className: 'rc-lines' }, o.lines.map(function (l, i) { return h('div', { key: i, className: l[1] < 0 ? 'neg' : '' }, h('span', null, l[0]), h('span', null, (l[1] < 0 ? '−' : '') + money(Math.abs(l[1])))); }),
-            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Amount attempted' : 'Total paid'), h('b', null, money(o.total)))))),
-        st.st === 'failed' ? h('div', { className: 'rc-failbox' }, h(F.Icon, { name: 'x', size: 16 }), h('span', null, 'Declined by bank · Insufficient funds. You were not charged.')) : null,
+            h('div', { className: 'rc-tot' }, h('span', null, st.st === 'failed' ? 'Total' : 'Total paid'), h('b', null, money(o.total)))))),
         h('div', { className: 'rc-card rc-meta' },
           h('div', null, h('span', null, 'Payment method'), h('b', { className: 'rc-pm' }, h(CardLogo, { k: o.pm }), o.pmT)),
           h('div', null, h('span', null, 'Transaction ID'), h('b', null, 'ch_3Q' + id.slice(-4) + 'Xa9LkT')),
           h('div', null, h('span', null, 'Billed to'), h('b', null, 'Tran Nguyen'))),
-        h('div', { className: 'rc-acts' },
+        st.st === 'failed' ? null : h('div', { className: 'rc-acts' },
           h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt PDF saved'); } }, h(F.Icon, { name: 'inbox', size: 18 }), 'Download PDF'),
           h(Tap, { className: 'rc-act', go: function () { p.nav.toast('Receipt sent to your email'); } }, h(F.Icon, { name: 'mail', size: 18 }), 'Email receipt')),
         st.st === 'paid' ? h(Tap, { className: 'rc-refund', go: function () { set({ ref: true }); } }, 'Request a refund') : null,
