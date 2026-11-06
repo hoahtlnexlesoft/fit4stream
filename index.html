@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106041010"</script>
+<script>window.__BUILD__="20261106041139"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4907,6 +4907,16 @@ body .eg-strip .eg-d.today:not(.on):not(.is-on):not(:focus-within),body .eg-cal 
 
 body .eg-es .f4-ea3{display:block;width:112px!important;height:84px!important;margin:0 auto 10px!important}
 body .eg-es .f4-ea3 svg{width:112px!important;height:84px!important}
+
+/* one day header for every view */
+.eg-dh{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
+.eg-dh b{font-size:16px;font-weight:800;color:#fff;display:inline-flex;align-items:center;gap:8px}
+.eg-dh b em{font-style:normal;font-size:11px;font-weight:800;color:#f4b740;background:rgba(244,164,37,.14);padding:2px 7px;border-radius:6px}
+.eg-dh>span{margin-left:auto;font-size:12.5px;color:rgba(255,255,255,.5)}
+.eg-dh .eg-sortb{margin-left:4px}
+.eg-cal{margin-bottom:16px}
+
+.eg-dhw .eg-dh{padding:0!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7163,6 +7173,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         action: filtered ? 'Show all statuses' : nx ? 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx : 'Browse upcoming',
         onAction: function () { tap(5); if (filtered) setStF('all'); else if (nx) setSelDay(nx); else p.nav.tab('upcoming'); } }));
     };
+    var dayHead = h('div', { className: 'pad eg-dh' },
+        h('b', null, new Date(ym.y, ym.m, selDay).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }), isToday(selDay) ? h('em', null, 'Today') : null),
+        h('span', null, dayEvents.length ? dayEvents.length + (dayEvents.length === 1 ? ' event' : ' events') : 'No events'),
+        view === 'list' && dayEvents.length > 1 ? h('button', { type: 'button', className: 'eg-sortb', onClick: function () { tap(4); setSort(-sortDir); } }, 'Time ', sortDir > 0 ? '\u2191' : '\u2193') : null);
     var body;
     if (view === 'timeline') {
       var by = {}; dayEvents.forEach(function (e) { (by[e.org] = by[e.org] || []).push(e); });
@@ -7182,8 +7196,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       var liveN = dayEvents.filter(function (e) { return e.status === 'live'; }).length;
       var cnt = function (k) { return k === 'all' ? dayAll.length : dayAll.filter(function (e) { return e.status === k; }).length; };
       body = h('div', { className: 'pad fade-in', key: 'ls' + selDay + ym.m },
-        h('div', { className: 'eg-lh2' }, h('span', null, src.length + (src.length === 1 ? ' event' : ' events')),
-          h('button', { type: 'button', className: 'eg-sortb', onClick: function () { tap(4); setSort(-sortDir); } }, 'Time ', sortDir > 0 ? '\u2191' : '\u2193')),
         liveN ? h('div', { className: 'eg-sum' }, h('span', { className: 'eg-sl' }, h('i', null), liveN + ' live now'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), '2.4K watching')) : null,
         src.length ? h('div', { className: 'col gap12' }, src.map(function (e) {
           var live = e.status === 'live', ended = e.status === 'ended';
@@ -7208,7 +7220,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             var evs = onDay(d).filter(matchQ).filter(matchSt), live = evs.some(function (e) { return e.status === 'live'; });
             return h('button', { key: d, type: 'button', className: cx('eg-cd', d === selDay && 'on', isToday(d) && 'today', evs.length && 'has'), onClick: function () { tap(4); setSelDay(d); setWk(0); } }, isToday(d) && d !== selDay ? h('small', { className: 'eg-tdl' }, 'Today') : null, h('b', null, d), evs.length ? h('span', { className: 'eg-dots' }, evs.slice(0, 3).map(function (e) { return h('i', { key: e.id, className: e.status }); })) : null, live ? h('em', null) : null);
           })),
-        h('div', { className: 'eg-calh' }, h('b', null, MONTHS[ym.m].slice(0, 3) + ' ' + selDay), h('span', null, dayEvents.length ? dayEvents.length + (dayEvents.length === 1 ? ' event' : ' events') : 'No events')),
+        h('div', { className: 'eg-dhw' }, dayHead),
         dayEvents.length ? h('div', { className: 'col gap8' }, dayEvents.map(function (e) {
           var lv = e.status === 'live';
           return h('div', { key: e.id, className: cx('eg-cr', lv && 'live'), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(lv && p.nav.authed ? 'player' : 'detail:' + e.id); } }, h('span', { className: 'eg-crt' }, t0(e)), h('span', { className: cx('eg-crb', e.status) }),
@@ -7225,7 +7237,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide'), h(Tap, { className: cx('rbtn', (showQ || query) && 'on'), label: showQ ? 'Close search' : 'Search', onClick: function () { tap(5); if (showQ) setQ(''); setShowQ(!showQ); setTimeout(function () { var i = document.getElementById('eg-q'); if (i) i.focus(); }, 60); } }, h(F.Icon, { name: showQ ? 'x' : 'search', size: 20 }))),
-      toolbar, body,
+      toolbar,
+      view !== 'calendar' ? dayHead : null,
+      body,
       pick !== null ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) setPick(null); } },
         h('div', { className: 'sheet eg-pk', role: 'dialog', 'aria-label': 'Choose month' },
           h('span', { className: 'grab' }),
