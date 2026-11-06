@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106040533"</script>
+<script>window.__BUILD__="20261106040651"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4893,6 +4893,9 @@ body .eg-strip .eg-d.today:not(.on):not(.is-on):not(:focus-within),body .eg-cal 
 
 .eg-ei{width:auto!important;height:auto!important;background:none!important;color:#d6bcfb!important;margin-bottom:2px!important}
 .eg-ei svg{width:28px;height:28px}
+
+/* Event Guide empty states use the app's illustrated EmptyState, compact */
+.eg-es .f4-empty{padding-top:6px!important;padding-bottom:10px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7142,13 +7145,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var empty = function (t, b) {
       var nx = null; for (var q = selDay + 1; q <= dim && !nx; q++) if (onDay(q).filter(matchQ).filter(matchSt).length) nx = q;
       var filtered = stF !== 'all' && dayAll.length;
-      return h('div', { className: 'pad', style: { marginTop: 8 } }, h('div', { className: 'eg-empty' },
-        h('span', { className: 'eg-ei' }, h(F.Icon, { name: filtered ? 'filter' : 'calendar', size: 22 })),
-        h('b', null, filtered ? 'No ' + STL[stF].toLowerCase() + ' events here' : (ql ? 'No matches' : 'Nothing scheduled')),
-        h('span', null, filtered ? 'This day has ' + dayAll.length + (dayAll.length === 1 ? ' event' : ' events') + ' with another status.' : (ql ? 'Try another channel, event or host name.' : 'No events on ' + MONTHS[ym.m].slice(0, 3) + ' ' + selDay + '. Pick another day.')),
-        filtered ? h('button', { type: 'button', className: 'eg-next', onClick: function () { tap(5); setStF('all'); } }, 'Show all statuses', h(F.Icon, { name: 'chevronRight', size: 15 }))
-          : nx ? h('button', { type: 'button', className: 'eg-next', onClick: function () { tap(5); setSelDay(nx); } }, 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx, h(F.Icon, { name: 'chevronRight', size: 15 }))
-          : h('button', { type: 'button', className: 'eg-next', onClick: function () { p.nav.tab('upcoming'); } }, 'Browse upcoming', h(F.Icon, { name: 'chevronRight', size: 15 }))));
+      return h('div', { className: 'pad eg-es', style: { marginTop: 4 } }, h(F.EmptyState, {
+        art: filtered ? 'search' : 'calendar',
+        title: filtered ? 'No ' + STL[stF].toLowerCase() + ' events here' : (ql ? 'No matches' : 'Nothing scheduled'),
+        body: filtered ? 'This day has ' + dayAll.length + (dayAll.length === 1 ? ' event' : ' events') + ' with another status.' : (ql ? 'Try another channel, event or host name.' : 'No events on ' + MONTHS[ym.m].slice(0, 3) + ' ' + selDay + '. Pick another day.'),
+        action: filtered ? 'Show all statuses' : nx ? 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx : 'Browse upcoming',
+        onAction: function () { tap(5); if (filtered) setStF('all'); else if (nx) setSelDay(nx); else p.nav.tab('upcoming'); } }));
     };
     var body;
     if (view === 'timeline') {
@@ -7203,12 +7205,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             lv ? h('span', { className: 'eg-crw' }, h(F.Icon, { name: 'play', size: 12 }), 'Watch') : h(F.Icon, { name: 'chevronRight', size: 16 }));
         })) : (function () {
           var nx = null; for (var q = selDay + 1; q <= dim && !nx; q++) if (onDay(q).filter(matchQ).filter(matchSt).length) nx = q;
-          return h('div', { className: 'eg-empty' },
-            h('span', { className: 'eg-ei' }, h(F.Icon, { name: 'calendar', size: 22 })),
-            h('b', null, 'Nothing scheduled'),
-            h('span', null, stF !== 'all' ? 'No ' + STL[stF].toLowerCase() + ' events on this day.' : 'No events on ' + MONTHS[ym.m].slice(0, 3) + ' ' + selDay + '. Pick another day.'),
-            nx ? h('button', { type: 'button', className: 'eg-next', onClick: function () { tap(5); setSelDay(nx); } }, 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx + ' \u00b7 ' + onDay(nx).filter(matchSt).length + (onDay(nx).filter(matchSt).length === 1 ? ' event' : ' events'), h(F.Icon, { name: 'chevronRight', size: 15 }))
-              : h('button', { type: 'button', className: 'eg-next', onClick: function () { p.nav.tab('upcoming'); } }, 'Browse upcoming', h(F.Icon, { name: 'chevronRight', size: 15 })));
+          return h('div', { className: 'eg-es' }, h(F.EmptyState, { art: 'calendar', title: 'Nothing scheduled',
+            body: stF !== 'all' ? 'No ' + STL[stF].toLowerCase() + ' events on this day.' : 'No events on ' + MONTHS[ym.m].slice(0, 3) + ' ' + selDay + '. Pick another day.',
+            action: nx ? 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx : 'Browse upcoming',
+            onAction: function () { tap(5); if (nx) setSelDay(nx); else p.nav.tab('upcoming'); } }));
         })());
     }
     return h('div', { className: 'screen tabscreen' },
