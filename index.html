@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106030604"</script>
+<script>window.__BUILD__="20261106030920"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4446,6 +4446,11 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 
 .screen.pf{padding-top:0!important}
 .pf-back{top:calc(var(--st) + 8px)!important}
+
+/* hero dots: compact so 10 fit neatly */
+.cf2 + .dots{gap:5px!important}
+.cf2 + .dots span{width:6px!important;height:6px!important}
+.cf2 + .dots span.on{width:18px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -5971,6 +5976,17 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
     gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
   };
+  // extra demo events so the Home hero shows its full set (client rule: max 10 there)
+  [['standup', 'Saigon Stand-up Night: Live Comedy', 'Hoang Minh', 'comedy', 'Talk Shows', 'November 07, 2026', '20:30 – 90 mins', '$4.99'],
+   ['lantern', 'Hoi An Lantern Festival Live', 'Linh Vo', 'festival', 'Social and Community', 'November 08, 2026', '19:00 – 120 mins', 'Free'],
+   ['premiere', 'Indie Film Premiere & Director Q&A', 'Quang Le', 'movie', 'Broadcast Events', 'November 09, 2026', '21:00 – 75 mins', '$6.99'],
+   ['derby', 'Hanoi City Derby — Watch Party', 'Mai Pham', 'sports', 'Broadcast Events', 'November 10, 2026', '18:00 – 120 mins', 'Free'],
+   ['hamlet', 'Hamlet — Opening Night Stream', 'Duc Tran', 'theater', 'Concerts and Performances', 'November 12, 2026', '19:30 – 150 mins', '$12.99'],
+   ['launch', 'Product Launch: Fit4Stream Studio', 'Bao Ngoc', 'conference', 'Product Launches and Demonstrations', 'November 14, 2026', '10:00 – 45 mins', 'Free'],
+   ['arena', 'Arena Tour: Encore Night', 'Khoa Dang', 'hero', 'Concerts and Performances', 'November 15, 2026', '20:00 – 120 mins', '$14.99'],
+   ['yoga', 'Sunrise Yoga Flow (Live Class)', 'Vy Nguyen', 'festival', 'Virtual Workshops and Training', 'November 16, 2026', '06:00 – 60 mins', 'Free']
+  ].forEach(function (x) { if (EV[x[0]]) return; var t = x[6].split(' – ')[0], hh = +t.split(':')[0], mm = t.split(':')[1], d = +x[6].split(' – ')[1].split(' ')[0];
+    var end = new Date(0, 0, 0, hh, +mm + d); EV[x[0]] = Object.assign({}, EV.seo, { id: x[0], title: x[1], org: x[2], img: PH[x[3]] || PH.concert, cat: x[4], date: x[5], time: x[6], range: t + ' – ' + ('0' + end.getHours()).slice(-2) + ':' + ('0' + end.getMinutes()).slice(-2), price: x[7], status: 'upcoming', trailer: 0, registers: 20 + x[1].length, startsIn: 86400 }); });
   function evFrom(param) { return EV[param] || EV.xmas; }
   function fmtT(s) { s = Math.max(0, s); function z(n) { return (n < 10 ? '0' : '') + n; } return z(Math.floor(s / 3600)) + ':' + z(Math.floor(s / 60) % 60) + ':' + z(s % 60); }
   /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
