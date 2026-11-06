@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106080850"</script>
+<script>window.__BUILD__="20261106081025"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5335,6 +5335,16 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 .pf-go.on .pf-gck{background:#f4b740;box-shadow:none}
 
 .pf-date{pointer-events:none!important}.pf-datew{cursor:pointer}
+
+/* birthday wheel picker */
+.wh{position:relative;display:grid;grid-template-columns:1.5fr .8fr 1fr;gap:6px;height:200px;margin:6px 0 10px;-webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent)}
+.wh-band{position:absolute;left:0;right:0;top:80px;height:40px;border-radius:12px;background:rgba(255,255,255,.07);pointer-events:none}
+.wh-col{position:relative;height:200px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+.wh-col::-webkit-scrollbar{display:none}
+.wh-pad{height:80px}
+.wh-it{height:40px;line-height:40px;text-align:center;scroll-snap-align:center;font-size:17px;color:rgba(255,255,255,.45);cursor:pointer;font-variant-numeric:tabular-nums;transition:color .15s}
+.wh-it.on{color:#fff;font-weight:700}
+.pf-bnote{margin:0 0 14px;text-align:center;font-size:12.5px;color:rgba(255,255,255,.45)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7079,7 +7089,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var xs = useState(['Live music', 'Concerts']), exp = xs[0], setExp = xs[1];
     var bz = useState(false), biz = bz[0], setBiz = bz[1];
     var ad = useState(false), adding = ad[0], setAdding = ad[1];
-    var gsS = useState(false), gs = gsS[0], setGs = gsS[1];
+    var gsS = useState(false), gs = gsS[0], setGs = gsS[1], bsS = useState(false), bs = bsS[0], setBs = bsS[1];
     function set(k, val) { var o = Object.assign({}, v); o[k] = val; setV(o); }
     function photo() { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); }
     var checks = [!!v.first, !!v.last, !!v.gender, !!v.birthday, !!v.phone, !!v.address, exp.length > 0, !!v.bio, !!me];
@@ -7096,7 +7106,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'ac-head' }, h('h2', null, 'Gender'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: function () { setGs(false); } }, h(F.Icon, { name: 'x', size: 18 }))),
         h('div', { className: 'pf-gl2' }, GOPT.map(function (g) { var on = v.gender === g[0];
           return h(Tap, { key: g[0], className: cx('pf-go', on && 'on'), go: function () { tap(6); set('gender', g[0]); setTimeout(function () { setGs(false); }, 160); } }, h('span', null, g[0]), h('i', { className: 'pf-gck' }, on ? h(F.Icon, { name: 'check', size: 14, stroke: 3 }) : null)); }))))) : null;
-    return h('div', { className: 'screen tabscreen pf' }, gSheet,
+    var bSheet = bs ? toApp(h(BdaySheet, { value: v.birthday, close: function () { setBs(false); }, save: function (d) { set('birthday', d); setBs(false); p.nav.toast('Birthday saved'); } })) : null;
+    return h('div', { className: 'screen tabscreen pf' }, gSheet, bSheet,
       h('div', { className: 'pf-hero' },
         h('div', { className: 'pf-glow', 'aria-hidden': true }),
         h(Tap, { className: 'dt-glass pf-back', label: 'Back', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 20 })),
@@ -7114,7 +7125,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           Row('user', 'Last name', Txt('last', 'Enter last name', 'text', 'family-name')),
           h('div', { className: 'pf-row', onClick: function () { setGs(true); } }, ic('gender'), h('span', { className: 'pf-l' }, 'Gender'),
             v.gender ? h('span', { className: 'pf-pick' }, h('span', { className: 'pf-v' }, v.gender), h(F.Icon, { name: 'chevronRight', size: 15 })) : h('span', { className: 'pf-addchip' }, h(F.Icon, { name: 'plus', size: 13, stroke: 2.6 }), 'Add')),
-          Row('cake', 'Birthday', h('span', { className: 'pf-datew', onClick: function (e) { var i = e.currentTarget.querySelector('input'); if (i) { e.preventDefault(); try { i.showPicker(); } catch (x) { i.focus(); i.click(); } } } }, bday ? h('span', { className: 'pf-v' }, bday) : h('span', { className: 'pf-addchip' }, h(F.Icon, { name: 'plus', size: 13, stroke: 2.6 }), 'Add'), bday ? h(F.Icon, { name: 'chevronRight', size: 15 }) : null, h('input', { type: 'date', className: 'pf-date', value: v.birthday, onChange: function (e) { set('birthday', e.target.value); } })))),
+          Row('cake', 'Birthday', h('span', { className: 'pf-datew', onClick: function (e) { e.preventDefault(); setBs(true); } }, bday ? h('span', { className: 'pf-v' }, bday) : h('span', { className: 'pf-addchip' }, h(F.Icon, { name: 'plus', size: 13, stroke: 2.6 }), 'Add'), bday ? h(F.Icon, { name: 'chevronRight', size: 15 }) : null))),
         h('p', { className: 'pf-gl' }, 'Contact'),
         h('div', { className: 'pf-grp' },
           Row('mail', 'Email', h('span', { className: 'pf-v ro' }, h(F.Icon, { name: 'lock', size: 13 }), 'thaonguyentest123+13@gmail.com')),
@@ -8300,6 +8311,30 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('path', { d: path, fill: 'url(#' + id + 's)' }),
         h('circle', { cx: 60, cy: 60, r: 38, fill: 'none', stroke: 'rgba(255,255,255,.16)', strokeWidth: 1.2, strokeDasharray: '2 4' })),
       h('path', { className: 'rc-badge-glyph', d: G[0], transform: 'translate(60 60) scale(.66) translate(-60 -60)', fill: 'none', stroke: 'url(#' + id + 'g)', strokeWidth: 6.5, strokeLinecap: 'round', strokeLinejoin: 'round', filter: 'url(#' + id + 'l)', pathLength: 100 }));
+  }
+  function Wheel(p) {
+    var ref = useRef(null), H = 40;
+    useEffect(function () { if (ref.current) ref.current.scrollTop = p.index * H; }, []);
+    return h('div', { className: 'wh-col', ref: ref, onScroll: function (e) { var el = e.currentTarget; clearTimeout(el.__t); el.__t = setTimeout(function () { var k = Math.max(0, Math.min(p.items.length - 1, Math.round(el.scrollTop / H))); if (k !== p.index) { tap(4); p.onChange(k); } }, 90); } },
+      h('div', { className: 'wh-pad' }), p.items.map(function (x, k) { return h('div', { key: k, className: cx('wh-it', k === p.index && 'on'), onClick: function (e) { e.currentTarget.parentNode.scrollTo({ top: k * H, behavior: 'smooth' }); } }, x); }), h('div', { className: 'wh-pad' }));
+  }
+  function BdaySheet(p) {
+    var init = p.value ? new Date(p.value + 'T00:00') : new Date(1995, 0, 1);
+    var yrs = []; for (var y = new Date().getFullYear() - 13; y >= 1930; y--) yrs.push(y);
+    var st = useState({ m: init.getMonth(), d: init.getDate() - 1, y: Math.max(0, yrs.indexOf(init.getFullYear())) }), v = st[0], setV = st[1];
+    var dim = new Date(yrs[v.y], v.m + 1, 0).getDate(), days = []; for (var d = 1; d <= dim; d++) days.push(d);
+    var dd = Math.min(v.d, dim - 1);
+    function up(k, val) { var o = Object.assign({}, v); o[k] = val; setV(o); }
+    var iso = yrs[v.y] + '-' + ('0' + (v.m + 1)).slice(-2) + '-' + ('0' + (dd + 1)).slice(-2);
+    return h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) p.close(); } },
+      h('div', { className: 'sheet pf-bsheet', role: 'dialog', 'aria-label': 'Birthday' }, h('span', { className: 'grab' }),
+        h('div', { className: 'ac-head' }, h('h2', null, 'Birthday'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: p.close }, h(F.Icon, { name: 'x', size: 18 }))),
+        h('div', { className: 'wh' }, h('i', { className: 'wh-band' }),
+          h(Wheel, { items: MONTHS_EN, index: v.m, onChange: function (k) { up('m', k); } }),
+          h(Wheel, { key: 'd' + dim, items: days, index: dd, onChange: function (k) { up('d', k); } }),
+          h(Wheel, { items: yrs, index: v.y, onChange: function (k) { up('y', k); } })),
+        h('p', { className: 'pf-bnote' }, 'Only used to personalise your experience. Not shown publicly.'),
+        h(Tap, { className: 'f4-btn f4-btn-primary f4-btn-lg f4-btn-block', go: function () { p.save(iso); } }, 'Save birthday')));
   }
   function Receipt(p) {
     var parts = (p.param || '').split('|'), id = ORDERS[parts[0]] ? parts[0] : 'F4S-261103-0412', o = ORDERS[id], flag = parts[1] || '';
