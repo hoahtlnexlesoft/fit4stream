@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106043219"</script>
+<script>window.__BUILD__="20261106043428"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7019,7 +7019,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.status !== 'ended'; }).slice(0, 8).map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
           h('section', { className: 'sec pad' }, h(SH, { title: 'Browse by Category', action: 'View all' }),
             h(CatTiles, { onPick: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })),
-          (cat === 0 ? CATS.filter(function (c) { return c[1] > 0; }) : [CATS[cat - 1]]).map(function (c) {
+          (cat === 0 ? CATS.filter(function (c) { return c[1] >= 3; }) : [CATS[cat - 1]]).map(function (c) {
             var list = Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.cat === c[0]; }).slice(0, 8);
             return h(Sec, { key: c[0], title: c[0], action: list.length ? 'View all' : null },
               list.length ? h(CatBentoEv, { list: list, nav: p.nav }) : h(SecEmpty, { art: 'ticket', title: 'No events in ' + (SHORT[c[0]] || c[0]) + ' yet', action: 'Browse categories', onAction: function () { p.nav.push('categories'); }, body: 'Follow channels to get notified when they go live.' }));
