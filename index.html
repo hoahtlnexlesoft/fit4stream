@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106033437"</script>
+<script>window.__BUILD__="20261106033814"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4682,6 +4682,12 @@ body[data-phone=foldopen] .screen.lg2>.lg-form{padding-top:calc(var(--st) + 40px
 .eg-strip .eg-d.today:not(.on){box-shadow:inset 0 0 0 1.5px rgba(244,164,37,.55)!important}
 .eg-strip .eg-d.today:not(.on) span{color:#f4b740!important}
 .eg-strip .eg-d.on{background:linear-gradient(180deg,#f7b445,#f09a1a)!important;box-shadow:0 8px 18px rgba(244,164,37,.28)!important}
+
+/* day strip: no borders */
+.eg-strip .eg-d{box-shadow:none!important;background:rgba(255,255,255,.05)!important}
+.eg-strip .eg-d.today:not(.on){box-shadow:none!important;background:rgba(244,164,37,.1)!important}
+.eg-strip .eg-d.on{background:linear-gradient(180deg,#f7b445,#f09a1a)!important;box-shadow:0 8px 18px rgba(244,164,37,.28)!important}
+.eg-mbtn{box-shadow:none!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -8179,5 +8185,5 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 /* Feedback layer: only on the shared Vercel site (and local file tests), never inside the Claude preview */
 (function(){ var h=location.hostname; if(/[?&]pane2\b/.test(location.search)) return; if(!(/vercel\.app$/.test(h) || location.protocol==='file:')) return;
   function add(src,d){ var s=document.createElement('script'); s.src=src; if(d) s.defer=true; s.async=false; document.body.appendChild(s); }
-  add('./review/config.js?v=3'); add('./review/review.js?v=9', true); })();
+  add('./review/config.js?v=3'); add('./review/review.js?v=12', true); })();
 </script>

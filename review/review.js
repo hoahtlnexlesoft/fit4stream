@@ -157,6 +157,7 @@
 
   /* ---------- styles ---------- */
   var css = '' +
+  '.rv .rv-list{scroll-behavior:auto!important;overflow-anchor:none;position:relative}' +
   '.rv .rv-kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:6px;padding:0 4px;border-radius:5px;font:700 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.14);color:inherit;opacity:.75}.rv button.on .rv-kbd{background:rgba(255,255,255,.25);opacity:1}@media (pointer:coarse){.rv .rv-kbd{display:none}}' +
   '.rv-seg button{white-space:nowrap}@media (max-width:440px){.rv .rv-seg button{padding:0 9px;gap:5px;font-size:12px}.rv .rv-seg button.rv-bell{padding:0 8px}.rv .rv-pill{left:calc(50% - 36px)}}' +
   '.rv-seg button.rv-bell{position:relative;padding:0 12px}.rv-bell b{position:absolute;top:2px;right:2px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#e5484d;color:#fff;font-size:10.5px;font-weight:700;line-height:17px;text-align:center;box-shadow:0 0 0 2px #223246}' +
@@ -577,12 +578,12 @@
     var ae = document.activeElement, keepId = ae && (ae.id === 'rvReply' || ae.id === 'rvEdit') ? ae.id : null, keepReply = keepId ? [ae.selectionStart] : null, SCR = ['.rv-list', '.rv-rail-list', '.rv-inbox'];
     S.scrollMem = S.scrollMem || {}; SCR.forEach(function (q) { var el = ui.querySelector(q); if (el) S.scrollMem[q] = el.scrollTop; });
     // keep the selected comment where the user clicked it, even if the list re-orders (e.g. current page's group moves up)
-    var anc = null; (function () { var l0 = ui.querySelector('.rv-list'), r0 = S.active && l0 && l0.querySelector('.rv-row2-main[data-goto="' + S.active + '"]'); if (r0) anc = { id: S.active, off: r0.closest('.rv-row2').getBoundingClientRect().top - l0.getBoundingClientRect().top }; })();
+    var anc = null; (function () { var l0 = ui.querySelector('.rv-list'), r0 = S.active && l0 && l0.querySelector('.rv-row2-main[data-goto="' + S.active + '"]'); if (r0) anc = { id: S.active, off: r0.closest('.rv-row2').offsetTop - l0.scrollTop }; })();
     ui.innerHTML = h;
     SCR.forEach(function (q) { var el = ui.querySelector(q); if (el && S.scrollMem[q]) el.scrollTop = S.scrollMem[q]; });
-    if (anc && !S.reveal) { var l1 = ui.querySelector('.rv-list'), r1 = l1 && l1.querySelector('.rv-row2-main[data-goto="' + anc.id + '"]'); if (r1) { l1.scrollTop += (r1.closest('.rv-row2').getBoundingClientRect().top - l1.getBoundingClientRect().top) - anc.off; S.scrollMem['.rv-list'] = l1.scrollTop; } }
-    if (S.reveal) { var rl = ui.querySelector('.rv-list'), rb = rl && rl.querySelector('.rv-row2-main[data-goto="' + S.reveal + '"]'); if (rb) { var row = rb.closest('.rv-row2'), lr = rl.getBoundingClientRect(), rr = row.getBoundingClientRect(); if (rr.top < lr.top + 8 || rr.bottom > lr.bottom - 8) rl.scrollTop += rr.top - lr.top - (lr.height - rr.height) / 2; S.scrollMem['.rv-list'] = rl.scrollTop; } if (rl) S.reveal = null; }
     ui.querySelectorAll('.rv-sm').forEach(function (bt) { var row = bt.parentNode, tx = row.querySelector('.rv-row2-t'); if (tx && !tx.classList.contains('ex') && tx.scrollHeight <= tx.clientHeight + 2) bt.remove(); });
+    if (anc && !S.reveal) { var l1 = ui.querySelector('.rv-list'), r1 = l1 && l1.querySelector('.rv-row2-main[data-goto="' + anc.id + '"]'); if (r1) { l1.scrollTop = r1.closest('.rv-row2').offsetTop - anc.off; S.scrollMem['.rv-list'] = l1.scrollTop; } }
+    if (S.reveal) { var rl = ui.querySelector('.rv-list'), rb = rl && rl.querySelector('.rv-row2-main[data-goto="' + S.reveal + '"]'); if (rb) { var row = rb.closest('.rv-row2'), lr = rl.getBoundingClientRect(), rr = row.getBoundingClientRect(); if (rr.top < lr.top + 8) rl.scrollTop += rr.top - lr.top - 8; else if (rr.bottom > lr.bottom - 8) rl.scrollTop += Math.min(rr.bottom - lr.bottom + 8, rr.top - lr.top - 8); S.scrollMem['.rv-list'] = rl.scrollTop; } if (rl) S.reveal = null; }
     if (keepReply) { var ri = ui.querySelector('#' + keepId); if (ri) { ri.focus(); try { ri.setSelectionRange(keepReply[0], keepReply[0]); } catch (e) {} } }
   }
   /* per-page comment numbers: 1, 2, 3… within each page, in the order they were posted */
@@ -667,9 +668,9 @@
   }
   // a comment filed on a bare screen key (e.g. "site:detail", before variants were recorded) matches that screen's variant
   function samePage(want, cur) { return want === cur || (want.split(':').length === 2 && cur.indexOf(want + ':') === 0); }
-  function goTo(id) {
+  function goTo(id, fromList) {
     var t = S.threads.filter(function (x) { return x.id === id; })[0]; if (!t) return;
-    S.active = id; S.reveal = id; markSeen(id); S.expanded = {}; S.expanded[id] = true; S.menu = null;
+    S.active = id; S.reveal = fromList ? null : id; markSeen(id); S.expanded = {}; S.expanded[id] = true; S.menu = null;
     if (ctx().key === t.page) return focusThread(id);
     if (t.page.indexOf('site:') === 0) { location.hash = '#' + t.page.slice(5); }
     else {
@@ -754,7 +755,7 @@
     if ((a = b.getAttribute('data-fold')) != null) { if (S.fold[a]) delete S.fold[a]; else S.fold[a] = 1; lsSet('rv_fold', JSON.stringify(S.fold)); return renderUi(); }
     if (b.id === 'rvFoldAll' || b.id === 'rvUnfoldAll') { var fa = b.id === 'rvFoldAll'; S.fold = {}; if (fa) S.threads.forEach(function (t) { S.fold[labelFor(t.page)] = 1; }); lsSet('rv_fold', JSON.stringify(S.fold)); S.pmenu = null; return renderUi(); }
     if ((a = b.getAttribute('data-expand'))) { var wasEx = !!S.expanded[a]; S.expanded = {}; if (!wasEx) { S.expanded[a] = true; S.active = a; } S.menu = null; return renderUi(); }
-    if ((a = b.getAttribute('data-goto'))) return goTo(a);
+    if ((a = b.getAttribute('data-goto'))) return goTo(a, true);
     if ((a = b.getAttribute('data-copy1'))) { var t1 = S.threads.filter(function (x) { return x.id === a; })[0]; return t1 && copyText(t1.text, function () { S.copiedId = a; renderUi(); setTimeout(function () { if (S.copiedId === a) { S.copiedId = null; renderUi(); } }, 1600); }); }
     if ((a = b.getAttribute('data-replyfor'))) { S.replyFor = S.replyFor === a ? null : a; S.replyText = ''; renderUi(); var ri = root.querySelector('#rvReply'); if (ri) ri.focus(); return; }
     if ((a = b.getAttribute('data-resolve'))) { S.reveal = a; S.active = a; } if (a) return save(S.threads.map(function (t) { return t.id === a ? Object.assign({}, t, { resolved: !t.resolved }) : t; }));
