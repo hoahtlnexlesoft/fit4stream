@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106025243"</script>
+<script>window.__BUILD__="20261106025701"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4369,6 +4369,25 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .up-btn.pri.on *{color:#7fe0a8!important}
 .up-reg{flex:none;align-self:center;height:32px;padding:0 14px;border-radius:16px;display:inline-flex!important;align-items:center;gap:5px;background:#F4A425;color:#1b1306;font-size:13px;font-weight:700;white-space:nowrap}
 .up-reg.on{background:rgba(57,200,124,.16);color:#7fe0a8}
+
+.dt-chips{display:flex;flex-wrap:wrap;gap:4px;max-width:100%}
+.dt-chips i{font-style:normal;font-size:11.5px;font-weight:650;line-height:20px;padding:0 7px;border-radius:6px;background:rgba(255,255,255,.08);color:#fff;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.dt-chips i.more{background:rgba(244,164,37,.16);color:#f4b740}
+
+/* On-air list: still image only (no video affordances) */
+.oa-still .cf3-play,.oa-still .cf3-time,.feed-media .feed-play{display:none!important}
+/* Event Guide month filter */
+.gd-mon{display:flex;align-items:center;gap:10px;margin:2px 0 10px}
+.gd-mt{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px}
+.gd-mt b{font-size:16px;font-weight:800;color:#fff}
+.gd-mt span{font-size:12px;color:rgba(255,255,255,.5)}
+.gd-ma{width:36px;height:36px;border-radius:50%;display:grid!important;place-items:center;background:rgba(255,255,255,.07);color:#fff}
+.gd-ma.dis{opacity:.3;pointer-events:none}
+.gd-mchips{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none}
+.gd-mc{flex:none;height:32px;padding:0 14px;border-radius:16px;border:0;background:rgba(255,255,255,.07);color:rgba(255,255,255,.75);font:inherit;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.gd-mc em{font-style:normal;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.12)}
+.gd-mc.on{background:#F4A425;color:#1b1306}
+.gd-mc.on em{background:rgba(27,19,6,.18)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -5884,7 +5903,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   var CHANNELS = ['Thao', 'Hieu LK', 'Thao NGUYEN2', 'An Tran', 'Nhan Doan', 'Business Demo', 'Kee Desmond', 'Marc John', 'Sandra Smith'];
   function ini(n) { var w = n.trim().split(/\s+/); return ((w[0] || '')[0] + ((w[1] || w[0] || '')[w[1] ? 0 : 1] || '')).toUpperCase(); }
   var EV = {
-    xmas: { id: 'xmas', trailer: 48, title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
+    xmas: { id: 'xmas', trailer: 48, title: 'Danang Christmas Market 2026', org: 'thao15 nguyen15', img: PH.xmas, cat: 'Concerts and Performances', format: ['Live Performance', 'Market Tour', 'Q&A'], type: 'One-time', price: '$3.99', registers: 2, views: 1, attendees: 1, likes: 0, date: 'November 03, 2026', time: '09:43 – 137 mins', range: '09:43 – 12:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'live', left: 4556, watching: 1,
       about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
     seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: 'Training Session', type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
@@ -6446,9 +6465,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h('div', { className: 'tab-head' }, h('h1', null, 'On-air', h(F.Badge, { tone: 'live' }, lives.length + ' live')), h(SearchBtn, { nav: p.nav })),
       h('div', { className: 'pad col', style: { gap: 18, marginTop: 6 } },
-        lives.map(function (e) { return h(FeedCard, { key: e.id, avatar: av('Thao'), name: e.org, handle: e.cat, image: e.img, title: e.title, meta: e.format + ' · ' + e.watching + ' watching · ' + e.likes + ' likes', viewers: String(e.watching), go: function () { p.nav.push('detail:' + e.id); }, onComment: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to join the live chat'); p.nav.registered = true; window.__focusChat = true; p.nav.push('player'); }, onProfile: function () { p.nav.push('organizer:' + encodeURIComponent(e.org)); } }); }),
+        lives.map(function (e) { return h(FeedCard, { key: e.id, avatar: av('Thao'), name: e.org, handle: e.cat, image: e.img, title: e.title, meta: [].concat(e.format)[0] + ' · ' + e.watching + ' watching · ' + e.likes + ' likes', viewers: String(e.watching), go: function () { p.nav.push('detail:' + e.id); }, onComment: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to join the live chat'); p.nav.registered = true; window.__focusChat = true; p.nav.push('player'); }, onProfile: function () { p.nav.push('organizer:' + encodeURIComponent(e.org)); } }); }),
         h(SH, { title: 'Concerts and Performances' }),
-        h('div', { className: 'col gap12' }, lives.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav, wide: true }); }))),
+        h('div', { className: 'col gap12 oa-still' }, lives.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav, wide: true }); }))),
       h('div', { style: { height: 140 } }));
   }
 
@@ -6500,12 +6519,24 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function Guide(p) {
     var d = useState(1), day = d[0], setDay = d[1];
     var q = useState(''), query = q[0], setQ = q[1], so = useState(false), showQ = so[0], setShowQ = so[1];
-    var days = [{ dow: 'Nov', day: '02' }, { dow: 'Today', day: '03', dot: true }, { dow: 'Nov', day: '04' }, { dow: 'Nov', day: '05', dot: true }, { dow: 'Nov', day: '06' }, { dow: 'Nov', day: '07' }, { dow: 'Nov', day: '08' }];
-    var rows = day === 1 ? [{ ch: 'thao15 nguyen15', ev: [EV.xmas, EV.payout] }, { ch: 'Marc John', ev: [EV.seo] }] : day === 3 ? [{ ch: 'Sandra Smith', ev: [EV.gig] }] : [];
+    // month filter (client request): switch month, the day strip follows; events exist in Nov 2026 in the demo
+    var MONTHS = [['Oct', 'October', 31], ['Nov', 'November', 30], ['Dec', 'December', 31], ['Jan', 'January', 31]];
+    var ms = useState(1), mon = ms[0], setMon = ms[1];
+    var M = MONTHS[mon], isNov = mon === 1;
+    function setMonth(i) { tap(5); setMon(i); setDay(i === 1 ? 1 : 0); }
+    var start = isNov ? 2 : 1, days = [];
+    for (var k = 0; k < 7; k++) { var dd = start + k; days.push({ dow: isNov && dd === 3 ? 'Today' : M[0], day: (dd < 10 ? '0' : '') + dd, dot: isNov && (dd === 3 || dd === 5) }); }
+    var rows = !isNov ? [] : day === 1 ? [{ ch: 'thao15 nguyen15', ev: [EV.xmas, EV.payout] }, { ch: 'Marc John', ev: [EV.seo] }] : day === 3 ? [{ ch: 'Sandra Smith', ev: [EV.gig] }] : [];
+    var monthCount = isNov ? 4 : 0;
     rows = rows.filter(function (r) { return !query || r.ch.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide'), h(Tap, { className: cx('rbtn', showQ && 'on'), label: showQ ? 'Close search' : 'Search channels', onClick: function () { tap(5); if (showQ) setQ(''); setShowQ(!showQ); setTimeout(function () { var i = document.getElementById('guide-q'); i && i.focus(); }, 60); } }, h(F.Icon, { name: showQ ? 'x' : 'search', size: 20 }))),
+      h('div', { className: 'pad gd-mon' },
+        h(Tap, { className: cx('gd-ma', mon === 0 && 'dis'), label: 'Previous month', onClick: function () { if (mon > 0) setMonth(mon - 1); } }, h(F.Icon, { name: 'chevronLeft', size: 18 })),
+        h('div', { className: 'gd-mt' }, h('b', null, M[1] + ' ' + (mon === 3 ? 2027 : 2026)), h('span', null, monthCount ? monthCount + ' events this month' : 'No events yet')),
+        h(Tap, { className: cx('gd-ma', mon === MONTHS.length - 1 && 'dis'), label: 'Next month', onClick: function () { if (mon < MONTHS.length - 1) setMonth(mon + 1); } }, h(F.Icon, { name: 'chevronRight', size: 18 }))),
+      h('div', { className: 'pad gd-mchips', role: 'tablist' }, MONTHS.map(function (x, i) { return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': i === mon, className: cx('gd-mc', i === mon && 'on'), onClick: function () { setMonth(i); } }, x[0], i === 1 ? h('em', null, '4') : null); })),
       h('div', { className: 'pad', onClick: function (e) { var b = e.target.closest('.f4-date'); if (b) { tap(5); setDay(Array.prototype.indexOf.call(b.parentNode.children, b)); } } }, h(F.DateStrip, { days: days, value: day })),
       showQ ?       h('div', { className: 'pad', style: { marginTop: 14 } }, h('label', { className: 'f4-search' }, h(F.Icon, { name: 'search', size: 18 }), h('input', { id: 'guide-q', type: 'search', placeholder: 'Search channels...', value: query, onChange: function (e) { setQ(e.target.value); } }))) : null,
       rows.length ? h('div', { className: 'pad col gap12 fade-in', style: { marginTop: 16 } }, rows.map(function (r) {
@@ -6520,7 +6551,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
                 h('b', null, e.title),
                 h('div', { className: 'tl-meta' }, st === 'live' ? h('span', { className: 'tl-pill live' }, h('i', null), 'Live') : st === 'ended' ? h('span', { className: 'tl-pill' }, 'Ended') : h('span', { className: 'tl-pill up' }, 'Upcoming'), h('span', null, e.cat))));
           })));
-      })) : h(F.EmptyState, { art: 'calendar', title: 'No events scheduled', body: 'There are no live or upcoming events scheduled. Please check back again soon.', action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } }),
+      })) : h(F.EmptyState, { art: 'calendar', title: isNov ? 'No events scheduled' : 'No events in ' + M[1], body: isNov ? 'There are no live or upcoming events scheduled. Please check back again soon.' : 'Nothing is scheduled for this month yet. Check another month or browse upcoming events.', action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } }),
       h('div', { style: { height: 140 } }));
   }
 
@@ -6734,7 +6765,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'dt-hshade' }),
         h(Tap, { className: 'dt-glass dt-close', label: 'Close', go: p.nav.back }, h(F.Icon, { name: 'x', size: 20 })),
         live ? h('span', { className: 'dt-live' }, h('i', null), 'LIVE · ' + fmtT(e.left - t)) : null,
-        e.trailer ? h(Tap, { className: 'dt-trailer', label: 'Watch trailer', go: function () { setTr(true); } }, h('span', { className: 'dt-tr-ic' }, h(F.Icon, { name: 'play', size: 12 })), 'Trailer', h('em', null, fmtDur(e.trailer))) : null),
+        false && e.trailer ? h(Tap, { className: 'dt-trailer', label: 'Watch trailer', go: function () { setTr(true); } }, h('span', { className: 'dt-tr-ic' }, h(F.Icon, { name: 'play', size: 12 })), 'Trailer', h('em', null, fmtDur(e.trailer))) : null),
       h('div', { className: 'dt-main' },
         h('h1', { className: 'dt-title' }, e.title),
         h('div', { className: 'dt-badges' },
@@ -6763,7 +6794,9 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           info('clock', start + ' · ' + dur, 'Starts'),
           info('globe', e.lang, 'Language'),
           info('mapPin', 'Asia/Saigon', 'Time zone'),
-          info('ticket', e.format, e.type),
+          (function () { var fm = [].concat(e.format); return h('div', { className: cx('dt-card', fm.length > 1 && 'dt-multi') }, h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 22 })),
+            fm.length > 1 ? h('div', { className: 'dt-chips' }, fm.slice(0, 2).map(function (x) { return h('i', { key: x }, x); }), fm.length > 2 ? h('i', { className: 'more' }, '+' + (fm.length - 2)) : null) : h('b', null, fm[0]),
+            h('span', null, fm.length > 1 ? fm.length + ' formats \u00b7 ' + e.type : e.type)); })(),
           info('users', e.cat.split(' ')[0], 'Category'),
           info('eye', e.views + ' views', e.likes + ' likes'))),
       h('section', { className: 'dt-sec' },
@@ -7661,7 +7694,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     render() { return React.createElement(React.Fragment, { key: this.state.k }, this.props.children); }
   }
   root.render(React.createElement(F4Boundary, null, React.createElement(window.__F4S_APP__)));
-  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader — logo'],['loader-ticks','03f Page loader — ticks %'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout — choose method & tickets'],['checkout-coupon','11b Checkout — promo applied, 2 tickets'],['checkout-coupon-bad','11c Checkout — invalid promo'],['checkout-addcard','11d Checkout — add new card'],['checkout-processing','11e Payment processing'],['checkout-declined','11f Payment declined'],['success','12 Registered'],['payments','12b Payment history'],['receipt-paid','12c Receipt — paid'],['receipt-refund','12d Receipt — request refund'],['receipt-pending','12e Receipt — refund pending'],['receipt-refunded','12f Receipt — refunded'],['receipt-failed','12g Receipt — failed payment'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['player-stage','15b Live — multi-speaker stage'],['player-invite','15c Live — invited to speak'],['player-onstage','15d Live — you are on stage'],['player-waiting','15e Live — waiting room'],['player-ended','15f Live — ended'],['player-reconnect','15g Live — reconnecting'],['full','16 Fullscreen']];
+  var list = [['welcome','01 Launch / loading'],['guest','01b Guest mode (Home)'],['login','02 Sign in'],['home','03 Home'],['home-empty','03b Home — no events (empty)'],['loader-logo','03e Page loader'],['search','03c Search'],['categories','03d All categories'],['guide','04 Event Guide'],['onair','05 On-air'],['upcoming','06 Upcoming'],['account','07 Account'],['account-pro','07b Account — Premium (upgraded)'],['myevents','08 My Events'],['detail','09 Event detail — upcoming'],['payout','09b Event detail — ended'],['live','10 Event detail — live'],['checkout','11 Checkout — choose method & tickets'],['checkout-coupon','11b Checkout — promo applied, 2 tickets'],['checkout-coupon-bad','11c Checkout — invalid promo'],['checkout-addcard','11d Checkout — add new card'],['checkout-processing','11e Payment processing'],['checkout-declined','11f Payment declined'],['success','12 Registered'],['payments','12b Payment history'],['receipt-paid','12c Receipt — paid'],['receipt-refund','12d Receipt — request refund'],['receipt-pending','12e Receipt — refund pending'],['receipt-refunded','12f Receipt — refunded'],['receipt-failed','12g Receipt — failed payment'],['organizer','13 Organizer'],['reviews','14 Rating & Review'],['player','15 Live player'],['player-stage','15b Live — multi-speaker stage'],['player-invite','15c Live — invited to speak'],['player-onstage','15d Live — you are on stage'],['player-waiting','15e Live — waiting room'],['player-ended','15f Live — ended'],['player-reconnect','15g Live — reconnecting'],['full','16 Fullscreen']];
   // map an app hash (#player:waiting, #receipt:F4S-…|refund, #detail:payout…) to its entry in the screen list
   var RCPT = { 'F4S-261103-0412': 'receipt-paid', 'F4S-261103-0412|refund': 'receipt-refund', 'F4S-261103-0412|pending': 'receipt-pending', 'F4S-261030-0977': 'receipt-refunded', 'F4S-261022-0315': 'receipt-failed' };
   function hk(h) {
