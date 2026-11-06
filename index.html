@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106045226"</script>
+<script>window.__BUILD__="20261106045351"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4987,6 +4987,9 @@ body[data-phone=foldopen] .f4-tabbar{width:94px!important;padding:8px 7px!import
 body[data-phone=foldopen] .f4-tab{width:80px!important;padding:0 6px!important;box-sizing:border-box!important}
 body[data-phone=foldopen] .f4-tab-l{font-size:10px!important;letter-spacing:0!important;white-space:nowrap}
 body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
+
+.dt-fmt .dt-ic{position:relative;overflow:visible!important}
+.dt-badge{position:absolute;top:-6px;right:-10px;min-width:22px;height:20px;padding:0 6px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#1b1306;background:#f4b740;box-shadow:0 0 0 3px #17141f}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7527,10 +7530,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function FmtCard(p) {
     var o = useState(false), open = o[0], setOpen = o[1]; var fm = p.fm, n = fm.length - 1;
     return h(Tap, { className: cx('dt-card dt-fmt', open && 'open'), onClick: function () { if (n > 0) setOpen(!open); } },
-      h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 22 })),
+      h('span', { className: 'dt-ic' }, h(F.Icon, { name: 'ticket', size: 22 }), !open && n > 0 ? h('em', { className: 'dt-badge' }, '+' + n) : null),
       open ? h('div', { className: 'dt-fl' }, fm.map(function (x) { return h('b', { key: x }, x); }))
         : h('b', null, fm[0]),
-      h('span', { className: 'dt-fs' }, open ? 'Formats' : 'Format', !open && n > 0 ? h('em', null, '+' + n + ' more') : null));
+      h('span', null, open ? 'Formats' : 'Format'));
   }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
