@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106080508"</script>
+<script>window.__BUILD__="20261106080637"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5321,6 +5321,18 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 /* tab pages: header (title + icons) stays put while content scrolls */
 .screen>.tab-head{position:sticky!important;top:0!important;z-index:20!important}
 .screen>.tab-head h1{text-shadow:0 1px 2px rgba(0,0,0,.8),0 2px 12px rgba(0,0,0,.6)}
+
+/* edit profile: nicer empty values */
+.pf-v::placeholder{color:rgba(255,255,255,.3)!important;font-weight:400!important}
+.pf-addchip{flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 12px 0 10px;border-radius:15px;font-size:13px;font-weight:700;color:#f4b740;background:rgba(244,164,37,.13);cursor:pointer}
+.pf-addchip svg{stroke:currentColor}
+.pf-pick{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;gap:4px;color:rgba(255,255,255,.35);cursor:pointer}
+.pf-datew .pf-addchip{pointer-events:none}
+.pf-gl2{display:flex;flex-direction:column;gap:8px;padding:4px 0 8px}
+.pf-go{display:flex!important;align-items:center;justify-content:space-between;height:54px;padding:0 16px;border-radius:16px;background:rgba(255,255,255,.05);font-size:15.5px;font-weight:600;color:#fff;text-align:left}
+.pf-go.on{background:rgba(244,164,37,.12);box-shadow:inset 0 0 0 1px rgba(244,164,37,.5)}
+.pf-gck{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25);color:#1b1306}
+.pf-go.on .pf-gck{background:#f4b740;box-shadow:none}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7065,6 +7077,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var xs = useState(['Live music', 'Concerts']), exp = xs[0], setExp = xs[1];
     var bz = useState(false), biz = bz[0], setBiz = bz[1];
     var ad = useState(false), adding = ad[0], setAdding = ad[1];
+    var gsS = useState(false), gs = gsS[0], setGs = gsS[1];
     function set(k, val) { var o = Object.assign({}, v); o[k] = val; setV(o); }
     function photo() { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); }
     var checks = [!!v.first, !!v.last, !!v.gender, !!v.birthday, !!v.phone, !!v.address, exp.length > 0, !!v.bio, !!me];
@@ -7075,7 +7088,13 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function Row(icon, label, field, input) { return h('label', { className: 'pf-row' }, ic(icon), h('span', { className: 'pf-l' }, label), field || input); }
     function Txt(k, ph, type, ac) { return h('input', { className: cx('pf-v', !v[k] && 'empty'), type: type || 'text', value: v[k], placeholder: ph || 'Add', autoComplete: ac || 'off', onChange: function (e) { set(k, e.target.value); } }); }
     var bday = v.birthday ? new Date(v.birthday + 'T00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-    return h('div', { className: 'screen tabscreen pf' },
+    var GOPT = [['Female', 'user'], ['Male', 'user'], ['Non-binary', 'users'], ['Prefer not to say', 'eyeOff']];
+    var gSheet = gs ? toApp(h('div', { className: 'sheet-wrap', onClick: function (e) { if (e.target === e.currentTarget) setGs(false); } },
+      h('div', { className: 'sheet pf-gsheet', role: 'dialog', 'aria-label': 'Gender' }, h('span', { className: 'grab' }),
+        h('div', { className: 'ac-head' }, h('h2', null, 'Gender'), h(Tap, { className: 'f4-iconbtn round-s', label: 'Close', go: function () { setGs(false); } }, h(F.Icon, { name: 'x', size: 18 }))),
+        h('div', { className: 'pf-gl2' }, GOPT.map(function (g) { var on = v.gender === g[0];
+          return h(Tap, { key: g[0], className: cx('pf-go', on && 'on'), go: function () { tap(6); set('gender', g[0]); setTimeout(function () { setGs(false); }, 160); } }, h('span', null, g[0]), h('i', { className: 'pf-gck' }, on ? h(F.Icon, { name: 'check', size: 14, stroke: 3 }) : null)); }))))) : null;
+    return h('div', { className: 'screen tabscreen pf' }, gSheet,
       h('div', { className: 'pf-hero' },
         h('div', { className: 'pf-glow', 'aria-hidden': true }),
         h(Tap, { className: 'dt-glass pf-back', label: 'Back', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 20 })),
@@ -7089,15 +7108,16 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad pf-body' },
         h('p', { className: 'pf-gl' }, 'Personal'),
         h('div', { className: 'pf-grp' },
-          Row('user', 'First name', Txt('first', 'Add', 'text', 'given-name')),
-          Row('user', 'Last name', Txt('last', 'Add', 'text', 'family-name')),
-          Row('gender', 'Gender', h('span', { className: 'pf-selw' }, h('select', { className: cx('pf-v', !v.gender && 'empty'), value: v.gender, onChange: function (e) { set('gender', e.target.value); } }, h('option', { value: '' }, 'Add'), ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) { return h('option', { key: g, value: g }, g); })), h(F.Icon, { name: 'chevronRight', size: 15 }))),
-          Row('cake', 'Birthday', h('span', { className: 'pf-datew' }, h('span', { className: cx('pf-v', !bday && 'empty') }, bday || 'Add'), h(F.Icon, { name: 'chevronRight', size: 15 }), h('input', { type: 'date', className: 'pf-date', value: v.birthday, onChange: function (e) { set('birthday', e.target.value); } })))),
+          Row('user', 'First name', Txt('first', 'Enter first name', 'text', 'given-name')),
+          Row('user', 'Last name', Txt('last', 'Enter last name', 'text', 'family-name')),
+          h('div', { className: 'pf-row', onClick: function () { setGs(true); } }, ic('gender'), h('span', { className: 'pf-l' }, 'Gender'),
+            v.gender ? h('span', { className: 'pf-pick' }, h('span', { className: 'pf-v' }, v.gender), h(F.Icon, { name: 'chevronRight', size: 15 })) : h('span', { className: 'pf-addchip' }, h(F.Icon, { name: 'plus', size: 13, stroke: 2.6 }), 'Add')),
+          Row('cake', 'Birthday', h('span', { className: 'pf-datew' }, bday ? h('span', { className: 'pf-v' }, bday) : h('span', { className: 'pf-addchip' }, h(F.Icon, { name: 'plus', size: 13, stroke: 2.6 }), 'Add'), bday ? h(F.Icon, { name: 'chevronRight', size: 15 }) : null, h('input', { type: 'date', className: 'pf-date', value: v.birthday, onChange: function (e) { set('birthday', e.target.value); } })))),
         h('p', { className: 'pf-gl' }, 'Contact'),
         h('div', { className: 'pf-grp' },
           Row('mail', 'Email', h('span', { className: 'pf-v ro' }, h(F.Icon, { name: 'lock', size: 13 }), 'thaonguyentest123+13@gmail.com')),
-          Row('phone', 'Phone', Txt('phone', 'Add', 'tel', 'tel')),
-          Row('mapPin', 'Address', Txt('address', 'Add', 'text', 'street-address'))),
+          Row('phone', 'Phone', Txt('phone', 'Enter phone', 'tel', 'tel')),
+          Row('mapPin', 'Address', Txt('address', 'Enter address', 'text', 'street-address'))),
         h('p', { className: 'pf-gl' }, 'About me'),
         h('div', { className: 'pf-grp' },
           h('div', { className: 'pf-row pf-col' }, h('div', { className: 'pf-rh' }, ic('star'), h('span', { className: 'pf-l' }, 'Expertise')),
@@ -7111,8 +7131,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h('div', { className: 'pf-row' }, ic('briefcase'), h('span', { className: 'pf-l' }, 'Registered business', h('small', null, 'Shown on your receipts')),
             h('button', { type: 'button', role: 'switch', 'aria-checked': biz, 'aria-label': 'Registered business', className: cx('ep-sw', biz && 'on'), onClick: function () { tap(6); setBiz(!biz); } }, h('i'))),
           biz ? [
-            h(React.Fragment, { key: 'n' }, Row('briefcase', 'Business name', Txt('bizName', 'Add', 'text', 'organization'))),
-            h(React.Fragment, { key: 't' }, Row('ticket', 'Tax ID', Txt('taxId', 'Add'))),
+            h(React.Fragment, { key: 'n' }, Row('briefcase', 'Business name', Txt('bizName', 'Enter name', 'text', 'organization'))),
+            h(React.Fragment, { key: 't' }, Row('ticket', 'Tax ID', Txt('taxId', 'Enter tax ID'))),
             h(React.Fragment, { key: 'a' }, Row('mapPin', 'Address', Txt('bizAddr', 'Add'))),
             h(React.Fragment, { key: 'w' }, Row('globe', 'Website', Txt('web', 'https://', 'url')))] : null)),
       h('div', { style: { height: 16 } }),
