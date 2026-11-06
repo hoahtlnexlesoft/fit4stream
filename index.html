@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106034057"</script>
+<script>window.__BUILD__="20261106034158"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4795,6 +4795,19 @@ body .mcard{border:0!important;box-shadow:0 16px 36px rgba(0,0,0,.35)!important}
 .eg-sub{display:flex;align-items:center;gap:6px;font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden}
 .eg-sub i{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3);flex:none}
 .eg-li2.live .eg-sub{color:#ff8a80}
+
+/* live event: featured card */
+.eg-hot{position:relative;border-radius:20px;overflow:hidden;background:#221a22;cursor:pointer;box-shadow:0 14px 34px rgba(231,70,69,.22),0 0 0 1.5px rgba(231,70,69,.55)}
+.eg-hot-img{position:relative;aspect-ratio:16/8;background-size:cover;background-position:center}
+.eg-hot-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 40%,rgba(34,26,34,.9))}
+.eg-hot-top{position:absolute;z-index:1;left:10px;top:10px;right:10px;display:flex;justify-content:space-between}
+.eg-hot-top .eg-tl{position:static;height:22px;font-size:10.5px;padding:0 8px}
+.eg-hot-v{font-style:normal;height:22px;padding:0 8px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#fff;background:rgba(10,9,14,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.eg-hot-play{position:absolute;z-index:1;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(231,70,69,.85);box-shadow:0 0 0 8px rgba(231,70,69,.22)}
+.eg-hot-b{display:flex;align-items:flex-end;gap:12px;padding:10px 14px 14px;margin-top:-6px;position:relative}
+.eg-hot-b b{display:block;font-size:17px;line-height:22px;font-weight:800;color:#fff;margin-bottom:6px}
+.eg-hot-b small{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap}
+.eg-hot-cta{flex:none;height:36px;padding:0 16px;border-radius:18px;display:inline-flex;align-items:center;gap:6px;background:#e74645;color:#fff;font-size:13.5px;font-weight:800}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7049,6 +7062,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         liveN ? h('div', { className: 'eg-sum' }, h('span', { className: 'eg-sl' }, h('i', null), liveN + ' live now'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), '2.4K watching')) : null,
         src.length ? h('div', { className: 'col gap12' }, src.map(function (e) {
           var live = e.status === 'live', ended = e.status === 'ended';
+          if (live) return h('div', { key: e.id, className: 'eg-hot', role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(p.nav.authed ? 'player' : 'detail:' + e.id); } },
+            h('div', { className: 'eg-hot-img', style: { backgroundImage: 'url(' + e.img + ')' } },
+              h('span', { className: 'eg-hot-top' }, h('i', { className: 'eg-tl live' }, h('em', null), 'LIVE NOW'), h('i', { className: 'eg-hot-v' }, h(F.Icon, { name: 'eye', size: 12 }), (e.viewers || '2.4K'))),
+              h('span', { className: 'eg-hot-play', 'aria-hidden': true }, h(F.Icon, { name: 'play', size: 20 }))),
+            h('div', { className: 'eg-hot-b' },
+              h('div', { style: { minWidth: 0, flex: 1 } }, h('b', null, e.title),
+                h('span', { className: 'eg-host' }, h(F.Avatar, { src: av(e.org), name: e.org, initials: ini(e.org), size: 20 }), h('em', null, e.org), h('small', null, '\u00b7 started ' + t0(e)))),
+              h('span', { className: 'eg-hot-cta' }, h(F.Icon, { name: 'play', size: 13 }), 'Watch')));
           return h('div', { key: e.id, className: cx('eg-li2', e.status), role: 'link', tabIndex: 0, onClick: function () { tap(); p.nav.push(live && p.nav.authed ? 'player' : 'detail:' + e.id); } },
             h('span', { className: 'eg-th2', style: { backgroundImage: 'url(' + e.img + ')' } },
               live ? h('i', { className: 'eg-tl live' }, h('em', null), 'LIVE') : h('i', { className: cx('eg-tl', ended && 'end') }, ended ? 'Ended' : 'Soon'),
