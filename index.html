@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106062239"</script>
+<script>window.__BUILD__="20261106062516"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5040,6 +5040,15 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-ivm{font-size:13px;font-weight:600;color:#f4b740;padding:2px 0}
 
 .dt-ib.on svg path{fill:currentColor}
+
+/* ended notice */
+.dt-endn{flex:1;min-width:0;height:56px;display:flex;align-items:center;gap:10px;padding:0 8px 0 10px;border-radius:999px;border:1.5px dashed rgba(255,255,255,.16);box-sizing:border-box}
+.dt-endi{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06)}
+.dt-endn>div{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;text-align:left}
+.dt-endn b{font-size:13.5px;font-weight:650;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dt-endn>div>span{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dt-endf{flex:none;height:36px;padding:0 14px;border-radius:18px;display:grid!important;place-items:center;font-size:13px;font-weight:700;color:#1b1306;background:#f4b740}
+.dt-endf.on{color:#f4b740;background:rgba(244,183,64,.14)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7628,10 +7637,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             return h('div', { key: x[1] }, h('b', null, x[0]), h('span', null, x[1]));
           })),
         h('div', { className: 'dt-ctarow' },
-          ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
+          ended ? h('div', { className: 'dt-endn' }, h('span', { className: 'dt-endi' }, h(F.Icon, { name: 'clock', size: 18 })),
+              h('div', null, h('b', null, 'This event has ended'), h('span', null, 'Follow the host for the next one')),
+              h(Tap, { className: cx('dt-endf', following && 'on'), onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to follow organizers'); tap(10); setF(!following); } }, following ? 'Following' : 'Follow'))
             : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room')
             : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
-          h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
+          ended ? null : h(Tap, { className: cx('dt-ib', saved && 'on'), label: saved ? 'Saved' : 'Save', onClick: function () { if (!p.nav.authed) return p.nav.requireAuth('Sign in to save events'); tap(10); setSaved(!saved); p.nav.toast(saved ? 'Removed from saved' : 'Saved to My Events'); } }, h(F.Icon, { name: 'bookmark', size: 21 })),
           h(Tap, { className: 'dt-ib', label: 'Share', onClick: function () { p.nav.share({ title: e.title, img: e.img }); } }, h(F.Icon, { name: 'share', size: 20 }))),
         h('p', { className: cx('dt-about', !e.about && 'muted') }, more || about.length < 150 ? about : about.slice(0, 150) + '…'),
         about.length >= 150 ? h(Tap, { className: 'dt-more', onClick: function () { setMore(!more); } }, more ? 'Less' : 'More', h(F.Icon, { name: 'chevronDown', size: 16, className: more ? 'flip' : '' })) : null),
