@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106061605"</script>
+<script>window.__BUILD__="20261106062105"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5034,6 +5034,10 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-ctarow .dt-cta{flex:1;min-width:0;margin-top:0!important;font-size:15px!important;white-space:nowrap}
 .dt-ib{flex:none;width:56px;height:56px;border-radius:50%;display:grid!important;place-items:center;color:#fff;background:rgba(255,255,255,.07)}
 .dt-ib.on{color:#f4b740;background:rgba(244,183,64,.14)}
+
+.dt-iv{display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right}
+.dt-iv b{font-weight:600;color:#fff}
+.dt-ivm{font-size:13px;font-weight:600;color:#f4b740;padding:2px 0}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6557,7 +6561,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       about: 'Danang Christmas Market 2026 🎄 CHỢ GIÁNG SINH ĐÀ NẴNG 2026 🎄\n\nFREE ENTRY! Vào cửa miễn phí!\n\nGet ready for the most magical winter celebration in Central Vietnam! Danang Christmas Market brings stalls, music and lights to the city.' },
     payout: { id: 'payout', title: 'For payout batch 5.Nov-1', org: 'thao15 nguyen15', img: PH.conference, cat: 'Concerts and Performances', format: 'Training Session', type: 'One-time', price: '$6.99', registers: 3, views: 2, attendees: 0, likes: 0, date: 'November 03, 2026', time: '09:50 – 40 mins', range: '09:50 – 10:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'ended', about: '' },
     seo: { id: 'seo', trailer: 45, title: 'Welcome to our topic about SEO marketing', org: 'Marc John', img: PH.conference, cat: 'Virtual Workshops and Training', format: ['Training Session', 'Workshop', 'Live Q&A'], type: 'One-time', price: 'Free', registers: 24, views: 120, attendees: 0, likes: 12, date: 'November 03, 2026', time: '20:00 – 60 mins', range: '20:00 – 21:00', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 36000, about: 'A practical 60-minute session on SEO for creators and small businesses: how search really ranks pages, quick wins you can apply today, and a live Q&A at the end.\n\nBring your questions — Marc will review a few audience websites live.' },
-    gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: 'Live Performance', type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
+    gig: { id: 'gig', title: 'Acoustic night: Live from the studio', org: 'Sandra Smith', img: PH.concert, cat: 'Concerts and Performances', format: ['Live Performance', 'Acoustic Set', 'Q&A', 'Meet & Greet', 'Behind the Scenes'], type: 'Series', price: '$9.99', registers: 146, views: 860, attendees: 0, likes: 88, date: 'November 05, 2026', time: '21:00 – 90 mins', range: '21:00 – 22:30', tz: 'Asia/Saigon (ICT)', lang: 'English', status: 'upcoming', startsIn: 214000, about: '[Sample upcoming event]' }
   };
   // extra demo events so the Home hero shows its full set (client rule: max 10 there)
   [['standup', 'Saigon Stand-up Night: Live Comedy', 'Hoang Minh', 'comedy', 'Talk Shows', 'November 07, 2026', '20:30 – 90 mins', '$4.99'],
@@ -7579,6 +7583,13 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         : h('b', null, fm[0]),
       h('span', null, open ? 'Formats' : 'Format'));
   }
+  function FmtRow(p) {
+    var o = useState(false), open = o[0], setOpen = o[1]; var fm = p.fm, extra = fm.length - 3;
+    return h('div', { className: 'dt-ir' }, h(F.Icon, { name: 'ticket', size: 17 }), h('span', null, fm.length > 1 ? 'Formats' : 'Format'),
+      h('div', { className: 'dt-iv' },
+        open || extra <= 0 ? fm.map(function (x) { return h('b', { key: x }, x); }) : fm.slice(0, 2).map(function (x) { return h('b', { key: x }, x); }),
+        extra > 0 ? h(Tap, { className: 'dt-ivm', onClick: function () { setOpen(!open); } }, open ? 'Show less' : '+' + (fm.length - 2) + ' more') : null));
+  }
   function Detail(p) {
     var e = evFrom(p.param), t = useTick();
     var reg = e.id === 'xmas' && p.nav.registered;
@@ -7638,7 +7649,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
             row('clock', 'Time', e.range.replace(' \u2013 ', '\u2013') + ' \u00b7 ' + dur),
             row('mapPin', 'Time zone', e.tz || 'Asia/Saigon'),
             row('globe', 'Language', e.lang),
-            row('ticket', fm.length > 1 ? 'Formats' : 'Format', fm.join(', ')),
+            h(FmtRow, { key: 'fmt', fm: fm }),
             row('refresh', 'Repeats', e.type === 'One-time' ? 'No \u00b7 one-time event' : e.type),
             row('grid', 'Category', e.cat));
         })()),
