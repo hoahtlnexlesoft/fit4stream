@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106032350"</script>
+<script>window.__BUILD__="20261106032543"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4553,6 +4553,28 @@ body[data-phone=foldopen] .brand-head .brand{transform:scale(.88);transform-orig
 
 body[data-phone=foldopen] .screen:has(.duo-hero){padding-left:0!important;padding-right:0!important}
 body[data-phone=foldopen] .duo-hero{padding:0 16px!important}
+
+/* ===== Event Guide toolbar v3 (compact) ===== */
+.eg-tools2{margin:0 0 14px}
+.eg-bar{display:flex;align-items:center;gap:8px}
+.eg-mon2{display:flex;align-items:center;gap:2px;min-width:0}
+.eg-mon2 b{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.2px;white-space:nowrap;padding:0 4px}
+.eg-mon2 b span{font-weight:600;color:rgba(255,255,255,.45)}
+.eg-ar2{width:28px;height:28px;border-radius:50%;display:grid!important;place-items:center;color:rgba(255,255,255,.7);flex:none}
+.eg-today2{height:26px;padding:0 10px;border-radius:13px;display:inline-flex!important;align-items:center;background:rgba(244,164,37,.14);color:#f4b740;font-size:12px;font-weight:700;flex:none}
+.eg-vw{margin-left:auto;display:flex;gap:2px;padding:3px;border-radius:12px;background:rgba(255,255,255,.06);flex:none}
+.eg-vwi{width:34px;height:30px;border:0;border-radius:9px;background:none;color:rgba(255,255,255,.55);display:grid;place-items:center;cursor:pointer}
+.eg-vwi.on{background:rgba(255,255,255,.14);color:#fff}
+.eg-strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 16px 2px;scroll-padding:0 16px}
+.eg-strip::-webkit-scrollbar{display:none}
+.eg-strip .eg-d{flex:none;width:46px;height:62px;border-radius:14px;background:none;gap:3px}
+.eg-strip .eg-d span{font-size:10.5px;letter-spacing:.3px;font-weight:600;text-transform:capitalize;color:rgba(255,255,255,.45)}
+.eg-strip .eg-d b{font-size:17px}
+.eg-strip .eg-d i{position:static;width:5px;height:5px;margin-top:1px}
+.eg-strip .eg-d i.none{background:transparent}
+.eg-strip .eg-d.today:not(.on){box-shadow:inset 0 0 0 1.5px rgba(244,164,37,.55)}
+.eg-strip .eg-d.on{background:#F4A425}
+.eg-strip .eg-d.on span{color:rgba(27,19,6,.7)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6764,24 +6786,24 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function t0(e) { return e.range.split('\u2013')[0].trim(); }
     var STL = { live: 'Live', upcoming: 'Upcoming', ended: 'Ended' };
     function pill(st) { return st === 'live' ? h('span', { className: 'tl-pill live' }, h('i', null), 'Live') : st === 'ended' ? h('span', { className: 'tl-pill' }, 'Ended') : h('span', { className: 'tl-pill up' }, 'Upcoming'); }
-    var toolbar = h('div', { className: 'pad eg-tools' },
-      h('div', { className: 'eg-r1' },
-        h('div', { className: 'eg-month' },
-          h(Tap, { className: 'eg-ar', label: 'Previous month', onClick: function () { goMonth(-1); } }, h(F.Icon, { name: 'chevronLeft', size: 17 })),
-          h('b', null, MONTHS[ym.m] + ' ' + ym.y),
-          h(Tap, { className: 'eg-ar', label: 'Next month', onClick: function () { goMonth(1); } }, h(F.Icon, { name: 'chevronRight', size: 17 }))),
-        h(Tap, { className: 'eg-today', onClick: goToday }, h(F.Icon, { name: 'calendar', size: 14 }), 'Today')),
-      h('div', { className: 'eg-seg', role: 'tablist' }, [['timeline', 'Timeline', 'list'], ['list', 'List', 'list'], ['calendar', 'Calendar', 'calendar']].map(function (x) {
-        return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': view === x[0], className: cx('eg-segi', view === x[0] && 'on'), onClick: function () { tap(5); setView(x[0]); } }, x[0] === 'timeline' ? h('svg', { width: 15, height: 15, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' }, h('path', { d: 'M4 6h10M4 12h16M4 18h7' })) : h(F.Icon, { name: x[2], size: 15 }), x[1]);
-      })),
-      h('label', { className: 'f4-search eg-q' }, h(F.Icon, { name: 'search', size: 17 }), h('input', { type: 'search', placeholder: 'Search channels, live events, hosts\u2026', value: query, onChange: function (e) { setQ(e.target.value); } })),
-      view !== 'calendar' ? h('div', { className: 'eg-days' },
-        h(Tap, { className: cx('eg-ar', start <= 1 && 'dis'), label: 'Previous days', onClick: function () { shiftWeek(-1); } }, h(F.Icon, { name: 'chevronLeft', size: 16 })),
-        h('div', { className: 'eg-dl' }, days.map(function (d) {
+    var sq = useState(false), showQ = sq[0], setShowQ = sq[1];
+    var stripRef = useRef(null);
+    useEffect(function () { var el = stripRef.current; if (!el) return; var b = el.querySelector('.eg-d.on'); if (b) el.scrollTo({ left: b.offsetLeft - el.clientWidth / 2 + b.offsetWidth / 2, behavior: 'smooth' }); }, [selDay, ym.m, view]);
+    var VIEWS = [['timeline', 'Timeline', h('svg', { width: 17, height: 17, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round' }, h('path', { d: 'M4 6h10M4 12h16M4 18h7' }))], ['list', 'List', h(F.Icon, { name: 'list', size: 17 })], ['calendar', 'Calendar', h(F.Icon, { name: 'calendar', size: 17 })]];
+    var allDays = []; for (var dk = 1; dk <= dim; dk++) allDays.push(dk);
+    var toolbar = h('div', { className: 'eg-tools2' },
+      h('div', { className: 'pad eg-bar' },
+        h('div', { className: 'eg-mon2' },
+          h(Tap, { className: 'eg-ar2', label: 'Previous month', onClick: function () { goMonth(-1); } }, h(F.Icon, { name: 'chevronLeft', size: 16 })),
+          h('b', null, MONTHS[ym.m], h('span', null, ' ' + ym.y)),
+          h(Tap, { className: 'eg-ar2', label: 'Next month', onClick: function () { goMonth(1); } }, h(F.Icon, { name: 'chevronRight', size: 16 }))),
+        !(ym.y === TODAY.y && ym.m === TODAY.m && selDay === TODAY.d) ? h(Tap, { className: 'eg-today2', onClick: goToday }, 'Today') : null,
+        h('div', { className: 'eg-vw', role: 'tablist', 'aria-label': 'View' }, VIEWS.map(function (x) { return h('button', { key: x[0], type: 'button', role: 'tab', title: x[1], 'aria-label': x[1], 'aria-selected': view === x[0], className: cx('eg-vwi', view === x[0] && 'on'), onClick: function () { tap(5); setView(x[0]); } }, x[2]); }))),
+      showQ || query ? h('div', { className: 'pad', style: { marginTop: 10 } }, h('label', { className: 'f4-search eg-q' }, h(F.Icon, { name: 'search', size: 17 }), h('input', { id: 'eg-q', type: 'search', placeholder: 'Search channels, events, hosts\u2026', value: query, onChange: function (e) { setQ(e.target.value); } }))) : null,
+      view !== 'calendar' ? h('div', { className: 'eg-strip', ref: stripRef }, allDays.map(function (d) {
           var wd = DOW[new Date(ym.y, ym.m, d).getDay()], n = onDay(d).length;
-          return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); setWk(start); } }, h('span', null, isToday(d) ? 'TODAY' : wd), h('b', null, d), n ? h('i', null) : null);
-        })),
-        h(Tap, { className: cx('eg-ar', start >= dim - 6 && 'dis'), label: 'Next days', onClick: function () { shiftWeek(1); } }, h(F.Icon, { name: 'chevronRight', size: 16 }))) : null);
+          return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); } }, h('span', null, wd.slice(0, 3)), h('b', null, d), n ? h('i', null) : h('i', { className: 'none' }));
+        })) : null);
     var empty = function (t, b) { return h('div', { style: { marginTop: 18 } }, h(F.EmptyState, { art: 'calendar', title: t, body: b, action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } })); };
     var body;
     if (view === 'timeline') {
@@ -6834,7 +6856,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }
     return h('div', { className: 'screen tabscreen' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
-      h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide')),
+      h('div', { className: 'tab-head' }, h('h1', null, 'Event Guide'), h(Tap, { className: cx('rbtn', (showQ || query) && 'on'), label: showQ ? 'Close search' : 'Search', onClick: function () { tap(5); if (showQ) setQ(''); setShowQ(!showQ); setTimeout(function () { var i = document.getElementById('eg-q'); if (i) i.focus(); }, 60); } }, h(F.Icon, { name: showQ ? 'x' : 'search', size: 20 }))),
       toolbar, body,
       h('div', { style: { height: 140 } }));
   }
