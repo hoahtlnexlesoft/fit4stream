@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106040250"</script>
+<script>window.__BUILD__="20261106040510"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7133,10 +7133,20 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'eg-vw', role: 'tablist', 'aria-label': 'View' }, VIEWS.map(function (x) { return h('button', { key: x[0], type: 'button', role: 'tab', title: x[1], 'aria-label': x[1], 'aria-selected': view === x[0], className: cx('eg-vwi', view === x[0] && 'on'), onClick: function () { tap(5); setView(x[0]); } }, x[2]); }))),
       showQ || query ? h('div', { className: 'pad', style: { marginTop: 10 } }, h('label', { className: 'f4-search eg-q' }, h(F.Icon, { name: 'search', size: 17 }), h('input', { id: 'eg-q', type: 'search', placeholder: 'Search channels, events, hosts\u2026', value: query, onChange: function (e) { setQ(e.target.value); } }))) : null,
       view !== 'calendar' ? h('div', { className: 'eg-strip', ref: stripRef }, allDays.map(function (d) {
-          var wd = DOW[new Date(ym.y, ym.m, d).getDay()], n = onDay(d).length;
+          var wd = DOW[new Date(ym.y, ym.m, d).getDay()], n = onDay(d).filter(matchSt).length;
           return h('button', { key: d, type: 'button', className: cx('eg-d', d === selDay && 'on', isToday(d) && 'today'), onClick: function () { tap(4); setSelDay(d); } }, h('span', null, isToday(d) && d !== selDay ? 'Today' : wd.slice(0, 3)), h('b', null, d), n ? h('i', null) : h('i', { className: 'none' }));
         })) : null);
-    var empty = function (t, b) { return h('div', { style: { marginTop: 18 } }, h(F.EmptyState, { art: 'calendar', title: t, body: b, action: 'Browse upcoming', onAction: function () { p.nav.tab('upcoming'); } })); };
+    var empty = function (t, b) {
+      var nx = null; for (var q = selDay + 1; q <= dim && !nx; q++) if (onDay(q).filter(matchQ).filter(matchSt).length) nx = q;
+      var filtered = stF !== 'all' && dayAll.length;
+      return h('div', { className: 'pad', style: { marginTop: 8 } }, h('div', { className: 'eg-empty' },
+        h('span', { className: 'eg-ei' }, h(F.Icon, { name: filtered ? 'filter' : 'calendar', size: 22 })),
+        h('b', null, filtered ? 'No ' + STL[stF].toLowerCase() + ' events here' : (ql ? 'No matches' : 'Nothing scheduled')),
+        h('span', null, filtered ? 'This day has ' + dayAll.length + (dayAll.length === 1 ? ' event' : ' events') + ' with another status.' : (ql ? 'Try another channel, event or host name.' : 'No events on ' + MONTHS[ym.m].slice(0, 3) + ' ' + selDay + '. Pick another day.')),
+        filtered ? h('button', { type: 'button', className: 'eg-next', onClick: function () { tap(5); setStF('all'); } }, 'Show all statuses', h(F.Icon, { name: 'chevronRight', size: 15 }))
+          : nx ? h('button', { type: 'button', className: 'eg-next', onClick: function () { tap(5); setSelDay(nx); } }, 'Next: ' + MONTHS[ym.m].slice(0, 3) + ' ' + nx, h(F.Icon, { name: 'chevronRight', size: 15 }))
+          : h('button', { type: 'button', className: 'eg-next', onClick: function () { p.nav.tab('upcoming'); } }, 'Browse upcoming', h(F.Icon, { name: 'chevronRight', size: 15 }))));
+    };
     var body;
     if (view === 'timeline') {
       var by = {}; dayEvents.forEach(function (e) { (by[e.org] = by[e.org] || []).push(e); });
