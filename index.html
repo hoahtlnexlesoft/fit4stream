@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106061234"</script>
+<script>window.__BUILD__="20261106061452"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5012,6 +5012,22 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:110px!important}
 .dt-ir svg{color:rgba(255,255,255,.4);margin-top:1px}
 .dt-ir span{color:rgba(255,255,255,.5)}
 .dt-ir b{font-weight:600;color:#fff;text-align:right}
+
+/* detail hero meta v2 */
+.dt-status{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13.5px;color:rgba(255,255,255,.6)}
+.dt-status>i{width:8px;height:8px;border-radius:50%;background:#f4b740;box-shadow:0 0 0 4px rgba(244,183,64,.15)}
+.dt-status>b{font-weight:700;color:#f4b740}
+.dt-status.live>i{background:#ff5a5a;box-shadow:0 0 0 4px rgba(255,90,90,.18);animation:dtPulse 1.6s ease-in-out infinite}
+.dt-status.live>b{color:#ff6b6b}
+.dt-status.off>i{background:rgba(255,255,255,.4);box-shadow:none}
+.dt-status.off>b{color:rgba(255,255,255,.7)}
+.dt-status>em{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
+@keyframes dtPulse{50%{box-shadow:0 0 0 7px rgba(255,90,90,0)}}
+.dt-stats{display:grid;grid-template-columns:repeat(3,1fr);margin:16px auto 0;width:100%;box-sizing:border-box;padding:12px 0;border-radius:18px;background:rgba(255,255,255,.045)}
+.dt-stats>div{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dt-stats>div+div{border-left:1px solid rgba(255,255,255,.08)}
+.dt-stats b{font-size:18px;font-weight:700;color:#fff;line-height:22px}
+.dt-stats span{font-size:11.5px;color:rgba(255,255,255,.5)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7583,10 +7599,14 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         false && e.trailer ? h(Tap, { className: 'dt-trailer', label: 'Watch trailer', go: function () { setTr(true); } }, h('span', { className: 'dt-tr-ic' }, h(F.Icon, { name: 'play', size: 12 })), 'Trailer', h('em', null, fmtDur(e.trailer))) : null),
       h('div', { className: 'dt-main' },
         h('h1', { className: 'dt-title' }, e.title),
-        h('div', { className: 'dt-badges' },
-          h('span', { className: cx('dt-b grad', ended && 'off', live && 'live') }, live ? 'LIVE NOW' : ended ? 'ENDED' : 'UPCOMING'),
-          h('span', { className: 'dt-st' }, h('span', null, h(F.Icon, { name: 'users', size: 14 }), h('b', null, e.registers), ' registered'), h('span', null, h(F.Icon, { name: 'eye', size: 14 }), h('b', null, e.views), e.views === 1 ? ' view' : ' views'), h('span', null, h(F.Icon, { name: 'heart', size: 14 }), h('b', null, e.likes), e.likes === 1 ? ' like' : ' likes'))),
-        h('div', { className: 'dt-meta' }, h('span', null, e.date.replace(', 2026', '')), h('i', null), h('span', null, start + ' · ' + dur), h('i', null), h('span', null, e.cat)),
+        h('div', { className: cx('dt-status', live && 'live', ended && 'off') },
+          h('i'), h('b', null, live ? 'Live now' : ended ? 'Ended' : 'Upcoming'),
+          h('span', null, live ? 'Started ' + start : e.date.replace(', 2026', '') + ' \u00b7 ' + start),
+          h('em'), h('span', null, e.cat.replace(' and Performances', '').replace('Virtual ', '').replace(' and Training', ''))),
+        h('div', { className: 'dt-stats' },
+          [[e.registers, 'Registered'], [e.views, e.views === 1 ? 'View' : 'Views'], [e.likes, e.likes === 1 ? 'Like' : 'Likes']].map(function (x) {
+            return h('div', { key: x[1] }, h('b', null, x[0]), h('span', null, x[1]));
+          })),
         ended ? h('span', { className: 'dt-cta off' }, 'Event ended')
           : e.id === 'seo' && p.nav.authed ? h(Tap, { className: 'dt-cta', go: function () { p.nav.push('player:waiting'); } }, h(F.Icon, { name: 'clock', size: 18 }), 'Enter waiting room \u00b7 starts in 5 min')
           : h(Tap, { className: 'dt-cta', go: go }, h(F.Icon, { name: 'play', size: 18 }), reg ? 'Join Live Event' : live ? 'Register & watch · ' + e.price : 'Register · ' + e.price),
