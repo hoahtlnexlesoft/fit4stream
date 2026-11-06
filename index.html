@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106080209"</script>
+<script>window.__BUILD__="20261106080307"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6878,7 +6878,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         var cn = typeof c.className === 'string' ? c.className : '';
         if (SKIP.test(cn)) continue;
         var cs = getComputedStyle(c); if (cs.position === 'fixed' || cs.position === 'sticky' || cs.display === 'none') continue;
-        if (c.querySelector(HDR + ', .top-blur')) pick(c, out); else out.push(c);
+        if (c.querySelector(HDR + ', .top-blur') || (c.offsetHeight > 420 && c.children.length > 1 && !/(auto|scroll)/.test(cs.overflowX))) pick(c, out); else out.push(c);
       }
     }
     function zone(stage) {
@@ -6895,8 +6895,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, zh = (zb - stage.getBoundingClientRect().top) / k, key;
         key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - zh) + '|' + Math.round(b + FF / 3);
         if (n.__m === key) continue; n.__m = key;
-        if (n.__media === undefined) n.__media = n.offsetHeight > 150 && /dt-hero|dt-himg|dt-hshade|og-hero|og-cover|ch2-hero|hero-media|cf3-media|thumb|img/.test(n.className + ' ' + (n.firstElementChild ? n.firstElementChild.className : ''));
-        var a0 = n.__media ? '.55' : '.04', a1 = n.__media ? '.7' : '.1';
+        if (n.__media === undefined) { n.__media = false; var A = n.offsetWidth * n.offsetHeight, im = n.querySelectorAll('[style*="background-image"], img'); for (var u = 0; u < im.length && !n.__media; u++) if (im[u].offsetWidth * im[u].offsetHeight > A * .3) n.__media = true; if (!n.__media && /(^|\s)(dt-himg|dt-hero|og-cover)/.test(n.className)) n.__media = true; }
+        var a0 = n.__media ? '.4' : '.04', a1 = n.__media ? '.6' : '.1';
         var m = key ? 'linear-gradient(180deg,rgba(0,0,0,' + a0 + ') ' + Math.round(b - zh) + 'px,rgba(0,0,0,' + a1 + ') ' + Math.round(b - 10) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
         n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
