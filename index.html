@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106025701"</script>
+<script>window.__BUILD__="20261106030604"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4388,6 +4388,64 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .gd-mc em{font-style:normal;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.12)}
 .gd-mc.on{background:#F4A425;color:#1b1306}
 .gd-mc.on em{background:rgba(27,19,6,.18)}
+
+/* ===== My Profile v2: hero + grouped settings rows ===== */
+.pf{background:#0f0e14}
+.pf-hero{position:relative;display:flex;flex-direction:column;align-items:center;padding:calc(var(--st) + 22px) 20px 22px;overflow:hidden}
+.pf-glow{position:absolute;inset:-40% -20% 0;background:radial-gradient(55% 55% at 30% 35%,rgba(165,122,216,.45),transparent 70%),radial-gradient(45% 50% at 75% 30%,rgba(244,164,37,.32),transparent 70%),radial-gradient(40% 40% at 55% 75%,rgba(231,70,69,.22),transparent 70%);filter:blur(10px);pointer-events:none}
+.pf-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,#0f0e14);pointer-events:none}
+.pf-back{position:absolute!important;left:16px;top:calc(var(--st) + 6px);z-index:3}
+.pf-av{position:relative;width:120px;height:120px;display:grid;place-items:center;z-index:2;margin-top:8px}
+.pf-ring{position:absolute;inset:0;transform:rotate(-90deg)}
+.pf-ring circle{fill:none;stroke-width:4;stroke-linecap:round}
+.pf-ring .bg{stroke:rgba(255,255,255,.1)}
+.pf-ring .fg{stroke:url(#none);stroke:#F4A425;transition:stroke-dasharray .5s ease}
+.pf-avimg{border-radius:50%;padding:0;border:0;background:none;cursor:pointer}
+.pf-cam{position:absolute!important;right:6px;bottom:6px;width:34px;height:34px;border-radius:50%;display:grid!important;place-items:center;background:#F4A425;color:#1b1306;box-shadow:0 0 0 3px #0f0e14}
+.pf-name{position:relative;z-index:2;margin:12px 0 2px;font-size:22px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.pf-mail{position:relative;z-index:2;font-size:13px;color:rgba(255,255,255,.6)}
+.pf-done{position:relative;z-index:2;margin-top:12px;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 13px;border-radius:15px;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-size:12.5px;color:rgba(255,255,255,.75)}
+.pf-done b{color:#F6C26B;font-weight:800}
+.pf-body{position:relative;z-index:2;margin-top:-4px}
+.pf-gl{margin:18px 4px 8px;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.pf-grp{border-radius:18px;background:rgba(255,255,255,.05);overflow:hidden}
+.pf-row{display:flex;align-items:center;gap:12px;min-height:54px;padding:8px 14px;position:relative;cursor:text}
+.pf-row+.pf-row::before,.pf-grp>*+*::before{content:'';position:absolute;left:56px;right:0;top:0;height:1px;background:rgba(255,255,255,.07)}
+.pf-grp>*{position:relative}
+.pf-ic{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}
+.pf-l{flex:none;font-size:15px;font-weight:600;color:#fff;display:flex;flex-direction:column}
+.pf-l small{font-size:12px;font-weight:500;color:rgba(255,255,255,.5);margin-top:1px}
+.pf-row .ep-sw{margin-left:auto}
+.pf-v{flex:1;min-width:0;text-align:right;background:none;border:0;outline:none;color:rgba(255,255,255,.72);font:inherit;font-size:15px;padding:0;text-overflow:ellipsis}
+.pf-v::placeholder,.pf-v.empty{color:#F4A425;opacity:1;font-weight:600}
+.pf-v:focus{color:#fff}
+.pf-v.ro{display:flex;align-items:center;justify-content:flex-end;gap:6px;color:rgba(255,255,255,.45);white-space:nowrap;overflow:hidden;font-size:14px}
+.pf-v.ro svg{flex:none}
+.pf-selw,.pf-datew{flex:1;min-width:0;position:relative;display:flex;align-items:center;justify-content:flex-end;gap:4px;color:rgba(255,255,255,.35)}
+.pf-selw select{appearance:none;-webkit-appearance:none;direction:rtl;cursor:pointer}
+.pf-selw select option{direction:ltr;color:#111}
+.pf-date{position:absolute;inset:0;opacity:0;cursor:pointer;color-scheme:dark}
+.pf-col{flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px;cursor:default}
+.pf-rh{display:flex;align-items:center;gap:12px}
+.pf-cnt{margin-left:auto;font-size:12px;color:rgba(255,255,255,.4)}
+.pf-chips{display:flex;flex-wrap:wrap;gap:8px;padding-left:42px}
+.pf-chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 6px 0 12px;border-radius:15px;background:rgba(244,164,37,.14);color:#F6C26B;font-size:13px;font-weight:600}
+.pf-cx{width:20px;height:20px;border-radius:50%;display:grid!important;place-items:center;background:rgba(244,164,37,.2);color:#F6C26B}
+.pf-add{display:inline-flex!important;align-items:center;gap:5px;height:30px;padding:0 12px;border-radius:15px;border:1px dashed rgba(255,255,255,.25);color:rgba(255,255,255,.75);font-size:13px;font-weight:600}
+.pf-chipin{height:30px;width:120px;padding:0 12px;border-radius:15px;border:1px solid rgba(244,164,37,.6);background:none;color:#fff;font:inherit;font-size:13px;outline:none}
+.pf-ta{margin-left:42px;min-height:76px;resize:none;border:0;border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.05);color:#fff;font:inherit;font-size:14px;line-height:20px;outline:none}
+.pf-ta:focus{box-shadow:inset 0 0 0 1.5px rgba(244,164,37,.6)}
+.pf-ta::placeholder{color:rgba(255,255,255,.35)}
+
+/* invite sheet avatar: real box so it centres and sits below the grab handle */
+.inv .inv-av{flex:none!important;width:72px!important;height:72px!important;display:grid!important;place-items:center!important;margin:16px auto 14px!important;position:relative!important;top:auto!important;transform:none!important}
+.inv .inv-av>:first-child{position:static!important;width:72px!important;height:72px!important;margin:0!important;transform:none!important;box-shadow:0 0 0 3px rgba(244,164,37,.55),0 10px 24px rgba(0,0,0,.4)}
+.inv .inv-av>span:last-child{right:-4px!important;bottom:-2px!important}
+.pf .top-blur{opacity:var(--sp,0)!important}
+.pf .pf-glow{inset:-60% -20% 0!important}
+
+.screen.pf{padding-top:0!important}
+.pf-back{top:calc(var(--st) + 8px)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4774,6 +4832,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     video: ['m16 13 5.22 3.48a.5.5 0 0 0 .78-.42V7.87a.5.5 0 0 0-.75-.43L16 10.5', 'M4 6h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'],
     pip: ['M21 9V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4', 'M14 13h7a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z'],
     maximize: ['M8 3H5a2 2 0 0 0-2 2v3', 'M21 8V5a2 2 0 0 0-2-2h-3', 'M3 16v3a2 2 0 0 0 2 2h3', 'M16 21h3a2 2 0 0 0 2-2v-3'],
+    camera: ['M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z', 'M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'],
+    phone: ['M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z'],
+    gender: ['M12 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10z', 'M12 15v7', 'M9 19h6'],
+    cake: ['M4 21h16', 'M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7', 'M5 16c2 1 3 1 4.7 0s3-1 4.6 0 3 1 4.7 0', 'M12 12V8', 'M12 5.5a1 1 0 0 0 0-2'],
     smartphone: ['M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z', 'M11 18h2'],
     refresh: ['M3 12a9 9 0 1 0 3-6.7', 'M3 4v5h5'],
     minimize: ['M8 3v3a2 2 0 0 1-2 2H3', 'M21 8h-3a2 2 0 0 1-2-2V3', 'M3 16h3a2 2 0 0 1 2 2v3', 'M16 21v-3a2 2 0 0 1 2-2h3'],
@@ -6055,40 +6117,63 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function useMyPhoto() { var s = useState(AV.me), v = s[0], set = s[1]; useEffect(function () { function f() { set(AV.me); } window.addEventListener('f4-avatar', f); return function () { window.removeEventListener('f4-avatar', f); }; }, []); return v; }
   function EditProfile(p) {
     var me = useMyPhoto();
-    var bs = useState(''), bio = bs[0], setBio = bs[1];
+    var init = { first: 'Thao 13', last: 'NGUYEN13', gender: '', birthday: '', phone: '+1 555-0000', address: '', bio: '', bizName: '', taxId: '', bizAddr: '', web: '' };
+    var vs = useState(init), v = vs[0], setV = vs[1];
+    var xs = useState(['Live music', 'Concerts']), exp = xs[0], setExp = xs[1];
     var bz = useState(false), biz = bz[0], setBiz = bz[1];
-    var gs = useState(''), gender = gs[0], setGender = gs[1];
+    var ad = useState(false), adding = ad[0], setAdding = ad[1];
+    function set(k, val) { var o = Object.assign({}, v); o[k] = val; setV(o); }
     function photo() { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); }
-    function F2(label, input, hint) { return h('label', { className: 'ch2-f' }, h('span', null, label), input, hint ? h('small', { className: 'ep-hint' }, hint) : null); }
-    function In(props, pre) { return h('div', { className: cx('ch2-in', props.readOnly && 'ro') }, pre || null, h('input', props)); }
-    function Sec(icon, title, kids, extra) { return h('section', { className: 'ch2-card ep-card' }, h('h3', { className: 'ep-h' }, h('span', { className: 'ep-hic' }, h(F.Icon, { name: icon, size: 16 })), title, extra || null), kids); }
-    return h(SubPage, { nav: p.nav, title: 'My Profile', bottom: h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Profile saved'); p.nav.back(); } }, 'Save profile') },
-      h('div', { className: 'ep' },
-        Sec('user', 'Personal information', [
-          h('div', { key: 'ph', className: 'ep-photo' },
-            h(Tap, { className: 'mcard-av ep-av', label: 'Change photo', onClick: photo }, h(F.Avatar, { src: me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 72 })),
-            h('div', null, h('b', null, 'Profile photo'), h('span', null, 'JPG or PNG \u00b7 max 5 MB'), h(Tap, { className: 'f4-link', onClick: photo }, 'Change photo'))),
-          h('div', { key: 'nm', className: 'ep-row2' },
-            F2('First name', In({ defaultValue: 'Thao 13', autoComplete: 'given-name' })),
-            F2('Last name', In({ defaultValue: 'NGUYEN13', autoComplete: 'family-name' }))),
-          h('div', { key: 'gb', className: 'ep-row2' },
-            F2('Gender', h('div', { className: 'ch2-in ep-sel' }, h('select', { value: gender, onChange: function (e) { setGender(e.target.value); }, className: gender ? '' : 'ph' }, h('option', { value: '', disabled: true }, 'Select'), ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) { return h('option', { key: g, value: g }, g); })), h(F.Icon, { name: 'chevronDown', size: 16 }))),
-            F2('Birthday', In({ type: 'date', className: 'ep-date' })))]),
-        Sec('mail', 'Contact details', [
-          h(React.Fragment, { key: 'e' }, F2('Email', In({ defaultValue: 'thaonguyentest123+13@gmail.com', readOnly: true }, h(F.Icon, { name: 'lock', size: 14 })), 'Email can\u2019t be changed here.')),
-          h(React.Fragment, { key: 'p' }, F2('Phone number', In({ type: 'tel', defaultValue: '+1 555-0000', autoComplete: 'tel' }))),
-          h(React.Fragment, { key: 'a' }, F2('Address', In({ placeholder: '123 Main St, City, Country', autoComplete: 'street-address' })))]),
-        Sec('heart', 'About me', [
-          h(React.Fragment, { key: 'x' }, F2('Expertise', In({ placeholder: 'e.g. Yoga, HIIT, Nutrition' }), 'Separate areas with commas.')),
-          h('label', { key: 'b', className: 'ch2-f' }, h('span', null, 'Bio', h('small', null, bio.length + '/500')), h('textarea', { className: 'ch2-ta', rows: 4, maxLength: 500, value: bio, placeholder: 'Tell us about yourself\u2026', onChange: function (e) { setBio(e.target.value); } }))]),
-        Sec('briefcase', 'Business information', [
-          h('p', { key: 'd', className: 'ep-note' }, 'Turn on if you operate under a registered business. These details appear on your receipts.'),
-          biz ? h('div', { key: 'f', className: 'ep-biz' },
-            F2('Business name', In({ placeholder: 'Company or trading name', autoComplete: 'organization' })),
-            F2('Tax ID / registration no.', In({ placeholder: 'e.g. 0312345678' })),
-            F2('Business address', In({ placeholder: 'Registered address' })),
-            F2('Website', In({ type: 'url', placeholder: 'https://' }))) : null],
-          h('button', { type: 'button', role: 'switch', 'aria-checked': biz, 'aria-label': 'Business information', className: cx('ep-sw', biz && 'on'), onClick: function () { tap(6); setBiz(!biz); } }, h('i')))));
+    var checks = [!!v.first, !!v.last, !!v.gender, !!v.birthday, !!v.phone, !!v.address, exp.length > 0, !!v.bio, !!me];
+    var pct = Math.round(checks.filter(Boolean).length / checks.length * 100);
+    var nextMissing = !v.birthday ? 'birthday' : !v.address ? 'address' : !v.bio ? 'bio' : !v.gender ? 'gender' : null;
+    var TINT = { user: '#a57ad8', gender: '#f472b6', cake: '#f4a425', mail: '#5b8cf0', phone: '#34c77b', mapPin: '#e74645', star: '#f4a425', message: '#39cae0', briefcase: '#8a9ab0', globe: '#5b8cf0', ticket: '#a57ad8' };
+    function ic(n) { return h('span', { className: 'pf-ic', style: { '--c': TINT[n] || '#a57ad8' } }, h(F.Icon, { name: n, size: 16 })); }
+    function Row(icon, label, field, input) { return h('label', { className: 'pf-row' }, ic(icon), h('span', { className: 'pf-l' }, label), field || input); }
+    function Txt(k, ph, type, ac) { return h('input', { className: cx('pf-v', !v[k] && 'empty'), type: type || 'text', value: v[k], placeholder: ph || 'Add', autoComplete: ac || 'off', onChange: function (e) { set(k, e.target.value); } }); }
+    var bday = v.birthday ? new Date(v.birthday + 'T00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    return h('div', { className: 'screen tabscreen pf' },
+      h('div', { className: 'pf-hero' },
+        h('div', { className: 'pf-glow', 'aria-hidden': true }),
+        h(Tap, { className: 'dt-glass pf-back', label: 'Back', go: p.nav.back }, h(F.Icon, { name: 'chevronLeft', size: 20 })),
+        h('div', { className: 'pf-av' },
+          h('svg', { className: 'pf-ring', viewBox: '0 0 120 120', 'aria-hidden': true }, h('circle', { cx: 60, cy: 60, r: 56, className: 'bg' }), h('circle', { cx: 60, cy: 60, r: 56, className: 'fg', style: { strokeDasharray: (pct / 100 * 351.9).toFixed(1) + ' 351.9' } })),
+          h(Tap, { className: 'pf-avimg', label: 'Change photo', onClick: photo }, h(F.Avatar, { src: me, name: v.first + ' ' + v.last, initials: 'T1', size: 96 })),
+          h(Tap, { className: 'pf-cam', label: 'Change photo', onClick: photo }, h(F.Icon, { name: 'camera', size: 15 }))),
+        h('h1', { className: 'pf-name' }, (v.first + ' ' + v.last).trim() || 'Your name'),
+        h('span', { className: 'pf-mail' }, 'thaonguyentest123+13@gmail.com'),
+        h('div', { className: 'pf-done' }, h('b', null, pct + '%'), h('span', null, pct === 100 ? 'Profile complete \u2014 nice!' : 'complete' + (nextMissing ? ' \u00b7 add your ' + nextMissing : '')))),
+      h('div', { className: 'pad pf-body' },
+        h('p', { className: 'pf-gl' }, 'Personal'),
+        h('div', { className: 'pf-grp' },
+          Row('user', 'First name', Txt('first', 'Add', 'text', 'given-name')),
+          Row('user', 'Last name', Txt('last', 'Add', 'text', 'family-name')),
+          Row('gender', 'Gender', h('span', { className: 'pf-selw' }, h('select', { className: cx('pf-v', !v.gender && 'empty'), value: v.gender, onChange: function (e) { set('gender', e.target.value); } }, h('option', { value: '' }, 'Add'), ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) { return h('option', { key: g, value: g }, g); })), h(F.Icon, { name: 'chevronRight', size: 15 }))),
+          Row('cake', 'Birthday', h('span', { className: 'pf-datew' }, h('span', { className: cx('pf-v', !bday && 'empty') }, bday || 'Add'), h(F.Icon, { name: 'chevronRight', size: 15 }), h('input', { type: 'date', className: 'pf-date', value: v.birthday, onChange: function (e) { set('birthday', e.target.value); } })))),
+        h('p', { className: 'pf-gl' }, 'Contact'),
+        h('div', { className: 'pf-grp' },
+          Row('mail', 'Email', h('span', { className: 'pf-v ro' }, h(F.Icon, { name: 'lock', size: 13 }), 'thaonguyentest123+13@gmail.com')),
+          Row('phone', 'Phone', Txt('phone', 'Add', 'tel', 'tel')),
+          Row('mapPin', 'Address', Txt('address', 'Add', 'text', 'street-address'))),
+        h('p', { className: 'pf-gl' }, 'About me'),
+        h('div', { className: 'pf-grp' },
+          h('div', { className: 'pf-row pf-col' }, h('div', { className: 'pf-rh' }, ic('star'), h('span', { className: 'pf-l' }, 'Expertise')),
+            h('div', { className: 'pf-chips' }, exp.map(function (x) { return h('span', { key: x, className: 'pf-chip' }, x, h(Tap, { className: 'pf-cx', label: 'Remove ' + x, onClick: function () { setExp(exp.filter(function (y) { return y !== x; })); } }, h(F.Icon, { name: 'x', size: 11 }))); }),
+              adding ? h('input', { className: 'pf-chipin', autoFocus: true, placeholder: 'e.g. Yoga', onKeyDown: function (e) { if (e.key === 'Enter' && e.target.value.trim()) { setExp(exp.concat([e.target.value.trim()])); e.target.value = ''; } if (e.key === 'Escape') setAdding(false); }, onBlur: function (e) { if (e.target.value.trim()) setExp(exp.concat([e.target.value.trim()])); setAdding(false); } })
+                : h(Tap, { className: 'pf-add', onClick: function () { setAdding(true); } }, h(F.Icon, { name: 'plus', size: 13 }), 'Add'))),
+          h('div', { className: 'pf-row pf-col' }, h('div', { className: 'pf-rh' }, ic('message'), h('span', { className: 'pf-l' }, 'Bio'), h('small', { className: 'pf-cnt' }, v.bio.length + '/500')),
+            h('textarea', { className: 'pf-ta', rows: 3, maxLength: 500, value: v.bio, placeholder: 'A few lines about you \u2014 what you love to watch, where you\u2019re tuning in from\u2026', onChange: function (e) { set('bio', e.target.value); } }))),
+        h('p', { className: 'pf-gl' }, 'Business'),
+        h('div', { className: 'pf-grp' },
+          h('div', { className: 'pf-row' }, ic('briefcase'), h('span', { className: 'pf-l' }, 'Registered business', h('small', null, 'Shown on your receipts')),
+            h('button', { type: 'button', role: 'switch', 'aria-checked': biz, 'aria-label': 'Registered business', className: cx('ep-sw', biz && 'on'), onClick: function () { tap(6); setBiz(!biz); } }, h('i'))),
+          biz ? [
+            h(React.Fragment, { key: 'n' }, Row('briefcase', 'Business name', Txt('bizName', 'Add', 'text', 'organization'))),
+            h(React.Fragment, { key: 't' }, Row('ticket', 'Tax ID', Txt('taxId', 'Add'))),
+            h(React.Fragment, { key: 'a' }, Row('mapPin', 'Address', Txt('bizAddr', 'Add'))),
+            h(React.Fragment, { key: 'w' }, Row('globe', 'Website', Txt('web', 'https://', 'url')))] : null)),
+      h('div', { style: { height: 16 } }),
+      h('div', { className: 'd-bar sp-bar' }, h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Profile saved'); p.nav.back(); } }, 'Save profile')));
   }
   function MyChannel(p) {
     var ds = useState(''), desc = ds[0], setDesc = ds[1];
