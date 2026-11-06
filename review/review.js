@@ -157,6 +157,7 @@
 
   /* ---------- styles ---------- */
   var css = '' +
+  '.rv .rv-keys{display:flex;flex-wrap:wrap;gap:4px 12px;padding:0 18px 10px;font-size:11.5px;color:#64748b}.rv .rv-keys span{display:inline-flex;align-items:center;gap:5px}.rv .rv-keys kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:5px;font:700 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#334155;background:#f1f5f9;box-shadow:inset 0 -1px 0 #cbd5e1}@media (pointer:coarse){.rv .rv-keys{display:none}}' +
   '.rv .rv-list{scroll-behavior:auto!important;overflow-anchor:none;position:relative}' +
   '.rv .rv-kbd{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:6px;padding:0 4px;border-radius:5px;font:700 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.14);color:inherit;opacity:.75}.rv button.on .rv-kbd{background:rgba(255,255,255,.25);opacity:1}@media (pointer:coarse){.rv .rv-kbd{display:none}}' +
   '.rv-seg button{white-space:nowrap}@media (max-width:440px){.rv .rv-seg button{padding:0 9px;gap:5px;font-size:12px}.rv .rv-seg button.rv-bell{padding:0 8px}.rv .rv-pill{left:calc(50% - 36px)}}' +
@@ -542,6 +543,7 @@
       var groups = [], gi = {};
       list.forEach(function (t) { var g = labelFor(t.page); if (gi[g] == null) { gi[g] = groups.length; groups.push({ name: g, items: [] }); } groups[gi[g]].items.push(t); });
       h += '<aside class="rv-panel"><header class="rv-head"><h2>Comments</h2><div><button class="rv-ib" id="rvHide" title="Hide comments (full view)" aria-label="Hide comments">' + ICON.eyeoff + '</button><button class="rv-ib" id="rvClose" title="Close panel (O)" aria-label="Close panel">' + ICON.x + '</button></div></header>' +
+        '<div class="rv-keys"><span><kbd>O</kbd> Mở/đóng</span><span><kbd>C</kbd> Comment</span><span><kbd>B</kbd> Browse</span><span><kbd>Esc</kbd> Thoát</span></div>' +
         '<div class="rv-fseg" role="tablist" aria-label="Lọc comment">' + [['all', 'Tất cả', S.threads.length], ['open', 'Đang mở', S.threads.filter(function (t) { return !t.resolved; }).length], ['resolved', 'Đã xử lý', S.threads.filter(function (t) { return t.resolved; }).length]].map(function (f) { return '<button type="button" role="tab" aria-selected="' + (S.filter === f[0]) + '" class="rv-fseg-b' + (S.filter === f[0] ? ' on' : '') + (f[0] === 'open' && f[2] ? ' hot' : '') + '" data-filter="' + f[0] + '"><span>' + f[1] + '</span><b>' + f[2] + '</b></button>'; }).join('') + '</div>' +
         
         '<div class="rv-tools"><label class="rv-search">' + ICON.search + '<input id="rvSearch" placeholder="Search" value="' + esc(S.q || '') + '"></label>' +
@@ -656,7 +658,7 @@
     var stop = function () { userMoved = true; };
     ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { addEventListener(ev, stop, { once: true, passive: true }); try { c.win !== window && c.win.addEventListener(ev, stop, { once: true, passive: true }); } catch (e) {} });
     var place = function () {
-      if (el && el.isConnected && el.scrollIntoView) { try { el.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'instant' }); } catch (e) { el.scrollIntoView({ block: 'center' }); } }
+      if (el && el.isConnected && el.scrollIntoView) { try { el.scrollIntoView({ block: 'center', inline: 'center', behavior: 'instant' }); } catch (e) { el.scrollIntoView({ block: 'center' }); } }
       else { try { c.win.scrollTo({ top: Math.max(0, t.ay - c.win.innerHeight / 2), behavior: 'instant' }); } catch (e) { c.win.scrollTo(0, Math.max(0, t.ay - c.win.innerHeight / 2)); } }
     };
     place();
@@ -681,8 +683,8 @@
       else location.hash = '#' + route;
     }
     var tries = 0, iv = setInterval(function () {
-      tries++; var c = ctx(), ready = samePage(t.page, c.key) && c.doc.readyState === 'complete';
-      if (ready || tries > 40) { clearInterval(iv); if (ready) setTimeout(function () { focusThread(id); }, 500); }
+      tries++; var c = ctx(), found = true; try { found = !t.selector || !!c.doc.querySelector(t.selector); } catch (e) {} var ready = samePage(t.page, c.key) && c.doc.readyState === 'complete' && (found || tries > 15);
+      if (ready || tries > 40) { clearInterval(iv); if (ready) setTimeout(function () { focusThread(id); setTimeout(function () { renderPins && renderPins(); }, 300); }, 600); }
     }, 200);
     renderAll();
   }
