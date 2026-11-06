@@ -576,8 +576,11 @@
     if (S.lightbox) h += '<div class="rv-lb" id="rvLb"><img src="' + S.lightbox + '" alt=""></div>';
     var ae = document.activeElement, keepId = ae && (ae.id === 'rvReply' || ae.id === 'rvEdit') ? ae.id : null, keepReply = keepId ? [ae.selectionStart] : null, SCR = ['.rv-list', '.rv-rail-list', '.rv-inbox'];
     S.scrollMem = S.scrollMem || {}; SCR.forEach(function (q) { var el = ui.querySelector(q); if (el) S.scrollMem[q] = el.scrollTop; });
+    // keep the selected comment where the user clicked it, even if the list re-orders (e.g. current page's group moves up)
+    var anc = null; (function () { var l0 = ui.querySelector('.rv-list'), r0 = S.active && l0 && l0.querySelector('.rv-row2-main[data-goto="' + S.active + '"]'); if (r0) anc = { id: S.active, off: r0.closest('.rv-row2').getBoundingClientRect().top - l0.getBoundingClientRect().top }; })();
     ui.innerHTML = h;
     SCR.forEach(function (q) { var el = ui.querySelector(q); if (el && S.scrollMem[q]) el.scrollTop = S.scrollMem[q]; });
+    if (anc && !S.reveal) { var l1 = ui.querySelector('.rv-list'), r1 = l1 && l1.querySelector('.rv-row2-main[data-goto="' + anc.id + '"]'); if (r1) { l1.scrollTop += (r1.closest('.rv-row2').getBoundingClientRect().top - l1.getBoundingClientRect().top) - anc.off; S.scrollMem['.rv-list'] = l1.scrollTop; } }
     if (S.reveal) { var rl = ui.querySelector('.rv-list'), rb = rl && rl.querySelector('.rv-row2-main[data-goto="' + S.reveal + '"]'); if (rb) { var row = rb.closest('.rv-row2'), lr = rl.getBoundingClientRect(), rr = row.getBoundingClientRect(); if (rr.top < lr.top + 8 || rr.bottom > lr.bottom - 8) rl.scrollTop += rr.top - lr.top - (lr.height - rr.height) / 2; S.scrollMem['.rv-list'] = rl.scrollTop; } if (rl) S.reveal = null; }
     ui.querySelectorAll('.rv-sm').forEach(function (bt) { var row = bt.parentNode, tx = row.querySelector('.rv-row2-t'); if (tx && !tx.classList.contains('ex') && tx.scrollHeight <= tx.clientHeight + 2) bt.remove(); });
     if (keepReply) { var ri = ui.querySelector('#' + keepId); if (ri) { ri.focus(); try { ri.setSelectionRange(keepReply[0], keepReply[0]); } catch (e) {} } }
