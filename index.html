@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106032158"</script>
+<script>window.__BUILD__="20261106032350"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4523,6 +4523,36 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 
 .dt-card.dt-multi{min-width:168px}
 .dt-card.dt-multi .dt-chips{justify-content:center}
+
+/* ===== iPhone Duo open v2: slim sidebar + wide home ===== */
+.duo-hero{display:none}
+body[data-phone=foldopen] .cf2,body[data-phone=foldopen] .cf2 + .dots{display:none!important}
+body[data-phone=foldopen] .duo-hero{display:grid;grid-template-columns:1.5fr 1fr;gap:16px;padding:0 20px;margin:6px 0 4px;align-items:stretch}
+body[data-phone=foldopen] .duo-feat .ev16{width:100%!important;height:100%}
+body[data-phone=foldopen] .duo-feat .ev16 .cf3-body>b{font-size:18px;line-height:23px}
+body[data-phone=foldopen] .duo-next{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:20px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+body[data-phone=foldopen] .duo-nh{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 6px}
+body[data-phone=foldopen] .duo-nh b{font-size:15px;color:#fff}
+body[data-phone=foldopen] .duo-ni{display:flex!important;align-items:center;gap:10px;padding:6px;border-radius:12px;text-align:left}
+body[data-phone=foldopen] .duo-ni:hover{background:rgba(255,255,255,.05)}
+body[data-phone=foldopen] .duo-th{flex:none;width:72px;height:41px;border-radius:8px;background-size:cover;background-position:center}
+body[data-phone=foldopen] .duo-nb{min-width:0;display:flex;flex-direction:column;gap:2px}
+body[data-phone=foldopen] .duo-nb b{font-size:13px;line-height:17px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=foldopen] .duo-nb small{font-size:11.5px;color:rgba(255,255,255,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* slim full-height sidebar */
+body[data-phone=foldopen] .tabbar{width:76px!important;padding:calc(var(--st) + 10px) 0 calc(var(--sb) + 10px) 0!important;background:rgba(255,255,255,.025)!important;border-right:1px solid rgba(255,255,255,.06);align-items:flex-start!important}
+body[data-phone=foldopen] .f4-tabbar{width:76px!important;padding:0!important;gap:4px!important;background:none!important;box-shadow:none!important;border:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important}
+body[data-phone=foldopen] .f4-tab{width:60px!important;height:52px!important;margin:0 auto!important;border-radius:14px!important}
+body[data-phone=foldopen] .f4-tab-l{font-size:10px!important}
+body[data-phone=foldopen] .f4-tab.is-center{height:64px!important}
+body[data-phone=foldopen] .f4-tab-orb{width:40px!important;height:40px!important;margin-top:0!important;transform:none!important;top:auto!important}
+body[data-phone=foldopen] .f4-tab-orb svg{width:20px!important;height:20px!important}
+body[data-phone=foldopen] .f4-tab-pulse{display:none!important}
+body[data-phone=foldopen] .app:has(.tabbar) .stage{left:76px!important}
+body[data-phone=foldopen] .brand-head .brand{transform:scale(.88);transform-origin:left center}
+
+body[data-phone=foldopen] .screen:has(.duo-hero){padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .duo-hero{padding:0 16px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6539,6 +6569,20 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         })),
       h('div', { className: 'dots' }, heroes.map(function (x, i) { return h('span', { key: i, className: i === slide ? 'on' : '', onClick: function () { go(i); } }); })));
   }
+  /* Wide layout (iPhone Duo open): featured live card + "Up next" list instead of the phone coverflow */
+  function DuoHero(p) {
+    var f = p.heroes[0] && p.heroes.filter(function (e) { return e.status === 'live'; })[0] || p.heroes[0], rest = p.heroes.filter(function (e) { return e !== f; }).slice(0, 4);
+    if (!f) return null;
+    return h('div', { className: 'duo-hero' },
+      h('div', { className: 'duo-feat' }, h(EventTile, { e: f, nav: p.nav, wide: true })),
+      h('div', { className: 'duo-next' },
+        h('div', { className: 'duo-nh' }, h('b', null, 'Up next'), h(Tap, { className: 'f4-link', go: function () { p.nav.tab('upcoming'); } }, 'See all')),
+        rest.map(function (e) {
+          return h(Tap, { key: e.id, className: 'duo-ni', go: function () { p.nav.push('detail:' + e.id); } },
+            h('span', { className: 'duo-th', style: { backgroundImage: 'url(' + e.img + ')' } }),
+            h('span', { className: 'duo-nb' }, h('b', null, e.title), h('small', null, e.date.replace(', 2026', '') + ' \u00b7 ' + e.range.split('\u2013')[0].trim() + ' \u00b7 ' + e.price)));
+        })));
+  }
   function Home(p) {
     useMyPhoto();
     var st = useState(function () { if (window.__fromLaunch) { window.__fromLaunch = false; p.nav.firstHome = false; return false; } return true; }), loading = st[0], setLoading = st[1];
@@ -6588,6 +6632,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'ptr', style: { height: pull, opacity: pull / 70 } }, h('span', { className: pull > 64 ? 'spin' : '', style: { transform: 'rotate(' + pull * 4 + 'deg)' } }, h(F.Logo, { size: 28, markOnly: true }))),
         loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : h('div', { className: 'fade-in' },
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
+          h(DuoHero, { heroes: heroes, nav: p.nav, reg: reg }),
           p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
             h('div', { className: 'pad col gap10' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
               h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('i', { className: 'yt-live' }, h('em', null), 'LIVE')),
