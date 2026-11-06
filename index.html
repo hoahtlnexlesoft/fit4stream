@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106074919"</script>
+<script>window.__BUILD__="20261106075022"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5298,6 +5298,17 @@ body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgb
 
 /* header title: text only, strong shadow */
 .stage .top .top-title{background:none!important;box-shadow:none!important;padding:0!important;height:auto!important;text-shadow:0 1px 2px rgba(0,0,0,.85),0 2px 10px rgba(0,0,0,.75),0 0 22px rgba(0,0,0,.6)!important}
+
+/* receipt: crisper orb + button, less glow */
+.rc3-orb{background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.45) 0%,rgba(255,255,255,0) 22%),linear-gradient(160deg,color-mix(in srgb,var(--sl) 35%,var(--sc)) 0%,var(--sc) 45%,var(--sc2) 100%)!important;box-shadow:0 8px 18px color-mix(in srgb,var(--sc) 28%,transparent),inset 0 1px 0 rgba(255,255,255,.35),inset 0 -6px 12px rgba(0,0,0,.18)!important}
+.rc3-ring{box-shadow:none!important;border-color:color-mix(in srgb,var(--sl) 55%,transparent)!important}
+.rc3-sp{box-shadow:none!important}
+.rc3-amb{opacity:.6}
+.rc3-btn{background:linear-gradient(180deg,color-mix(in srgb,var(--sl) 22%,var(--sc)) 0%,var(--sc) 100%)!important;box-shadow:0 4px 10px color-mix(in srgb,var(--sc) 22%,transparent),inset 0 1px 0 rgba(255,255,255,.22)!important}
+.rc3-btn.ghost{background:rgba(255,255,255,.05)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)!important}
+.rc3-amt-l>b{text-shadow:none!important}
+.rc3-card-badge{box-shadow:0 0 0 3px #15141c!important}
+.rc3-card-b{box-shadow:0 6px 12px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.4)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6876,7 +6887,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, zh = (zb - stage.getBoundingClientRect().top) / k, key;
         key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - zh) + '|' + Math.round(b + FF / 3);
         if (n.__m === key) continue; n.__m = key;
-        var m = key ? 'linear-gradient(180deg,rgba(0,0,0,.12) ' + Math.round(b - zh) + 'px,rgba(0,0,0,.35) ' + Math.round(b - zh * .35) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
+        var m = key ? 'linear-gradient(180deg,rgba(0,0,0,.04) ' + Math.round(b - zh) + 'px,rgba(0,0,0,.1) ' + Math.round(b - 10) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
         n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
     }
