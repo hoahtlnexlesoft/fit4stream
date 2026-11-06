@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106023114"</script>
+<script>window.__BUILD__="20261106024832"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4306,6 +4306,58 @@ body[data-phone=foldopen] .player.fs .pv-rc{top:var(--vt)!important;height:var(-
 .pv-rc-ldr .ldr-logo{width:64px!important;height:64px!important;transform:none!important}
 .pv-rc-ldr .ldr-logo svg{width:32px!important;height:32px!important}
 .pv-rc-ldr .ldr-ring{inset:0!important}
+
+/* My Events: platform + refund row */
+.me2-card{display:flex!important;flex-direction:column;align-items:stretch!important;gap:0!important;box-sizing:border-box;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.me2-main{width:100%}
+.me2-main{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.me2-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07)}
+.me2-pf{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,.55);min-width:0;white-space:nowrap}
+.me2-pf b{font-weight:600;color:rgba(255,255,255,.82)}
+.me2-refund{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:15px;border:0;background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.me2-refund:active{background:rgba(255,255,255,.14)}
+.me2-rf{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border-radius:13px;border:0;font:inherit;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.me2-rf.pending{background:rgba(244,164,37,.15);color:#f4b740}
+.me2-rf.pending i{width:6px;height:6px;border-radius:50%;background:#f4b740;animation:me2p 1.4s ease-in-out infinite}
+@keyframes me2p{50%{opacity:.35}}
+.me2-rf.done{background:rgba(52,199,123,.15);color:#4ade80}
+.me2-tag.free{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
+
+/* My Profile (edit) */
+.ep{display:flex;flex-direction:column;gap:14px;padding-bottom:8px}
+.ep-card{margin:0!important}
+.ep-h{display:flex!important;align-items:center;gap:10px}
+.ep-hic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(244,164,37,.14);color:#f4b740;flex:none}
+.ep-h .ep-sw{margin-left:auto}
+.ep-photo{display:flex;align-items:center;gap:14px;margin:2px 0 6px}
+.ep-photo>div{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.ep-photo b{font-size:15px;color:#fff}
+.ep-photo span{font-size:12px;color:rgba(255,255,255,.5)}
+.ep-photo .f4-link{margin-top:4px;font-size:13px}
+.ep-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ep-row2 .ch2-f{min-width:0}
+.ep-hint{display:block;margin-top:5px;font-size:11.5px;color:rgba(255,255,255,.45)}
+.ch2-in.ro{opacity:.7}
+.ch2-in.ro svg{color:rgba(255,255,255,.45);flex:none}
+.ep-sel{position:relative}
+.ep-sel select{flex:1;min-width:0;appearance:none;-webkit-appearance:none;background:none;border:0;color:#fff;font:inherit;font-size:15px;height:100%;outline:none;padding-right:20px}
+.ep-sel select.ph{color:rgba(255,255,255,.4)}
+.ep-sel select option{color:#111}
+.ep-sel svg{position:absolute;right:12px;pointer-events:none;color:rgba(255,255,255,.5)}
+.ep-date{color-scheme:dark;min-width:0}
+.ep-note{margin:0;font-size:13px;line-height:18px;color:rgba(255,255,255,.55)}
+.ep-biz{display:flex;flex-direction:column;gap:12px;margin-top:12px;animation:me2in .2s ease-out}
+@keyframes me2in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.ep-sw{position:relative;width:46px;height:28px;border-radius:14px;border:0;background:rgba(255,255,255,.14);cursor:pointer;flex:none;transition:background .2s}
+.ep-sw i{position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.ep-sw.on{background:#F4A425}
+.ep-sw.on i{transform:translateX(18px)}
+
+.ep-h{justify-content:flex-start!important;text-align:left!important}
+.ep-h .ep-sw{margin-left:auto!important}
+
+/* sub-page action bar stays pinned to the bottom while the page scrolls */
+.d-bar.sp-bar{position:sticky!important;top:auto!important;bottom:0!important;margin-top:auto}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -4692,6 +4744,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     video: ['m16 13 5.22 3.48a.5.5 0 0 0 .78-.42V7.87a.5.5 0 0 0-.75-.43L16 10.5', 'M4 6h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z'],
     pip: ['M21 9V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4', 'M14 13h7a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-7a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1z'],
     maximize: ['M8 3H5a2 2 0 0 0-2 2v3', 'M21 8V5a2 2 0 0 0-2-2h-3', 'M3 16v3a2 2 0 0 0 2 2h3', 'M16 21h3a2 2 0 0 0 2-2v-3'],
+    smartphone: ['M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z', 'M11 18h2'],
+    refresh: ['M3 12a9 9 0 1 0 3-6.7', 'M3 4v5h5'],
     minimize: ['M8 3v3a2 2 0 0 1-2 2H3', 'M21 8h-3a2 2 0 0 1-2-2V3', 'M3 16h3a2 2 0 0 1 2 2v3', 'M16 21v-3a2 2 0 0 1 2-2h3'],
     rotateCcw: ['M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8', 'M3 3v5h5'],
     external: ['M15 3h6v6', 'M10 14 21 3', 'M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'],
@@ -5815,7 +5869,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   }
 
   /* ===== data mirrored from the current app ===== */
-  var CATS = [['Concerts and Performances', 1, 'music'], ['Broadcast Events', 0, 'video'], ['Talk Shows', 0, 'message'], ['Social and Community', 0, 'users'], ['Product Launches and Demonstrations', 0, 'zap'], ['Virtual Conferencing', 0, 'monitor'], ['Others', 0, 'more'], ['Virtual Workshops and Training', 0, 'briefcase'], ['Virtual Networking', 0, 'globe']];
+  var CATS = [['Concerts and Performances', 1, 'music'], ['Broadcast Events', 0, 'video'], ['Talk Shows', 0, 'message'], ['Social and Community', 0, 'users'], ['Product Launches and Demonstrations', 0, 'zap'], ['Virtual Conferencing', 0, 'monitor'], ['Virtual Workshops and Training', 0, 'briefcase'], ['Virtual Networking', 0, 'globe']];
   var CHANNELS = ['Thao', 'Hieu LK', 'Thao NGUYEN2', 'An Tran', 'Nhan Doan', 'Business Demo', 'Kee Desmond', 'Marc John', 'Sandra Smith'];
   function ini(n) { var w = n.trim().split(/\s+/); return ((w[0] || '')[0] + ((w[1] || w[0] || '')[w[1] ? 0 : 1] || '')).toUpperCase(); }
   var EV = {
@@ -5896,8 +5950,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: p.title, actions: p.actions }),
       h('div', { className: 'pad col gap16', style: { paddingTop: 6 } }, p.children),
-      h('div', { style: { height: p.bottom ? 120 : 50 } }),
-      p.bottom ? h('div', { className: 'd-bar' }, p.bottom) : null);
+      h('div', { style: { height: p.bottom ? 16 : 50 } }),
+      p.bottom ? h('div', { className: 'd-bar sp-bar' }, p.bottom) : null);
   }
 
   /* ---------- generic event list (category / section "View all") ---------- */
@@ -5971,13 +6025,40 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function useMyPhoto() { var s = useState(AV.me), v = s[0], set = s[1]; useEffect(function () { function f() { set(AV.me); } window.addEventListener('f4-avatar', f); return function () { window.removeEventListener('f4-avatar', f); }; }, []); return v; }
   function EditProfile(p) {
     var me = useMyPhoto();
-    return h(SubPage, { nav: p.nav, title: 'My Profile', bottom: h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Profile saved'); p.nav.back(); } }, 'Save changes') },
-      h('div', { className: 'col', style: { alignItems: 'center', gap: 10, padding: '8px 0' } },
-        h(Tap, { className: 'mcard-av ep-av', label: 'Change photo', onClick: function () { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); } }, h(F.Avatar, { src: me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 96 })),
-        h(Tap, { className: 'f4-link', onClick: function () { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); } }, 'Change photo')),
-      h(F.TextField, { label: 'Full name', icon: 'user', value: 'Thao 13 NGUYEN13' }),
-      h(F.TextField, { label: 'Email', icon: 'mail', value: 'thaonguyentest123+13@gmail.com', hint: 'Email can’t be changed here.' }),
-      h(F.TextField, { label: 'Language', icon: 'globe', value: 'English' }));
+    var bs = useState(''), bio = bs[0], setBio = bs[1];
+    var bz = useState(false), biz = bz[0], setBiz = bz[1];
+    var gs = useState(''), gender = gs[0], setGender = gs[1];
+    function photo() { pickPhoto(function (u) { setMyPhoto(u); p.nav.toast('Profile photo updated'); }); }
+    function F2(label, input, hint) { return h('label', { className: 'ch2-f' }, h('span', null, label), input, hint ? h('small', { className: 'ep-hint' }, hint) : null); }
+    function In(props, pre) { return h('div', { className: cx('ch2-in', props.readOnly && 'ro') }, pre || null, h('input', props)); }
+    function Sec(icon, title, kids, extra) { return h('section', { className: 'ch2-card ep-card' }, h('h3', { className: 'ep-h' }, h('span', { className: 'ep-hic' }, h(F.Icon, { name: icon, size: 16 })), title, extra || null), kids); }
+    return h(SubPage, { nav: p.nav, title: 'My Profile', bottom: h(Tap, { className: 'd-cta grad', style: { flex: 1 }, go: function () { p.nav.toast('Profile saved'); p.nav.back(); } }, 'Save profile') },
+      h('div', { className: 'ep' },
+        Sec('user', 'Personal information', [
+          h('div', { key: 'ph', className: 'ep-photo' },
+            h(Tap, { className: 'mcard-av ep-av', label: 'Change photo', onClick: photo }, h(F.Avatar, { src: me, name: 'Thao 13 NGUYEN13', initials: 'T1', size: 72 })),
+            h('div', null, h('b', null, 'Profile photo'), h('span', null, 'JPG or PNG \u00b7 max 5 MB'), h(Tap, { className: 'f4-link', onClick: photo }, 'Change photo'))),
+          h('div', { key: 'nm', className: 'ep-row2' },
+            F2('First name', In({ defaultValue: 'Thao 13', autoComplete: 'given-name' })),
+            F2('Last name', In({ defaultValue: 'NGUYEN13', autoComplete: 'family-name' }))),
+          h('div', { key: 'gb', className: 'ep-row2' },
+            F2('Gender', h('div', { className: 'ch2-in ep-sel' }, h('select', { value: gender, onChange: function (e) { setGender(e.target.value); }, className: gender ? '' : 'ph' }, h('option', { value: '', disabled: true }, 'Select'), ['Female', 'Male', 'Non-binary', 'Prefer not to say'].map(function (g) { return h('option', { key: g, value: g }, g); })), h(F.Icon, { name: 'chevronDown', size: 16 }))),
+            F2('Birthday', In({ type: 'date', className: 'ep-date' })))]),
+        Sec('mail', 'Contact details', [
+          h(React.Fragment, { key: 'e' }, F2('Email', In({ defaultValue: 'thaonguyentest123+13@gmail.com', readOnly: true }, h(F.Icon, { name: 'lock', size: 14 })), 'Email can\u2019t be changed here.')),
+          h(React.Fragment, { key: 'p' }, F2('Phone number', In({ type: 'tel', defaultValue: '+1 555-0000', autoComplete: 'tel' }))),
+          h(React.Fragment, { key: 'a' }, F2('Address', In({ placeholder: '123 Main St, City, Country', autoComplete: 'street-address' })))]),
+        Sec('heart', 'About me', [
+          h(React.Fragment, { key: 'x' }, F2('Expertise', In({ placeholder: 'e.g. Yoga, HIIT, Nutrition' }), 'Separate areas with commas.')),
+          h('label', { key: 'b', className: 'ch2-f' }, h('span', null, 'Bio', h('small', null, bio.length + '/500')), h('textarea', { className: 'ch2-ta', rows: 4, maxLength: 500, value: bio, placeholder: 'Tell us about yourself\u2026', onChange: function (e) { setBio(e.target.value); } }))]),
+        Sec('briefcase', 'Business information', [
+          h('p', { key: 'd', className: 'ep-note' }, 'Turn on if you operate under a registered business. These details appear on your receipts.'),
+          biz ? h('div', { key: 'f', className: 'ep-biz' },
+            F2('Business name', In({ placeholder: 'Company or trading name', autoComplete: 'organization' })),
+            F2('Tax ID / registration no.', In({ placeholder: 'e.g. 0312345678' })),
+            F2('Business address', In({ placeholder: 'Registered address' })),
+            F2('Website', In({ type: 'url', placeholder: 'https://' }))) : null],
+          h('button', { type: 'button', role: 'switch', 'aria-checked': biz, 'aria-label': 'Business information', className: cx('ep-sw', biz && 'on'), onClick: function () { tap(6); setBiz(!biz); } }, h('i')))));
   }
   function MyChannel(p) {
     var ds = useState(''), desc = ds[0], setDesc = ds[1];
@@ -6283,7 +6364,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       clearTimeout(el.__t);
       if ('onscrollend' in el) { if (!el.__se) { el.__se = 1; el.addEventListener('scrollend', settle); } } else el.__t = setTimeout(settle, 260);
     }
-    var heroes = [EV.gig, EV.xmas, EV.seo];
+    // hero carousel: live first, then upcoming; capped at 10 (client rule: "Max 10 events here")
+    var HERO_MAX = 10;
+    var heroes = [EV.gig, EV.xmas, EV.seo].concat(Object.keys(EV).map(function (k) { return EV[k]; }))
+      .filter(function (e, i, a) { return e && e.status !== 'ended' && a.indexOf(e) === i; })
+      .slice(0, HERO_MAX);
     var reg = p.nav.registered;
     var chipNames = ['All'].concat(CATS.map(function (c) { return c[0]; }));
     return h('div', { className: 'abs' },
@@ -6541,8 +6626,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('p', { className: 'mgroup-l' }, 'Activity'),
       h('div', { className: 'mgroup' },
         row('ticket', '#a57ad8', 'My Events', 'Created and purchased events', function () { p.nav.push('myevents'); }),
-        row('dollar', '#a57ad8', 'Payment History', 'Invoices and transactions', function () { p.nav.push('payments'); }),
-        row('monitor', '#a57ad8', 'My Channel', 'Name, avatar, description, tags, social links', function () { p.nav.push('channel'); })),
+        row('dollar', '#a57ad8', 'Payment History', 'Invoices and transactions', function () { p.nav.push('payments'); })),
       h('p', { className: 'mgroup-l' }, 'Settings'),
       h('div', { className: 'mgroup' },
         row('lock', '#a57ad8', 'Security', 'Change your account password', function () { p.nav.push('security'); }),
@@ -6693,14 +6777,19 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   function MyEvents(p) {
     var t = useState(0), tab = t[0], setTab = t[1];
+    // pf = where the ticket was bought; rf = refund state (null | 'pending' | 'refunded'); rc = receipt id
     var ITEMS = [
-      { id: 'xmas', img: EV.xmas.img, title: 'Danang Christmas Market 2026', when: 'Live now \u00b7 started 9:43 AM', by: 'thao15 nguyen15', st: 'live', price: '$3.99', go: function () { p.nav.push('player'); } },
-      { id: 'seo', img: EV.seo.img, title: EV.seo.title, when: 'Today \u00b7 starts in 5 min', by: 'Marc John', st: 'soon', price: 'Free', go: function () { p.nav.push('player:waiting'); } },
-      { id: 'payout', img: PH.concert, title: 'Payout 3 - pay on 31.Oct - USD', when: 'Oct 30, 2026 \u00b7 10:40 AM', by: 'Thao11 Nguyen11', st: 'ended', price: '$9.99', go: function () { p.nav.push('detail:payout'); } }
+      { id: 'xmas', img: EV.xmas.img, title: 'Danang Christmas Market 2026', when: 'Live now \u00b7 started 9:43 AM', by: 'thao15 nguyen15', st: 'live', price: '$3.99', pf: 'ios', rf: null, rc: 'F4S-261103-0412', go: function () { p.nav.push('player'); } },
+      { id: 'gig', img: EV.gig.img, title: EV.gig.title, when: 'Nov 05 \u00b7 21:00', by: EV.gig.org, st: 'upcoming', price: '$9.99', pf: 'android', rf: 'pending', rc: 'F4S-261103-0412|pending', go: function () { p.nav.push('detail:gig'); } },
+      { id: 'seo', img: EV.seo.img, title: EV.seo.title, when: 'Today \u00b7 starts in 5 min', by: 'Marc John', st: 'soon', price: 'Free', pf: 'web', rf: null, go: function () { p.nav.push('player:waiting'); } },
+      { id: 'payout', img: PH.concert, title: 'Payout 3 - pay on 31.Oct - USD', when: 'Oct 30, 2026 \u00b7 10:40 AM', by: 'Thao11 Nguyen11', st: 'ended', price: '$9.99', pf: 'web', rf: 'refunded', rc: 'F4S-261030-0977', go: function () { p.nav.push('detail:payout'); } }
     ];
-    var lists = [ITEMS.filter(function (x) { return x.st !== 'ended'; }), ITEMS.filter(function (x) { return x.st === 'ended'; }), [], ITEMS];
-    var tabs = [['Upcoming', lists[0].length], ['Past', 0], ['Invited', 0], ['Purchased', ITEMS.length]];
+    var PF = { ios: ['smartphone', 'iOS app'], android: ['smartphone', 'Android app'], web: ['globe', 'Web'] };
+    var lists = [ITEMS.filter(function (x) { return x.st !== 'ended'; }), ITEMS.filter(function (x) { return x.st === 'ended'; }), [], ITEMS.filter(function (x) { return x.price !== 'Free'; })];
+    var tabs = [['Upcoming', lists[0].length], ['Past', lists[1].length], ['Invited', 0], ['Purchased', lists[3].length]];
     var list = lists[tab];
+    function receipt(e, ev) { ev.stopPropagation(); tap(6); p.nav.push('receipt:' + e.rc); }
+    function refund(e, ev) { ev.stopPropagation(); tap(8); p.nav.push('receipt:' + e.rc + '|refund'); }
     return h('div', { className: 'screen tabscreen me2' },
       h('div', { className: 'tab-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'My Events' }),
@@ -6710,17 +6799,26 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           return h('button', { key: x[0], type: 'button', role: 'tab', 'aria-selected': i === tab, className: cx('me2-segi', i === tab && 'on'), onClick: function () { tap(5); setTab(i); } }, x[0], x[1] ? h('em', null, x[1]) : null);
         }))),
       list.length ? h('section', { className: 'pad fade-in me2-list', key: tab }, list.map(function (e) {
-        return h(Tap, { key: e.id, className: cx('me2-card', 'st-' + e.st), go: e.go },
-          h('span', { className: 'me2-th', style: { backgroundImage: 'url(' + e.img + ')' } }, e.st === 'live' ? h('i', { className: 'yt-live' }, h('em', null), 'LIVE') : e.st === 'soon' ? h('i', { className: 'yt-live yt-sn' }, '5 MIN') : null),
-          h('div', { className: 'me2-body' },
-            h('b', null, e.title),
-            h('span', { className: 'me2-date' }, h(F.Icon, { name: e.st === 'ended' ? 'calendar' : 'clock', size: 13 }), e.when),
-            h('span', { className: 'me2-org' }, 'by ' + e.by),
-            h('div', { className: 'me2-foot' },
-              h('span', { className: 'me2-tags' }, h('i', { className: 'me2-tag paid' }, h(F.Icon, { name: 'ticket', size: 12 }), 'Purchased'), e.st === 'ended' ? h('i', { className: 'me2-tag' }, 'Ended') : null),
-              e.st === 'live' ? h('span', { className: 'yt-go me2-cta' }, h(F.Icon, { name: 'play', size: 13 }), 'Join')
-                : e.st === 'soon' ? h('span', { className: 'yt-go yt-go2 me2-cta' }, h(F.Icon, { name: 'clock', size: 13 }), 'Enter')
-                : h('strong', null, e.price))));
+        var paid = e.price !== 'Free', pf = PF[e.pf];
+        return h('div', { key: e.id, className: cx('me2-card', 'st-' + e.st), role: 'button', tabIndex: 0, onClick: function () { tap(6); e.go(); } },
+          h('div', { className: 'me2-main' },
+            h('span', { className: 'me2-th', style: { backgroundImage: 'url(' + e.img + ')' } }, e.st === 'live' ? h('i', { className: 'yt-live' }, h('em', null), 'LIVE') : e.st === 'soon' ? h('i', { className: 'yt-live yt-sn' }, '5 MIN') : null),
+            h('div', { className: 'me2-body' },
+              h('b', null, e.title),
+              h('span', { className: 'me2-date' }, h(F.Icon, { name: e.st === 'ended' ? 'calendar' : 'clock', size: 13 }), e.when),
+              h('span', { className: 'me2-org' }, 'by ' + e.by),
+              h('div', { className: 'me2-foot' },
+                h('span', { className: 'me2-tags' },
+                  h('i', { className: cx('me2-tag', paid ? 'paid' : 'free') }, h(F.Icon, { name: 'ticket', size: 12 }), paid ? e.price : 'Free'),
+                  e.st === 'ended' ? h('i', { className: 'me2-tag' }, 'Ended') : null),
+                e.st === 'live' ? h('span', { className: 'yt-go me2-cta' }, h(F.Icon, { name: 'play', size: 13 }), 'Join')
+                  : e.st === 'soon' ? h('span', { className: 'yt-go yt-go2 me2-cta' }, h(F.Icon, { name: 'clock', size: 13 }), 'Enter') : null))),
+          h('div', { className: 'me2-meta' },
+            h('span', { className: 'me2-pf' }, h(F.Icon, { name: pf[0], size: 13 }), 'Registered via ', h('b', null, pf[1])),
+            !paid ? null
+              : e.rf === 'pending' ? h('button', { type: 'button', className: 'me2-rf pending', onClick: function (ev) { receipt(e, ev); } }, h('i'), 'Refund pending')
+              : e.rf === 'refunded' ? h('button', { type: 'button', className: 'me2-rf done', onClick: function (ev) { receipt(e, ev); } }, h(F.Icon, { name: 'check', size: 12 }), 'Refunded')
+              : h('button', { type: 'button', className: 'me2-refund', onClick: function (ev) { refund(e, ev); } }, h(F.Icon, { name: 'refresh', size: 13 }), 'Request refund')));
       }))
         : h('div', { className: 'fade-in' }, h(F.EmptyState, { art: 'ticket', title: 'No events here yet', body: 'Events you register for, get invited to or attend will show up in this list.', action: 'Discover events', onAction: function () { p.nav.tab('home'); } })));
   }
