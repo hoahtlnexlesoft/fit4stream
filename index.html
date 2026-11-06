@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106085914"</script>
+<script>window.__BUILD__="20261106090200"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -8873,7 +8873,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var navRef = useRef({ firstHome: true, registered: false });
     var nav = navRef.current;
     var AUTHED = /^(account|myevents|payments|receipt|security|profile|channel|notifications|checkout|success|player|full)$/;
-    var aus = useState(AUTHED.test(startHash.split(':')[0])), authed = aus[0], setAuthed = aus[1];
+    var aus = useState(AUTHED.test(startHash.split(':')[0]) || startHash === 'detail:seo'), authed = aus[0], setAuthed = aus[1];
     var ags = useState(null), gate = ags[0], setGate = ags[1];
     nav.authed = authed;
     nav.setAuthed = function (v) { setAuthed(v); };
@@ -8891,7 +8891,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     nav.tab = function (n) { setDir('fade'); setStack([n]); };
     nav.pip = function () { setPip(true); setDir('pop'); setStack(function (st) { return st.slice(0, -1); }); };
     if (/^(success|player|full)(:|$)/.test(startHash)) nav.registered = true;
-    window.__jump = function (n) { nav.empty = n === 'home-empty'; if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
+    window.__jump = function (n) { if (n === 'detail' || n === 'detail:seo') setAuthed(true); nav.empty = n === 'home-empty'; if (/^(checkout|receipt)-/.test(n)) { var q = n.split('-'), base = q.shift(), arg = q.join('-'); setLaunch(false); setAuthed(true); nav.registered = false; setPip(false); setDir('fade'); setStack(base === 'checkout' ? ['home', 'live', 'checkout:' + arg] : ['account', 'payments', 'receipt:' + ({ paid: 'F4S-261103-0412', refund: 'F4S-261103-0412|refund', pending: 'F4S-261103-0412|pending', refunded: 'F4S-261030-0977', failed: 'F4S-261022-0315' })[arg]]); return; } if (/^player-/.test(n)) { setLaunch(false); setAuthed(true); nav.registered = true; setPip(false); setDir('fade'); setStack(['home', 'player:' + n.slice(7)]); return; } if (n === 'account-pro') { nav.pro = true; setLaunch(false); setAuthed(true); setPip(false); setDir('fade'); setStack(['account']); return; } if (n === 'account') nav.pro = false; if (n === 'welcome' || n === 'splash') { window.__fromLaunch = true; setPip(false); setDir('none'); setStack(['home']); setLaunch(Date.now()); return; } setLaunch(false); if (n === 'loader-logo' || n === 'loader-ticks') { window.__TICKS_UNTIL__ = n === 'loader-ticks' ? Date.now() + 300 : 0; setDir('fade'); setStack(['home', 'search']); setLoadKey(Date.now()); return; } nav.empty = n === 'home-empty'; window.__NT_EMPTY = n === 'notifications-empty'; if (n === 'notifications-empty') n = 'notifications'; if (n === 'home-empty') { nav.firstHome = false; setPip(false); setDir('fade'); setStack(['home']); return; } if (n === 'guest') { setAuthed(false); setPip(false); setDir('fade'); setStack(['home']); return; } if (AUTHED.test(n) || n === 'home') setAuthed(true); if (n === 'home') nav.registered = true; if (n === 'success' || n === 'player') nav.registered = true; setPip(false); setDir('fade'); setStack(stackFor(n)); };
     // the URL hash names the exact screen *and* its variant (e.g. #player:waiting, #checkout:coupon, #detail:seo),
     // so feedback comments are filed against the screen that was really on show
     useEffect(function () { try { history.replaceState(null, '', '#' + top); } catch (e) {} window.__setLand && window.__setLand(top === 'full'); }, [top]);
@@ -8900,7 +8900,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       function onHash() {
         var hh = decodeURIComponent((location.hash || '').replace('#', '')); if (hh === 'detail') hh = 'detail:xmas'; if (!hh || hh === topRef.current) return;
         var b = hh.split(':')[0]; if (!SCREENS[b]) return;
-        setLaunch(false); if (AUTHED.test(b)) setAuthed(true); if (/^(player|full|success)$/.test(b)) nav.registered = true;
+        setLaunch(false); if (AUTHED.test(b) || hh === 'detail:seo') setAuthed(true); if (/^(player|full|success)$/.test(b)) nav.registered = true;
         var st = stackFor(hh); if (st.length === 1 && TABS.indexOf(b) < 0) st = ['home', hh];
         setPip(false); setDir('fade'); setStack(st);
       }
