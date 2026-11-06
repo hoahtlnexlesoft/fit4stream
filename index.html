@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106074038"</script>
+<script>window.__BUILD__="20261106074403"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6839,31 +6839,34 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   /* waiting-room countdown runs on a real clock shared across visits (loops every 5 min in the demo) */
   function wrLeft() { if (!window.__WR_T0) window.__WR_T0 = Date.now(); var el = Math.floor((Date.now() - window.__WR_T0) / 1000); return 299 - (el % 300); }
 
-  // global: content fades + blurs as it scrolls up under the (kept) header
+  // global: content fades out only inside the header zone (status bar + header row) as it scrolls under it
   (function () {
-    var SKIP = /(^|\s)(top|top-sp|top-blur|brand-head|tabbar|tab-amb|rc3-amb|home-amb|ptr|sheet-wrap|dt-sbar)(\s|$)/;
-    function pick(node, out, depth) {
+    var HDR = '.top, .brand-head, .d-top, .dt-close, .og-back, .ch2-back';
+    var SKIP = /(^|\s)(top|top-sp|top-blur|brand-head|tabbar|tab-amb|rc3-amb|home-amb|ptr|sheet-wrap|dt-sbar|dt-close|og-back|ch2-back|d-top)(\s|$)/;
+    function pick(node, out) {
       for (var c = node.firstElementChild; c; c = c.nextElementSibling) {
-        if (SKIP.test(c.className && c.className.baseVal === undefined ? c.className : '')) continue;
+        var cn = typeof c.className === 'string' ? c.className : '';
+        if (SKIP.test(cn)) continue;
         var cs = getComputedStyle(c); if (cs.position === 'fixed' || cs.position === 'sticky' || cs.display === 'none') continue;
-        var hgt = c.offsetHeight; if (!hgt) continue;
-        var rail = c.scrollWidth > c.clientWidth + 4 && /(auto|scroll)/.test(cs.overflowX);
-        if (hgt > 240 && !rail && depth < 6 && c.firstElementChild) pick(c, out, depth + 1); else out.push(c);
+        if (c.querySelector(HDR + ', .top-blur')) pick(c, out); else out.push(c);
       }
+    }
+    function zone(stage) {
+      var hs = stage.querySelectorAll(HDR), z = 0;
+      for (var i = 0; i < hs.length; i++) { if (!hs[i].offsetHeight) continue; var r = hs[i].getBoundingClientRect(); if (r.top < stage.getBoundingClientRect().top + 160) z = Math.max(z, r.bottom); }
+      if (!z) z = stage.getBoundingClientRect().top + (parseFloat(getComputedStyle(stage).getPropertyValue('--st')) || 54) + 10;
+      return z + 6;
     }
     function run(el) {
       var stage = el.closest('.stage'); if (!stage) return;
-      var y = el.scrollTop, base = 0;
-      var hd = stage.querySelector('.top, .brand-head, .d-top'), ttl = hd && hd.querySelector('h1, .top-title, .brand, b');
-      var stH = parseFloat(getComputedStyle(stage).getPropertyValue('--st')) || 54;
-      if (hd && hd.offsetHeight && ttl && ttl.textContent.trim()) base = hd.getBoundingClientRect().bottom;
-      else base = stage.getBoundingClientRect().top + stH + 6;
-      var list = el.__fadeList; if (!list || y <= 2) { list = []; pick(el, list, 0); el.__fadeList = list; }
+      var y = el.scrollTop, zb = zone(stage), F = 44;
+      var list = el.__fadeList; if (!list || y <= 2) { list = []; pick(el, list); el.__fadeList = list; }
       for (var i = 0; i < list.length; i++) {
-        var n = list[i], r = n.getBoundingClientRect(), f;
-        if (y <= 2 || r.top > base + 4) f = 1; else f = Math.max(0, Math.min(1, (r.top + r.height / 2 - base) / (r.height / 2 + 30)));
-        var key = f.toFixed(2); if (n.__f === key) continue; n.__f = key;
-        if (f >= 1) { n.style.opacity = ''; n.style.filter = ''; } else { n.style.opacity = key; n.style.filter = 'blur(' + ((1 - f) * 6).toFixed(1) + 'px)'; }
+        var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, key;
+        key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - FF / 3) + '|' + Math.round(b + FF / 2);
+        if (n.__m === key) continue; n.__m = key;
+        var m = key ? 'linear-gradient(180deg,transparent ' + Math.round(b - FF / 3) + 'px,#000 ' + Math.round(b + FF / 2) + 'px)' : '';
+        n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
     }
     var raf = 0, tgt = null;
