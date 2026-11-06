@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106070941"</script>
+<script>window.__BUILD__="20261106071222"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5135,6 +5135,13 @@ body .rc-paper,body .rc-paper.st-paid,body .rc-paper.st-pending,body .rc-paper.s
 .rc-big>b.in sup{font-size:26px!important;top:8px}
 .rc-big>b.in i{font-style:normal;font-size:30px;font-weight:700;margin-right:2px;position:relative;top:-6px}
 .rc-top2.st-pending .rc-big>span,.rc-top2.st-refunded .rc-big>span{color:#fff;font-weight:650;font-size:13px}
+
+/* Duo open: tickets 2-up, smaller bottom spacers */
+body[data-phone=foldopen] .yt-list{display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important}
+body[data-phone=foldopen] .yt-list .yt-card{min-width:0}
+body[data-phone=foldopen] .yt-list .yt-body b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=foldopen] .yt-list .yt-body span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-phone=foldopen] .screen div[style="height: 140px;"],body[data-phone=foldopen] .screen div[style="height: 130px;"]{height:28px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7236,7 +7243,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           h(DuoHero, { heroes: heroes, nav: p.nav, reg: reg }),
           p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
-            h('div', { className: 'pad col gap10' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
+            h('div', { className: 'pad col gap10 yt-list' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
               h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('i', { className: 'yt-live' }, h('em', null), 'LIVE')),
               h('div', { className: 'yt-body' }, h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Started 12 min ago \u00b7 by thao15 nguyen15')),
               h('span', { className: 'yt-go' }, h(F.Icon, { name: 'play', size: 14 }), 'Join')),
