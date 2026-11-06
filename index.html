@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106074403"</script>
+<script>window.__BUILD__="20261106074659"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5287,6 +5287,14 @@ body .duo-hero2 + .sec{margin-top:12px!important}
 .rc3.st-paid{--sc:#39b8d4!important;--sc2:#1d6f8a!important;--sl:#9ee6f4!important}
 .rc3.st-pending{--sc:#f0a84a!important;--sc2:#b8661c!important;--sl:#fbd58e!important}
 .rc3.st-failed{--sc:#e2574f!important;--sc2:#9e2c2f!important;--sl:#f5a59c!important}
+
+/* floating pill header (Claude-app style): solid pills over faded content */
+.stage .top .f4-iconbtn,.brand-head .mbtn.ring,.dt-close,.og-back,.ch2-back{background:rgba(30,29,37,.94)!important;box-shadow:0 6px 18px rgba(0,0,0,.38),inset 0 0 0 1px rgba(255,255,255,.06)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important}
+.stage .top .top-title{flex:0 1 auto!important;margin:0 auto!important;height:44px;padding:0 18px;border-radius:22px;display:flex!important;align-items:center;background:rgba(30,29,37,.94);box-shadow:0 6px 18px rgba(0,0,0,.38),inset 0 0 0 1px rgba(255,255,255,.06);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:calc(100% - 120px);font-size:16px!important}
+.stage .top{background:none!important}
+
+/* lighter top shade on detail hero */
+body:not([data-phone=foldopen]) .dt-hshade{background:linear-gradient(180deg,rgba(10,12,18,.16) 0%,transparent 22%)!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6862,10 +6870,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       var y = el.scrollTop, zb = zone(stage), F = 44;
       var list = el.__fadeList; if (!list || y <= 2) { list = []; pick(el, list); el.__fadeList = list; }
       for (var i = 0; i < list.length; i++) {
-        var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, key;
-        key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - FF / 3) + '|' + Math.round(b + FF / 2);
+        var n = list[i], r = n.getBoundingClientRect(), k = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1, b = (zb - r.top) / k, FF = F / k, zh = (zb - stage.getBoundingClientRect().top) / k, key;
+        key = y <= 2 || b <= -FF / 2 ? '' : Math.round(b - zh) + '|' + Math.round(b + FF / 3);
         if (n.__m === key) continue; n.__m = key;
-        var m = key ? 'linear-gradient(180deg,transparent ' + Math.round(b - FF / 3) + 'px,#000 ' + Math.round(b + FF / 2) + 'px)' : '';
+        var m = key ? 'linear-gradient(180deg,rgba(0,0,0,.12) ' + Math.round(b - zh) + 'px,rgba(0,0,0,.35) ' + Math.round(b - zh * .35) + 'px,#000 ' + Math.round(b + FF / 3) + 'px)' : '';
         n.style.webkitMaskImage = m; n.style.maskImage = m;
       }
     }
