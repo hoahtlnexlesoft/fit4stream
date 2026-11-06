@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261106072603"</script>
+<script>window.__BUILD__="20261106072752"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5278,7 +5278,9 @@ body .duo-hero2 + .sec{margin-top:12px!important}
 .rc3-help .q{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;box-shadow:inset 0 0 0 1.3px rgba(255,255,255,.4)}
 .rc3-help u{color:var(--sl);text-decoration-color:color-mix(in srgb,var(--sl) 50%,transparent)}
 
-.rc3 .top{background:linear-gradient(180deg,rgba(14,13,20,.92) 60%,rgba(14,13,20,.6))!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.rc3 .top{background:transparent!important;transition:background .2s}
+.rc3 .top::before{content:'';position:absolute;left:0;right:0;bottom:0;height:200px;z-index:-1;background:rgba(16,15,22,.95);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:0 1px 0 rgba(255,255,255,.06);opacity:0;transition:opacity .2s;pointer-events:none}
+.rc3.solid .top::before{opacity:1}
 .rc3-help .q{display:inline-grid!important;flex:none;border:1.3px solid rgba(255,255,255,.4);box-shadow:none!important}
 </style>
 <div class="stagewrap">
@@ -8200,7 +8202,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     }[k];
     var steps = k === 'refunded' ? [['Requested', 'Nov 04', 2], ['Approved', 'Nov 04', 2], ['Refunded', 'Nov 06', 2]] : [['Requested', 'Nov 04', 2], ['Approved', '~24h', 1], ['Refunded', '5–10 days', 0]];
     var cents = money(amt).split('.');
-    return h('div', { className: 'screen tabscreen rc3 st-' + k },
+    var sv = useState(false), solid = sv[0], setSolid = sv[1];
+    return h('div', { className: cx('screen tabscreen rc3 st-' + k, solid && 'solid'), onScroll: function (e) { var v = e.currentTarget.scrollTop > 40; if (v !== solid) setSolid(v); } },
       h('div', { className: 'rc3-amb', 'aria-hidden': true }),
       h(Top, { back: p.nav.back, title: 'Receipt', actions: h(Tap, { className: 'f4-iconbtn', label: 'Share receipt', go: function () { p.nav.toast('Receipt link copied'); } }, h(F.Icon, { name: 'share', size: 19 })) }),
       h('div', { className: 'pad col', style: { paddingTop: 4 } },
