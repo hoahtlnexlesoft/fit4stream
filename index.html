@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109020222"</script>
+<script>window.__BUILD__="20261109020612"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5458,6 +5458,13 @@ body[data-phone=foldopen] .screen.nt2{padding-left:16px!important;padding-right:
 
 body[data-phone=foldopen] .screen.nt2>.top-sp{margin-bottom:14px}
 body[data-phone=foldopen] .screen.nt2>.nt2-chips{top:calc(var(--st) + 70px)}
+
+/* iPhone Duo open: short 626pt screen -> denser type & spacing, like an iPad-mini density */
+body[data-phone=foldopen] .screenhost>.app{zoom:.86}
+
+body[data-phone=foldopen] .screen.sc2,body[data-phone=foldopen] .screen.rc3,body[data-phone=foldopen] .screen.co2,body[data-phone=foldopen] .screen.sx{padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .sc2-body,body[data-phone=foldopen] .rc3>.pad{grid-template-columns:340px minmax(0,1fr)!important}
+body[data-phone=foldopen] .sc2>.d-bar{margin-left:374px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
