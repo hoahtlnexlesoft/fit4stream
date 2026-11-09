@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109070154"</script>
+<script>window.__BUILD__="20261109083437"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5510,6 +5510,10 @@ body[data-phone=foldopen] .dh2{column-gap:28px!important}
 body[data-phone=foldopen] .dh2-cf .cf2{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
 body[data-phone=foldopen] .dh2-cf .cf2{display:block!important}
 body[data-phone=foldopen] .dh2-cf .cf2 + .dots{display:flex!important}
+
+/* Duo open: tab rail sits on the RIGHT edge (client feedback), in line with the header actions */
+body[data-phone=foldopen] .tabbar{left:auto!important;right:0!important;padding:calc(var(--st) + 8px) 10px calc(var(--sb) + 8px) 0!important;justify-content:flex-end!important}
+body[data-phone=foldopen] .app:has(.tabbar) .stage{left:0!important;right:110px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
