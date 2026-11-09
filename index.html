@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109025102"</script>
+<script>window.__BUILD__="20261109030006"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5495,6 +5495,14 @@ body .sk-duo,body .sk-dduo{max-width:none!important;width:100%!important;margin:
 .sk-duo-main>.sk{width:100%!important}
 .sk-dduo{position:absolute!important;inset:0;display:grid!important;grid-template-columns:42% minmax(0,1fr);align-items:start}
 .sk-dduo>.sk:first-child{height:100%!important}
+
+/* home skeleton hero = same geometry as the real coverflow */
+.sk-cf2{--cw:min(346px,calc(var(--dw,440px) - 84px));position:relative;height:calc(var(--cw) * .825 + 14px);margin-top:10px;overflow:hidden}
+body.devmode .sk-cf2{--cw:min(346px,calc(100vw - 84px))}
+.sk-cf2>.sk{position:absolute;top:0;left:50%;width:var(--cw);height:calc(var(--cw) * .824);border-radius:22px}
+.sk-cf2>.sk-cfc{transform:translateX(-50%)}
+.sk-cf2>.sk-cfl{transform:translateX(calc(-50% - var(--cw) * .88)) scale(.7);transform-origin:right center;opacity:.6}
+.sk-cf2>.sk-cfr{transform:translateX(calc(-50% + var(--cw) * .88)) scale(.7);transform-origin:left center;opacity:.6}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6926,8 +6934,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'sk-box' }, SKSec(100, false), [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(44, 44, 12), h('div', { style: { flex: 1 } }, SK('80%', 12), SK('50%', 10, 5, { marginTop: 6 })), SK(30, 30, 15)); })),
         h('div', { className: 'sk-box' }, SKSec(110, false), [0, 1, 2, 3].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(36, 36, 18), h('div', { style: { flex: 1 } }, SK('60%', 12), SK('40%', 10, 5, { marginTop: 6 }))); }))));
     return h('div', { className: 'skw sk-home' },
-      h('div', { className: 'sk-cf' }, SK(30, 244, '0 22px 22px 0'), SK(346, 285, 22), SK(30, 244, '22px 0 0 22px')),
-      h('div', { className: 'dots' }, h('span', null), h('span', { className: 'on' }), h('span', null), h('span', null), h('span', null)),
+      h('div', { className: 'sk-cf2' }, h('div', { className: 'sk sk-cfl' }), h('div', { className: 'sk sk-cfc' }), h('div', { className: 'sk sk-cfr' })),
+      h('div', { className: 'dots' }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (i) { return h('span', { key: i, className: i === 1 ? 'on' : '' }); })),
       h('section', { className: 'sec pad' }, SKSec(110), h('div', { className: 'col gap10' }, [0, 1].map(SKTicket))),
       h('section', { className: 'sec' }, h('div', { className: 'pad' }, SKSec(130)),
         h('div', { className: 'stories' }, [0, 1, 2, 3, 4, 5].map(function (i) { return h('div', { key: i, className: 'story' }, SK(70, 70, 35), SK(48, 10, 5, { margin: '9px auto 0' })); }))),
