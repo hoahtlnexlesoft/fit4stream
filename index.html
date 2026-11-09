@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109015307"</script>
+<script>window.__BUILD__="20261109020222"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5405,6 +5405,59 @@ body .cd .cd-acts{margin-top:24px!important}
 /* iPhone Duo folded: squarer, shorter screen -> denser UI so content fits like a real compact app */
 body[data-phone=duo] .screenhost>.app{zoom:.84}
 body[data-phone=duo] .statusbar{zoom:1}
+
+/* ===== Duo open: real two-pane layouts for form/detail screens ===== */
+body[data-phone=foldopen] .sc2-body,body[data-phone=foldopen] .co2>.pad,body[data-phone=foldopen] .rc3>.pad,body[data-phone=foldopen] .sx-disc{display:grid!important;grid-template-columns:290px minmax(0,1fr);column-gap:18px;row-gap:14px;align-items:start;max-width:none!important}
+body[data-phone=foldopen] .sc2-body>*,body[data-phone=foldopen] .co2>.pad>*,body[data-phone=foldopen] .rc3>.pad>*,body[data-phone=foldopen] .sx-disc>*{margin-top:0!important;min-width:0}
+/* Security: left = status + settings lists, right = change password */
+body[data-phone=foldopen] .sc2-body>.sc-hero{grid-column:1;grid-row:1}
+body[data-phone=foldopen] .sc2-body>.sc-card:not(.sc-list){grid-column:2;grid-row:1/span 3}
+body[data-phone=foldopen] .sc2-body>.sc-list{grid-column:1}
+body[data-phone=foldopen] .sc2-body .sc-hero{flex-direction:column;align-items:flex-start;text-align:left}
+body[data-phone=foldopen] .sc2>.d-bar{margin-left:324px!important;width:auto!important}
+/* Checkout: left = event, ticket, promo; right = payment, summary */
+body[data-phone=foldopen] .co2>.pad>.co-ev{grid-column:1;grid-row:1}
+body[data-phone=foldopen] .co2>.pad>.co-sec:nth-of-type(1){grid-column:1;grid-row:2}
+body[data-phone=foldopen] .co2>.pad>.co-sec:nth-of-type(2){grid-column:1;grid-row:3}
+body[data-phone=foldopen] .co2>.pad>.co-sec:nth-of-type(3){grid-column:2;grid-row:1/span 2}
+body[data-phone=foldopen] .co2>.pad>.co-sec:nth-of-type(4){grid-column:2;grid-row:3}
+body[data-phone=foldopen] .co2>.pad>.co-note{grid-column:2}
+body[data-phone=foldopen] .co2>.d-bar{margin-left:324px!important;width:auto!important}
+/* Receipt: left = status hero + amount (sticky), right = details */
+body[data-phone=foldopen] .rc3>.pad>.rc3-hero,body[data-phone=foldopen] .rc3>.pad>.rc3-amt{grid-column:1}
+body[data-phone=foldopen] .rc3>.pad>.rc3-hero{grid-row:1;padding-top:0}
+body[data-phone=foldopen] .rc3>.pad>.rc3-amt{grid-row:2;flex-direction:column;align-items:flex-start}
+body[data-phone=foldopen] .rc3>.pad>.rc3-amt .rc3-card{position:absolute;right:10px;top:12px;transform:scale(.7);transform-origin:top right}
+body[data-phone=foldopen] .rc3>.pad>.rc3-box,body[data-phone=foldopen] .rc3>.pad>.rc3-acts1,body[data-phone=foldopen] .rc3>.pad>.rc3-help,body[data-phone=foldopen] .rc3>.pad>.rc3-steps{grid-column:2}
+body[data-phone=foldopen] .rc3>.pad>.rc3-steps{grid-row:1;margin:0!important}
+body[data-phone=foldopen] .rc3-amb{width:320px}
+/* Search: left = recent + categories, right = trending */
+body[data-phone=foldopen] .sx-disc>.sx-sec:nth-child(1){grid-column:1;grid-row:1}
+body[data-phone=foldopen] .sx-disc>.sx-sec:nth-child(3){grid-column:1;grid-row:2}
+body[data-phone=foldopen] .sx-disc>.sx-sec:nth-child(2){grid-column:2;grid-row:1/span 2}
+body[data-phone=foldopen] .sx-disc{padding:0 16px}
+/* Notifications: left = filter rail, right = feed */
+body[data-phone=foldopen] .screen.nt2{display:grid!important;grid-template-columns:200px minmax(0,1fr);column-gap:16px;align-content:start;padding:0 16px}
+body[data-phone=foldopen] .screen.nt2>*{grid-column:1/-1}
+body[data-phone=foldopen] .screen.nt2>.nt2-chips{grid-column:1;grid-row:3/span 6;flex-direction:column!important;align-items:stretch!important;overflow:visible!important;padding:0!important;gap:6px!important;position:sticky;top:calc(var(--st) + 62px);align-self:start}
+body[data-phone=foldopen] .screen.nt2>.nt2-chips>*{justify-content:space-between!important;height:42px!important;border-radius:14px!important;padding:0 14px!important;width:100%!important;box-sizing:border-box}
+body[data-phone=foldopen] .screen.nt2>.nt2-sec{grid-column:2;margin-top:0!important;padding:0!important}
+body[data-phone=foldopen] .screen.nt2>.nt2-sec .nt2-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+body[data-phone=foldopen] .screen.nt2>.nt2-sec .nt2-list>*{margin:0!important}
+
+body[data-phone=foldopen] .screen.nt2>.nt2-chips{grid-row:2/span 4!important}
+body[data-phone=foldopen] .screen.nt2>.nt2-sec{grid-row:auto}
+body[data-phone=foldopen] .screen.nt2>.nt2-sec .nt2-list{display:flex!important;flex-direction:column;gap:10px}
+body[data-phone=foldopen] .screen.sx>.sx-bar,body[data-phone=foldopen] .screen.sx>.sx-disc{width:auto!important;max-width:none!important;margin-left:16px!important;margin-right:16px!important;padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .sx-disc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+body[data-phone=foldopen] .co2>.pad{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+body[data-phone=foldopen] .co2>.d-bar{margin-left:calc(50% + 2px)!important}
+
+body[data-phone=foldopen] .screen.co2,body[data-phone=foldopen] .screen.sx{padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .screen.nt2{padding-left:16px!important;padding-right:16px!important}
+
+body[data-phone=foldopen] .screen.nt2>.top-sp{margin-bottom:14px}
+body[data-phone=foldopen] .screen.nt2>.nt2-chips{top:calc(var(--st) + 70px)}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
