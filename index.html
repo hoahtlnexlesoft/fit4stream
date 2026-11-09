@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109020612"</script>
+<script>window.__BUILD__="20261109023952"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7593,7 +7593,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     return h('div', { className: 'dh2' },
       h('div', { className: 'dh2-main' },
         h(DuoHero, { heroes: p.heroes, nav: p.nav, reg: p.reg }),
-        h('section', { className: 'dh2-sec' }, head('Trending now', 'View all'), grid(trending)),
+        h('section', { className: 'dh2-sec' }, head('Trending', 'View all'), grid(trending)),
         h('section', { className: 'dh2-sec' }, head('Browse by Category', 'View all', function () { p.nav.push('categories'); }), h(CatTiles, { onPick: p.onCat })),
         cats.map(function (c) {
           var list = all.filter(function (e) { return e.cat === c[0]; }).slice(0, 6);
@@ -7604,13 +7604,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         p.nav.authed ? h('div', { className: 'dh2-box' }, head('Your tickets', 'All', function () { p.nav.push('myevents'); }),
           h(Tap, { className: 'dh2-tk', go: function () { p.nav.push('player'); } }, h('span', { className: 'th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }), h('div', null, h('b', null, EV.xmas.title), h('span', { className: 'lv' }, h('i'), 'Live now')), h('em', { className: 'go' }, h(F.Icon, { name: 'play', size: 13 }))),
           h(Tap, { className: 'dh2-tk', go: function () { p.nav.push('player:waiting'); } }, h('span', { className: 'th', style: { backgroundImage: 'url(' + EV.seo.img + ')' } }), h('div', null, h('b', null, EV.seo.title), h('span', null, 'Starts in 5 min')), h('em', { className: 'go soft' }, h(F.Icon, { name: 'clock', size: 13 })))) : null,
-        h('div', { className: 'dh2-box' }, head('Up next', 'See all', function () { p.nav.tab('upcoming'); }),
-          up.map(function (e) { var d = dt(e);
-            return h(Tap, { key: e.id, className: 'dh2-up', go: function () { p.nav.push('detail:' + e.id); } },
-              h('span', { className: 'dt' }, h('small', null, MONTHS_EN[d.getMonth()].slice(0, 3)), h('b', null, d.getDate())),
-              h('div', null, h('b', null, e.title), h('span', null, e.range.split('–')[0].trim() + ' · ' + e.org)),
-              h('em', { className: e.price === 'Free' ? 'free' : '' }, e.price)); })),
-        h('div', { className: 'dh2-box' }, head('Top channels', 'View all'),
+        h('div', { className: 'dh2-box' }, head('Top Channels', 'View all'),
           CHANNELS.slice(0, 6).map(function (n, i) {
             return h(Tap, { key: n, className: 'dh2-ch', go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } },
               h('span', { className: cx('av', i === 0 && 'live') }, h(F.Avatar, { src: av(n), name: n, initials: ini(n), size: 36 })),
