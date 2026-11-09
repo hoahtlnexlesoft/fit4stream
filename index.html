@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109063658"</script>
+<script>window.__BUILD__="20261109064453"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5503,6 +5503,11 @@ body.devmode .sk-cf2{--cw:min(346px,calc(100vw - 84px))}
 .sk-cf2>.sk-cfc{transform:translateX(-50%)}
 .sk-cf2>.sk-cfl{transform:translateX(calc(-50% - var(--cw) * .88)) scale(.7);transform-origin:center;opacity:.6}
 .sk-cf2>.sk-cfr{transform:translateX(calc(-50% + var(--cw) * .88)) scale(.7);transform-origin:center;opacity:.6}
+
+/* Duo open: Home hero = same coverflow carousel as other devices */
+body[data-phone=foldopen] .dh2-cf{margin:0 -16px}
+body[data-phone=foldopen] .dh2-cf .cf2{display:block!important}
+body[data-phone=foldopen] .dh2-cf .cf2 + .dots{display:flex!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6929,7 +6934,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function HomeSkeleton() {
     var duo = useDuo();
     if (duo) return h('div', { className: 'skw sk-duo' },
-      h('div', { className: 'sk-duo-main' }, SK('100%', 270, 22), SKSec(90), h('div', { className: 'sk-grid3' }, [0, 1, 2, 3, 4, 5].map(function (i) { return SKEvCard(i, 'auto'); }))),
+      h('div', { className: 'sk-duo-main' }, h('div', { className: 'sk-cf2' }, h('div', { className: 'sk sk-cfl' }), h('div', { className: 'sk sk-cfc' }), h('div', { className: 'sk sk-cfr' })), SKSec(90), h('div', { className: 'sk-grid3' }, [0, 1, 2, 3, 4, 5].map(function (i) { return SKEvCard(i, 'auto'); }))),
       h('div', { className: 'sk-duo-side' },
         h('div', { className: 'sk-box' }, SKSec(110, false), [0, 1, 2, 3].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(36, 36, 18), h('div', { style: { flex: 1 } }, SK('60%', 12), SK('40%', 10, 5, { marginTop: 6 }))); }))));
     return h('div', { className: 'skw sk-home' },
@@ -7642,7 +7647,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function head(t, a, fn) { return h('div', { className: 'dh2-h' }, h('b', null, t), a ? h(Tap, { className: 'f4-link', go: fn || function () {} }, a, h(F.Icon, { name: 'chevronRight', size: 15 })) : null); }
     return h('div', { className: 'dh2' },
       h('div', { className: 'dh2-main' },
-        h(DuoHero, { heroes: p.heroes, nav: p.nav, reg: p.reg }),
+        h('div', { className: 'dh2-cf' }, h(CoverFlow, { heroes: p.heroes, nav: p.nav, reg: p.reg })),
         h('section', { className: 'dh2-sec' }, head('Trending', 'View all'), grid(trending)),
         h('section', { className: 'dh2-sec' }, head('Browse by Category', 'View all', function () { p.nav.push('categories'); }), h(CatTiles, { onPick: p.onCat })),
         cats.map(function (c) {
