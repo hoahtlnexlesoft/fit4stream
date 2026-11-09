@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "Fit4Stream",
+    "slug": "fit4stream",
+    "scheme": "fit4stream",
+    "version": "1.0.0",
+    "orientation": "default",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/images/icon.png",
+    "backgroundColor": "#0F0E14",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0F0E14",
+      "resizeMode": "contain",
+      "image": "./assets/images/icon.png"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.fit4stream.app"
+    },
+    "android": {
+      "package": "com.fit4stream.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#0F0E14"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
