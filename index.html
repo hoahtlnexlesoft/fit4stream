@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109023952"</script>
+<script>window.__BUILD__="20261109024117"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5465,6 +5465,14 @@ body[data-phone=foldopen] .screenhost>.app{zoom:.86}
 body[data-phone=foldopen] .screen.sc2,body[data-phone=foldopen] .screen.rc3,body[data-phone=foldopen] .screen.co2,body[data-phone=foldopen] .screen.sx{padding-left:0!important;padding-right:0!important}
 body[data-phone=foldopen] .sc2-body,body[data-phone=foldopen] .rc3>.pad{grid-template-columns:340px minmax(0,1fr)!important}
 body[data-phone=foldopen] .sc2>.d-bar{margin-left:374px!important}
+
+body[data-phone=foldopen] .sc2-body>.sc-card:not(.sc-list){grid-row:1!important}
+body[data-phone=foldopen] .sc2-body>.sc-hero{padding:22px 18px!important;gap:14px!important;align-items:flex-start!important}
+body[data-phone=foldopen] .sc2-body>.sc-hero .sc-emb{transform:scale(1.25);transform-origin:left top;margin-bottom:18px}
+body[data-phone=foldopen] .sc2-body>.sc-hero b{font-size:18px!important}
+
+body[data-phone=foldopen] .sc2-body>.sc-hero{display:flex!important;flex-direction:column!important}
+body[data-phone=foldopen] .sc2-body>.sc-hero .sc-emb{transform:none!important;margin:0 0 4px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -7323,8 +7331,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h('div', { className: 'pad sc2-body' },
         h('div', { className: 'sc-hero' },
           h('span', { className: 'sc-emb' }, h(F.Emblem, { name: 'shield', width: 84 })),
-          h('div', null, h('b', null, twofa ? 'Your account is well protected' : 'Good \u2014 one step to go'), h('span', null, twofa ? 'Password + 2-step verification are on' : 'Turn on 2-step verification for extra safety')),
-          h('div', { className: 'sc-meter' }, h('i', { style: { width: twofa ? '100%' : '70%' } }))),
+          h('div', null, h('b', null, 'Keep your account secure'), h('span', null, 'Use a strong password you don\u2019t use anywhere else'))),
         h('section', { className: 'sc-card' },
           h('h3', null, 'Change password', h('small', null, 'Last changed 3 months ago')),
           pf('Current password', 'password', function () {}, ''),
@@ -7332,16 +7339,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           pw ? h('div', { className: 'sc-str' }, h('div', { className: 'sc-bars' }, [1, 2, 3, 4].map(function (i) { return h('i', { key: i, style: { background: i <= Math.max(1, score) ? lv[1] : 'rgba(255,255,255,.1)' } }); })), h('span', { style: { color: lv[1] } }, lv[0])) : null,
           pf('Confirm new password', pw2, setPw2, 'Repeat new password'),
           h('div', { className: 'sc-rules' }, rules.map(function (r) { return h('span', { key: r[0], className: cx('sc-rule', r[1] && 'ok') }, h('i', null, r[1] ? h(F.Icon, { name: 'check', size: 11, stroke: 3 }) : null), r[0]); }))),
-        h('section', { className: 'sc-card sc-list' },
-          h('h3', null, 'Sign-in & alerts'),
-          h('div', { className: 'sc-row' }, h('span', { className: 'sc-ic', style: { '--c': '#39C87C' } }, h(F.Icon, { name: 'lock', size: 18 })), h('div', null, h('b', null, '2-step verification'), h('span', null, 'Code by SMS or authenticator app')), sw(twofa, set2, '2-step verification')),
-          h('div', { className: 'sc-row' }, h('span', { className: 'sc-ic', style: { '--c': '#F4A425' } }, h(F.Icon, { name: 'bell', size: 18 })), h('div', null, h('b', null, 'New sign-in alerts'), h('span', null, 'Email me when a new device signs in')), sw(alerts, setAlerts, 'Sign-in alerts'))),
-        h('section', { className: 'sc-card sc-list' },
-          h('h3', null, 'Where you\u2019re signed in'),
-          [['iPhone 15 Pro', 'Da Nang \u00b7 This device', true], ['MacBook Air \u00b7 Chrome', 'Ho Chi Minh City \u00b7 2 days ago'], ['iPad \u00b7 Safari', 'Hanoi \u00b7 Oct 20']].map(function (d) {
-            return h('div', { key: d[0], className: 'sc-row' }, h('span', { className: 'sc-ic', style: { '--c': '#A57AD8' } }, h(F.Icon, { name: 'monitor', size: 18 })), h('div', null, h('b', null, d[0]), h('span', null, d[1])), d[2] ? h('span', { className: 'sc-this' }, 'Active') : h(Tap, { className: 'sc-out', onClick: function () { p.nav.toast('Signed out of ' + d[0]); } }, 'Sign out'));
-          }),
-          h(Tap, { className: 'sc-outall', onClick: function () { p.nav.toast('Signed out of all other devices'); } }, h(F.Icon, { name: 'logOut', size: 16 }), 'Sign out of all other devices'))),
+        null),
       h('div', { style: { height: 24 } }),
       h('div', { className: 'd-bar sc-bar' }, h(Tap, { className: cx('d-cta grad', !ok && 'sc-dis'), style: { flex: 1 }, go: function () { if (!ok) return p.nav.toast('Check the password requirements'); p.nav.toast('Password updated'); p.nav.back(); } }, 'Update password')));
   }
