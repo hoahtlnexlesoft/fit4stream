@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109030728"</script>
+<script>window.__BUILD__="20261109063658"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6931,12 +6931,10 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (duo) return h('div', { className: 'skw sk-duo' },
       h('div', { className: 'sk-duo-main' }, SK('100%', 270, 22), SKSec(90), h('div', { className: 'sk-grid3' }, [0, 1, 2, 3, 4, 5].map(function (i) { return SKEvCard(i, 'auto'); }))),
       h('div', { className: 'sk-duo-side' },
-        h('div', { className: 'sk-box' }, SKSec(100, false), [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(44, 44, 12), h('div', { style: { flex: 1 } }, SK('80%', 12), SK('50%', 10, 5, { marginTop: 6 })), SK(30, 30, 15)); })),
         h('div', { className: 'sk-box' }, SKSec(110, false), [0, 1, 2, 3].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(36, 36, 18), h('div', { style: { flex: 1 } }, SK('60%', 12), SK('40%', 10, 5, { marginTop: 6 }))); }))));
     return h('div', { className: 'skw sk-home' },
       h('div', { className: 'sk-cf2' }, h('div', { className: 'sk sk-cfl' }), h('div', { className: 'sk sk-cfc' }), h('div', { className: 'sk sk-cfr' })),
       h('div', { className: 'dots' }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (i) { return h('span', { key: i, className: i === 1 ? 'on' : '' }); })),
-      h('section', { className: 'sec pad' }, SKSec(110), h('div', { className: 'col gap10' }, [0, 1].map(SKTicket))),
       h('section', { className: 'sec' }, h('div', { className: 'pad' }, SKSec(130)),
         h('div', { className: 'stories' }, [0, 1, 2, 3, 4, 5].map(function (i) { return h('div', { key: i, className: 'story' }, SK(70, 70, 35), SK(48, 10, 5, { margin: '9px auto 0' })); }))),
       h('section', { className: 'sec' }, h('div', { className: 'pad' }, SKSec(90)), h('div', { className: 'rail' }, [0, 1].map(function (i) { return SKEvCard(i); }))));
@@ -7653,9 +7651,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         }),
         h('div', { style: { height: 28 } })),
       h('aside', { className: 'dh2-side' },
-        p.nav.authed ? h('div', { className: 'dh2-box' }, head('Your tickets', 'All', function () { p.nav.push('myevents'); }),
-          h(Tap, { className: 'dh2-tk', go: function () { p.nav.push('player'); } }, h('span', { className: 'th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }), h('div', null, h('b', null, EV.xmas.title), h('span', { className: 'lv' }, h('i'), 'Live now')), h('em', { className: 'go' }, h(F.Icon, { name: 'play', size: 13 }))),
-          h(Tap, { className: 'dh2-tk', go: function () { p.nav.push('player:waiting'); } }, h('span', { className: 'th', style: { backgroundImage: 'url(' + EV.seo.img + ')' } }), h('div', null, h('b', null, EV.seo.title), h('span', null, 'Starts in 5 min')), h('em', { className: 'go soft' }, h(F.Icon, { name: 'clock', size: 13 })))) : null,
         h('div', { className: 'dh2-box' }, head('Top Channels', 'View all'),
           CHANNELS.slice(0, 6).map(function (n, i) {
             return h(Tap, { key: n, className: 'dh2-ch', go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } },
@@ -7715,15 +7710,6 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : duo ? h('div', { className: 'fade-in' }, h(DuoHome, { heroes: heroes, nav: p.nav, reg: reg, cat: cat, onCat: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })) : h('div', { className: 'fade-in' },
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           h(DuoHero, { heroes: heroes, nav: p.nav, reg: reg }),
-          p.nav.authed ? h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Your tickets', action: 'My events', onAction: function () { p.nav.push('myevents'); } })),
-            h('div', { className: 'pad col gap10 yt-list' }, h(Tap, { className: 'yt-card', go: function () { p.nav.push('player'); } },
-              h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.xmas.img + ')' } }, h('i', { className: 'yt-live' }, h('em', null), 'LIVE')),
-              h('div', { className: 'yt-body' }, h('b', null, 'Danang Christmas Market 2026'), h('span', null, 'Started 12 min ago \u00b7 by thao15 nguyen15')),
-              h('span', { className: 'yt-go' }, h(F.Icon, { name: 'play', size: 14 }), 'Join')),
-              h(Tap, { className: 'yt-card yt-soon', go: function () { p.nav.push('player:waiting'); } },
-                h('span', { className: 'yt-th', style: { backgroundImage: 'url(' + EV.seo.img + ')' } }, h('i', { className: 'yt-live yt-sn' }, '5 MIN')),
-                h('div', { className: 'yt-body' }, h('b', null, EV.seo.title), h('span', null, 'Starts in 5 min \u00b7 doors open now')),
-                h('span', { className: 'yt-go yt-go2' }, h(F.Icon, { name: 'clock', size: 14 }), 'Enter')))) : null,
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
             h('div', { className: 'stories' }, CHANNELS.map(function (n, i) { return h(Story, { key: n, seed: i, name: n, initials: ini(n), src: av(n), live: i === 0, go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } }); }))),
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.status !== 'ended'; }).slice(0, 8).map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
