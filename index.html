@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109064453"</script>
+<script>window.__BUILD__="20261109070154"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5505,7 +5505,9 @@ body.devmode .sk-cf2{--cw:min(346px,calc(100vw - 84px))}
 .sk-cf2>.sk-cfr{transform:translateX(calc(-50% + var(--cw) * .88)) scale(.7);transform-origin:center;opacity:.6}
 
 /* Duo open: Home hero = same coverflow carousel as other devices */
-body[data-phone=foldopen] .dh2-cf{margin:0 -16px}
+body[data-phone=foldopen] .dh2-cf{margin:0 0 0 -16px}
+body[data-phone=foldopen] .dh2{column-gap:28px!important}
+body[data-phone=foldopen] .dh2-cf .cf2{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
 body[data-phone=foldopen] .dh2-cf .cf2{display:block!important}
 body[data-phone=foldopen] .dh2-cf .cf2 + .dots{display:flex!important}
 </style>
