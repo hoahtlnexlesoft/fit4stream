@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109024445"</script>
+<script>window.__BUILD__="20261109025102"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5473,6 +5473,28 @@ body[data-phone=foldopen] .sc2-body>.sc-hero b{font-size:18px!important}
 
 body[data-phone=foldopen] .sc2-body>.sc-hero{display:flex!important;flex-direction:column!important}
 body[data-phone=foldopen] .sc2-body>.sc-hero .sc-emb{transform:none!important;margin:0 0 4px!important}
+
+/* skeletons v2 */
+.skw .sk-card{flex:none;border-radius:16px;overflow:hidden;background:rgba(255,255,255,.035)}
+.skw .sk-card>.sk:first-child{border-radius:0!important}
+.skw .sk-sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.skw .sk-row{display:flex;align-items:center;gap:10px}
+.skw .sk-box{padding:14px;border-radius:20px;background:rgba(255,255,255,.035)}
+.sk-cf{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;height:285px}
+.sk-home .sec{margin-top:24px}
+.sk-home .rail{display:flex;gap:12px;overflow:hidden;padding:0 16px}
+.sk-home .stories{display:flex;gap:12px;overflow:hidden;padding:0 16px}
+.sk-home .story{flex:none;width:72px;display:flex;flex-direction:column;align-items:center}
+.sk-duo{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;padding:4px 16px 0}
+.sk-duo-main{display:flex;flex-direction:column;gap:14px}
+.sk-duo-side{display:flex;flex-direction:column;gap:12px}
+.sk-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+
+body .sk-duo,body .sk-dduo{max-width:none!important;width:100%!important;margin:0!important}
+.sk-duo .sk{max-width:none!important}
+.sk-duo-main>.sk{width:100%!important}
+.sk-dduo{position:absolute!important;inset:0;display:grid!important;grid-template-columns:42% minmax(0,1fr);align-items:start}
+.sk-dduo>.sk:first-child{height:100%!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
@@ -6893,36 +6915,60 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   function SK(w, hgt, r, st) { return h('div', { className: 'sk', style: Object.assign({ width: w, height: hgt, borderRadius: r == null ? 8 : r }, st || {}) }); }
   function SKHead(title) { return h('div', { className: 'tab-head' }, h('h1', null, title), h('span', { className: 'sk', style: { width: 40, height: 40, borderRadius: 20 } })); }
+  function SKSec(w, a) { return h('div', { className: 'sk-sh' }, SK(w, 18, 8), a === false ? null : SK(64, 14, 7)); }
+  function SKEvCard(k, w) { return h('div', { key: k, className: 'sk-card', style: { width: w || 216 } }, SK('100%', 122, 0), h('div', { style: { padding: '10px 12px 12px' } }, SK('82%', 14, 7), SK('55%', 11, 6, { marginTop: 8 }))); }
+  function SKTicket(k) { return h('div', { key: k, className: 'sk-row sk-box', style: { padding: 8, gap: 12 } }, SK(92, 58, 14), h('div', { style: { flex: 1 } }, SK('80%', 14, 7), SK('55%', 11, 6, { marginTop: 8 })), SK(64, 34, 17)); }
   function HomeSkeleton() {
-    function head(w) { return h('div', { className: 'pad' }, h('div', { className: 'f4-section-h' }, SK(w, 20, 8), SK(60, 16, 8))); }
+    var duo = useDuo();
+    if (duo) return h('div', { className: 'skw sk-duo' },
+      h('div', { className: 'sk-duo-main' }, SK('100%', 270, 22), SKSec(90), h('div', { className: 'sk-grid3' }, [0, 1, 2, 3, 4, 5].map(function (i) { return SKEvCard(i, 'auto'); }))),
+      h('div', { className: 'sk-duo-side' },
+        h('div', { className: 'sk-box' }, SKSec(100, false), [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(44, 44, 12), h('div', { style: { flex: 1 } }, SK('80%', 12), SK('50%', 10, 5, { marginTop: 6 })), SK(30, 30, 15)); })),
+        h('div', { className: 'sk-box' }, SKSec(110, false), [0, 1, 2, 3].map(function (i) { return h('div', { key: i, className: 'sk-row', style: { marginTop: 12 } }, SK(36, 36, 18), h('div', { style: { flex: 1 } }, SK('60%', 12), SK('40%', 10, 5, { marginTop: 6 }))); }))));
     return h('div', { className: 'skw sk-home' },
-      h('div', { className: 'coverflow sk-cf2' }, SK(40, 344, '0 22px 22px 0', { alignSelf: 'center' }), SK(320, 410, 26), SK(40, 344, '22px 0 0 22px', { alignSelf: 'center' })),
-      h('div', { className: 'dots' }, h('span', null), h('span', { className: 'on' }), h('span', null)),
-      h('section', { className: 'sec' }, head(130),
-        h('div', { className: 'stories' }, [0, 1, 2, 3, 4, 5].map(function (i) { return h('div', { key: i, className: 'story' }, h('span', { className: 'story-ring' }, SK(64, 64, 32)), SK(48, 11, 6, { margin: '8px auto 0' })); }))),
-      h('section', { className: 'sec' }, head(96),
-        h('div', { className: 'rail' }, [0, 1].map(function (i) { return SK(236, 300, 24, { key: i }); }))),
-      h('section', { className: 'sec' }, head(170),
-        h('div', { className: 'ct', style: { margin: 0, padding: '0 16px' } }, [0, 1, 2].map(function (i) { return SK('calc((100% - 52px) / 3)', 140, 18, { key: i, minWidth: 112 }); }))));
+      h('div', { className: 'sk-cf' }, SK(30, 244, '0 22px 22px 0'), SK(346, 285, 22), SK(30, 244, '22px 0 0 22px')),
+      h('div', { className: 'dots' }, h('span', null), h('span', { className: 'on' }), h('span', null), h('span', null), h('span', null)),
+      h('section', { className: 'sec pad' }, SKSec(110), h('div', { className: 'col gap10' }, [0, 1].map(SKTicket))),
+      h('section', { className: 'sec' }, h('div', { className: 'pad' }, SKSec(130)),
+        h('div', { className: 'stories' }, [0, 1, 2, 3, 4, 5].map(function (i) { return h('div', { key: i, className: 'story' }, SK(70, 70, 35), SK(48, 10, 5, { margin: '9px auto 0' })); }))),
+      h('section', { className: 'sec' }, h('div', { className: 'pad' }, SKSec(90)), h('div', { className: 'rail' }, [0, 1].map(function (i) { return SKEvCard(i); }))));
   }
   function UpcomingSkeleton() {
-    return h('div', { className: 'skw pad' }, SK(78, 12, 6, { marginTop: 6 }), SK('100%', 400, 28, { marginTop: 12 }),
-      h('div', { className: 'sk-sh', style: { marginTop: 26 } }, SK(70, 18), SK(80, 12)),
-      [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-row' }, SK(44, 30), SK(64, 64, 14), h('div', { style: { flex: 1 } }, SK('85%', 14), SK('45%', 11, 6, { marginTop: 8 })), SK(38, 38, 19)); }));
+    return h('div', { className: 'skw pad' }, SK(70, 11, 6, { marginTop: 4 }),
+      h('div', { className: 'sk-card', style: { marginTop: 10, borderRadius: 22 } }, SK('100%', 230, 0),
+        h('div', { style: { padding: '14px 14px 16px' } }, SK('85%', 16, 8), SK('40%', 12, 6, { marginTop: 8 }),
+          h('div', { style: { display: 'flex', gap: 10, marginTop: 16 } }, SK(54, 52, 12), SK(54, 52, 12), SK(54, 52, 12)),
+          h('div', { style: { display: 'flex', gap: 10, marginTop: 16 } }, SK('50%', 44, 22), SK('50%', 44, 22)))),
+      h('div', { style: { marginTop: 22 } }, SKSec(70)),
+      [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-row sk-box', style: { padding: 10, gap: 12, marginTop: 10 } }, SK(92, 64, 14), h('div', { style: { flex: 1 } }, SK('85%', 13), SK('50%', 10, 5, { marginTop: 8 })), SK(76, 34, 17)); }));
   }
   function GuideSkeleton() {
-    return h('div', { className: 'skw pad' }, h('div', { style: { display: 'flex', gap: 8 } }, [0, 1, 2, 3, 4, 5].map(function (i) { return SK(52, 64, 16, { flex: 'none', key: i }); })),
-      SK('100%', 46, 23, { marginTop: 14 }),
-      [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-box' }, h('div', { style: { display: 'flex', gap: 10, alignItems: 'center' } }, SK(36, 36, 18), SK(120, 14)), SK('100%', 70, 18, { marginTop: 12 }), i ? null : SK('100%', 56, 18, { marginTop: 8 })); }));
+    return h('div', { className: 'skw' },
+      h('div', { className: 'pad', style: { display: 'flex', alignItems: 'center', gap: 10 } }, SK(112, 36, 18), h('span', { style: { flex: 1 } }), SK(36, 36, 18), SK(108, 36, 18)),
+      h('div', { className: 'pad', style: { display: 'flex', gap: 8, marginTop: 14, overflow: 'hidden' } }, [0, 1, 2, 3, 4, 5, 6, 7].map(function (i) { return SK(48, 64, 16, { flex: 'none', key: i }); })),
+      h('div', { className: 'pad', style: { marginTop: 18 } }, SKSec(120),
+        [0, 1].map(function (i) { return h('div', { key: i, className: 'sk-box', style: { marginTop: 12 } }, h('div', { className: 'sk-row' }, SK(32, 32, 16), SK(120, 13), h('span', { style: { flex: 1 } }), SK(50, 11)),
+          [0, 1].map(function (j) { return h('div', { key: j, className: 'sk-row', style: { marginTop: 14 } }, SK(40, 26, 6), h('div', { style: { flex: 1 } }, SK('80%', 13), SK('50%', 10, 5, { marginTop: 7 }))); })); })));
   }
   function OnAirSkeleton() {
-    return h('div', { className: 'skw pad' }, h('div', { className: 'sk-box' }, h('div', { style: { display: 'flex', gap: 10, alignItems: 'center' } }, SK(40, 40, 20), h('div', null, SK(120, 13), SK(80, 10, 5, { marginTop: 6 }))), SK('100%', 300, 20, { marginTop: 12 }), SK('70%', 16, 8, { marginTop: 12 }), SK('45%', 12, 6, { marginTop: 8 })),
-      h('div', { className: 'sk-sh', style: { marginTop: 22 } }, SK(180, 18), SK(56, 14)), SK('100%', 120, 20));
+    return h('div', { className: 'skw pad' },
+      h('div', { className: 'sk-box' }, h('div', { className: 'sk-row' }, SK(40, 40, 20), h('div', { style: { flex: 1 } }, SK(130, 13), SK(90, 10, 5, { marginTop: 6 })), SK(74, 34, 17)),
+        SK('100%', 230, 18, { marginTop: 12 }), h('div', { className: 'sk-row', style: { marginTop: 14 } }, SK(40, 14), SK(80, 14), SK(56, 14), h('span', { style: { flex: 1 } }), SK(80, 34, 17))),
+      h('div', { style: { marginTop: 22 } }, SKSec(190, false)), SK('100%', 200, 20, { marginTop: 12 }));
   }
   function DetailSkeleton() {
-    return h('div', { className: 'skw' }, SK('100%', 'calc(300px + var(--st))', 0, { marginTop: 'calc(-1 * var(--st))' }), h('div', { className: 'pad', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: 4 } },
-      SK('80%', 24), SK('55%', 24), h('div', { style: { display: 'flex', gap: 8, marginTop: 6 } }, SK(90, 30, 15), SK(110, 30, 15)), SK('70%', 12, 6, { marginTop: 6 }), SK('100%', 56, 28, { marginTop: 12 }),
-      h('div', { style: { display: 'flex', gap: 34, marginTop: 14 } }, SK(48, 48, 24), SK(48, 48, 24), SK(48, 48, 24)), SK('100%', 12, 6, { marginTop: 18 }), SK('92%', 12), SK('60%', 12)));
+    var duo = useDuo();
+    if (duo) return h('div', { className: 'skw sk-dduo' }, SK('100%', '100%', 0),
+      h('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: 'calc(var(--st) + 14px) 16px 0' } },
+        SK('86%', 22), SK('60%', 13, 6, { marginTop: 4 }), SK('100%', 58, 16, { marginTop: 10 }),
+        h('div', { style: { display: 'flex', gap: 10, width: '100%', marginTop: 6 } }, SK('100%', 48, 24, { flex: 1 }), SK(48, 48, 24, { flex: 'none' }), SK(48, 48, 24, { flex: 'none' })),
+        SK('100%', 12, 6, { marginTop: 14 }), SK('94%', 12), SK('60%', 12), SK('100%', 70, 18, { marginTop: 16 })));
+    return h('div', { className: 'skw' }, SK('100%', 300, 0),
+      h('div', { className: 'pad', style: { display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, marginTop: 14 } },
+        SK('82%', 24), SK('56%', 24), SK('68%', 13, 6, { marginTop: 4 }),
+        SK('100%', 62, 18, { marginTop: 10 }),
+        h('div', { style: { display: 'flex', gap: 10, width: '100%', marginTop: 8 } }, SK('100%', 56, 28, { flex: 1 }), SK(56, 56, 28, { flex: 'none' }), SK(56, 56, 28, { flex: 'none' })),
+        SK('100%', 12, 6, { marginTop: 16 }), SK('94%', 12), SK('62%', 12)));
   }
   function TickLoader(p) {
     var ps = useState(0), pc = ps[0], setPc = ps[1];
@@ -7916,7 +7962,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
   function Search(p) {
     var q = useState(''), query = q[0], setQ = q[1];
     var t = useState({ events: 1, channels: 2, categories: 3 }[p.param] || 0), tab = t[0], setTab = t[1];
-    var rc = useState(function () { try { var v = JSON.parse(localStorage.getItem('f4-recent') || 'null'); if (v) return v; } catch (e) {} return ['christmas market', 'Marc John', 'acoustic']; }), recent = rc[0], setRecent = rc[1];
+    var rc = useState(function () { try { var v = JSON.parse(localStorage.getItem('f4-recent') || 'null'); if (v && v.length) return v; } catch (e) {} return ['christmas market', 'Marc John', 'acoustic']; }), recent = rc[0], setRecent = rc[1];
     var inRef = useRef(null);
     function saveRecent(list) { setRecent(list); try { localStorage.setItem('f4-recent', JSON.stringify(list)); } catch (e) {} }
     function commit(v) { v = (v || query).trim(); if (!v) return; saveRecent([v].concat(recent.filter(function (x) { return x.toLowerCase() !== v.toLowerCase(); })).slice(0, 6)); }
