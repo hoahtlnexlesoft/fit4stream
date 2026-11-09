@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109024344"</script>
+<script>window.__BUILD__="20261109024445"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7585,7 +7585,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function dt(e) { var x = e.date.match(/^(\w+) (\d+), (\d+)/); return x ? new Date(+x[3], MONTHS_EN.indexOf(x[1]), +x[2]) : new Date(0); }
     var up = all.filter(function (e) { return e.status === 'upcoming'; }).sort(function (a, b) { return (dt(a) - dt(b)) || (a.range < b.range ? -1 : 1); }).slice(0, 5);
     var trending = all.filter(function (e) { return e.status !== 'ended'; }).slice(0, 6);
-    var cats = p.cat === 0 ? [] : [CATS[p.cat - 1]];
+    var cats = p.cat === 0 ? CATS.filter(function (c) { return c[0] === 'Broadcast Events'; }) : [CATS[p.cat - 1]];
     function grid(list) { return h('div', { className: 'dh2-grid' }, list.map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); })); }
     function head(t, a, fn) { return h('div', { className: 'dh2-h' }, h('b', null, t), a ? h(Tap, { className: 'f4-link', go: fn || function () {} }, a, h(F.Icon, { name: 'chevronRight', size: 15 })) : null); }
     return h('div', { className: 'dh2' },
@@ -7675,7 +7675,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h(Sec, { title: 'Trending', action: 'View all' }, h(Rail, null, Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.status !== 'ended'; }).slice(0, 8).map(function (e) { return h(EventTile, { key: e.id, e: e, nav: p.nav }); }))),
           h('section', { className: 'sec pad' }, h(SH, { title: 'Browse by Category', action: 'View all' }),
             h(CatTiles, { onPick: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })),
-          (cat === 0 ? [] : [CATS[cat - 1]]).map(function (c) {
+          (cat === 0 ? CATS.filter(function (c) { return c[0] === 'Broadcast Events'; }) : [CATS[cat - 1]]).map(function (c) {
             var list = Object.keys(EV).map(function (k) { return EV[k]; }).filter(function (e) { return e.cat === c[0]; }).slice(0, 8);
             return h(Sec, { key: c[0], title: c[0], action: list.length ? 'View all' : null },
               list.length ? h(CatBentoEv, { list: list, nav: p.nav }) : h(SecEmpty, { art: 'ticket', title: 'No events in ' + (SHORT[c[0]] || c[0]) + ' yet', action: 'Browse categories', onAction: function () { p.nav.push('categories'); }, body: 'Follow channels to get notified when they go live.' }));
