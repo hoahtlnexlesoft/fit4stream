@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261109101734"</script>
+<script>window.__BUILD__="20261110020656"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -6924,7 +6924,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'lg-row' },
           h('button', { type: 'button', className: cx('lg-rem', rem && 'on'), 'aria-pressed': rem, onClick: function () { tap(6); setRem(!rem); } }, h('i', null), 'Remember me'),
           h(Tap, { className: 'inline-link', go: function () { p.nav.push('forgot'); } }, 'Forgot password?')),
-        h('button', { type: 'submit', className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block lg-cta', busy && 'is-loading') }, busy ? h('span', { className: 'spinner' }) : 'Sign in')),
+        h('button', { type: 'submit', className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block lg-cta', busy && 'is-loading') }, busy ? h('span', { className: 'spinner' }) : 'Sign in'),
+        h('div', { className: 'lg-or' }, h('span', null, 'or continue with')),
+        h('div', { className: 'lg-social' },
+          h('button', { type: 'button', className: 'lg-soc', onClick: submit }, h(AppleA), 'Apple'),
+          h('button', { type: 'button', className: 'lg-soc', onClick: submit }, h(GoogleG), 'Google'))),
       h('p', { className: 'lg-foot' }, 'Don’t have an account? ', h(Tap, { className: 'inline-link', go: function () { p.nav.push('signup'); } }, 'Sign up')));
   }
 
@@ -8038,7 +8042,11 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
           h('div', { className: 'lg-row' },
             h('button', { type: 'button', className: cx('lg-rem', rem && 'on'), 'aria-pressed': rem, onClick: function () { tap(6); setRem(!rem); } }, h('i', null), 'Remember me'),
             h(Tap, { className: 'inline-link', go: function () { p.nav.push('forgot'); } }, 'Forgot password?')),
-          h('button', { type: 'submit', className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block lg-cta', busy && 'is-loading') }, busy ? h('span', { className: 'spinner' }) : 'Sign in')),
+          h('button', { type: 'submit', className: cx('f4-btn f4-btn-primary f4-btn-lg f4-btn-block lg-cta', busy && 'is-loading') }, busy ? h('span', { className: 'spinner' }) : 'Sign in'),
+        h('div', { className: 'lg-or' }, h('span', null, 'or continue with')),
+        h('div', { className: 'lg-social' },
+          h('button', { type: 'button', className: 'lg-soc', onClick: submit }, h(AppleA), 'Apple'),
+          h('button', { type: 'button', className: 'lg-soc', onClick: submit }, h(GoogleG), 'Google'))),
         h('p', { className: 'lg-foot', style: { margin: '18px 0 0' } }, 'Don’t have an account? ', h(Tap, { className: 'inline-link', go: function () { p.nav.push('signup'); } }, 'Sign up'))),
       h('div', { style: { height: 140 } }));
   }
