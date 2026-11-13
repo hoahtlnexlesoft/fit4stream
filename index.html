@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113083545"</script>
+<script>window.__BUILD__="20261113084309"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4096,7 +4096,7 @@ body[data-phone=foldopen] .app:has(.tabbar) .stage{left:96px!important;width:aut
 body[data-phone=foldopen] .app:has(.tabbar) .stage .top-blur{left:0!important;right:0!important;width:auto!important}
 
 /* --- live player: video + info on the left, chat column on the right --- */
-body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state){--cw:320px;--vw:calc(var(--dw) - var(--cw));--vh:calc(var(--vw) * .5625);--vt:calc(var(--st) + 44px + (var(--dh) - var(--st) - 44px - var(--sb) - var(--vh) - 92px) / 2)}
+body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state){--lw:calc(var(--dw) / .86);--lh:calc(var(--dh) / .86);--cw:330px;--vw:calc(var(--lw) - var(--cw));--vh:calc(var(--vw) * .5625);--vt:calc(var(--st) + 52px + (var(--lh) - var(--st) - 52px - var(--sb) - var(--vh) - 92px) / 2)}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-media{right:var(--cw)!important;width:auto!important}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-frame{left:0!important;right:0!important;width:auto!important;top:var(--vt)!important;height:var(--vh)!important;bottom:auto!important}
 body[data-phone=foldopen] .player.fs:not(.is-grid):not(.is-state) .fs-info{top:calc(var(--vt) + var(--vh))!important;right:var(--cw)!important;border-bottom:0!important}
@@ -5562,6 +5562,41 @@ body[data-phone=foldopen] .me2-body>.me2-foot{display:contents!important}
 body[data-phone=foldopen] .me2-body .me2-tags{grid-area:g;margin-top:4px}
 body[data-phone=foldopen] .me2-body .me2-cta{grid-area:cta;align-self:center}
 body[data-phone=foldopen] .me2-meta{margin-top:12px!important;padding-top:10px!important}
+
+/* ===== Open displays (iPhone Duo open, Galaxy Z Fold8 open): regular-width presentation ===== */
+/* sheets become centred form sheets instead of edge-to-edge bottom sheets */
+body[data-phone=foldopen] .sheet-wrap>.sheet{left:0!important;right:0!important;top:0!important;bottom:0!important;margin:auto!important;width:560px!important;max-width:calc(100% - 48px)!important;height:fit-content!important;max-height:calc(100% - 40px)!important;overflow-y:auto!important;border-radius:28px!important;box-sizing:border-box}
+body[data-phone=foldopen] .sheet-wrap>.sheet.ac{width:760px!important}
+/* add card: card preview on the left, form on the right */
+body[data-phone=foldopen] .sheet.ac{display:grid!important;grid-template-columns:300px minmax(0,1fr);column-gap:26px;align-items:start}
+body[data-phone=foldopen] .sheet.ac>*{grid-column:1/-1}
+/* registration success: one centred column */
+body[data-phone=foldopen] .screen.success{display:flex!important;flex-direction:column;align-items:center;justify-content:center}
+body[data-phone=foldopen] .screen.success>*:not(.confetti-box):not(.top-blur){width:520px!important;max-width:calc(100% - 48px);margin-left:auto!important;margin-right:auto!important;box-sizing:border-box}
+body[data-phone=foldopen] .screen.success>.ok-art{width:auto!important}
+body[data-phone=foldopen] .screen.success>div:empty{display:none!important}
+body[data-phone=foldopen] .screen.success>.pad{padding:0!important;margin-top:22px!important}
+/* live ended: centred content column */
+body[data-phone=foldopen] .player .ed{left:0!important;right:0!important;margin:0 auto!important;width:680px!important;max-width:calc(100% - 48px)!important}
+/* organizer: profile card on the left (sticky), about + events on the right */
+body[data-phone=foldopen] .screen.og{display:grid!important;grid-template-columns:330px minmax(0,1fr);grid-auto-rows:min-content;column-gap:28px;align-content:start;padding-bottom:32px!important}
+body[data-phone=foldopen] .screen.og>.og-cover{grid-column:1/-1}
+body[data-phone=foldopen] .screen.og>.og-head{grid-column:1;grid-row:2 / span 30;position:sticky!important;top:60px;align-self:start;width:auto!important;margin:-56px 0 0 24px!important;padding:20px 18px 22px!important;border-radius:24px;background:rgba(255,255,255,.04);box-sizing:border-box}
+body[data-phone=foldopen] .screen.og>.og-head .og-acts{width:100%!important}
+body[data-phone=foldopen] .screen.og>.og-head .og-follow{flex:1!important;width:auto!important}
+body[data-phone=foldopen] .screen.og>section:not(.og-head),body[data-phone=foldopen] .screen.og>div:not(.og-cover):not(.top-sp){grid-column:2;width:auto!important;max-width:none!important;margin-left:0!important;margin-right:24px!important;padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .screen.og .og-bio,body[data-phone=foldopen] .screen.og .og-chips{width:auto!important;max-width:none!important}
+body[data-phone=foldopen] .screen.og>section.og-sec:first-of-type{margin-top:16px!important}
+body[data-phone=foldopen] .screen.og>section:not(.og-head)>*{margin-left:0!important;margin-right:0!important;max-width:none!important;width:auto!important;padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .screen.og .og-sec>*{justify-content:flex-start!important;text-align:left!important}
+body[data-phone=foldopen] .screen.og>section:not(.og-head) .pad{padding-left:0!important;padding-right:0!important}
+body[data-phone=foldopen] .screen.og>section:not(.og-head){display:block!important}
+body[data-phone=foldopen] .screen.og>section:not(.og-head)>*+*{margin-top:12px!important}
+body[data-phone=foldopen] .screen.og .rv-sum{max-width:420px!important}
+/* iPhone Duo player: keep the top-right controls clear of the camera / clock corner */
+html body[data-dev=duo] .player .fs-top,html body[data-dev=foldopen] .player .fs-top{padding-right:76px!important}
+
+
 /* ===== Device frames — same set and rendering as the Poscura viewer ===== */
 .dx-spine,.dx-hinge,.dx-crease,.dx-top,.dx-clock{display:none;position:absolute;pointer-events:none}
 html body[data-dev] #device::after{display:none!important}
