@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113090214"</script>
+<script>window.__BUILD__="20261113090924"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5565,15 +5565,14 @@ body[data-phone=foldopen] .me2-meta{margin-top:12px!important;padding-top:10px!i
 
 /* ===== Open displays (iPhone Duo open, Galaxy Z Fold8 open): regular-width presentation ===== */
 /* sheets become centred form sheets instead of edge-to-edge bottom sheets */
-body[data-phone=foldopen] .sheet-wrap>.sheet{left:0!important;right:0!important;top:0!important;bottom:0!important;margin:auto!important;width:560px!important;max-width:calc(100% - 48px)!important;height:fit-content!important;max-height:calc(100% - 40px)!important;overflow-y:auto!important;border-radius:28px!important;box-sizing:border-box}
-body[data-phone=foldopen] .sheet-wrap>.sheet.ac{width:760px!important}
-/* add card: card preview on the left, form on the right */
-body[data-phone=foldopen] .sheet.ac{display:grid!important;grid-template-columns:300px minmax(0,1fr);column-gap:26px;align-items:start}
-body[data-phone=foldopen] .sheet.ac>*{grid-column:1/-1}
+body[data-phone=foldopen] .sheet-wrap>.sheet{left:0!important;right:0!important;top:0!important;bottom:0!important;margin:auto!important;width:500px!important;max-width:calc(100% - 48px)!important;height:fit-content!important;max-height:calc(100% - 40px)!important;overflow-y:auto!important;border-radius:28px!important;box-sizing:border-box}
+body[data-phone=foldopen] .sheet-wrap>.sheet.ac{width:460px!important}
+body[data-phone=foldopen] .sheet.ac .ac-card{zoom:.82;margin-bottom:10px!important}
 /* registration success: one centred column */
 body[data-phone=foldopen] .screen.success{display:flex!important;flex-direction:column;align-items:center;justify-content:center}
-body[data-phone=foldopen] .screen.success>*:not(.confetti-box):not(.top-blur){width:520px!important;max-width:calc(100% - 48px);margin-left:auto!important;margin-right:auto!important;box-sizing:border-box}
-body[data-phone=foldopen] .screen.success>.ok-art{width:auto!important}
+body[data-phone=foldopen] .screen.success>*:not(.confetti-box):not(.top-blur){width:420px!important;max-width:calc(100% - 48px);margin-left:auto!important;margin-right:auto!important;box-sizing:border-box}
+body[data-phone=foldopen] .screen.success>.ok-art{width:auto!important;align-self:center!important;margin-left:auto!important;margin-right:auto!important;zoom:.8}
+body[data-phone=foldopen] .screen.success>.ok-h,body[data-phone=foldopen] .screen.success>p{text-align:center!important}
 body[data-phone=foldopen] .screen.success>div:empty{display:none!important}
 body[data-phone=foldopen] .screen.success>.pad{padding:0!important;margin-top:22px!important}
 /* live ended: centred content column */
@@ -5684,7 +5683,7 @@ html body[data-dev=duo] .duo-col,html body[data-dev=foldopen] .duo-col{display:b
 .duo-col .duo-btn img{width:36px;height:36px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #F4A425}
 .duo-col .duo-btn>span:not(:only-child){position:absolute;top:4px;right:5px;min-width:8px;height:8px;padding:0;border-radius:50%;background:#ff4d4f;font-size:0;box-shadow:0 0 0 2px #1a1920}
 /* screens without a tab bar keep the same trailing column free for the toolbar */
-html body[data-dev=duo] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)),html body[data-dev=foldopen] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)){right:110px!important;width:auto!important}
+html body.duo-tools[data-dev=duo] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)),html body.duo-tools[data-dev=foldopen] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)){right:110px!important;width:auto!important}
 /* launch: Skip moves off the camera / clock corner on iPhone Duo */
 html body[data-dev=duo] .l3-skip,html body[data-dev=foldopen] .l3-skip{top:auto!important;bottom:calc(var(--sb) + 18px)!important;right:20px!important}
 /* iPhone Duo: the trailing column shares the page background (no separate dark strip) */
@@ -9392,7 +9391,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (dev || pane2) return;
     var host = document.getElementById('root'), devEl = document.getElementById('device'), tmr = 0, cache = new WeakMap();
     var col = document.createElement('div'); col.className = 'duo-col'; col.setAttribute('aria-label', 'Toolbar'); devEl.appendChild(col);
-    function reset(){ col.innerHTML = ''; col.classList.remove('more-open'); Array.prototype.forEach.call(host.querySelectorAll('[data-duo-hidden]'), function (e) { e.removeAttribute('data-duo-hidden'); }); }
+    function reset(){ col.innerHTML = ''; col.classList.remove('more-open'); document.body.classList.remove('duo-tools'); Array.prototype.forEach.call(host.querySelectorAll('[data-duo-hidden]'), function (e) { e.removeAttribute('data-duo-hidden'); }); }
     function run(){
       reset();
       var d = document.body.dataset.dev; if (d !== 'duo' && d !== 'foldopen') return;
@@ -9423,6 +9422,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         c.addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); col.classList.remove('more-open'); e.click(); });
         e.setAttribute('data-duo-hidden', '1'); return c;
       }
+      if (items.length || rest.length) document.body.classList.add('duo-tools');
       items.forEach(function (e, i) { var c = mk(e); c.style.top = (y0 + i * gap - 20) + 'px'; col.appendChild(c); });
       if (rest.length) {
         /* system-style overflow: the remaining actions sit behind an ellipsis button at the end of the toolbar */
