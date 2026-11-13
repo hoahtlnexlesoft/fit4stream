@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113084309"</script>
+<script>window.__BUILD__="20261113090214"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5430,7 +5430,7 @@ body[data-phone=foldopen] .rc3>.pad>.rc3-amt{grid-row:2;flex-direction:column;al
 body[data-phone=foldopen] .rc3>.pad>.rc3-amt .rc3-card{position:absolute;right:10px;top:12px;transform:scale(.7);transform-origin:top right}
 body[data-phone=foldopen] .rc3>.pad>.rc3-box,body[data-phone=foldopen] .rc3>.pad>.rc3-acts1,body[data-phone=foldopen] .rc3>.pad>.rc3-help,body[data-phone=foldopen] .rc3>.pad>.rc3-steps{grid-column:2}
 body[data-phone=foldopen] .rc3>.pad>.rc3-steps{grid-row:1;margin:0!important}
-body[data-phone=foldopen] .rc3-amb{width:320px}
+body[data-phone=foldopen] .rc3-amb{width:440px;height:440px;background:radial-gradient(closest-side at 50% 42%,color-mix(in srgb,var(--sc) 30%,transparent),transparent)!important} /* fades out before its edges: no hard seam */
 /* Search: left = recent + categories, right = trending */
 body[data-phone=foldopen] .sx-disc>.sx-sec:nth-child(1){grid-column:1;grid-row:1}
 body[data-phone=foldopen] .sx-disc>.sx-sec:nth-child(3){grid-column:1;grid-row:2}
@@ -5586,7 +5586,7 @@ body[data-phone=foldopen] .screen.og>.og-head .og-acts{width:100%!important}
 body[data-phone=foldopen] .screen.og>.og-head .og-follow{flex:1!important;width:auto!important}
 body[data-phone=foldopen] .screen.og>section:not(.og-head),body[data-phone=foldopen] .screen.og>div:not(.og-cover):not(.top-sp){grid-column:2;width:auto!important;max-width:none!important;margin-left:0!important;margin-right:24px!important;padding-left:0!important;padding-right:0!important}
 body[data-phone=foldopen] .screen.og .og-bio,body[data-phone=foldopen] .screen.og .og-chips{width:auto!important;max-width:none!important}
-body[data-phone=foldopen] .screen.og>section.og-sec:first-of-type{margin-top:16px!important}
+body[data-phone=foldopen] .screen.og>.og-head+section{margin-top:-56px!important;position:relative;z-index:2}
 body[data-phone=foldopen] .screen.og>section:not(.og-head)>*{margin-left:0!important;margin-right:0!important;max-width:none!important;width:auto!important;padding-left:0!important;padding-right:0!important}
 body[data-phone=foldopen] .screen.og .og-sec>*{justify-content:flex-start!important;text-align:left!important}
 body[data-phone=foldopen] .screen.og>section:not(.og-head) .pad{padding-left:0!important;padding-right:0!important}
@@ -5689,6 +5689,9 @@ html body[data-dev=duo] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.pla
 html body[data-dev=duo] .l3-skip,html body[data-dev=foldopen] .l3-skip{top:auto!important;bottom:calc(var(--sb) + 18px)!important;right:20px!important}
 /* iPhone Duo: the trailing column shares the page background (no separate dark strip) */
 html body[data-dev=duo] .screenhost .app,html body[data-dev=foldopen] .screenhost .app{background:radial-gradient(110% 50% at 88% -8%,rgba(120,47,141,.13),transparent 62%),radial-gradient(80% 40% at 0% 0%,rgba(57,202,224,.035),transparent 60%),linear-gradient(180deg,#121319 0%,#0e0f13 50%,#0b0c0f 100%)!important}
+/* inset stages paint the page gradient at the full app size so it continues seamlessly into the trailing column */
+html body[data-dev=duo] .screenhost .app>.stage,html body[data-dev=foldopen] .screenhost .app>.stage{background:radial-gradient(110% 50% at 88% -8%,rgba(120,47,141,.13),transparent 62%),radial-gradient(80% 40% at 0% 0%,rgba(57,202,224,.035),transparent 60%),linear-gradient(180deg,#121319 0%,#0e0f13 50%,#0b0c0f 100%)!important;background-size:calc(100% + 110px) 100%!important;background-position:0 0!important;background-repeat:no-repeat!important}
+html body[data-dev=duo] .rc3-amb{left:0;right:auto;width:420px;height:420px;background:radial-gradient(closest-side at 50% 42%,color-mix(in srgb,var(--sc) 30%,transparent),transparent)!important}
 html body[data-dev=duo] .tabbar::before,html body[data-dev=duo] .tabbar::after,html body[data-dev=foldopen] .tabbar::before,html body[data-dev=foldopen] .tabbar::after{display:none!important}
 .duo-col .duo-pop{position:absolute;right:76px;display:none;gap:8px;padding:6px;border-radius:26px;background:rgba(28,26,36,.94);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 10px 30px rgba(0,0,0,.45);pointer-events:auto}
 .duo-col.more-open .duo-pop{display:flex}
