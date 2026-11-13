@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113082407"</script>
+<script>window.__BUILD__="20261113082511"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5619,6 +5619,8 @@ html body[data-dev=duo] .duo-col,html body[data-dev=foldopen] .duo-col{display:b
 .duo-col .duo-btn>span:not(:only-child){position:absolute;top:4px;right:5px;min-width:8px;height:8px;padding:0;border-radius:50%;background:#ff4d4f;font-size:0;box-shadow:0 0 0 2px #1a1920}
 /* screens without a tab bar keep the same trailing column free for the toolbar */
 html body[data-dev=duo] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)),html body[data-dev=foldopen] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)){right:110px!important;width:auto!important}
+/* launch: Skip moves off the camera / clock corner on iPhone Duo */
+html body[data-dev=duo] .l3-skip,html body[data-dev=foldopen] .l3-skip{top:auto!important;bottom:calc(var(--sb) + 18px)!important;right:20px!important}
 /* corner clock + Wi-Fi (iPhone Duo) */
 .dx-clock{z-index:85;transform:translateX(50%);flex-direction:column;align-items:center;gap:5px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .dx-clock b{color:#fff;font:600 13px/1 -apple-system,'SF Pro Text',system-ui,sans-serif;letter-spacing:-.2px;font-variant-numeric:tabular-nums}
@@ -9295,10 +9297,12 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       reset();
       var d = document.body.dataset.dev; if (d !== 'duo' && d !== 'foldopen') return;
       var sh = host.getBoundingClientRect(); var k = sh.width / DEVS[d].w; if (!k) return;
+      if (host.querySelector('.l3, .l2-overlay')) return; /* launch video: no app chrome */
       var stages = host.querySelectorAll('.app > .stage'); var stage = stages[stages.length - 1]; if (!stage || stage.querySelector('.player')) return;
       var band = (d === 'duo' ? 96 : 84);
       var found = Array.prototype.filter.call(stage.querySelectorAll('button,a[href],[role=button]'), function (e) {
         if (e.closest('.tabbar') || e.closest('[role=dialog]') || e.closest('.duo-col')) return false;
+        if (!e.querySelector('svg,img') && (e.textContent || '').trim()) return false; /* text buttons stay in the header */
         var r = e.getBoundingClientRect(); if (!r.width || !r.height) return false;
         if (r.width > 56 * k || r.height > 56 * k) return false;
         if (r.top - sh.top > band * k || r.bottom < sh.top) return false;
