@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113082511"</script>
+<script>window.__BUILD__="20261113082912"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5621,6 +5621,14 @@ html body[data-dev=duo] .duo-col,html body[data-dev=foldopen] .duo-col{display:b
 html body[data-dev=duo] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)),html body[data-dev=foldopen] .screenhost .app:not(:has(.tabbar))>.stage:not(:has(.player)){right:110px!important;width:auto!important}
 /* launch: Skip moves off the camera / clock corner on iPhone Duo */
 html body[data-dev=duo] .l3-skip,html body[data-dev=foldopen] .l3-skip{top:auto!important;bottom:calc(var(--sb) + 18px)!important;right:20px!important}
+/* iPhone Duo: the trailing column shares the page background (no separate dark strip) */
+html body[data-dev=duo] .screenhost .app,html body[data-dev=foldopen] .screenhost .app{background:radial-gradient(110% 50% at 88% -8%,rgba(120,47,141,.13),transparent 62%),radial-gradient(80% 40% at 0% 0%,rgba(57,202,224,.035),transparent 60%),linear-gradient(180deg,#121319 0%,#0e0f13 50%,#0b0c0f 100%)!important}
+html body[data-dev=duo] .tabbar::before,html body[data-dev=duo] .tabbar::after,html body[data-dev=foldopen] .tabbar::before,html body[data-dev=foldopen] .tabbar::after{display:none!important}
+.duo-col .duo-pop{position:absolute;right:76px;display:none;gap:8px;padding:6px;border-radius:26px;background:rgba(28,26,36,.94);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:0 10px 30px rgba(0,0,0,.45);pointer-events:auto}
+.duo-col.more-open .duo-pop{display:flex}
+.duo-col .duo-pop .duo-btn{position:relative;right:auto;top:auto!important}
+.duo-col .duo-ell svg{width:20px;height:20px}
+.duo-col.more-open .duo-ell{background:#F4A425;color:#1b1306}
 /* corner clock + Wi-Fi (iPhone Duo) */
 .dx-clock{z-index:85;transform:translateX(50%);flex-direction:column;align-items:center;gap:5px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .dx-clock b{color:#fff;font:600 13px/1 -apple-system,'SF Pro Text',system-ui,sans-serif;letter-spacing:-.2px;font-variant-numeric:tabular-nums}
@@ -9292,14 +9300,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (dev || pane2) return;
     var host = document.getElementById('root'), devEl = document.getElementById('device'), tmr = 0, cache = new WeakMap();
     var col = document.createElement('div'); col.className = 'duo-col'; col.setAttribute('aria-label', 'Toolbar'); devEl.appendChild(col);
-    function reset(){ col.innerHTML = ''; Array.prototype.forEach.call(host.querySelectorAll('[data-duo-hidden]'), function (e) { e.removeAttribute('data-duo-hidden'); }); }
+    function reset(){ col.innerHTML = ''; col.classList.remove('more-open'); Array.prototype.forEach.call(host.querySelectorAll('[data-duo-hidden]'), function (e) { e.removeAttribute('data-duo-hidden'); }); }
     function run(){
       reset();
       var d = document.body.dataset.dev; if (d !== 'duo' && d !== 'foldopen') return;
       var sh = host.getBoundingClientRect(); var k = sh.width / DEVS[d].w; if (!k) return;
       if (host.querySelector('.l3, .l2-overlay')) return; /* launch video: no app chrome */
       var stages = host.querySelectorAll('.app > .stage'); var stage = stages[stages.length - 1]; if (!stage || stage.querySelector('.player')) return;
-      var band = (d === 'duo' ? 96 : 84);
+      /* only the header row counts as toolbar; controls further down (filters, view toggles) stay next to the content they affect */
+      var az = parseFloat(getComputedStyle(host.querySelector('.app') || host).zoom) || 1, band = (DEVS[d].st + 56) * az;
       var found = Array.prototype.filter.call(stage.querySelectorAll('button,a[href],[role=button]'), function (e) {
         if (e.closest('.tabbar') || e.closest('[role=dialog]') || e.closest('.duo-col')) return false;
         if (!e.querySelector('svg,img') && (e.textContent || '').trim()) return false; /* text buttons stay in the header */
@@ -9313,14 +9322,26 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       cache.set(stage, items);
       var first = items.filter(function (e) { return /\b(back|close|dismiss)\b/i.test(e.getAttribute('aria-label') || ''); });
       items = first.concat(items.filter(function (e) { return first.indexOf(e) < 0; }));
-      var y0 = (d === 'duo' ? 104 : 84);
-      items.forEach(function (e, i) {
+      var y0 = (d === 'duo' ? 104 : 84), gap = 50;
+      var tb = host.querySelector('.f4-tabbar'); var limit = tb ? (tb.getBoundingClientRect().top - sh.top) / k - 14 : DEVS[d].h - 60;
+      var fit = Math.max(1, Math.floor((limit - (y0 - 20)) / gap)), rest = [];
+      if (items.length > fit) { rest = items.slice(fit - 1); items = items.slice(0, fit - 1); }
+      function mk(e){
         var c = e.cloneNode(true); c.removeAttribute('id'); c.removeAttribute('style'); c.className = 'duo-btn' + (e.querySelector('img') ? ' has-img' : '');
-        c.style.top = (y0 + i * 50 - 20) + 'px';
-        c.addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); e.click(); });
-        col.appendChild(c);
-        e.setAttribute('data-duo-hidden', '1');
-      });
+        c.addEventListener('click', function (ev) { ev.preventDefault(); ev.stopPropagation(); col.classList.remove('more-open'); e.click(); });
+        e.setAttribute('data-duo-hidden', '1'); return c;
+      }
+      items.forEach(function (e, i) { var c = mk(e); c.style.top = (y0 + i * gap - 20) + 'px'; col.appendChild(c); });
+      if (rest.length) {
+        /* system-style overflow: the remaining actions sit behind an ellipsis button at the end of the toolbar */
+        var top = y0 + items.length * gap - 20;
+        var m = document.createElement('button'); m.type = 'button'; m.className = 'duo-btn duo-ell'; m.setAttribute('aria-label', 'More'); m.style.top = top + 'px';
+        m.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>';
+        m.addEventListener('click', function (ev) { ev.stopPropagation(); col.classList.toggle('more-open'); });
+        var pop = document.createElement('div'); pop.className = 'duo-pop'; pop.style.top = (top - 4) + 'px';
+        rest.forEach(function (e) { var c = mk(e); pop.appendChild(c); });
+        col.appendChild(m); col.appendChild(pop);
+      }
     }
     function later(){ clearTimeout(tmr); tmr = setTimeout(run, 140); }
     new MutationObserver(later).observe(host, { childList: true, subtree: true });
