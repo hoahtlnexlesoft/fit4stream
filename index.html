@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113082912"</script>
+<script>window.__BUILD__="20261113083318"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5531,6 +5531,16 @@ body[data-phone=duo] .app:has(.tabbar) .stage{left:110px!important}
 body[data-phone=duo] .tabbar{left:auto!important;right:0!important;padding:calc(var(--st) + 8px) 10px calc(var(--sb) + 8px) 0!important;justify-content:flex-end!important}
 body[data-phone=duo] .app:has(.tabbar) .stage{left:0!important;right:110px!important}
 
+
+/* Duo open Home: side panel (Top Channels / Channels to follow) runs the full visible height and stays pinned under the header */
+body[data-phone=foldopen] .dh2-side{top:4px!important;height:calc(var(--dh) / .86 - var(--st) - 66px - var(--sb) - 14px);max-height:none!important;margin-top:4px}
+body[data-phone=foldopen] .dh2-side .dh2-box{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none}
+body[data-phone=foldopen] .dh2-side .dh2-box::-webkit-scrollbar{display:none}
+body[data-phone=foldopen] .dh2-ch{padding:9px 4px!important}
+body[data-phone=foldopen] .dh2-empty .dh2-he{margin:4px 0 0!important;padding:28px 24px!important}
+body[data-phone=foldopen] .dh2-empty .dh2-sec .pad{padding:0!important}
+body[data-phone=foldopen] .dh2-fol{flex:none;height:28px;padding:0 12px;border:0;border-radius:999px;font:inherit;font-size:12px;font-weight:700;background:#F4A425;color:#1b1306;cursor:pointer}
+body[data-phone=foldopen] .dh2-fol.on{background:rgba(255,255,255,.1);color:#fff}
 /* ===== Device frames — same set and rendering as the Poscura viewer ===== */
 .dx-spine,.dx-hinge,.dx-crease,.dx-top,.dx-clock{display:none;position:absolute;pointer-events:none}
 html body[data-dev] #device::after{display:none!important}
@@ -7790,7 +7800,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { style: { height: 28 } })),
       h('aside', { className: 'dh2-side' },
         h('div', { className: 'dh2-box' }, head('Top Channels', 'View all'),
-          CHANNELS.slice(0, 6).map(function (n, i) {
+          CHANNELS.map(function (n, i) {
             return h(Tap, { key: n, className: 'dh2-ch', go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } },
               h('span', { className: cx('av', i === 0 && 'live') }, h(F.Avatar, { src: av(n), name: n, initials: ini(n), size: 36 })),
               h('div', null, h('b', null, n), h('span', null, i === 0 ? 'Live now' : (12 - i) * 87 + ' followers')),
@@ -7845,7 +7855,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
         h('div', { className: 'pillrow top', role: 'tablist' }, chipNames.map(function (c, i) { return h('button', { key: c, type: 'button', role: 'tab', 'aria-selected': i === cat, className: cx('gchip', i === cat && 'on'), onClick: function () { tap(6); setCat(i); } }, c === 'All' ? 'For you' : c.replace(' and Performances', '').replace('Virtual ', '').replace(' and Demonstrations', '').replace(' and Community', '').replace(' and Training', '')); }))),
       h('div', { className: 'screen under-head', ref: ref, onTouchStart: ts, onTouchMove: tm, onTouchEnd: te, onScroll: function (e) { var v = e.currentTarget.scrollTop > 8; if (v !== solid) setSolid(v); } },
         h('div', { className: 'ptr', style: { height: pull, opacity: pull / 70 } }, h('span', { className: pull > 64 ? 'spin' : '', style: { transform: 'rotate(' + pull * 4 + 'deg)' } }, h(F.Logo, { size: 28, markOnly: true }))),
-        loading ? h(HomeSkeleton) : p.nav.empty ? h(HomeEmpty, { nav: p.nav }) : duo ? h('div', { className: 'fade-in' }, h(DuoHome, { heroes: heroes, nav: p.nav, reg: reg, cat: cat, onCat: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })) : h('div', { className: 'fade-in' },
+        loading ? h(HomeSkeleton) : p.nav.empty ? (duo ? h(DuoHomeEmpty, { nav: p.nav }) : h(HomeEmpty, { nav: p.nav })) : duo ? h('div', { className: 'fade-in' }, h(DuoHome, { heroes: heroes, nav: p.nav, reg: reg, cat: cat, onCat: function (i) { tap(6); setCat(i + 1); ref.current && (ref.current.scrollTop = 0); } })) : h('div', { className: 'fade-in' },
           h(CoverFlow, { heroes: heroes, nav: p.nav, reg: reg }),
           h(DuoHero, { heroes: heroes, nav: p.nav, reg: reg }),
           h('section', { className: 'sec' }, h('div', { className: 'pad' }, h(SH, { title: 'Top Channels', action: 'View all' })),
@@ -7867,6 +7877,29 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       h(F.EmptyArt, { name: p.art, width: 132 }),
       h('div', { className: 'se-t' }, h('b', null, p.title), h('span', null, p.body),
         p.action ? h(Tap, { className: 'se-link', onClick: p.onAction }, p.action, h(F.Icon, { name: 'chevronRight', size: 14 })) : null)));
+  }
+  function DuoHomeEmpty(p) {
+    var a = useState({}), f = a[0], setF = a[1];
+    function head(t, a2, fn) { return h('div', { className: 'dh2-h' }, h('b', null, t), a2 ? h(Tap, { className: 'f4-link', go: fn || function () {} }, a2, h(F.Icon, { name: 'chevronRight', size: 15 })) : null); }
+    function fol(n) { tap(8); var o = Object.assign({}, f); o[n] = !o[n]; setF(o); p.nav.toast && p.nav.toast(o[n] ? 'Following ' + n : 'Unfollowed ' + n); }
+    return h('div', { className: 'fade-in dh2 dh2-empty' },
+      h('div', { className: 'dh2-main' },
+        h('div', { className: 'he-card dh2-he' },
+          h(F.EmptyState, { art: 'calendar', title: 'No events yet', body: 'There\u2019s nothing scheduled right now. Follow channels and we\u2019ll let you know when something goes live.', action: 'Browse categories', onAction: function () { p.nav.push('categories'); } })),
+        h('section', { className: 'dh2-sec' }, head('Trending'),
+          h(SecEmpty, { art: 'live', title: 'Nothing trending yet', body: 'Popular events will show up here.', action: 'See upcoming', onAction: function () { p.nav.tab('upcoming'); } })),
+        h('section', { className: 'dh2-sec' }, head('Concerts and Performances'),
+          h(SecEmpty, { art: 'ticket', title: 'No events in this category', body: 'Check back soon or explore other categories.', action: 'Browse categories', onAction: function () { p.nav.push('categories'); } })),
+        h('section', { className: 'dh2-sec' }, head('Browse by Category', 'View all', function () { p.nav.push('categories'); }), h(CatTiles, { empty: true, onPick: function () { p.nav.push('categories'); } })),
+        h('div', { style: { height: 28 } })),
+      h('aside', { className: 'dh2-side' },
+        h('div', { className: 'dh2-box' }, head('Channels to follow', 'View all', function () { p.nav.push('channels'); }),
+          CHANNELS.map(function (n, i) {
+            return h(Tap, { key: n, className: 'dh2-ch', go: function () { p.nav.push('organizer:' + encodeURIComponent(n)); } },
+              h('span', { className: 'av' }, h(F.Avatar, { src: av(n), name: n, initials: ini(n), size: 36, seed: i })),
+              h('div', null, h('b', null, n), h('span', null, (12 - i) * 87 + ' followers')),
+              h('button', { type: 'button', className: cx('dh2-fol', f[n] && 'on'), 'aria-pressed': !!f[n], onClick: function (e) { e.stopPropagation(); e.preventDefault(); fol(n); } }, f[n] ? 'Following' : 'Follow'));
+          }))));
   }
   function HomeEmpty(p) {
     return h('div', { className: 'fade-in he' },
@@ -9346,7 +9379,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     function later(){ clearTimeout(tmr); tmr = setTimeout(run, 140); }
     new MutationObserver(later).observe(host, { childList: true, subtree: true });
     window.addEventListener('hashchange', function () { later(); setTimeout(run, 520); });
-    window.addEventListener('resize', later);
+    window.addEventListener('resize', function () { later(); setTimeout(run, 700); setTimeout(run, 1500); });
+    host.addEventListener('animationend', later, true);
     window.__duoTools = run; later();
   })();
   window.__setLand = function(v){ land = v; device.classList.toggle('land', v); fit(); };
