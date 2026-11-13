@@ -1,4 +1,4 @@
-<script>window.__BUILD__="20261113031221"</script>
+<script>window.__BUILD__="20261113073228"</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -5530,17 +5530,103 @@ body[data-phone=duo] .f4-tab-l{font-size:10px!important;letter-spacing:0!importa
 body[data-phone=duo] .app:has(.tabbar) .stage{left:110px!important}
 body[data-phone=duo] .tabbar{left:auto!important;right:0!important;padding:calc(var(--st) + 8px) 10px calc(var(--sb) + 8px) 0!important;justify-content:flex-end!important}
 body[data-phone=duo] .app:has(.tabbar) .stage{left:0!important;right:110px!important}
+
+/* ===== Device frames — same set and rendering as the Poscura viewer ===== */
+.dx-spine,.dx-hinge,.dx-crease,.dx-top,.dx-clock{display:none;position:absolute;pointer-events:none}
+html body[data-dev] #device::after{display:none!important}
+html body[data-dev] #device::before{inset:5px!important;border-radius:inherit!important;background:#050505!important}
+html body[data-dev] #device .btn-side{width:4px;border-radius:2px;display:block}
+html body[data-dev] #device .btn-side.b1,html body[data-dev] #device .btn-side.b2,html body[data-dev] #device .btn-side.b3{left:-3px;right:auto}
+html body[data-dev] #device .btn-side.b4{right:-3px;left:auto}
+/* switcher buttons */
+.devcol{width:214px!important}
+.devsw{gap:6px!important}
+.devsw button{font-size:15px!important;font-weight:600!important;padding:10px 16px!important;border-radius:10px!important;background:#1b1a22!important;color:rgba(255,255,255,.88)!important;white-space:nowrap}
+.devsw button:hover{background:#25232e!important}
+.devsw button.on{background:#F4A425!important;color:#1b1306!important}
+.devcol small{font-size:14px!important;line-height:1.5;color:rgba(255,255,255,.5)}
+
+/* iPhone 18 Pro Max — warm titanium, Dynamic Island */
+html body[data-dev=max] #device{width:calc(var(--dw) + 36px)!important;height:calc(var(--dh) + 36px)!important;padding:18px!important;border-radius:74px!important;background:linear-gradient(145deg,#8d8577,#514b42 40%,#3b3731)!important;box-shadow:0 0 0 2px #3a3d45,0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=max] #device .screenhost{border-radius:58px!important}
+html body[data-dev=max] #device:not(.land) .island{top:29px!important;width:126px!important;height:37px!important;margin-left:-63px!important;border-radius:20px!important;background:#000!important}
+html body[data-dev=max] #device .btn-side{background:#5a544b!important}
+html body[data-dev=max] #device .b1{top:180px;height:34px}html body[data-dev=max] #device .b2{top:240px;height:64px}html body[data-dev=max] #device .b3{top:316px;height:64px}html body[data-dev=max] #device .b4{top:260px;height:100px}
+html body[data-dev=max] #device.land{width:calc(var(--dh) + 36px)!important;height:calc(var(--dw) + 36px)!important}
+
+/* iPhone SE — graphite, thick bezels, Touch ID */
+html body[data-dev=se] #device{width:calc(var(--dw) + 36px)!important;height:calc(var(--dh) + 178px)!important;padding:89px 18px!important;border-radius:60px!important;background:linear-gradient(145deg,#2a2c31,#141518)!important;box-shadow:0 0 0 2px #3a3d45,0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=se] #device.land{width:calc(var(--dh) + 178px)!important;height:calc(var(--dw) + 36px)!important;padding:18px 89px!important}
+html body[data-dev=se] #device .screenhost{border-radius:2px!important}
+html body[data-dev=se] #device:not(.land) .island{top:42px!important;width:64px!important;height:6px!important;margin-left:-32px!important;border-radius:3px!important;background:#0b0c0e!important}
+html body[data-dev=se] #device:not(.land) .island::before{left:-30px!important;top:-3px!important;width:12px!important;height:12px!important;background:#0b0c0e!important}
+html body[data-dev=se] #device .homebtn{bottom:14px!important;width:60px!important;height:60px!important;margin-left:-30px!important;background:#101114!important;box-shadow:inset 0 0 0 2px #2e3036!important}
+html body[data-dev=se] #device .btn-side{background:#2e3036!important}
+html body[data-dev=se] #device .b1{top:110px;height:30px}html body[data-dev=se] #device .b2{top:170px;height:56px}html body[data-dev=se] #device .b3{top:236px;height:56px}html body[data-dev=se] #device .b4{top:170px;height:66px}
+
+/* iPhone Duo · Folded — cover screen, hinge spine on the left, punch-hole + clock/Wi-Fi over the right rail, no status row */
+html body[data-dev=duo] #device{width:calc(var(--dw) + 28px)!important;height:calc(var(--dh) + 28px)!important;padding:14px!important;border-radius:18px 58px 58px 18px!important;background:linear-gradient(145deg,#8d8577,#514b42 40%,#3b3731)!important;box-shadow:0 0 0 2px #3a3d45,0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=duo] #device .screenhost{border-radius:6px 44px 44px 6px!important}
+html body[data-dev=duo] #device .statusbar{display:none!important}
+html body[data-dev=duo] #device .island{display:block!important;left:auto!important;right:54px!important;top:26px!important;width:16px!important;height:16px!important;margin:0!important;border-radius:50%!important;background:radial-gradient(circle at 40% 36%,#26324a 0 1.5px,#06070a 2.5px)!important;z-index:80!important}
+html body[data-dev=duo] #device .dx-clock{display:flex;right:71px;top:52px}
+html body[data-dev=duo] #device .dx-spine{display:block;left:-4px;top:12px;bottom:12px;width:7px;border-radius:4px;background:linear-gradient(90deg,#1c1d20,#6a6357 55%,#2c2925)}
+html body[data-dev=duo] #device .btn-side{display:none!important}
+html body[data-dev=duo] #device .b4{display:block!important;background:#5a544b!important;top:110px;height:64px}
+html body[data-dev=duo] #device .dx-top{display:block;top:-3px;right:150px;width:56px;height:4px;border-radius:2px;background:#5a544b}
+
+/* iPhone Duo · Open — landscape book, centre crease, clock/Wi-Fi in the corner, no camera */
+html body[data-dev=foldopen] #device{width:calc(var(--dw) + 28px)!important;height:calc(var(--dh) + 28px)!important;padding:14px!important;border-radius:44px!important;background:linear-gradient(145deg,#8d8577,#514b42 40%,#1f2226)!important;box-shadow:0 0 0 2px #3a3d45,0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=foldopen] #device .screenhost{border-radius:30px!important}
+html body[data-dev=foldopen] #device .statusbar{display:none!important}
+html body[data-dev=foldopen] #device .dx-clock{display:flex;right:62px;top:30px}
+html body[data-dev=foldopen] #device .dx-crease{display:block;z-index:75;top:14px;bottom:14px;left:50%;width:16px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.035) 45%,rgba(0,0,0,.2) 50%,rgba(255,255,255,.035) 55%,transparent)}
+html body[data-dev=foldopen] #device .dx-hinge{display:block;left:50%;top:-3px;bottom:-3px;width:6px;transform:translateX(-50%);border-radius:3px;background:linear-gradient(90deg,#1c1d20,#6a6357,#1c1d20)}
+html body[data-dev=foldopen] #device .btn-side{display:none!important}
+html body[data-dev=foldopen] #device .b4{display:block!important;background:#5a544b!important;top:110px;height:60px}
+html body[data-dev=foldopen] #device .dx-top{display:block;top:-3px;right:120px;width:70px;height:4px;border-radius:2px;background:#5a544b}
+
+/* Galaxy Z Fold8 · Folded — squared Android slab, punch-hole, back half peeking out right/bottom */
+html body[data-dev=zfoldc] #device{width:calc(var(--dw) + 28px)!important;height:calc(var(--dh) + 30px)!important;padding:15px 14px!important;border-radius:10px!important;background:linear-gradient(145deg,#3c3f45,#141619)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 0 0 1px #50545c,1.5px 1.5px 0 1px rgba(0,0,0,.75),7px 3px 0 1px #4a4e56,8px 4px 0 1px #2a2d33,0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=zfoldc] #device .screenhost{border-radius:10px!important}
+html body[data-dev=zfoldc] #device .island{display:block!important;left:50%!important;right:auto!important;top:27px!important;width:18px!important;height:18px!important;margin:0 0 0 -9px!important;border-radius:50%!important;background:#000!important;z-index:80!important}
+html body[data-dev=zfoldc] #device .btn-side{display:none!important}
+html body[data-dev=zfoldc] #device .b3,html body[data-dev=zfoldc] #device .b4{display:block!important;left:auto!important;right:-3px!important;background:#3b3f46!important}
+html body[data-dev=zfoldc] #device .b3{top:190px;height:60px}html body[data-dev=zfoldc] #device .b4{top:270px;height:110px}
+
+/* Galaxy Z Fold8 · Open — silver frame, Android status bar, soft crease, punch-hole on the right panel */
+html body[data-dev=zfoldo] #device{width:calc(var(--dw) + 20px)!important;height:calc(var(--dh) + 20px)!important;padding:10px!important;border-radius:10px!important;background:linear-gradient(145deg,#3c3f45,#141619)!important;box-shadow:0 0 0 1px #50545c,inset 0 1px 0 rgba(255,255,255,.14),0 40px 80px rgba(0,0,0,.6)!important}
+html body[data-dev=zfoldo] #device .screenhost{border-radius:10px!important}
+html body[data-dev=zfoldo] #device .island{display:block!important;left:calc(75% + 2px)!important;right:auto!important;top:23px!important;width:16px!important;height:16px!important;margin:0 0 0 -8px!important;border-radius:50%!important;background:#000!important;z-index:80!important}
+html body[data-dev=zfoldo] #device .dx-crease{display:block;z-index:75;top:10px;bottom:10px;left:50%;width:10px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.02) 45%,rgba(0,0,0,.09) 50%,rgba(255,255,255,.02) 55%,transparent)}
+html body[data-dev=zfoldo] #device .dx-hinge{display:block;left:50%;top:-3px;bottom:-3px;width:4px;transform:translateX(-50%);border-radius:3px;background:linear-gradient(90deg,#16181b,#5a5f68,#16181b)}
+html body[data-dev=zfoldo] #device .btn-side{display:none!important}
+html body[data-dev=zfoldo] #device .b4{display:block!important;background:#2c2f35!important;top:110px;height:60px}
+html body[data-dev=zfoldo] #device .dx-top{display:block;top:-3px;right:120px;width:70px;height:4px;border-radius:2px;background:#2c2f35}
+
+html body[data-dev=foldopen] #device .screenhost,html body[data-dev=zfoldo] #device .screenhost{z-index:1}
+/* corner clock + Wi-Fi (iPhone Duo) */
+.dx-clock{z-index:85;transform:translateX(50%);flex-direction:column;align-items:center;gap:5px;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.dx-clock b{color:#fff;font:600 13px/1 -apple-system,'SF Pro Text',system-ui,sans-serif;letter-spacing:-.2px;font-variant-numeric:tabular-nums}
+.dx-clock svg{display:block;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+
+/* Android status bar on the Galaxy Z Fold8 (Roboto, Material icons) */
+html body[data-dev^=zfold] #device .statusbar{display:flex!important;height:var(--st)!important;padding:0 24px!important;font-family:Roboto,system-ui,sans-serif!important;font-weight:500!important;font-size:14px!important;letter-spacing:0!important;zoom:1}
+html body[data-dev^=zfold] #device .statusbar .sb-icons>*{display:none!important}
+html body[data-dev^=zfold] #device .statusbar .sb-icons::after{content:'';display:block;width:48px;height:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='15' viewBox='0 0 48 15'%3E%3Cpath d='M8 14L0 4.4A12 12 0 0 1 16 4.4z' fill='%23fff'/%3E%3Cpath d='M34 0.5v14H20z' fill='%23fff'/%3E%3Crect x='41' y='0' width='4' height='2' fill='%23fff'/%3E%3Crect x='38' y='1.5' width='10' height='13.5' rx='1.5' fill='%23fff'/%3E%3C/svg%3E") no-repeat right center}
+html body[data-dev^=zfold] #device .homebar{display:block!important;bottom:9px!important;width:120px!important;margin-left:-60px!important;height:4px!important;background:rgba(255,255,255,.9)!important}
+html body[data-dev=zfoldc] #device .homebar{width:108px!important;margin-left:-54px!important;bottom:10px!important}
 </style>
 <div class="stagewrap">
   <aside class="side devcol" aria-label="Device">
     <h1>Device</h1>
     <div class="devsw" role="radiogroup" aria-label="Device">
-      <button type="button" data-phone="max" class="on">iPhone 16 Pro Max</button>
-            <button type="button" data-phone="se">iPhone SE</button>
-      <button type="button" data-phone="android">Android · Pixel 8</button>
-      <button type="button" data-phone="fold">Galaxy Z Flip</button>
-      <button type="button" data-phone="duo">iPhone Duo · gập</button>
-      <button type="button" data-phone="foldopen">iPhone Duo · mở</button>
+      <button type="button" data-phone="max" class="on">iPhone 18 Pro Max</button>
+      <button type="button" data-phone="se">iPhone SE</button>
+      <button type="button" data-phone="duo">iPhone Duo · Folded</button>
+      <button type="button" data-phone="foldopen">iPhone Duo · Open</button>
+      <button type="button" data-phone="zfoldc">Galaxy Z Fold8 · Folded</button>
+      <button type="button" data-phone="zfoldo">Galaxy Z Fold8 · Open</button>
     </div>
     <small id="devsize">Viewer app prototype · 440 × 956 pt</small>
   </aside>
@@ -5555,6 +5641,7 @@ body[data-phone=duo] .app:has(.tabbar) .stage{left:0!important;right:110px!impor
       <span class="btn-side b1"></span><span class="btn-side b2"></span><span class="btn-side b3"></span><span class="btn-side b4"></span>
       <div class="screenhost" id="root"></div>
       <span class="island"></span><span class="homebtn" aria-hidden="true"></span>
+      <span class="dx-spine" aria-hidden="true"></span><span class="dx-hinge" aria-hidden="true"></span><span class="dx-crease" aria-hidden="true"></span><span class="dx-top" aria-hidden="true"></span><span class="dx-clock" aria-hidden="true"><b>9:41</b><svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 11.5l2.4-2.9a3.6 3.6 0 0 0-4.8 0z" fill="#fff"/><path d="M8 5.2c1.7 0 3.3.6 4.5 1.7l1.4-1.7A9 9 0 0 0 8 3a9 9 0 0 0-5.9 2.2l1.4 1.7A6.7 6.7 0 0 1 8 5.2z" fill="#fff"/><path d="M8 0C5 0 2.3 1.1.2 2.9l1.4 1.7A10.9 10.9 0 0 1 8 2.2c2.4 0 4.6.9 6.4 2.4l1.4-1.7A13.1 13.1 0 0 0 8 0z" fill="#fff"/></svg></span>
     </div>
   </div>
 </div>
@@ -9148,15 +9235,15 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
 
   }
   var device = document.getElementById('device'), scaler = document.getElementById('scaler'), land = false;
-  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 16 Pro Max' }, mini: { w: 375, h: 812, st: 50, sb: 34, name: 'iPhone X' }, android: { w: 412, h: 915, st: 40, sb: 20, name: 'Android \u00b7 Pixel 8' }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 28, py: 196 }, fold: { w: 412, h: 1004, st: 36, sb: 20, name: 'Galaxy Z Flip' }, duo: { w: 466, h: 678, st: 54, sb: 20, name: 'iPhone Duo \u00b7 g\u1eadp' }, foldopen: { w: 890, h: 626, st: 24, sb: 12, name: 'iPhone Duo \u00b7 m\u1edf' } };
-  var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur] || cur === 'mini') cur = 'max';
+  var DEVS = { max: { w: 440, h: 956, st: 62, sb: 34, name: 'iPhone 18 Pro Max', px: 36, py: 36 }, se: { w: 375, h: 667, st: 20, sb: 8, name: 'iPhone SE', px: 36, py: 178 }, duo: { w: 466, h: 678, st: 24, sb: 20, name: 'iPhone Duo \u00b7 Folded' }, foldopen: { w: 890, h: 626, st: 24, sb: 20, name: 'iPhone Duo \u00b7 Open' }, zfoldc: { w: 467, h: 737, st: 40, sb: 24, name: 'Galaxy Z Fold8 \u00b7 Folded', lay: 'duo', dp: 1, px: 36, py: 33 }, zfoldo: { w: 972, h: 734, st: 36, sb: 22, name: 'Galaxy Z Fold8 \u00b7 Open', lay: 'foldopen', dp: 1, px: 20, py: 20 } };
+  var cur = 'max'; try { cur = localStorage.getItem('f4-dev') || 'max'; } catch (e) {} if (!DEVS[cur]) cur = 'max';
   function applyDev(k){
     cur = k; var d = DEVS[k]; var r = document.documentElement;
     r.style.setProperty('--dw', d.w + 'px'); r.style.setProperty('--dh', d.h + 'px');
     if (!dev) { r.style.setProperty('--st', d.st + 'px'); r.style.setProperty('--sb', d.sb + 'px'); }
-    if (!pane2) document.body.dataset.phone = k;
+    if (!pane2) { document.body.dataset.phone = d.lay || k; document.body.dataset.dev = k; }
     var n = document.getElementById('devname'); if (n) n.textContent = d.name;
-    var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (/^(android|fold)$/.test(k) ? ' dp' : ' pt');
+    var z = document.getElementById('devsize'); if (z) z.textContent = 'Viewer app prototype \u00b7 ' + d.w + ' \u00d7 ' + d.h + (d.dp ? ' dp' : ' pt');
     Array.prototype.forEach.call(document.querySelectorAll('.devsw button'), function (b) { b.classList.toggle('on', b.dataset.phone === k); });
     if (!pane2) try { localStorage.setItem('f4-dev', k); } catch (e) {}
     fit(); window.dispatchEvent(new Event('resize'));
@@ -9176,7 +9263,7 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     var d = DEVS[cur], W = d.w + (d.px || 28), H = d.h + (d.py || 28);
     var w = land ? H : W, hgt = land ? W : H;
     var pw = (window.innerWidth > 640 && document.querySelector('.rv-panel')) ? 370 : 0, vw = window.innerWidth - pw;
-    var side = vw > 900 ? 268 + 198 : 0;
+    var side = vw > 900 ? 268 + 262 : 0;
     var k = Math.min((window.innerHeight - 32) / hgt, (vw - 32 - side) / w, 1);
     scaler.style.width = w * k + 'px'; scaler.style.height = hgt * k + 'px';
     device.style.transform = 'scale(' + k + ')'; device.style.transformOrigin = 'top left';
